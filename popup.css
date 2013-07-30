@@ -1,0 +1,60 @@
+/*!
+ * popup v1
+ *
+ * Copyright 2013 Eric Xu
+ * Licensed under the Apache License v2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Designed and built with all the love in the world by Eric Xu.
+ */
+
+ .hidden
+{
+	display: none!important;
+}
+.hand
+{
+    cursor: pointer;
+}
+.audiopart
+{
+    position: absolute;
+    top: -10000px;
+    left: -10000px;  
+}
+.logo_size, .logo, .logo1, .logo2
+{
+    background-repeat: no-repeat;
+    background-position: center right;
+    background-size: 48px 48px;
+    margin-top: 10px;
+}
+.logo1
+{
+    background-image: url(logo_128.png);
+    background-position: left center;
+}
+.logo2
+{
+    background-image: url(language_19.jpg);
+    background-size: 20px 20px;
+    margin-top: 10px;
+}
+.fixedw
+{
+    width: 544px;
+    min-width: 544px;
+    max-width: 544px;
+    overflow: auto;
+}
+
+/* added css attributes for bootstrap css*/
+.tab-pane
+{
+    margin-bottom: -10px;
+}
+.btn-link
+{
+    margin-left: -8px;
+    margin-right: -5px;
+}

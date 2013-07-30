@@ -1,0 +1,51 @@
+{
+  "manifest_version": 2,
+
+  "name": "Language Translator",
+  "version": "1.0.7",
+  "update_url": "https://dl.yunio.com/pub/Qfo4vk?name=updates.xml",
+  "description": "The Chrome Extension translates text from English to Simplified Chinese by default.",
+
+  "permissions": [
+    "<all_urls>",
+  	"contextMenus",
+  	"webNavigation",
+  	"activeTab",
+  	"notifications",
+    "clipboardRead",
+    "clipboardWrite",
+    "storage",
+    "unlimitedStorage",
+    "tts",
+  	"tabs"
+  ],
+  
+  "icons": {
+         "16": "logo_016.png",
+         "48": "logo_048.png",
+        "128": "logo_128.png"
+    },
+
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": "language_19.jpg",
+	  "default_title": "Language Translator"
+  },
+  
+  "background": {
+    "page": "background.html",
+    "persistent": false
+  },
+  
+  "incognito": "spanning",
+  
+  "content_scripts": [
+	{
+		"matches": ["<all_urls>"],
+		"css": ["content_translator.css"],
+		"js" : ["common.js", "jquery.min.js", "clipboard.js", "wikipages.js", "content_translator.js"],
+		"run_at": "document_idle",
+		"all_frames": true
+	}
+  ]
+}
