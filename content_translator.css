@@ -1,0 +1,124 @@
+/*!
+ * Language Translator v 1.0
+ *
+ * Copyright 2013 Eric Xu
+ * Licensed under the Apache License v2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Designed and built with all the love in the world @world by @eric
+ */
+
+.content_translator
+{
+    position: absolute;
+    top: 0px;
+    margin-top: 2px!important;
+    right: 2px!important;
+    
+    width: 326px;
+    height: 40px;    
+    
+    border: 0px solid;
+    border-color: #808080;
+    z-index: 9223372036854775807;
+    
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    color: #0094ff;
+    text-align: right;
+}
+.content_translator_circle
+{
+    background-color: rgba(34, 217, 105, 0.79);
+    border-top-left-radius:  0%;
+    border-top-right-radius:  0%;
+    border-bottom-left-radius: 100%;
+    border-bottom-right-radius: 0%;
+}
+.closelink:hover, .collapselink:hover, .expandlink:hover, .enablelink:hover, .disablelink:hover
+{
+    border: 0px solid;
+    border-color: #ff6a00;
+    border-top-left-radius:  100%;
+    border-top-right-radius:  100%;
+    border-bottom-left-radius: 100%;
+    border-bottom-right-radius: 100%;
+}
+.closelink, .collapselink, .expandlink, .enablelink, .disablelink
+{
+    position: absolute;
+    
+    cursor: pointer;
+    font-size: 14px;
+    border: 0px solid #0094ff;
+    width: 15px;
+    height: 14px;
+    padding-right: 1px;
+    color: rgba(255, 216, 0, 1.00);
+    background-position:-312px -120px;
+    background-repeat: no-repeat;
+    /*background-image: url(glyphicons-halflings.png);*/
+}
+
+
+
+
+.collapselink
+{
+    background-position:-287px -121px;
+}
+.expandlink
+{
+    background-position:-312px -120px;
+}
+.enablelink
+{
+    background-position:-96px -120px;
+}
+.disablelink
+{
+    background-position:-120px -120px;
+}
+.closelink
+{
+    background-position:-312px 0px;
+}
+
+
+
+
+.expandcollapserectangle
+{
+    margin-top: 14px;
+    right: 42px;
+}
+.disableenablerectangle
+{
+    margin-top: 14px;
+    right: 24px;
+}
+.closerectangle
+{
+    margin-top: 14px;
+    right: 6px;
+}
+
+
+
+
+.expandcollapsecircle
+{
+    margin-top: 1px;
+    right: 25px;
+}
+.disableenablecircle
+{
+    margin-top: 12px;
+    right: 16px;
+}
+.closecircle
+{
+    margin-top: 20px;
+    right: 1px;
+}

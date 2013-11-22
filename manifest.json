@@ -1,0 +1,76 @@
+{
+  "manifest_version": 2,
+
+  "name": "Language Translator",
+  "version": "1.13.1101",
+  "description": "A Chrome Extension which translates text between English and Chinese Simplified by default.",
+
+  "permissions": [
+    "<all_urls>",
+  	"contextMenus",
+  	"webNavigation",
+  	"activeTab",
+  	"notifications",
+    "clipboardRead",
+    "clipboardWrite",
+    "storage",
+    "unlimitedStorage",
+    "tts",
+    "windows",
+  	"tabs"
+  ],
+
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+
+  "icons": {
+         "16": "logo_016.png",
+         "48": "logo_048.png",
+        "128": "logo_128.png"
+    },
+
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": { 
+        "19": "language_19.jpg",
+        "38": "language_19.jpg"
+    },
+    "default_title": "Language Translator V1.13.1101"
+  },
+  
+  "background": {
+    "page": "background.html",
+    "persistent": false
+  },
+
+  "options_page": "options.html",
+  
+  "incognito": "spanning",
+  
+  "content_scripts": [
+	{
+		"matches": ["<all_urls>"],
+		"css": ["content_translator.css"],
+		"js" : ["common.js", "jquery.min.js", "content_popup.js", "clipboard.js", "storages.js", "wikipages.js", "addDOMLoadEvent.js", "content_translator.js"],
+		"run_at": "document_idle",
+		"all_frames": true
+	}
+  ],
+
+  "web_accessible_resources": [
+      "language_19.jpg",
+      "volume_max.png",
+      "glyphicons-halflings.png",
+      "google_wallet_logo.png",
+      "background_popup.html",
+      "background_popup_iframe.html",
+      "wikipages.js",
+      "content_popup.css",
+      "addDOMLoadEvent.js",
+      "jquery.min.js",
+      "common.js",
+      "translators.js",
+      "content_iframe.js",
+      "jquery-1.10.1.js",
+      "jquery-1.10.1.min.map"
+  ]
+}

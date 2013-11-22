@@ -1,0 +1,31 @@
+
+[OK] 1. popup translation (default on default language, zh <=> cn by YouDao)
+[OK] 2. inline input translation
+3. context menu translation
+4. change language translation
+5. page translation
+[OK] 6. popup layout: 
+title section: logo/name/icons(about,config,close)
+translation section: 
+	language selection/selected text/meanings
+	[
+		youdao meaning(main meaning/more meaning)/
+		microsoft meaning(main meaning)/
+		baidu meaning(main meaning)/
+		google meaning(main meaning)
+	]
+simple footer: simple copyright
+7. other popups:
+settings: configs
+    [ToLanguage, WikiPage, InPagePopupTranslation, AutoTextSelection(mouse hover selection)]
+about: version/history/copyright
+8. sound reader API
+[OK] 9. iframe support
+[OK] 10. multiple translation by tabs
+[OK] 11. PinYin (included in youdao)
+[OK] 12. Auto-Translation trigger after input
+[ok] 13. Open wikipages: baidu baike, tencent baike, wikipedia[en], wikipedia[cn]
+
+
+锁屏精灵: 
+对于未来的商业模式，他们表示目前并不考虑这些，重心将放在对锁屏场景内容形式拓展以及用户数的扩充上。

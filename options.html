@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<!-- This page is the OPTIONS PAGE of this chrome extension. -->
+<HTML>
+<HEAD>
+	<TITLE>Options Page</TITLE>
+    <meta http-equiv="Page-Enter" Content="blendTrans(Duration=0.5)">
+    <meta http-equiv="Page-Exit" Content="blendTrans(Duration=0.5)">
+    <meta http-equiv=Access-Control-Allow-Origin content=*>
+    <meta charset="UTF-8">
+    <meta name="Keywords" content="Language Translator">
+    <meta name="Author" content="Eric Xu">
+    <meta name="Email" content="vanillapeter@163.com">
+    <meta name="Version" content="1.0 Beta">
+
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="bootstrap/css/flat-ui-fonts.css"/>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap-switch.css"/>
+    <link rel="stylesheet" href="options.css"/>
+    
+    <script type="text/javascript" src="jquery.min.js"></script>
+	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="bootstrap/js/bootstrap-switch.min.js"></script>
+    
+    <script type="text/javascript" src="paypal-button.min.js"></script>
+    
+
+    <script type="text/javascript" src="common.js"></script>
+    <script type="text/javascript" src="querystring.js"></script>
+    <script type="text/javascript" src="filemailapi.js"></script>
+    <script type="text/javascript" src="wikipages.js"></script>
+    <script type="text/javascript" src="options.js"></script>
+</HEAD>
+
+    
+  <body>
+    <h1 class="hand title" title="View the Language-Translator extension on Google webstore">
+      <img id="logo" src="logo_128.png" width="64" height="64" alt="logo">
+      Language Translator - CONFIGURATIONS
+    </h1>
+    <h6>FREE Permanently</h6>
+
+    <ul class="nav nav-tabs" id="tabOptions">
+        <li><a href="#operations" data-toggle="tab">Operations</a></li>
+        <li class="active"><a href="#settings" data-toggle="tab">Settings</a></li>
+        <li><a href="#features" data-toggle="tab">Features</a></li>
+        <li><a href="#histories" data-toggle="tab">Histories</a></li>
+        <li><a href="#feedbacks" data-toggle="tab">Feedbacks</a></li>
+        <li><a href="#about" data-toggle="tab">About</a></li>
+        <li><a href="#contributors" data-toggle="tab">Contributors</a></li>
+    </ul>
+    <div class="tab-content">
+        
+        <div class="tab-pane" id="operations">
+
+            <form>
+              <fieldset>
+                <legend>Basic Operations</legend>
+                <ul>
+                    <li>Translate Text automatically by selecting text</li>
+                    <li>Translate Text automatically by double-clicking text</li>
+                    <li>Translate Text automatically by typing text</li>
+                </ul>
+              </fieldset>
+            </form>
+            
+            <form>
+              <fieldset>
+                <legend>More Operations</legend>
+                <ul>
+                    <li>Open Wiki Page for Source Text</li>
+                    <li>Pronunciation of text</li>
+                    <li>Copy Selected Text automatically if the [Enable Copy Text] feature enabled</li>
+                    <li>Open home page of this extension</li>
+                </ul>
+              </fieldset>
+            </form>
+
+        </div>
+
+        <div class="tab-pane active" id="settings">
+            <form>
+              <fieldset>
+                <legend>Basic Settings</legend>
+                Options with <font style="color: blue">BLUE TITLE</font> will be enabled by default.
+                <label class="checkbox">
+                  <input type="checkbox" id="chkEnableTextTranslation"> Enable Text Translation<br/>
+                  <label class="comment">Translate the text automatically when you select text in webpage.</label>
+                </label>
+                <label class="checkbox">
+                  <input type="checkbox" id="chkEnablePopupDialg"> Enable Popup Dialog<br/>
+                  <label class="comment">A Popup Dialog for Text Translation shows when you select text in webpage.</label>
+                  <label class="comment hide">This feature will take effect temporary while enabling above setting.</label>
+                </label>
+                <label class="checkbox">
+                  <input type="checkbox" id="chkEnableCopyText"> Enable Copy Text<br/>
+                  <label class="comment">Copy the selected text to system clipboard, then you can paste it anywhere.</label>
+                </label>
+                <label class="checkbox">
+                  <input type="checkbox" id="chkEnableTraceLog"> Enable Tracing Logs<br/>
+                  <label class="comment">Output tracing logs defined by authors by default.</label>
+                </label>
+                <input type="button" class="btn" value="Save"  title="Save Basic Settings" id="btnBasicSettings"></input>
+              </fieldset>
+            </form>
+
+            <form class="hide">
+              <fieldset>
+                <legend>Other Settings</legend>
+                <label class="select">
+                    <label class="comment">Select Default Encycolpedia Type</label>
+                    <select id="lstBaikeType">
+                        <option value="baidu" label="Baidu Baike" selected="selected"></option>
+                        <option value="soso" label="Tencent SOSO Baike"></option>
+                        <option value="wikicn" label="Wikipedia for Chinese Simplified"></option>
+                        <option value="wikien" label="Wikipedia for English"></option>
+                    </select>
+                </label>
+                <label class="select">
+                    <label class="comment">Select Source Language</label>
+                    <select id="lstSourceLanguage">
+                        <option value="en" label="English" selected="selected"></option>
+                        <option value="cn" label="Chinese Simplified"></option>
+                    </select>
+                </label>
+                <label class="select">
+                    <label class="comment">Select Target Language</label>
+                    <select id="lstTargetLanguage">
+                        <option value="en">English</option>
+                        <option value="cn" label="Chinese Simplified" selected="selected"></option>
+                    </select>
+                </label>
+                  
+                <label class="select">
+                    <label class="comment">Select Translator API</label>
+                    <select id="lstTranslatorAPI">
+                        <option value="http://dict.youdao.com" label="YouDao Translator API"></option>
+                        <option value="http://www.google.com" label="Google Translator API"></option>
+                        <option value="http://www.microsoft.com" label="Microsoft Translator API"></option>
+                        <option value="http://www.baidu.com" label="Baidu Translator API"></option>
+                        <option value="http://www.bing.com" label="Bing Translator API"></option>
+                    </select>
+                </label>
+
+                <label class="select hide">
+                    <input type="url" id="lstTranslatorAPI" list="TranslatorAPIList" placeholder="Type to select the default Translator API" />
+                    <datalist id="TranslatorAPIList">
+                        <option value="http://dict.youdao.com" label="YouDao Translator API" selected="selected"></option>
+                        <option value="http://www.google.com" label="Google Translator API"></option>
+                        <option value="http://www.microsoft.com" label="Microsoft Translator API"></option>
+                        <option value="http://www.baidu.com" label="Baidu Translator API"></option>
+                        <option value="http://www.bing.com" label="Bing Translator API"></option>
+                    </datalist>
+                </label>
+
+                <input type="button" class="btn" value="Save" title="Save Other Settings" id="btnOtherSettings"></input>
+              </fieldset>
+            </form>
+        </div>
+
+        <div class="tab-pane" id="features">
+            <form>
+              <fieldset>
+                <legend>MOST IMPORTANT FEATURE</legend>
+                <p><strong>Translate text between English and Chinese Simplified by default.</strong></p>
+                  <ul>
+                      <li><strong style="color: #f1c61c;">ONE STEP ONLY to Translate Text via selecting text on webpage!</strong></li>
+                  </ul>
+                <p>Yeah, installing this Google extension, then you get results immediately ONLY by ONE STEP:</p>
+                <p>1. Select a word, phrase or sentence.</p>
+                <p>It automatically translates the text by presenting a popup dialog in top-right corner in the current page.</p>
+                <p>Just it.</p>
+              </fieldset>
+            </form>
+            
+            <form>
+              <fieldset>
+                <legend>More Features</legend>
+                  <ol>
+                    <li>Type texts directly.</li>
+                    <li>Translate texts automatically after your typed it (ONE AWESOME FEATURE).</li>
+                    <li>Translate texts manually by shortcut (Ctrl+Enter).</li>
+                    <li>Translate texts manually by clicking the Translate button.</li>
+                    <li>Translate texts directly after you copied it (Ctrl + C).</li>
+                    <li>Open a wiki page for the Source Text.</li>
+                    <li>Pronunciation for texts.</li>
+                    <li>Collapse or Expand the Popup Dialog.</li>
+                    <li>Disable or Enable Text Translation for current page.</li>
+                    <li>Close the Popup Dialog for current page.</li>
+                  </ol>
+              </fieldset>
+            </form>
+            
+            <form>
+              <fieldset>
+                <legend>Nice Features TO HAVE</legend>
+                  <ol>
+                    <li>English Word Study.</li>
+                    <li>Translation History.</li>
+                    <li>OTHERS...</li>
+                  </ol>
+              </fieldset>
+            </form>
+        </div>
+        
+        <div class="tab-pane" id="histories">
+            <form>
+              <fieldset>
+                <legend>News</legend>
+                  <ul>
+                      <li>2013-06-21: Idea for translating text on webpage by ONE STEP ONLY.</li>
+                      <li>2013-06-22: Analyzed several Translators(Google Extension) for translating text.</li>
+                      <li>2013-06-23: Excogitation of Language Translator product.</li>
+                      <li>2013-06-25: Implementation of Language Translator product.</li>
+                      <li>2013-08-15: Improvements of Language Translator product.</li>
+                      <li>2013-09-20: Enhancements of Language Translator product.</li>
+                      <li>2013-10-11: Releasements of Language Translator product.</li>
+                  </ul>
+              </fieldset>
+            </form>
+            <form>
+              <fieldset>
+                <legend>Fixes</legend>
+                  <ul>
+                      <li>2013-10-21: Focus original element after text selected for translation.</li>
+                  </ul>
+              </fieldset>
+            </form>
+            
+            <form>
+              <fieldset>
+                <legend>Release</legend>
+                  <ul>
+                      <li>2013-07-01: Released Language Translator V1.0.0!</li>
+                      <li>2013-10-11: Released Language Translator V1.1.0!</li>
+                      <li>2013-10-12: Released Language Translator V1.1.2!</li>
+                      <li>2013-10-21: Released Language Translator V1.1.5!</li>
+                      <li>2013-11-01: Released Language Translator V1.13.1101!</li>
+                  </ul>
+              </fieldset>
+            </form>
+
+        </div>
+        
+        <div class="tab-pane" id="feedbacks">
+
+            <form id="formSendFeedback" method="post">
+              <fieldset>
+                <legend id="lgdFeedback" title="Send feedbacks to Author..." style="cursor: pointer;">Feedback</legend>
+                <div id="feedbackArea">
+                    <label class="checkbox">
+                        Type Name: <input type="text" id="txtName" required maxlength="200" placeholder="Type your Full Name" pattern="[a-zA-Z][a-zA-Z0-9 ]*">
+                    </label>
+                    <label class="checkbox">
+                        Type Email: <input type="email" id="txtEmail" required maxlength="200" placeholder="Type your valid Email">
+                    </label>
+                    <label class="checkbox suggestion">
+                        Suggestion: <textarea  id="txtFeedback" required maxlength="1024" rows="7" placeholder="What suggestions do you want to send us?"></textarea>
+                    </label>
+                    <div class="alert" id="msgContainer">
+                        <button class="close" type="button" data-dismiss="close">&times;</button>
+                        <strong>Message: </strong><span id="msgContent" class="message"></span>
+                    </div>
+                    <label class="checkbox">
+                        <button id="btnSendFeedback" type="submit" title="Send an Email to author" class="btn">Submit</button>
+                    </label>
+                </div>
+              </fieldset>
+            </form>            
+
+            <form class="">
+              <fieldset>
+                <legend>Donate to Author</legend>
+                <p>I develop "Language Translator" WITHOUT salary, bonus or sponsorship in my own time.</p>
+                <p>Your donation is appreciated and will ensure future development of "Language Translator".</p>
+                <p>Donations will help toward hardware, software, hosting and other costs.</p><br/>
+                <p>Thanks for your support.</p>
+                <p>Eric Xu</p>
+                <label class="">
+                    <input type="range" class="donationrange" min="2" max="100" value="10" step="1" id="txtDonation" title="Your Donation Amount">
+                </label>
+                <label class="">
+                    Donation will be: <span class="donation" id="spanDonation"></span>!<br/>
+                    <script src="paypal-button.min.js?merchant=vanillapeter@gmail.com"
+                        data-button="donate"
+                        data-name="Donation for Language Translator"
+                        data-quantity="1"
+                        data-amount="1"
+                        data-currency="USD"
+                    ></script>
+                </label>
+                <label class="hide">
+                    <input type="image" class="btn googlepay" value="" title="Donate it to Author via Google Wallet Payment" id="btnDonateGoogle" alt="Donate" src="https://checkout.google.com/buttons/donateNow.gif?merchant_id=vanillapeter@gmail.com&amp;w=115&amp;h=50&amp;style=white&amp;variant=text&amp;loc=en_US"></input>
+                </label>
+                <label class="hide">
+                    <input type="button" class="btn amazonpay" value="Buy with Amazon" title="Donate it to Author via Amazon Payment Service" id="btnDonateAmazon"></input>
+                </label>
+              </fieldset>
+            </form>
+
+        </div>
+
+        <div class="tab-pane" id="about">
+            <form>
+              <fieldset>
+                <legend>Authors</legend>
+                  <ul>
+                      <li>Eric Xu</li>
+                      <li>Lemon Ran</li>
+                  </ul>
+              </fieldset>
+            </form>
+            
+            <form class="hide">
+              <fieldset>
+                <legend>Sponsors & Thanks TO</legend>
+                  <ul>
+                      <li>Lemon Ran</li>
+                      <li>Frank Liu</li>
+                      <li>Kevin Hu</li>
+                      <li>Viva Jiang</li>
+                  </ul>
+              </fieldset>
+            </form>
+            
+            <form class="hide">
+              <fieldset>
+                <legend>Team Members</legend>
+                  <ul>
+                      <li>Frank Liu</li>
+                      <li>Eric Xu</li>
+                      <li>Lemon Ran</li>
+                      <li>Viva Jiang</li>
+                      <li>Kevin Hu</li>
+                  </ul>
+              </fieldset>
+            </form>
+
+            <form>
+              <fieldset>
+                <legend>COPYRIGHT</legend>
+                    <p class="copyright">
+                        Copyright 2013 @<a href="https://chrome.google.com/webstore/detail/language-translator/">The Language Translator</a>,
+                        <a href="mailto:vanillapeter@163.com" title="Mobile: 18688774304 | Email: vanillapeter@163.com" class="wp-link">Designed & Powered by Eric Xu</a><br/>
+                        <span class="sponsor-line">
+                        Product as a
+                        <a href="http://developer.chrome.com/extensions/getstarted.html" rel="noindex,nofollow" class="mt-link">Google Extension</a>
+                        &nbsp;|&nbsp;Thanks: <a href="#">Authors</a>, <a href="#">Members</a>, <a href="#">Sponsors</a>
+                        </span>
+                    </p>
+              </fieldset>
+            </form>
+            
+        </div>
+
+        
+        <div class="tab-pane" id="contributors">
+            <h6>A huge THANK YOU to all of there people for their great contributions to the Language Translator product!!!</h6>
+            <form>
+              <fieldset>
+                <legend>Language Translator Top Contributors</legend>
+                  <ul style="list-style-type: square; clear: both;">
+                      <li>Lemon Ran</li>
+                      <li>Frank Liu</li>
+                      <li>Kevin Hu</li>
+                      <li>Viva Jiang</li>
+                  </ul>
+              </fieldset>
+            </form>
+            
+        </div>
+    </div>
+
+  </body>
+
+</html>

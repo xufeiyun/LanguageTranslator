@@ -1,0 +1,157 @@
+/*!
+ * popup v1
+ *
+ * Copyright 2013 Eric Xu
+ * Licensed under the Apache License v2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Designed and built with all the love in the world by Eric Xu.
+ */
+
+body
+{
+    /*min-height: 2000px;*/
+  margin: 40px;
+}
+.hide
+{
+	display: none!important;
+}
+.hand
+{
+    cursor: pointer;
+}
+.title
+{
+    word-break: keep-all;
+    word-wrap: normal;
+    word-spacing: 0px;
+    text-wrap: none;
+}
+.title, ul, form
+{
+    min-width: 1024px;
+}
+
+input:required, textarea:required {
+    /*background: #fff url(images/red_asterisk.png) no-repeat 98% center;*/
+    background: #fff no-repeat 98% center;
+}
+
+.checkbox{
+    
+}
+.suggestion{
+    vertical-align: top;
+}
+.comment{
+    background-color: #fff;
+    color: rgba(77, 168, 5, 1);
+}
+.comment:hover {
+    background-color: #fff;
+    color: #FF0000;
+}
+.message{
+    padding-left: 10px;
+    color: #ff6a00;
+}
+
+
+.chkoptions{
+    margin-top: 1px;
+    padding-right: 5px;
+}
+
+.active {
+    color: #4F4F4F;
+}
+li.active a{
+    color: red;
+}
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:visited {
+  color: rgb(0, 0, 238);
+}
+
+.error {
+  color: #FF0000;
+}
+
+.note {
+  font-size: smaller;
+  color: #426DC9;
+  text-shadow: #fff 0 1px 1px;
+}
+
+.larger {
+  font-size: 1.1em;
+}
+
+.indent {
+  margin-left: 20px;
+  margin-bottom: -20px;
+}
+
+h1 {
+  -webkit-border-radius: 8px;
+  -webkit-box-shadow: 0 0 20px #d0d0d0;
+  /*background: -webkit-linear-gradient(top, #C0C8D2, #C0C8D2 50%, #CDD4E0);*/
+  background: -webkit-linear-gradient(left, #BBCEE9, #BBCEE9 50%, #AABEDC);
+  border-bottom: 1px solid #8faad9;
+  border-top: 1px solid #8faad9;
+  text-shadow: #bbcee9 0 1px 1px;
+  padding: 20px;
+  font-size: 3em;
+  color: #000;
+  text-shadow: #bbcee9 0 1px 1px;
+  /*margin: 20px;*/
+}
+
+#logo {
+  float: left;
+  padding-right: 20px;
+  margin-top: -11px;
+}
+
+div.clear {
+  clear: both;
+}
+
+input[type="range"]{
+    cursor: pointer;    
+}
+.donationrange {
+    width: 161px!important;
+}
+.donation {
+    color: rgba(77, 168, 5, 1);
+    font-weight: bold;
+}
+.donation:before {
+    content: '$USD ';
+    color: #4F4F4F;
+}
+.googlepay, .amazonpay{
+    background-position: center center!important;
+    background-size: 128px 30px;
+    background-repeat: no-repeat;
+    width: 128px!important;
+    height: 30px;    
+}
+.googlepay{
+    background-image: url(google_wallet_logo.png)!important;
+}
+.btn:hover, .btn:focus, .btn:active{
+    
+}
+.amazonpay{
+    
+}

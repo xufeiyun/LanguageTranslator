@@ -1,0 +1,34 @@
+Paypal Online Payment Services:
+https://github.com/paypal/JavaScriptButtons/blob/master/README.md
+
+                        data-env="sandbox"
+
+<script type="text/javascript" src="https://wallet-web.sandbox.google.com/online/v2/merchant/merchant.js"></script>
+
+
+OK
+FileAdded
+
+
+{
+  "transferid": "ptaurduexcmtksv",
+  "transferkey": "bf5121b718d546cf8bca16865276be60",
+  "transferurl": "https://sl21.filemail.com/savefile.ashx",
+  "responsestatus": "OK"
+}
+
+OK
+FileAdded
+{
+  "downloadurl": "https://www.filemail.com/d/ptaurduexcmtksv",
+  "responsestatus": "OK"
+}
+
+
+
+{
+  "transferid": "vhcdlsrpkgyragx",
+  "transferkey": "7559ff564c364c2ea4ae6d750ff54250",
+  "transferurl": "https://sl25.filemail.com/savefile.ashx",
+  "responsestatus": "OK"
+}

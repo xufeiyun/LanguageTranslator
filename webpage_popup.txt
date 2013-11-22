@@ -1,0 +1,54 @@
+﻿<!-- Copied from file: background_popup.html, contents of div#divLanguageTranslator -->
+<article>
+    <section>
+        <div id="divNavTitle" title="View the Language-Translator extension on Google webstore" class="navbar navbar-static-top">
+            <div class="navbar-inner">
+                <a id="btnLogo" class="brand logoProduct" href="#"></a>
+                <a id="btnTitle" class="brand title" href="#">Language Translator</a>
+            </div>
+        </div>
+    </section>
+</article>
+<article>
+    <section>
+        <form class="form-search">
+            <fieldset>
+                <span class="sourcetext btn-link">Source Text </span> <a id="btnReadSource" title="Pronunciation of Source Text" class="hand icon-volume-up"></a>(Press <strong>Ctrl</strong>+<strong>Enter</strong> to
+                <input id="btnTranslate" type="button" class="btn-mini btn-success" title="Translate the input text manually (Ctrl+Enter)" value=" Translate"/>):<br>
+                <textarea id="txtSelected" rows="2" class="fixedw text-warning input-medium search-query input-xxlarge" placeholder="please SELECT or TYPE a word, phrase or sentence..."></textarea><br>
+                <span class="mainmeaning">Main Meanings </span><a id="btnReadMain" title="Pronunciation of Main Meanings" class="hand icon-volume-up"></a>:<br>
+                <textarea id="txtTranslated" rows="2" class="fixedw text-success input-medium search-query input-xxlarge" placeholder="NO VALID SOURCE" style="height: 32px;"></textarea><br>
+                <span class="moremeaning">More Meanings </span><a id="btnReadMore" title="Pronunciation of More Meanings" class="hand icon-volume-up"></a>:<br>
+                <textarea id="txtTranslatedAll" rows="2" class="fixedw text-info input-medium search-query input-xxlarge" placeholder="NO VALID SOURCE" style="height: 32px;"></textarea><br>
+                <div id="logoYouDao" class="logoAPI">Data Provided by <a href="http://fanyi.youdao.com/" title="YOUDAO translateor API">YOUDAO translator</a>!</div>
+            </fieldset>
+        </form>
+    </section>
+</article>
+
+    var oSource = theEvent.srcElement;
+    /* Available Properties for event
+    altKey Sets or retrieves a value that indicates the state of the ALT key.  
+    altLeft Sets or retrieves a value that indicates the state of the left ALT key. 
+    cancelBubble Sets or retrieves whether the current event should bubble up the hierarchy of event handlers.  
+    clientX Sets or retrieves the x-coordinate of the mouse pointer's position relative to the client area of the window, excluding window decorations and scroll bars. 
+    clientY Sets or retrieves the y-coordinate of the mouse pointer's position relative to the client area of the window, excluding window decorations and scroll bars. 
+    ctrlKey Sets or retrieves the state of the CTRL key.  
+    ctrlLeft Sets or retrieves the state of the left CTRL key.  
+    offsetX Sets or retrieves the x-coordinate of the mouse pointer's position relative to the object firing the event.  
+    offsetY Sets or retrieves the y-coordinate of the mouse pointer's position relative to the object firing the event.  
+    returnValue Sets or retrieves the return value from the event.  
+    screenX Sets or retrieves the x-coordinate of the mouse pointer's position relative to the user's screen.  
+    screenY Sets or retrieves the y-coordinate of the mouse pointer's position relative to the user's screen.  
+    shiftKey Sets or retrieves the state of the SHIFT key.  
+    shiftLeft Retrieves the state of the left SHIFT key.  
+    srcElement Sets or retrieves the object that fired the event.  
+    type Sets or retrieves the event name from the event object.  
+    x Sets or retrieves the x-coordinate, in pixels, of the mouse pointer's position relative to a relatively positioned parent element. 
+    y Sets or retrieves the y-coordinate, in pixels, of the mouse pointer's position relative to a relatively positioned parent element. 
+    */
+    /*
+    
+    <iframe id="frameLanguageTranslator" src="chrome-extension://<ExecutionID>/background_popup_iframe.html"></iframe>
+    
+    */
