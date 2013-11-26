@@ -184,17 +184,36 @@ var popupPosition = function ()
 {
     if (!OptionItemValues.ClosedPopupDialog)
     {
-        var divContainer = getElement(ElementIds.WebPagePopupDiv).css("top", window.scrollY);
-        divContainer.css("display", "block");
+        // replaced by CSS
+        // var divContainer = getElement(ElementIds.WebPagePopupDiv, pDocument).css("top", window.scrollY);
+        // divContainer.css("display", "block");
     }
     // focus original element
 }
 
+var pDocument = null;
 function showPopupDialogForTranslation(sourceText, mainMeaning, moreMeaning)
 {
     logD("[X]=" + MousePosition.x + " [Y]=" + MousePosition.y);
 
-    var divContainer = getElement(ElementIds.WebPagePopupDiv);
+    var isFrame = window.top.window.document.body.tagName == "FRAMESET";
+
+    if (!pDocument && isFrame) 
+    {
+        var fs = window.top.frames;
+        for (var i = 0; i < fs.length; i++)
+        {
+            var frameHeight = fs[i].window.frameElement.height;
+            if (frameHeight > 400) // ElementIds.PopupIFrame's height
+            {
+                pDocument = fs[i].window.document;
+                break;
+            }
+        }
+    }
+    
+    var divContainer = getElement(ElementIds.WebPagePopupDiv, pDocument);
+
     if (divContainer == null || divContainer.length == 0)
     {
         var styles = "left: " + (MousePosition.x - 10) + "px; top: " + (MousePosition.y + 10) + "px;";
@@ -210,18 +229,18 @@ function showPopupDialogForTranslation(sourceText, mainMeaning, moreMeaning)
         //divContainer.setAttribute("style", styles);
         divContainer.innerHTML = html;
         
-        appendChild(divContainer);
+        appendChild(divContainer, pDocument);
 
-        getElement(ElementIds.PopupIFrame).bind("load", frameLoaded);
-        getElement(ElementIds.PopupIFrame).bind("loadeddata", frameLoaded);
-        getElement(ElementIds.PopupIFrame).bind("loadedmetadata", frameLoaded);
+        getElement(ElementIds.PopupIFrame, pDocument).bind("load", frameLoaded);
+        getElement(ElementIds.PopupIFrame, pDocument).bind("loadeddata", frameLoaded);
+        getElement(ElementIds.PopupIFrame, pDocument).bind("loadedmetadata", frameLoaded);
 
-        divContainer = getElement(ElementIds.WebPagePopupDiv);
+        divContainer = getElement(ElementIds.WebPagePopupDiv, pDocument);
     }
     else
     {
         divContainer.html(html);
-        showPopup(ElementIds.WebPagePopupDiv);
+        showPopup(ElementIds.WebPagePopupDiv, pDocument);
         //divContainer.show();
         //divContainer.popover('show');
         if (!isTranslatedByInput)
@@ -248,10 +267,10 @@ function showPopupDialogForTranslation(sourceText, mainMeaning, moreMeaning)
         divContainer.removeClass("content_translator_circle");
 
         // update container width
-        divContainer.css("width", getElement(ElementIds.PopupIFrame).css("width"));
+        divContainer.css("width", getElement(ElementIds.PopupIFrame, pDocument).css("width"));
         divContainer.css("height", "490px");
 
-        var expandLink = getElement(ElementIds.PopupButtonCollapse);
+        var expandLink = getElement(ElementIds.PopupButtonCollapse, pDocument);
         // enabled & expand webpage-based popup dialog
         expandLink.removeClass("expandlink");
         expandLink.removeClass("collapselink");
@@ -260,7 +279,7 @@ function showPopupDialogForTranslation(sourceText, mainMeaning, moreMeaning)
         expandLink.addClass("collapselink");
         expandLink.addClass("expandcollapserectangle");
 
-        var disableLink = getElement(ElementIds.PopupButtonDisable);
+        var disableLink = getElement(ElementIds.PopupButtonDisable, pDocument);
         disableLink.removeClass("enablelink");
         disableLink.removeClass("disablelink");
         disableLink.removeClass("disableenablecircle");
@@ -268,12 +287,12 @@ function showPopupDialogForTranslation(sourceText, mainMeaning, moreMeaning)
         disableLink.addClass("disablelink");
         disableLink.addClass("disableenablerectangle");
 
-        var closeLink = getElement(ElementIds.PopupButtonClose);
+        var closeLink = getElement(ElementIds.PopupButtonClose, pDocument);
         closeLink.removeClass("closecircle");
         closeLink.removeClass("closerectangle");
         closeLink.addClass("closerectangle");
 
-        var iframe = getElement(ElementIds.PopupIFrame);
+        var iframe = getElement(ElementIds.PopupIFrame, pDocument);
         iframe.css("display", "block");
     }
     else
@@ -284,7 +303,7 @@ function showPopupDialogForTranslation(sourceText, mainMeaning, moreMeaning)
         divContainer.css("width", "48px");
         divContainer.css("height", "40px");
 
-        var expandLink = getElement(ElementIds.PopupButtonCollapse);
+        var expandLink = getElement(ElementIds.PopupButtonCollapse, pDocument);
         // disable & collapse webpage-based popup dialog
         expandLink.removeClass("expandlink");
         expandLink.removeClass("collapselink");
@@ -293,7 +312,7 @@ function showPopupDialogForTranslation(sourceText, mainMeaning, moreMeaning)
         expandLink.addClass("expandlink");
         expandLink.addClass("expandcollapsecircle");
 
-        var disableLink = getElement(ElementIds.PopupButtonDisable);
+        var disableLink = getElement(ElementIds.PopupButtonDisable, pDocument);
         disableLink.removeClass("enablelink");
         disableLink.removeClass("disablelink");
         disableLink.removeClass("disableenablecircle");
@@ -301,12 +320,12 @@ function showPopupDialogForTranslation(sourceText, mainMeaning, moreMeaning)
         disableLink.addClass("enablelink");
         disableLink.addClass("disableenablecircle");
 
-        var closeLink = getElement(ElementIds.PopupButtonClose);
+        var closeLink = getElement(ElementIds.PopupButtonClose, pDocument);
         closeLink.removeClass("closecircle");
         closeLink.removeClass("closerectangle");
         closeLink.addClass("closecircle");
 
-        var iframe = getElement(ElementIds.PopupIFrame);
+        var iframe = getElement(ElementIds.PopupIFrame, pDocument);
         iframe.css("display", "none");
     }
 }
@@ -315,9 +334,9 @@ function updateIcons()
 {
     var img = "url(chrome-extension://" + ExtenionUID + "/glyphicons-halflings.png)";
     //console.log(img);
-    getById(ElementIds.PopupButtonCollapse).style.backgroundImage = img;
-    getById(ElementIds.PopupButtonDisable).style.backgroundImage = img;
-    getById(ElementIds.PopupButtonClose).style.backgroundImage = img;
+    getById(ElementIds.PopupButtonCollapse, pDocument).style.backgroundImage = img;
+    getById(ElementIds.PopupButtonDisable, pDocument).style.backgroundImage = img;
+    getById(ElementIds.PopupButtonClose, pDocument).style.backgroundImage = img;
 }
 
 var eventAttached = false;
@@ -329,11 +348,11 @@ function attachEvetns()
 
         updateIcons();
 
-        var div = getElement(ElementIds.WebPagePopupDiv);
-        var collpase = getElement(ElementIds.PopupButtonCollapse);
-        var disable = getElement(ElementIds.PopupButtonDisable);
-        var close = getElement(ElementIds.PopupButtonClose);
-        var frame = getElement(ElementIds.PopupIFrame);
+        var div = getElement(ElementIds.WebPagePopupDiv, pDocument);
+        var collpase = getElement(ElementIds.PopupButtonCollapse, pDocument);
+        var disable = getElement(ElementIds.PopupButtonDisable, pDocument);
+        var close = getElement(ElementIds.PopupButtonClose, pDocument);
+        var frame = getElement(ElementIds.PopupIFrame, pDocument);
         var display = frame.css("display");
         var shouldDisplay = function ()
         {
@@ -400,10 +419,11 @@ function attachEvetns()
         collpase.click(function ()
         {
             OptionItemValues.EnablePopupDialog = shouldDisplay();
-            if (shouldDisplay()) 
+            if (shouldDisplay())
             {
                 OptionItemValues.EnableTranslation = OptionItemValues.EnablePopupDialog;  // if open dialog, then enable translation   
             }
+            //collapseIFrame();
             window.setTimeout(collapseIFrame, 100);
         });
 
@@ -417,6 +437,7 @@ function attachEvetns()
             {
                 collapseIFrame();
             }
+            //collapseIFrame();
             window.setTimeout(disableThisPopup, 100);
         });
 
@@ -429,8 +450,9 @@ function attachEvetns()
 
             var hideThisPopup = function ()
             {
-                hidePopup(ElementIds.WebPagePopupDiv);
+                hidePopup(ElementIds.WebPagePopupDiv, pDocument);
             }
+            //hideThisPopup();
             window.setTimeout(hideThisPopup, 100);
         });
 

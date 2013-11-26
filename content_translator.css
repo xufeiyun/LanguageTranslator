@@ -8,6 +8,12 @@
  * Designed and built with all the love in the world @world by @eric
  */
 
+#divLanguageTranslator
+{
+    position: fixed;
+    top: 0px;
+    right: 0px;
+}
 .content_translator
 {
     position: absolute;

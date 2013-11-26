@@ -117,6 +117,7 @@ $(document).ready(function ()
         pronunceText(PronounceAudios.More.PlayerId);
     });
 
+    // bottom buttons' events in popup dialog
     $("#btnOperations").click(function ()
     {
         openPage("options.html?tab=operations");

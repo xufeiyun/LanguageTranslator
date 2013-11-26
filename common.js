@@ -6,7 +6,7 @@
 */
 
 var ExtenionUID = "hfcnemnjojifmhdgdbhnhiinmjdohlel"; // release key
-var ExtenionUID = "ikfloipcdobmbnhgodelfijfhmmjjeni"; // develop key
+var ExtenionUID = "dppekmccnfhabjbkalkadbhofdlhpnld"; // develop key
 
 var NewLine = "\r\n";
 var AutoCopyTextInterval = 1000;
@@ -185,26 +185,64 @@ function logE(message)
 	if (OptionItemValues.EnableLogger && isDefined(console.error)) console.error(prefix + message);
 }
 
-function getElement(id)
+function getElement(id, pDocument)
 {
     // return jquery object
-    return $(getById(id));
+    if (pDocument != undefined && pDocument != null)
+    {
+        return $(pDocument.getElementById(id));
+        //return $(pDocument.documentElement).children("body").children("[id='" + id + "']")
+    }
+    else
+    {
+        return $(getById(id));
+    }
+}
+function getById(id, pDocument)
+{
+    // return html element
+    if (pDocument != undefined && pDocument != null)
+    {
+        return pDocument.getElementById(id)
+    }
+    else
+    {
+	    return getDocument().getElementById(id);
+    }
 }
 
+function showPopup(id, pDocument)
+{
+    setTimeout(function ()
+    {
+        getElement(id, pDocument).slideDown();
+    }, 10);
+}
+
+function hidePopup(id, pDocument)
+{
+    setTimeout(function ()
+    {
+        getElement(id, pDocument).slideUp();
+    }, 100);
+}
+
+function appendChild(element, pDocument)
+{
+    if (pDocument != undefined && pDocument != null)
+    {
+        pDocument.body.appendChild(element);
+    }
+    else
+    {
+        getDocument().body.appendChild(element);
+    }
+}
 function createElement (tag)
 {
     return getDocument().createElement(tag);
 }
 
-function appendChild(element)
-{
-    getDocument().body.appendChild(element);
-}
-
-function getById(id)
-{
-	return getDocument().getElementById(id);
-}
 
 function getsByTag(tag)
 {
@@ -289,20 +327,4 @@ function getFileContentsSync(url, type)
         type: "get",
         async: false
     }).responseText;
-}
-
-function showPopup(id)
-{
-    setTimeout(function ()
-    {
-        getElement(id).slideDown();
-    }, 10);
-}
-
-function hidePopup(id)
-{
-    setTimeout(function ()
-    {
-        getElement(id).slideUp();
-    }, 100);
 }
