@@ -29,6 +29,7 @@ function openWikipage(word)
 /*END*/
 
 function openPage(url, callback){
+    debugger;
 	if (chrome.tabs) {
 	    chrome.tabs.create({ url: url }, callback);
 	}

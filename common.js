@@ -83,13 +83,13 @@ var OptionItemValues =
 {
     ClosedPopupDialog:      false,
     EnableTranslation:      true,   // It means translation takes effect OR NOT thru webpage-based popup dialog or the extension-based popup dialog.
-    EnablePopupDialog:      false,   // It means the webpage-based popup dialog takes effect OR NOT on current webpage that viewed by user.
+    EnablePopupDialog:      true,   // It means the webpage-based popup dialog takes effect OR NOT on current webpage that viewed by user.
     EnableCopyText:         false,  // It means to copy the selected text automatically on current webpage.
-    EnableLogger:           false,   // It means to log text to browser console.
+    EnableLogger:           true,   // It means to log text to browser console.
     FromLanguage:           'en',
     ToLanguage:             'cn',
     DefaultBaikie:          'baidu',    // one type of BaikeType,
-    EnableAction:    true,       // It means to enable the Text Translation feature which means it is able to popup the dialog. Highest switch than OptionItemKeys.EnableTranslation and OptionItemKeys. EnablePopupDialog!
+    EnableAction:           true,       // It means to enable the Text Translation feature which means it is able to popup the dialog. Highest switch than OptionItemKeys.EnableTranslation and OptionItemKeys. EnablePopupDialog!
     Default:                "defalt"    // placeholder
 }
 
