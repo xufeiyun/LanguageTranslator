@@ -84,7 +84,7 @@ var OptionItemValues =
 {
     ClosedPopupDialog:      false,
     EnableTranslation:      true,   // It means translation takes effect OR NOT thru webpage-based popup dialog or the extension-based popup dialog.
-    EnablePopupDialog:      true,   // It means the webpage-based popup dialog takes effect OR NOT on current webpage that viewed by user.
+    EnablePopupDialog:      false,   // It means the webpage-based popup dialog takes effect OR NOT on current webpage that viewed by user.
     EnableCopyText:         false,  // It means to copy the selected text automatically on current webpage.
     EnableLogger:           false,   // It means to log text to browser console.
     FromLanguage:           'en',
