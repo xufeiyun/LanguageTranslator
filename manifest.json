@@ -2,7 +2,7 @@
   "manifest_version": 2,
 
   "name": "Language Translator",
-  "version": "1.13.1126",
+  "version": "1.13.1128",
   "description": "A Chrome Extension which translates text between English and Chinese Simplified by default.",
 
   "permissions": [
@@ -34,7 +34,7 @@
         "19": "language_19.jpg",
         "38": "language_19.jpg"
     },
-    "default_title": "Language Translator V1.13.1126"
+    "default_title": "Language Translator V1.13.1128"
   },
   
   "background": {

@@ -29,7 +29,8 @@ var OperatorType =
     speakText: "OperatorTypeKey_SpeakText",
     loadSettings: "OperatorTypeKey_LoadSettings",
     saveSettings: "OperatorTypeKey_SaveSettings",
-    savedSettings: "OperatorTypeKey_SavedSettings"
+    savedSettings: "OperatorTypeKey_SavedSettings",
+    openOptionPage: "OperatorTypeKey_OpenOptionPage"
 };
 
 var BaikeType = 
@@ -85,12 +86,12 @@ var OptionItemValues =
     EnableTranslation:      true,   // It means translation takes effect OR NOT thru webpage-based popup dialog or the extension-based popup dialog.
     EnablePopupDialog:      true,   // It means the webpage-based popup dialog takes effect OR NOT on current webpage that viewed by user.
     EnableCopyText:         false,  // It means to copy the selected text automatically on current webpage.
-    EnableLogger:           true,   // It means to log text to browser console.
+    EnableLogger:           false,   // It means to log text to browser console.
     FromLanguage:           'en',
     ToLanguage:             'cn',
     DefaultBaikie:          'baidu',    // one type of BaikeType,
     EnableAction:           true,       // It means to enable the Text Translation feature which means it is able to popup the dialog. Highest switch than OptionItemKeys.EnableTranslation and OptionItemKeys. EnablePopupDialog!
-    Default:                "defalt"    // placeholder
+    Default:                "default"    // placeholder
 }
 
 function showPopupMsg(message)
@@ -172,16 +173,19 @@ function AlertMsg(message)
 // prefix is defined in each js file
 function logD(message)
 {
+    //console.debug(prefix + message);
 	if (OptionItemValues.EnableLogger && isDefined(console.debug)) console.debug(prefix + message);
 }
 
 function logW(message)
 {
+    //console.warn(prefix + message);
 	if (OptionItemValues.EnableLogger && isDefined(console.warn)) console.warn(prefix + message);
 }
 
 function logE(message)
 {
+    //console.error(prefix + message);
 	if (OptionItemValues.EnableLogger && isDefined(console.error)) console.error(prefix + message);
 }
 
@@ -328,3 +332,20 @@ function getFileContentsSync(url, type)
         async: false
     }).responseText;
 }
+
+
+
+/*------- Send message --------*/
+// Content Script => outter
+function msg_send(type, message)
+{
+    console.info("#COMMON: Sending message...");
+    chrome.runtime.sendMessage(ExtenionUID, { type: type, message: message }, msg_resp);
+}
+// response callback
+function msg_resp(response)
+{
+    console.log("dddd");
+	console.info("#COMMON: Received RESPONSE#: type=>" + response.type + ", message=>" + response.message);
+}
+/*END*/

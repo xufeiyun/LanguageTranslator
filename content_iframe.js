@@ -5,6 +5,8 @@
 
 var prefix = "[IFRAME SCRIPTS]: ";
 
+logD(prefix);
+
 // Error: SecurityError: DOM Exception 18
 // when invode webkitNotifications.createNotification in common.js
 // from content scripts

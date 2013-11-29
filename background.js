@@ -72,6 +72,16 @@ function rcvmsg_bgd(request, sender, sendResponse) {
     else if (type == OperatorType.showPageAction) {
         //chrome.pageAction.show(sender.tab.id);
     }
+    else if (type == OperatorType.openOptionPage) {
+        if (chrome.tabs)
+        {
+            chrome.tabs.create({ url: message }, function() { sendResponse({ type: type, message: "To Open Page: " + message }); });
+        }
+        else
+        {
+            console.warn(prefix + "chrome.tabs is NOT defined!");
+        }
+    }
     else if (type == OperatorType.loadSettings) {
         // tell options to load settings
         var data = {

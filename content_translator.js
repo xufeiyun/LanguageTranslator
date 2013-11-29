@@ -656,7 +656,7 @@ function getWindowSelection(win)
 /*------- scripts executed after page is loaded --------*/
 function handlePages()
 {
-    showPopupMsg("check for setting wiki pages...");
+    logD("check for setting wiki pages...");
 	// following data are set by chrome.tabs.executeScript() in wikipages.js
 	var source = getItem(OperatorType.setBaikeType);
     var type = getItem(OperatorType.setPageControl);

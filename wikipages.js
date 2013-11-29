@@ -29,12 +29,24 @@ function openWikipage(word)
 /*END*/
 
 function openPage(url, callback){
-    debugger;
 	if (chrome.tabs) {
 	    chrome.tabs.create({ url: url }, callback);
 	}
     else {
-        window.open(url);
+        console.warn(prefix + "chrome.tabs is NOT defined!");
+        if (url.indexOf("://") == -1) 
+        {
+            url = "chrome-extension://" + ExtenionUID + "/" + url;
+        }
+        if (url.indexOf("http") == 0)
+        {
+            window.open(url);
+        }
+        else
+        {
+            // send data to background for open the page by chrome.tabs
+            msg_send(OperatorType.openOptionPage, url);
+        }
     }
 }
 
