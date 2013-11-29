@@ -101,7 +101,7 @@ function showPopupMsg(message)
     {
         // notification popup
         var notify = webkitNotifications.createNotification(
-                    'notify_logo.png',      // icon url - can be relative
+                    'image/notify_logo.png',      // icon url - can be relative
                     prefix,                 // notification title
                     message                 // notification body text
                 );

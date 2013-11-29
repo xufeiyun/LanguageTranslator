@@ -2,7 +2,7 @@
   "manifest_version": 2,
 
   "name": "Language Translator",
-  "version": "1.13.1130",
+  "version": "1.13.1201",
   "description": "A Chrome Extension which translates text between English and Chinese Simplified by default.",
 
   "permissions": [
@@ -23,18 +23,18 @@
   "content_security_policy": "script-src 'self'; object-src 'self'",
 
   "icons": {
-         "16": "logo_016.png",
-         "48": "logo_048.png",
-        "128": "logo_128.png"
+         "16": "image/logo_016.png",
+         "48": "image/logo_048.png",
+        "128": "image/logo_128.png"
     },
 
   "browser_action": {
     "default_popup": "popup.html",
     "default_icon": { 
-        "19": "language_19.jpg",
-        "38": "language_19.jpg"
+        "19": "image/language_19.jpg",
+        "38": "image/language_19.jpg"
     },
-    "default_title": "Language Translator V1.13.1130"
+    "default_title": "Language Translator V1.13.1201"
   },
   
   "background": {
@@ -49,16 +49,16 @@
   "content_scripts": [
 	{
 		"matches": ["<all_urls>"],
-		"css": ["content_translator.css"],
+		"css": ["style/content_translator.css"],
 		"js" : [
-            "common.js", 
-            "jquery.min.js", 
-            "content_popup.js", 
-            "clipboard.js", 
-            "storages.js", 
-            "wikipages.js", 
-            "addDOMLoadEvent.js", 
-            "content_translator.js"
+            "script/common.js", 
+            "script/jquery.min.js", 
+            "script/content_popup.js", 
+            "script/clipboard.js", 
+            "script/storages.js", 
+            "script/wikipages.js", 
+            "script/addDOMLoadEvent.js", 
+            "script/content_translator.js"
         ],
 		"run_at": "document_idle",
 		"all_frames": true
@@ -66,20 +66,20 @@
   ],
 
   "web_accessible_resources": [
-      "language_19.jpg",
-      "volume_max.png",
-      "glyphicons-halflings.png",
-      "google_wallet_logo.png",
+      "image/language_19.jpg",
+      "image/volume_max.png",
+      "image/glyphicons-halflings.png",
+      "image/google_wallet_logo.png",
       "background_popup.html",
       "background_popup_iframe.html",
-      "wikipages.js",
-      "content_popup.css",
-      "addDOMLoadEvent.js",
-      "jquery.min.js",
-      "common.js",
-      "translators.js",
-      "content_iframe.js",
-      "jquery-1.10.1.js",
-      "jquery-1.10.1.min.map"
+      "script/wikipages.js",
+      "style/content_popup.css",
+      "script/addDOMLoadEvent.js",
+      "script/jquery.min.js",
+      "script/common.js",
+      "script/translators.js",
+      "script/content_iframe.js",
+      "script/jquery-1.10.1.js",
+      "script/jquery-1.10.1.min.map"
   ]
 }

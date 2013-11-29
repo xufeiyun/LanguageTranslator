@@ -142,8 +142,8 @@ $(document).ready(function ()
     });
 
     // set images by codes
-    //$(".logoProduct").css("background-image","url(chrome-extension://" + ExtenionUID + "/language_19.jpg);");
-    //$(".icon-volume-up").css("background-image","url(chrome-extension://" + ExtenionUID + "/volume_max.png)!important;");
+    //$(".logoProduct").css("background-image","url(chrome-extension://" + ExtenionUID + "/image/language_19.jpg);");
+    //$(".icon-volume-up").css("background-image","url(chrome-extension://" + ExtenionUID + "/image/volume_max.png)!important;");
     
     // translate firstly
     msg2out(OperatorType.getSelectText, "");

@@ -99,7 +99,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, response) {
             break;
         case 'iframe':
             chrome.tabs.executeScript(sender.tab.id, {
-                file: 'content.js',
+                file: 'script/content.js',
                 allFrames: true
             })
             break;

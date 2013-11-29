@@ -34,7 +34,7 @@ body
 }
 
 input:required, textarea:required {
-    /*background: #fff url(images/red_asterisk.png) no-repeat 98% center;*/
+    /*background: #fff url(image/red_asterisk.png) no-repeat 98% center;*/
     background: #fff no-repeat 98% center;
 }
 
@@ -153,7 +153,7 @@ input[type="range"]{
     height: 30px;    
 }
 .googlepay{
-    background-image: url(google_wallet_logo.png)!important;
+    background-image: url(image/google_wallet_logo.png)!important;
 }
 .btn:hover, .btn:focus, .btn:active{
     

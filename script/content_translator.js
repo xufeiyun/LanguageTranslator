@@ -332,7 +332,7 @@ function showPopupDialogForTranslation(sourceText, mainMeaning, moreMeaning)
 
 function updateIcons()
 {
-    var img = "url(chrome-extension://" + ExtenionUID + "/glyphicons-halflings.png)";
+    var img = "url(chrome-extension://" + ExtenionUID + "/image/glyphicons-halflings.png)";
     //console.log(img);
     getById(ElementIds.PopupButtonCollapse, pDocument).style.backgroundImage = img;
     getById(ElementIds.PopupButtonDisable, pDocument).style.backgroundImage = img;

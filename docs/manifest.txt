@@ -21,14 +21,14 @@
   ],
   
   "icons": {
-         "16": "logo_016.png",
-         "48": "logo_048.png",
-        "128": "logo_128.png"
+         "16": "image/logo_016.png",
+         "48": "image/logo_048.png",
+        "128": "image/logo_128.png"
     },
 
   "browser_action": {
     "default_popup": "popup.html",
-    "default_icon": "language_19.jpg",
+    "default_icon": "image/language_19.jpg",
 	  "default_title": "Language Translator"
   },
   

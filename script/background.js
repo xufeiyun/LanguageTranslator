@@ -138,13 +138,13 @@ var UpdateIcon = function (tab)
     if (typeof (action) != "undefined" && action == TrueValue)
     {
         chrome.browserAction.setIcon({
-            path: "language_19.png"
+            path: "image/language_19.png"
         });
     }
     else
     {
         chrome.browserAction.setIcon({
-            path: "language_on.png"
+            path: "image/language_on.png"
         });
     }
 };
