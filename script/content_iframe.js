@@ -90,6 +90,7 @@ $(document).ready(function ()
         textSelected.focus();
     });
 
+    // open wiki page
     $("#btnViewWikipage").click(function ()
     {
         openWikipage($("#txtSelected").val());

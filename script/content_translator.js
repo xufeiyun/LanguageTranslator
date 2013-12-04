@@ -333,7 +333,7 @@ function showPopupDialogForTranslation(sourceText, mainMeaning, moreMeaning)
 function updateIcons()
 {
     var img = "url(chrome-extension://" + ExtenionUID + "/image/glyphicons-halflings.png)";
-    //console.log(img);
+    //logD(img);
     getById(ElementIds.PopupButtonCollapse, pDocument).style.backgroundImage = img;
     getById(ElementIds.PopupButtonDisable, pDocument).style.backgroundImage = img;
     getById(ElementIds.PopupButtonClose, pDocument).style.backgroundImage = img;
@@ -656,28 +656,36 @@ function getWindowSelection(win)
 /*------- scripts executed after page is loaded --------*/
 function handlePages()
 {
-    logD("check for setting wiki pages...");
-	// following data are set by chrome.tabs.executeScript() in wikipages.js
-	var source = getItem(OperatorType.setBaikeType);
-    var type = getItem(OperatorType.setPageControl);
-    var value = getItem(OperatorType.copySelectText);
-    var isTyped = isValidText(type);
-    showPopupMsg(isDefined(source) ? source : "source undefined");
-	
-	// tencent soso baike
-	if (isDefined(source) && source == BaikeType.tencent)
-	{
-		setPage_TencentAPI(isTyped, value);
-	}
-	if (isDefined(source) && source == BaikeType.baidu)
-	{
-		setPage_BaiduAPI(isTyped, value);
-	}
+    msg_send(OperatorType.getBaikeSetting, OperatorType.getBaikeSetting, executeScriptsOnPage)
+}
+function executeScriptsOnPage(response)
+{
+    logW("What's the type of encyclopedia?");
+    logD(response);
 
-    // clear data
-    removeItem(OperatorType.setBaikeType);
-    removeItem(OperatorType.copySelectText);
-    removeItem(OperatorType.setPageControl);
+    // get data
+    var data = response.object;
+    if (data == undefined || data.control == undefined || data.control == null) { return; }
+
+    var control = data.control;
+    var type = data.type;
+    var value = data.value;
+
+    var isPageControl = isValidText(control);
+    var isTyped = isDefined(type);
+
+    // tencent soso baike
+    if (isTyped)
+    {
+        if (type == BaikeType.tencent)
+        {
+            setPage_TencentAPI(isPageControl, value);
+        }
+        if (type == BaikeType.baidu)
+        {
+            setPage_BaiduAPI(isPageControl, value);
+        }
+    }
 }
 /*END*/
 

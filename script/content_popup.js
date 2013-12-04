@@ -698,7 +698,7 @@ var zhongwenContent = {
                 debugstr = debugstr + " " + prop + "=" + obj[prop] + "\n";
             }
         }
-        console.log(debugstr);
+        logD(debugstr);
     },
 
     highlightMatch: function (doc, rp, ro, matchLen, selEndList, tdata) {

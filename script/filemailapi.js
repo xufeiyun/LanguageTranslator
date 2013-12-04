@@ -63,19 +63,21 @@ var MailAPI =
         Failure: null
     },
 
-    Send: function (name, fromemail, content, fnSuccess, fnFailure) {
+    Send: function (name, fromemail, content, fnSuccess, fnFailure, prefix)
+    {
         // prepare to send at first
         if (!isValidText(name)) name = "[USER N/A]";
         if (!isValidText(fromemail)) fromemail = "[USER'S EMAIL N/A]";
 
         MailAPI.Callbacks.Success = fnSuccess;
         MailAPI.Callbacks.Failure = fnFailure;
+        if (prefix == null || prefix == undefined) prefix = "[FEEDBACK FROM] - ";
 
         var apiurl = MailAPI.Configs.InitUrl
                     + "?apikey=" + (MailAPI.Configs.APIKey)
                     + "&from=" + (fromemail)
                     + "&to=" + MailAPI.Configs.ToUser
-                    + "&subject=" + ("[FEEDBACK FROM] - " + name)
+                    + "&subject=" + (prefix + name)
                     + "&message=" + (encodeURI(content))
                     + "&confirmation=False"
                     + "&days=1"
@@ -83,7 +85,8 @@ var MailAPI =
         MailAPI.get(apiurl, MailAPI.Type.AddFile);
     },
 
-    AddFile: function (transferId, transferKey, transferUrl) {
+    AddFile: function (transferId, transferKey, transferUrl)
+    {
         MailAPI.Configs.TransferId = transferId;
         MailAPI.Configs.TransferKey = transferKey;
 
@@ -111,7 +114,8 @@ var MailAPI =
         MailAPI.post(apiurl, newId, postDataEntity, MailAPI.Type.SendEmail);
     },
 
-    Complete: function (transferId, transferKey) {
+    Complete: function (transferId, transferKey)
+    {
         // send email to receiver at last
         var apiurl = MailAPI.Configs.SendUrl
                     + "?apikey=" + (MailAPI.Configs.APIKey)
@@ -121,21 +125,25 @@ var MailAPI =
         MailAPI.get(apiurl, MailAPI.Type.Complete);
     },
 
-    get: function (apiUrl, nextType) {
+    get: function (apiUrl, nextType)
+    {
         logD(apiUrl);
         $.ajax({
             url: apiUrl,
             type: "get",
             async: true,
-            success: function (r) {
+            success: function (r)
+            {
                 MailAPI.Result(r, nextType);
             },
-            error: function (e) {
+            error: function (e)
+            {
                 MailAPI.Result(e, nextType);
             }
         });
     },
-    post: function (apiUrl, newId, postData, nextType) {
+    post: function (apiUrl, newId, postData, nextType)
+    {
         logD(apiUrl);
         $.ajax({
             url: apiUrl,
@@ -144,28 +152,34 @@ var MailAPI =
             mimeType: MailAPI.Configs.MimeType,
             contentType: MailAPI.Configs.MimeType + "; boundary=" + MailAPI.Configs.Boundary + newId,
             data: postData,
-            success: function (r) {
+            success: function (r)
+            {
                 MailAPI.Result(r, nextType);
             },
-            error: function (e) {
+            error: function (e)
+            {
                 MailAPI.Result(e, nextType);
             }
         });
     },
 
-    guid: function () {
+    guid: function ()
+    {
         var guid = "";
-        for (var i = 1; i <= 32; i++) {
+        for (var i = 1; i <= 32; i++)
+        {
             var n = Math.floor(Math.random() * 16.0).toString(16).toUpperCase();
             guid += n;
-            if ((i == 8) || (i == 12) || (i == 16) || (i == 20)) {
+            if ((i == 8) || (i == 12) || (i == 16) || (i == 20))
+            {
                 guid += "-";
             }
         }
         return guid;
     },
 
-    Result: function (apiResult, type) {
+    Result: function (apiResult, type)
+    {
         /*
         returned JSON-formatted data:
         {
@@ -176,31 +190,39 @@ var MailAPI =
         }
         */
         // var result = JSON.parse(apiResult.responseText);
-        try {
+        try
+        {
             var result = (apiResult.responseJSON) ? apiResult.responseJSON : apiResult;
             var status = result.responsestatus;
-            if (status == "ok" || status == "OK" || (result.match && result.match(/[okOK]/) != null)) {
-                if (type == MailAPI.Type.InitEmail) {
+            if (status == "ok" || status == "OK" || (result.match && result.match(/[okOK]/) != null))
+            {
+                if (type == MailAPI.Type.InitEmail)
+                {
                     // nothing to do
                 }
-                else if (type == MailAPI.Type.AddFile) {
+                else if (type == MailAPI.Type.AddFile)
+                {
                     MailAPI.AddFile(result.transferid, result.transferkey, result.transferurl);
                 }
-                else if (type == MailAPI.Type.SendEmail) {
+                else if (type == MailAPI.Type.SendEmail)
+                {
                     // send to recievers
                     MailAPI.Complete(MailAPI.Configs.TransferId, MailAPI.Configs.TransferKey);
                 }
-                else if (type == MailAPI.Type.Complete) {
+                else if (type == MailAPI.Type.Complete)
+                {
                     logD(result.downloadurl);
                     if (MailAPI.Callbacks.Success) { MailAPI.Callbacks.Success("Thanks a lot for your feedback. Feedback sent successfully."); }
                 }
             }
-            else {
+            else
+            {
                 var code = result.errorcode;
                 if (MailAPI.Callbacks.Failure) { MailAPI.Callbacks.Failure("[#" + code + ": " + status + "] " + result.errormessage); }
             }
         }
-        catch (e) {
+        catch (e)
+        {
             msg = e.Message;
             logE(msg);
             if (MailAPI.Callbacks.Failure) { MailAPI.Callbacks.Failure(msg); }

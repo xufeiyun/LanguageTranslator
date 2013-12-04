@@ -221,7 +221,7 @@ function parseData(data)
 				values += parseEachData(data[data.length - l]) + ",";
 			}
 			catch (e) {
-				console.warn(e);
+				logW(e);
 			}
 			finally {
 			}
@@ -247,7 +247,7 @@ function parseEachData(data)
 				values += parseEachData(data[data.length - l]) + ",";
 			}
 			catch (e) {
-				console.warn(e);
+				logW(e);
 			}
 			finally {
 			}

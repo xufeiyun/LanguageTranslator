@@ -22,11 +22,11 @@
 	<script type="text/javascript" src="bootstrap/js/bootstrap-switch.min.js"></script>
     
     <script type="text/javascript" src="script/paypal-button.min.js"></script>
-    
 
     <script type="text/javascript" src="script/common.js"></script>
     <script type="text/javascript" src="script/querystring.js"></script>
     <script type="text/javascript" src="script/filemailapi.js"></script>
+    <script type="text/javascript" src="script/readfile.js"></script>
     <script type="text/javascript" src="script/wikipages.js"></script>
     <script type="text/javascript" src="script/options.js"></script>
 </HEAD>
@@ -56,9 +56,7 @@
               <fieldset>
                 <legend>Basic Operations</legend>
                 <ul>
-                    <li>Translate Text automatically by selecting text</li>
-                    <li>Translate Text automatically by double-clicking text</li>
-                    <li>Translate Text automatically by typing text</li>
+                    <li id="__basic_ops"></li>
                 </ul>
               </fieldset>
             </form>
@@ -67,10 +65,7 @@
               <fieldset>
                 <legend>More Operations</legend>
                 <ul>
-                    <li>Open Wiki Page for Source Text</li>
-                    <li>Pronunciation of text</li>
-                    <li>Copy Selected Text automatically if the [Enable Copy Text] feature enabled</li>
-                    <li>Open home page of this extension</li>
+                    <li id="__more_ops"></li>
                 </ul>
               </fieldset>
             </form>
@@ -176,16 +171,7 @@
               <fieldset>
                 <legend>More Features</legend>
                   <ol>
-                    <li>Type texts directly.</li>
-                    <li>Translate texts automatically after your typed it (ONE AWESOME FEATURE).</li>
-                    <li>Translate texts manually by shortcut (Ctrl+Enter).</li>
-                    <li>Translate texts manually by clicking the Translate button.</li>
-                    <li>Translate texts directly after you pasted it (Ctrl + V).</li>
-                    <li>Open a wiki page for the Source Text.</li>
-                    <li>Pronunciation for texts.</li>
-                    <li>Collapse or Expand the Popup Dialog.</li>
-                    <li>Disable or Enable Text Translation for current page.</li>
-                    <li>Close the Popup Dialog for current page.</li>
+                     <li id="__more_fea"></li>
                   </ol>
               </fieldset>
             </form>
@@ -194,9 +180,7 @@
               <fieldset>
                 <legend>Nice Features TO HAVE</legend>
                   <ol>
-                    <li>English Word Study.</li>
-                    <li>Translation History.</li>
-                    <li>OTHERS...</li>
+                    <li id="__nice_fea"></li>
                   </ol>
               </fieldset>
             </form>
@@ -207,14 +191,7 @@
               <fieldset>
                 <legend>News</legend>
                   <ul>
-                      <li>2013-06-21: Idea for translating text on webpage by ONE STEP ONLY.</li>
-                      <li>2013-06-22: Analyzed several Translators(Google Extension) for translating text.</li>
-                      <li>2013-06-23: Excogitation of Language Translator product.</li>
-                      <li>2013-06-25: Implementation of Language Translator product.</li>
-                      <li>2013-08-15: Improvements of Language Translator product.</li>
-                      <li>2013-09-20: Enhancements of Language Translator product.</li>
-                      <li>2013-10-11: Releasements of Language Translator product.</li>
-                      <li>2013-12-01: Releasements of Language Translator product.</li>
+                      <li id="__news"></li>
                   </ul>
               </fieldset>
             </form>
@@ -223,9 +200,7 @@
               <fieldset>
                 <legend>Fixes</legend>
                   <ul>
-                      <li>2013-10-21: Focus original element after text selected for translation.</li>
-                      <li>2013-11-26: Add support for displaying the popup in iframe.</li>
-                      <li>2013-11-30: Fix bug of opening Options page via popup dialog.</li>
+                      <li id="__fixes"></li>
                   </ul>
               </fieldset>
             </form>
@@ -234,12 +209,7 @@
               <fieldset>
                 <legend>Release</legend>
                   <ul>
-                      <li>2013-07-01: Released Language Translator V1.0.0!</li>
-                      <li>2013-10-11: Released Language Translator V1.1.0!</li>
-                      <li>2013-10-12: Released Language Translator V1.1.2!</li>
-                      <li>2013-10-21: Released Language Translator V1.1.5!</li>
-                      <li>2013-11-01: Released Language Translator V1.13.1101!</li>
-                      <li>2013-12-01: Released Language Translator V1.13.1201!</li>
+                      <li id="__releases"></li>
                   </ul>
               </fieldset>
             </form>
@@ -311,8 +281,7 @@
               <fieldset>
                 <legend>Authors</legend>
                   <ul>
-                      <li>Eric Xu</li>
-                      <li>Lemon Ran</li>
+                      <li id="__authors"></li>
                   </ul>
               </fieldset>
             </form>
@@ -321,12 +290,7 @@
               <fieldset>
                 <legend>Sponsors & Thanks TO</legend>
                   <ul>
-                      <li>Lemon Ran</li>
-                      <li>Frank Liu</li>
-                      <li>Jim Gan</li>
-                      <li>Kevin Hu</li>
-                      <li>Viva Jiang</li>
-                      <li>Eric Xu</li>
+                      <li id="__sponsors"></li>
                   </ul>
               </fieldset>
             </form>
@@ -335,12 +299,7 @@
               <fieldset>
                 <legend>Team Members</legend>
                   <ul>
-                      <li>Eric Xu</li>
-                      <li>Lemon Ran</li>
-                      <li>Frank Liu</li>
-                      <li>Jim Gan</li>
-                      <li>Viva Jiang</li>
-                      <li>Kevin Hu</li>
+                      <li id="__members"></li>
                   </ul>
               </fieldset>
             </form>
@@ -369,11 +328,7 @@
               <fieldset>
                 <legend>Language Translator Top Contributors</legend>
                   <ul style="list-style-type: square; clear: both;">
-                      <li>Lemon Ran</li>
-                      <li>Frank Liu</li>
-                      <li>Jim Gan</li>
-                      <li>Kevin Hu</li>
-                      <li>Viva Jiang</li>
+                      <li id="__contributors"></li>
                   </ul>
               </fieldset>
             </form>

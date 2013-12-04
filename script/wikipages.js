@@ -15,16 +15,54 @@ function openHomepage()
 
 function openWikipage(word)
 {
-    showPopupMsg("call openWikipage with word:" + word);
+    logD("call openWikipage with word:" + word);
 
-    // send message to content scripts
-    //pup2tab(OperatorType.viewWikipages, word);
+    var fromGoogle = function (word)
+    {
+        logW("Undefined Wikipedia Type: " + OptionItemValues.DefaultBaike);
+        logW("Searching [" + word + "] by google.com ...");
+        fromGoogleAPI(word);
+    };
 
     // ok
-    fromWikipediaEN(word);
-    fromWikipediaCN(word);
-    //fromTencentAPI(word);
-    fromBaiduAPI(word);
+    if (isChinese(word))
+    {
+        if (OptionItemValues.DefaultBaike == BaikeType.wikicn)
+        {
+            fromWikipediaCN(word);
+        } 
+        else if (OptionItemValues.DefaultBaike == BaikeType.tencent)
+        {
+            fromTencentAPI(word);
+        }
+        else if (OptionItemValues.DefaultBaike == BaikeType.baidu)
+        {
+            fromBaiduAPI(word);
+        }
+        else
+        {
+            fromGoogle(word);
+        }
+    }
+    else
+    {
+        if (OptionItemValues.DefaultBaike == BaikeType.wikien)
+        {
+            fromWikipediaEN(word);
+        }
+        else if (OptionItemValues.DefaultBaike == BaikeType.tencent)
+        {
+            fromTencentAPI(word);
+        }
+        else if (OptionItemValues.DefaultBaike == BaikeType.baidu)
+        {
+            fromBaiduAPI(word);
+        }
+        else
+        {
+            fromGoogle(word);
+        }
+    }
 }
 /*END*/
 
@@ -33,19 +71,22 @@ function openPage(url, callback){
 	    chrome.tabs.create({ url: url }, callback);
 	}
     else {
-        console.warn(prefix + "chrome.tabs is NOT defined!");
+        logW(callback ? callback : "callback is undefined");
+        logW(prefix + "chrome.tabs is NOT defined!");
         if (url.indexOf("://") == -1) 
         {
             url = "chrome-extension://" + ExtenionUID + "/" + url;
         }
         if (url.indexOf("http") == 0)
         {
-            window.open(url);
+            //window.open(url);
+            // send data to background for open the page by chrome.tabs
+            msg_send(OperatorType.openOptionPage, url, callback);
         }
         else
         {
             // send data to background for open the page by chrome.tabs
-            msg_send(OperatorType.openOptionPage, url);
+            msg_send(OperatorType.openOptionPage, url, callback);
         }
     }
 }
@@ -66,76 +107,69 @@ function fromWikipediaCN(word)
     var url = "http://zh.wikipedia.org/wiki/" + encodeText(word);
     openPage(url);
 }
+function fromGoogleAPI(word)
+{
+    var url = 'https://www.google.com/#q=' + encodeText(word) + "&safe=strict";
+    openPage(url);
+}
+// by scripts
 function fromBaiduAPI(word)
 {
     // Reference: http://baike.baidu.com/hezuo/hzsq.html
     // 1. open http://baike.baidu.com/
     // 2. set content of text id: word
     // 3. click the button of id: find by value [进入词条] and type [submit]
-    var success = function(results) {
-        showPopupMsg("RESULT:" + results.toString());
+
+    var data = {
+        type: BaikeType.baidu,
+        control: true,
+        value: word
     };
-    var initialData = function (tab) {
-        var tabId = tab.id;
-        var windowId = tab.windowId;
-        var value = getItem(OperatorType.copySelectText);
-        // execute script code
-        var details = {code: "localStorage['" + OperatorType.copySelectText + "'] = '" + value + "';", allFrames: false};
-        chrome.tabs.executeScript(tabId, details, success);
-        details = {code: "localStorage['" + OperatorType.setPageControl + "'] = true;", allFrames: false};
-        chrome.tabs.executeScript(tabId, details, success);
-        details = {code: "localStorage['" + OperatorType.setBaikeType + "'] = '" + BaikeType.baidu + "';", allFrames: false};
-        chrome.tabs.executeScript(tabId, details, success);
-    };
-    // works in background & popup
-    openPage('http://baike.baidu.com/', initialData);
+
+    msg_send(OperatorType.setBaikeSetting, data)
+
+    openPage('http://baike.baidu.com/');
 }
+// by scripts
 function fromTencentAPI(word)
 {
     // Reference: http://baike.soso.com/
     // 1. open http://baike.soso.com/
     // 2. set content of text id: searchText
     // 3. click the button of id: find by id enterLemma or by value [进入词条] and type [submit]id = "searchText";
-    var initialData = function (tab) {
-        var tabId = tab.id;
-        var windowId = tab.windowId;
-        var value = getItem(OperatorType.copySelectText);
-        // execute script code
-        var details = {code: "localStorage['" + OperatorType.copySelectText + "'] = '" + value + "';", allFrames: false};
-        chrome.tabs.executeScript(tabId, details);
-        details = {code: "localStorage['" + OperatorType.setPageControl + "'] = true;", allFrames: false};
-        chrome.tabs.executeScript(tabId, details);
-        details = {code: "localStorage['" + OperatorType.setBaikeType + "'] = '" + BaikeType.tencent + "';", allFrames: false};
-        chrome.tabs.executeScript(tabId, details);
+    
+    var data = {
+        type: BaikeType.tencent,
+        control: true,
+        value: word
     };
-    // works in background & popup
-    openPage('http://baike.soso.com/', initialData);
+
+    msg_send(OperatorType.setBaikeSetting, data)
+
+    openPage('http://baike.soso.com/');
 }
 /*END*/
 
 
 
 /*-----------  set values of page elements of opened page, called by content scripts--------------*/
-function setPage_BaiduAPI(isTyped, value)
+function setPage_BaiduAPI(isPageControl, value)
 {
-    showPopupMsg("setPage_BaiduAPI:" + value);
-    if (isTyped && isTyped == true)
+    if (isPageControl && isPageControl == true)
     {
         // text element
         var text = $("#word");
-        showPopupMsg(text ? "text found" : "text NOT found");
         if (text)
         {
             text.val(value);
             // button element
             var submit = $("input[value='进入词条']");
-            showPopupMsg(submit ? "submit found" : "submit NOT found");
+            logD(submit ? "submit found" : "submit NOT found");
             //if (submit.length > 0 && isDefined(submit[0].click))
             if (submit && isDefined(submit.click))
             {
                 submit.click();
-                console.log("Submit button clicked.");
-                showPopupMsg("Submit button clicked.");
+                logD("Submit button clicked.");
             }
             else
             {
@@ -144,9 +178,9 @@ function setPage_BaiduAPI(isTyped, value)
         }
     }
 }
-function setPage_TencentAPI(isTyped, value)
+function setPage_TencentAPI(isPageControl, value)
 {
-    if (isTyped && isTyped == true)
+    if (isPageControl && isPageControl == true)
     {
         // text element
         var text = $("#searchText");
@@ -158,14 +192,22 @@ function setPage_TencentAPI(isTyped, value)
             if (submit.length > 0 && isDefined(submit[0].click))
             {
                 submit[0].click();
-                console.log("Submit button clicked.");
+                logD("Submit button clicked.");
             }
             else
             {
-                console.error("Submit button not found.");
+                logE("Submit button not found.");
             }
         }
     }
 }
 /*END*/
 
+
+//判断字符是否是中文字符
+function isChinese(s)
+{
+    var patrn = /[\u4E00-\u9FA5]|[\uFE30-\uFFA0]/gi;
+    var result = patrn.exec(s);
+    return result;
+}

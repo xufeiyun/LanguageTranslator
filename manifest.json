@@ -2,7 +2,7 @@
   "manifest_version": 2,
 
   "name": "Language Translator",
-  "version": "1.13.1201",
+  "version": "1.13.1205",
   "description": "A Chrome Extension which translates text between English and Chinese Simplified by default.",
 
   "permissions": [
@@ -17,6 +17,7 @@
     "unlimitedStorage",
     "tts",
     "windows",
+    "geolocation",
   	"tabs"
   ],
 
@@ -34,7 +35,7 @@
         "19": "image/language_19.jpg",
         "38": "image/language_19.jpg"
     },
-    "default_title": "Language Translator V1.13.1201"
+    "default_title": "Language Translator V1.13.1205"
   },
   
   "background": {
@@ -66,12 +67,15 @@
   ],
 
   "web_accessible_resources": [
+      "image/logo.jpg",
       "image/language_19.jpg",
       "image/volume_max.png",
       "image/glyphicons-halflings.png",
       "image/google_wallet_logo.png",
       "background_popup.html",
       "background_popup_iframe.html",
+      "script/geo.js",
+      "script/geoapi.js",
       "script/wikipages.js",
       "style/content_popup.css",
       "script/addDOMLoadEvent.js",

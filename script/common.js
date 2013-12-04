@@ -5,8 +5,11 @@
 	This javascript file is the common file including common features
 */
 
-var ExtenionUID = "hfcnemnjojifmhdgdbhnhiinmjdohlel"; // release key
-var ExtenionUID = "dppekmccnfhabjbkalkadbhofdlhpnld"; // develop key
+var ReleaseId = "hfcnemnjojifmhdgdbhnhiinmjdohlel"; // release key
+var DebugerId = "dppekmccnfhabjbkalkadbhofdlhpnld"; // develop key
+
+var ExtenionUID = DebugerId;
+var ExtenionUID = ReleaseId;
 
 var NewLine = "\r\n";
 var AutoCopyTextInterval = 1000;
@@ -15,6 +18,7 @@ var OneLineCharCount = 45;
 var EmptyText = "";
 var TrueValue = "true";
 var UsePageAction = false;
+var IsDebugger = (ExtenionUID == DebugerId);
 
 var OperatorType = 
 {
@@ -23,14 +27,14 @@ var OperatorType =
     getCopiedText: "OperatorTypeKey_GetCopiedText",
     viewWikipages: "OperatorTypeKey_ViewWikipages",
     viewHomepage: "OperatorTypeKey_ViewHomepage",
-    setPageControl: "OperatorTypeKey_SetPageControl",
-    setBaikeType: "OperatorTypeKey_SetBaikeType",
     showPageAction: "OperatorTypeKey_ShowPageAction",
     speakText: "OperatorTypeKey_SpeakText",
     loadSettings: "OperatorTypeKey_LoadSettings",
     saveSettings: "OperatorTypeKey_SaveSettings",
     savedSettings: "OperatorTypeKey_SavedSettings",
-    openOptionPage: "OperatorTypeKey_OpenOptionPage"
+    openOptionPage: "OperatorTypeKey_OpenOptionPage",
+    getBaikeSetting: "OperatorTypeKey_getBaikeSetting",
+    setBaikeSetting: "OperatorTypeKey_setBaikeSetting"
 };
 
 var BaikeType = 
@@ -75,8 +79,13 @@ var OptionItemKeys =
     EnableLogger:           "OptionItemKeys_EnableLogger",
     FromLanguage:           "OptionItemKeys_FromLanguage",
     ToLanguage:             "OptionItemKeys_ToLanguage",
-    DefaultBaikie:          "OptionItemKeys_DefaultBaikie",
+    DefaultBaike:           "OptionItemKeys_DefaultBaike",
     EnableAction:           "OptionItemKeys_EnableAction",
+    EnableLocation:         "OptionItemKeys_EnableLocation",
+    StartLocation:          "OptionItemKeys_StartLocation",
+    IsPageControl:          "OptionItemKeys_IsPageControl",
+    BaikeType:              "OptionItemKeys_BaikeType",
+    BaikeWord:              "OptionItemKeys_BaikeWord",
     Default:                "OptionItemKeys_defalt"
 }
 
@@ -89,14 +98,19 @@ var OptionItemValues =
     EnableLogger:           false,   // It means to log text to browser console.
     FromLanguage:           'en',
     ToLanguage:             'cn',
-    DefaultBaikie:          'baidu',    // one type of BaikeType,
+    DefaultBaike:           'baidu',    // one type of BaikeType,
     EnableAction:           true,       // It means to enable the Text Translation feature which means it is able to popup the dialog. Highest switch than OptionItemKeys.EnableTranslation and OptionItemKeys. EnablePopupDialog!
+    EnableLocation:         true,       // It means to send geo location to me.
     Default:                "default"    // placeholder
+}
+if (IsDebugger)
+{
+    OptionItemValues.EnableLogger = true;
 }
 
 function showPopupMsg(message)
 {
-    logD("SHOW NOTIFICATION WITH MESSAGE: " + message);
+    //logD("SHOW NOTIFICATION WITH MESSAGE: " + message);
     try
     {
         // notification popup
@@ -116,7 +130,7 @@ function showPopupMsg(message)
 /*-------Import js file dynamically--------*/
 function importJS(path) 
 {
-	console.debug("[Try importing javascript file into viewed page dynamically] file path: " + path);
+	logD("[Try importing javascript file into viewed page dynamically] file path: " + path);
 	var i;
 	var ss = document.getElementsByTagName("script");
 	for (i = 0; i < ss.length; i++) {
@@ -337,15 +351,24 @@ function getFileContentsSync(url, type)
 
 /*------- Send message --------*/
 // Content Script => outter
-function msg_send(type, message)
+function msg_send(type, message, callback)
 {
-    console.info("#COMMON: Sending message...");
-    chrome.runtime.sendMessage(ExtenionUID, { type: type, message: message }, msg_resp);
+    var need_resp = function (response)
+    {
+        msg_resp(response);
+        // get tab
+        if (callback != undefined && callback != null)
+        {
+            callback(response);
+        }
+        return true;
+    };
+    logD("#COMMON: Sending message...");
+    chrome.runtime.sendMessage(ExtenionUID, { type: type, message: message }, need_resp);
 }
 // response callback
 function msg_resp(response)
 {
-    console.log("dddd");
-	console.info("#COMMON: Received RESPONSE#: type=>" + response.type + ", message=>" + response.message);
+	logD("#COMMON: Received RESPONSE#: type=>" + response.type + ", message=>" + response.message);
 }
 /*END*/

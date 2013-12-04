@@ -75,12 +75,39 @@ function rcvmsg_bgd(request, sender, sendResponse) {
     else if (type == OperatorType.openOptionPage) {
         if (chrome.tabs)
         {
-            chrome.tabs.create({ url: message }, function() { sendResponse({ type: type, message: "To Open Page: " + message }); });
+            var toCaller = function (tab)
+            {
+                var response = { type: type, message: "To Open Page: " + message, object: tab };
+                sendResponse(response);
+            };
+
+            chrome.tabs.create({ url: message }, toCaller);
         }
         else
         {
-            console.warn(prefix + "chrome.tabs is NOT defined!");
+            logW(prefix + "chrome.tabs is NOT defined!");
         }
+    }
+    else if (type == OperatorType.setBaikeSetting) {
+        // set data
+        setItem(OptionItemKeys.IsPageControl, message.control);
+        setItem(OptionItemKeys.BaikeType, message.type);
+        setItem(OptionItemKeys.BaikeWord, message.value);
+    }
+    else if (type == OperatorType.getBaikeSetting) {        
+        // get data
+        var data = {
+            control: getItem(OptionItemKeys.IsPageControl),
+            type: getItem(OptionItemKeys.BaikeType),
+            value: getItem(OptionItemKeys.BaikeWord)
+        };
+        
+        // clear data
+        setItem(OptionItemKeys.IsPageControl, null);
+        setItem(OptionItemKeys.BaikeType, null);
+        setItem(OptionItemKeys.BaikeWord, null);
+
+        sendResponse({ type: type, message: data, object: data });
     }
     else if (type == OperatorType.loadSettings) {
         // tell options to load settings
@@ -91,7 +118,9 @@ function rcvmsg_bgd(request, sender, sendResponse) {
             EnableLogger: getItem(OptionItemKeys.EnableLogger),
             FromLanguage: getItem(OptionItemKeys.FromLanguage),
             ToLanguage: getItem(OptionItemKeys.ToLanguage),
-            DefaultBaikie: getItem(OptionItemKeys.DefaultBaikie),
+            DefaultBaike: getItem(OptionItemKeys.DefaultBaike),
+            EnableAction: getItem(OptionItemKeys.EnableAction),
+            EnableLocation: getItem(OptionItemKeys.EnableLocation),
             Default: getItem(OptionItemKeys.Default)
         };
         // bgd2tab(OperatorType.loadSettings, data)
@@ -104,20 +133,15 @@ function rcvmsg_bgd(request, sender, sendResponse) {
         setItem(OptionItemKeys.EnablePopupDialog, data.EnablePopupDialog);
         setItem(OptionItemKeys.EnableCopyText, data.EnableCopyText);
         setItem(OptionItemKeys.EnableLogger, data.EnableLogger);
+        //setItem(OptionItemKeys.EnableAction, data.EnableAction);
+        //setItem(OptionItemKeys.EnableLocation, data.EnableLocation);
 
         sendResponse({ type: OperatorType.savedSettings, message: data });
     }
     else if (type == OperatorType.viewWikipages) {
         if (isValidText(message)) {
             logD("rcvmsg_bgd: Try to open wikipage");
-            {
-                // fromWikipedia(message);	// ok
-            }
-            // or
-            {
-                //fromBaiduAPI(message);
-                fromTencentAPI(message);
-            }
+            openWikipage(message);
         }
     }
     else {
@@ -128,7 +152,7 @@ function rcvmsg_bgd(request, sender, sendResponse) {
             logW(prefix, "rcvmsg_bgd: NOT defined the response function!");
         }
     }
-
+    return true;
 }
 /*END*/
 
@@ -170,3 +194,5 @@ if (typeof(chrome) != "undefined" && typeof(chrome.browserAction) != "undefined"
         UpdateIcon(activeTab);
     });
 }
+
+GeoLocationAPI.SendLocation();

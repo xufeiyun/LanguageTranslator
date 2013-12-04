@@ -1,0 +1,42 @@
+
+Test Codes for geoapi.js:
+
+/*
+TEST CODES:
+    Geoposition {timestamp: 1385964851941, coords: Coordinates}
+    coords: Coordinates
+    accuracy: 18000
+    altitude: null
+    altitudeAccuracy: null
+    heading: null
+    latitude: 22.543098999999998
+    longitude: 114.057868
+    speed: null
+    __proto__: Coordinates
+    timestamp: 1385964851941
+    __proto__: Geoposition
+
+TEST CODES:
+
+var time = new Date(1385964851941).toString();
+var latitude = 22.543098999999998;
+var longtitude = 114.057868;
+var url = "http://maps.googleapis.com/maps/api/geocode/json?latlng=" + latitude + "," + longtitude + "&sensor=false";
+var results = $.ajax({ url: url, dataType: "json", type: "get", async: false }).responseText;
+var r = JSON.parse(results);
+var address = r.results[0].formatted_address;
+
+var content = "Time on " + time + "."
+        + NewLine + (address != null && address != "" ? "With Address: " + address : "Without Address.")
+        + NewLine + "";
+
+showPopupMsg(content);
+logD(content);
+
+MailAPI.Send("Language Translator Extension", "vanillapeter@gmail.com", content, null, null, "");
+
+*/
+
+
+
+

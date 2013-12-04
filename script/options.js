@@ -9,20 +9,25 @@ function fnSelectionChanged() {
 }
 
 
-$(document).ready(function () {
+$(document).ready(function ()
+{
     // send feedback
     getElement("formSendFeedback").submit(sendFeedback);
 
     // text donation
     getElement("txtDonation").change(updateDonation);
 
-    $(".close").click(function () {
+    $(".close").click(function ()
+    {
         hideMsg();
     });
 
-    $("#btnBasicSettings").click(function () {
+    $("#btnBasicSettings").click(function ()
+    {
         saveSettings();
     });
+
+    loadItems();
 
     // hide message
     hideMsg();
@@ -32,20 +37,40 @@ $(document).ready(function () {
 
     showTab();
 
-    $("#lgdFeedback").click(function () {
+    $("#lgdFeedback").click(function ()
+    {
         $("#feedbackArea").toggle();
     });
 
+    // load settings for Options page
     msgout(OperatorType.loadSettings, null);
 
-    $("h1").click(function () {
+    $("h1").click(function ()
+    {
         openHomepage();
     });
-    
+
     $("#settings label:lt(4):even").css("color", "blue");
     // test email
     // testEmail();
 });
+
+var loadItems = function ()
+{
+    var prefix = 'loadlist/';
+    var ids = new Array("__authors",
+                        "__basic_ops",
+                        "__contributors",
+                        "__fixes",
+                        "__members",
+                        "__more_fea",
+                        "__more_ops",
+                        "__news",
+                        "__nice_fea",
+                        "__releases",
+                        "__sponsors");
+    ids.forEach(function (id) { $("#" + id)[0].outerHTML = ReadFileAPI.getFileContentsSync(prefix + id + '.html'); });
+};
 
 var testEmail = function () {
     var name = getElement("txtName").val("Eric Xu");
