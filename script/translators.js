@@ -33,19 +33,19 @@ function translate(message)
     translateByMicrosoft(message);
 }
 
-function isChina(s)
-{
-    var patrn = /[\u4E00-\u9FA5]|[\uFE30-\uFFA0]/gi;
-    return !patrn.exec(s);
-}
-
 function createTranslateAudio(audioType, word)
 {
+    if (OptionItemValues.EnablePronunciation == false)
+    {
+        logD("Pronunciation Feature has been disabled.");
+        return;
+    }
+
     var divId = audioType.ContainerId,
         audioId = audioType.PlayerId,
         buttonId = audioType.ButtonId;
 
-    var url = "http://tts.baidu.com/text2audio?lan=" + (isChina(word) ? "zh" : "en") +"&amp;ie=UTF-8&amp;text=" + encodeURI(word);
+    var url = "http://tts.baidu.com/text2audio?lan=" + (isChinese(word) ? "zh" : "en") +"&amp;ie=UTF-8&amp;text=" + encodeURI(word);
 
     // creat audio element
     var htmlAudio = "<audio buttonid='" + buttonId +  "' controls='controls' preload='preload' src='" + url + "' id='" + audioId + "'></audio>";

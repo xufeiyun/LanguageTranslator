@@ -203,11 +203,3 @@ function setPage_TencentAPI(isPageControl, value)
 }
 /*END*/
 
-
-//判断字符是否是中文字符
-function isChinese(s)
-{
-    var patrn = /[\u4E00-\u9FA5]|[\uFE30-\uFFA0]/gi;
-    var result = patrn.exec(s);
-    return result;
-}

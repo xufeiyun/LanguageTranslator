@@ -1,12 +1,10 @@
-
-/*-------  --------*/
-
 /**
 	This javascript file is the common file including common features
 */
 
 var ReleaseId = "hfcnemnjojifmhdgdbhnhiinmjdohlel"; // release key
 var DebugerId = "dppekmccnfhabjbkalkadbhofdlhpnld"; // develop key
+var DebugerId = "fhpodiibcajbmcllgnoaggldkfanoijo"; // develop key
 
 var ExtenionUID = DebugerId;
 var ExtenionUID = ReleaseId;
@@ -86,6 +84,7 @@ var OptionItemKeys =
     IsPageControl:          "OptionItemKeys_IsPageControl",
     BaikeType:              "OptionItemKeys_BaikeType",
     BaikeWord:              "OptionItemKeys_BaikeWord",
+    EnablePronunciation:    "OptionItemKeys_EnablePronunciation",
     Default:                "OptionItemKeys_defalt"
 }
 
@@ -101,11 +100,13 @@ var OptionItemValues =
     DefaultBaike:           'baidu',    // one type of BaikeType,
     EnableAction:           true,       // It means to enable the Text Translation feature which means it is able to popup the dialog. Highest switch than OptionItemKeys.EnableTranslation and OptionItemKeys. EnablePopupDialog!
     EnableLocation:         true,       // It means to send geo location to me.
+    EnablePronunciation:    true,
     Default:                "default"    // placeholder
 }
 if (IsDebugger)
 {
-    OptionItemValues.EnableLogger = true;
+    OptionItemValues.EnableLogger = true;   // enable log for dev env
+    OptionItemValues.EnablePronunciation = false;   // disable pronunce for dev env
 }
 
 function showPopupMsg(message)
@@ -348,6 +349,14 @@ function getFileContentsSync(url, type)
 }
 
 
+
+// judge whether the word contains chinese or not
+function isChinese(s)
+{
+    var patrn = /[\u4E00-\u9FA5]|[\uFE30-\uFFA0]/gi;
+    var result = patrn.exec(s);
+    return result;
+}
 
 /*------- Send message --------*/
 // Content Script => outter

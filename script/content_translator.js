@@ -494,7 +494,10 @@ function resp_tab(response)
 	{
 		logW("#RESPONSE#: RECEIVED type: 【" + response.type + "】, message:【" + response.message + "】");
 	}
-
+    else
+    {
+        return; 
+    }
 	var type = response.type;
 	if (type == OperatorType.loadSettings)
 	{
