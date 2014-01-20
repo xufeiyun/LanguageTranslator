@@ -45,7 +45,9 @@ function createTranslateAudio(audioType, word)
         audioId = audioType.PlayerId,
         buttonId = audioType.ButtonId;
 
-    var url = "http://tts.baidu.com/text2audio?lan=" + (isChinese(word) ? "zh" : "en") +"&amp;ie=UTF-8&amp;text=" + encodeURI(word);
+    var isChineseWord = isChinese(word);
+    logW("Is Chinese Word: " + isChineseWord);
+    var url = "http://tts.baidu.com/text2audio?lan=" + (isChineseWord ? "zh" : "en") +"&amp;ie=UTF-8&amp;text=" + encodeURI(word);
 
     // creat audio element
     var htmlAudio = "<audio buttonid='" + buttonId +  "' controls='controls' preload='preload' src='" + url + "' id='" + audioId + "'></audio>";
