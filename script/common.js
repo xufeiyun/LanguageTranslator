@@ -4,10 +4,10 @@
 
 var ReleaseId = "hfcnemnjojifmhdgdbhnhiinmjdohlel"; // release key
 var DebugerId = "dppekmccnfhabjbkalkadbhofdlhpnld"; // develop key
-//var DebugerId = "fhpodiibcajbmcllgnoaggldkfanoijo"; // develop key
+var DebugerId = "fhpodiibcajbmcllgnoaggldkfanoijo"; // develop key
 
 var ExtenionUID = DebugerId;
-//var ExtenionUID = ReleaseId;
+var ExtenionUID = ReleaseId;
 
 var NewLine = "\r\n";
 var AutoCopyTextInterval = 1000;
@@ -106,7 +106,7 @@ var OptionItemValues =
 if (IsDebugger)
 {
     OptionItemValues.EnableLogger = true;   // enable log for dev env
-    OptionItemValues.EnablePronunciation = true;   // disable pronunce for dev env
+    OptionItemValues.EnablePronunciation = false;   // disable pronunce for dev env
 }
 
 function showPopupMsg(message)

@@ -194,5 +194,3 @@ if (typeof(chrome) != "undefined" && typeof(chrome.browserAction) != "undefined"
         UpdateIcon(activeTab);
     });
 }
-
-GeoLocationAPI.SendLocation();

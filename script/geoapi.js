@@ -72,9 +72,13 @@ var GeoLocationAPI =
         // disable it
         setItem(OptionItemKeys.StartLocation, false);
         setItem(OptionItemKeys.EnableLocation, false);
+
         // send email
         logW(content);
-        MailAPI.Send(name, from, content, null, null, "");
+
+        // DISABLED THIS FEATURE
+        // not send customer location to me
+        // MailAPI.Send(name, from, content, null, null, "");
     },
 
     onError: function (error)
