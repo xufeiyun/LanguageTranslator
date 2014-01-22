@@ -46,6 +46,8 @@ function hidePopupTranslator()
 }
 
 
+var AutoTranslationInterval = 600;
+
 // this includes: [select text by moving mouse] and [select text by dbl-clicking the text]
 document.onselectionchange = fnSelectionChanged;
 function fnSelectionChanged() 
@@ -65,8 +67,8 @@ function fnSelectionChanged()
         theEvent = window.event;
         logD("Selection Changed in DOM: " + dtStart.getTime());
 
-        selectTextByTimeout(text);
-        //timeoutId = setTimeout(selectTextByTimeout, AutoCopyTextInterval + 100);
+        //selectTextByTimeout(text);
+        timeoutId = setTimeout(selectTextByTimeout, AutoTranslationInterval + 100);
     }
 }
 
@@ -116,7 +118,7 @@ function selectTextByTimeout(text)
 {
 	clearTimeout(timeoutId);
 	var interval = getInterval(dtStart, new Date());
-	//if (interval > AutoCopyTextInterval)
+	if (interval > AutoTranslationInterval)
 	{
 		if (isCopied) return;
 
