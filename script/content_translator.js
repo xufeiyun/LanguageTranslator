@@ -91,6 +91,7 @@ $(document).ready(function ()
 
 var loadConfigs = function (data)
 {
+    logD("setting OptionItemValues from loaded configs......");
     var options = data;
     if (typeof (options.EnablePopupDialog) != "undefined")
     {
@@ -104,9 +105,16 @@ var loadConfigs = function (data)
     {
         OptionItemValues.EnableCopyText = (options.EnableCopyText == TrueValue);
     }
-    if (typeof (options.EnableLogger) != "undefined")
+    if (!IsDebugger && typeof (options.EnableLogger) != "undefined")
     {
         OptionItemValues.EnableLogger = (options.EnableLogger == TrueValue);
+    }
+
+    if (OptionItemValues.EnablePopupDialog && !OptionItemValues.EnableTranslation)
+    {
+        logW("[Enable Popup Dialog] feature was enabled manually but without enabling the [Enable Text Translation] feature!");
+        logD("To enable the [Enable Text Translation] feature......");
+        OptionItemValues.EnableTranslation = OptionItemValues.EnablePopupDialog;
     }
 };
 

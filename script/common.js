@@ -2,12 +2,14 @@
 	This javascript file is the common file including common features
 */
 
+var prefix = "[COMMON SCRIPTS]: "
+
 var ReleaseId = "hfcnemnjojifmhdgdbhnhiinmjdohlel"; // release key
 var DebugerId = "dppekmccnfhabjbkalkadbhofdlhpnld"; // develop key
-//var DebugerId = "fhpodiibcajbmcllgnoaggldkfanoijo"; // develop key
+var DebugerId = "fhpodiibcajbmcllgnoaggldkfanoijo"; // develop key
 
 var ExtenionUID = DebugerId;
-//var ExtenionUID = ReleaseId;
+var ExtenionUID = ReleaseId;
 
 var NewLine = "\r\n";
 var AutoCopyTextInterval = 812;
@@ -103,11 +105,12 @@ var OptionItemValues =
     EnablePronunciation:    true,
     Default:                "default"    // placeholder
 }
-if (IsDebugger)
+if (!IsDebugger)
 {
     OptionItemValues.EnableLogger = true;           // enable log for dev env
     OptionItemValues.EnablePronunciation = false;   // disable pronunce for dev env
-    //OptionItemValues.EnablePopupDialog = true;      // open dialog in debug mode
+    OptionItemValues.EnablePopupDialog = true;      // open dialog in debug mode
+    logW("DEBUG MODE: Enable Logger, Disable Pronunciation, Show Popup Dialog!");
 }
 
 function showPopupMsg(message)
