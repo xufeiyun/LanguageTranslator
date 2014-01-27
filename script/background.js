@@ -57,6 +57,14 @@ function rcvmsg_bgd(request, sender, sendResponse) {
     }
     else if (type == OperatorType.getSelectText) {
         if (send) {
+            if (isValidText(message))
+            {
+                setItem(type, message);
+            }
+            else
+            {
+                message = getItem(type);
+            }
             //var textToTranslated = window.Clipboard.paste();
             var textToTranslated = message;
             bgd2tab(type, message);

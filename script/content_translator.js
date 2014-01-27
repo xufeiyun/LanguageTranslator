@@ -45,9 +45,6 @@ function hidePopupTranslator()
     }
 }
 
-
-var AutoTranslationInterval = 600;
-
 // this includes: [select text by moving mouse] and [select text by dbl-clicking the text]
 document.onselectionchange = fnSelectionChanged;
 function fnSelectionChanged() 
@@ -196,7 +193,7 @@ var popupPosition = function ()
 var pDocument = null;
 function showPopupDialogForTranslation(sourceText, mainMeaning, moreMeaning)
 {
-    logD("[X]=" + MousePosition.x + " [Y]=" + MousePosition.y);
+    logD("[X]=" + MousePosition.x + " [Y]=" + MousePosition.y + ", Selected Text: " + sourceText);
 
     var isFrame = window.top.window.document.body.tagName == "FRAMESET";
 

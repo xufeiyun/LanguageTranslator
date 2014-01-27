@@ -11,7 +11,7 @@ var ExtenionUID = DebugerId;
 
 var NewLine = "\r\n";
 var AutoCopyTextInterval = 812;
-var AutoTranslationInterval = 400;
+var AutoTranslationInterval = 600;
 var OneLineCharCount = 45;
 var EmptyText = "";
 var TrueValue = "true";
@@ -105,8 +105,9 @@ var OptionItemValues =
 }
 if (IsDebugger)
 {
-    OptionItemValues.EnableLogger = true;   // enable log for dev env
+    OptionItemValues.EnableLogger = true;           // enable log for dev env
     OptionItemValues.EnablePronunciation = false;   // disable pronunce for dev env
+    //OptionItemValues.EnablePopupDialog = true;      // open dialog in debug mode
 }
 
 function showPopupMsg(message)
@@ -185,23 +186,31 @@ function AlertMsg(message)
 	showPopupMsg(message);
 }
 
+function now()
+{
+    var d = new Date();
+    var ms = (1000 + d.getMilliseconds()).toString().substr(1);
+    var value = "[" + d.toLocaleString() + " - " + ms + "] ";
+    return value;
+}
+
 // prefix is defined in each js file
 function logD(message)
 {
     //console.debug(prefix + message);
-	if (OptionItemValues.EnableLogger && isDefined(console.debug)) console.debug(prefix + message);
+	if (OptionItemValues.EnableLogger && isDefined(console.debug)) console.debug(now() + prefix + message);
 }
 
 function logW(message)
 {
     //console.warn(prefix + message);
-	if (OptionItemValues.EnableLogger && isDefined(console.warn)) console.warn(prefix + message);
+	if (OptionItemValues.EnableLogger && isDefined(console.warn)) console.warn(now() + prefix + message);
 }
 
 function logE(message)
 {
     //console.error(prefix + message);
-	if (OptionItemValues.EnableLogger && isDefined(console.error)) console.error(prefix + message);
+	if (OptionItemValues.EnableLogger && isDefined(console.error)) console.error(now() + prefix + message);
 }
 
 function getElement(id, pDocument)

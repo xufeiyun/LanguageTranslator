@@ -147,7 +147,7 @@ $(document).ready(function ()
     //$(".icon-volume-up").css("background-image","url(chrome-extension://" + ExtenionUID + "/image/volume_max.png)!important;");
     
     // translate firstly
-    msg2out(OperatorType.getSelectText, "translation 1st time");
+    msg2out(OperatorType.getSelectText, "");
 });
 
 function pronunceText(playerId)
