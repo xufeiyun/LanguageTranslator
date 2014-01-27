@@ -4,14 +4,14 @@
 
 var ReleaseId = "hfcnemnjojifmhdgdbhnhiinmjdohlel"; // release key
 var DebugerId = "dppekmccnfhabjbkalkadbhofdlhpnld"; // develop key
-var DebugerId = "fhpodiibcajbmcllgnoaggldkfanoijo"; // develop key
+//var DebugerId = "fhpodiibcajbmcllgnoaggldkfanoijo"; // develop key
 
 var ExtenionUID = DebugerId;
-var ExtenionUID = ReleaseId;
+//var ExtenionUID = ReleaseId;
 
 var NewLine = "\r\n";
-var AutoCopyTextInterval = 1000;
-var AutoTranslateInterval = 812;
+var AutoCopyTextInterval = 812;
+var AutoTranslationInterval = 400;
 var OneLineCharCount = 45;
 var EmptyText = "";
 var TrueValue = "true";

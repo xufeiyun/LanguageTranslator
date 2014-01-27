@@ -37,7 +37,7 @@ function createTranslateAudio(audioType, word)
 {
     if (OptionItemValues.EnablePronunciation == false)
     {
-        logD("Pronunciation Feature has been disabled.");
+        logD("Pronunciation Feature has been disabled, it may be in DEBUG mode.");
         return;
     }
 

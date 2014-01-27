@@ -65,8 +65,8 @@ function fnSelectionChanged()
         theEvent = window.event;
         logD("Selection Changed in DOM: " + dtStart.getTime());
 
-        selectTextByTimeout(text);
-        //timeoutId = setTimeout(selectTextByTimeout, AutoCopyTextInterval + 100);
+        //selectTextByTimeout(text);
+        timeoutId = setTimeout(selectTextByTimeout, AutoTranslationInterval + 100);
     }
 }
 
@@ -116,7 +116,7 @@ function selectTextByTimeout(text)
 {
 	clearTimeout(timeoutId);
 	var interval = getInterval(dtStart, new Date());
-	//if (interval > AutoCopyTextInterval)
+	if (interval > AutoTranslationInterval)
 	{
 		if (isCopied) return;
 
