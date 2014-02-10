@@ -90,27 +90,32 @@ var OptionItemKeys =
     Default:                "OptionItemKeys_defalt"
 }
 
+// Set default values for deployment!
 var OptionItemValues = 
 {
+    EnableLogger:           false,  // It means to log text to browser console.
+    EnablePronunciation:    true,
+    EnablePopupDialog:      false,   // It means the webpage-based popup dialog displays automatically OR NOT on current webpage that viewed by user.
+    
     ClosedPopupDialog:      false,
     EnableTranslation:      true,   // It means translation takes effect OR NOT thru webpage-based popup dialog or the extension-based popup dialog.
-    EnablePopupDialog:      false,   // It means the webpage-based popup dialog takes effect OR NOT on current webpage that viewed by user.
     EnableCopyText:         false,  // It means to copy the selected text automatically on current webpage.
-    EnableLogger:           false,   // It means to log text to browser console.
     FromLanguage:           'en',
     ToLanguage:             'cn',
     DefaultBaike:           'baidu',    // one type of BaikeType,
-    EnableAction:           true,       // It means to enable the Text Translation feature which means it is able to popup the dialog. Highest switch than OptionItemKeys.EnableTranslation and OptionItemKeys. EnablePopupDialog!
-    EnableLocation:         true,       // It means to send geo location to me.
-    EnablePronunciation:    true,
-    Default:                "default"    // placeholder
+    EnableAction:           true,   // It means to enable the Text Translation feature which means it is able to popup the dialog. Highest switch than OptionItemKeys.EnableTranslation and OptionItemKeys. EnablePopupDialog!
+    EnableLocation:         true,   // It means to send geo location to me.
+    Default:                "default"   // placeholder
 }
-if (!IsDebugger)
+
+// Change default values for debug mode!
+if (IsDebugger)
 {
-    OptionItemValues.EnableLogger = true;           // enable log for dev env
-    OptionItemValues.EnablePronunciation = false;   // disable pronunce for dev env
-    OptionItemValues.EnablePopupDialog = true;      // open dialog in debug mode
     logW("DEBUG MODE: Enable Logger, Disable Pronunciation, Show Popup Dialog!");
+
+    OptionItemValues.EnableLogger = true;   // enable log for dev env
+    OptionItemValues.EnablePronunciation = false;   // disable pronunce for dev env
+    OptionItemValues.EnablePopupDialog = true; // open dialog in debug mode
 }
 
 function showPopupMsg(message)
@@ -370,6 +375,17 @@ function isChinese(s)
     return result;
 }
 
+function getFunctionName(fn)
+{
+    if (typeof (fn) == 'function')
+    {
+        var cbs = fn.toString();
+        var name = cbs.match(/function ([a-zA-Z0-9_-]*)/)[1];
+        return name;
+    }
+    return 'NOT A FUNCTION';
+}
+
 /*------- Send message --------*/
 // Content Script => outter
 function msg_send(type, message, callback)
@@ -384,12 +400,20 @@ function msg_send(type, message, callback)
         }
         return true;
     };
+    logD("#COMMON: callback function: " + getFunctionName(callback));
     logD("#COMMON: Sending message...");
     chrome.runtime.sendMessage(ExtenionUID, { type: type, message: message }, need_resp);
 }
 // response callback
 function msg_resp(response)
 {
-	logD("#COMMON: Received RESPONSE#: type=>" + response.type + ", message=>" + response.message);
+    if (response != null)
+    {
+        logD("#COMMON: Received RESPONSE#: type=>" + response.type + ", message=>" + response.message);
+    }
+    else
+    {
+        logW("#COMMON: Received RESPONSE#: response is null");
+    }
 }
 /*END*/
