@@ -10,7 +10,7 @@ function translateByTimeout()
 {
 	clearTimeout(timeoutId);
 	var interval = getInterval(dtStart, new Date());
-	if (interval > AutoTranslateInterval)
+	if (interval > AutoTranslationInterval)
 	{
 		translateByInput();
 	}
@@ -30,7 +30,7 @@ $(document).ready(function () {
     textSelected.keyup(function (e) {
         clearTimeout(timeoutId);
         clearTexts();
-        timeoutId = setTimeout(translateByTimeout, AutoTranslateInterval + 100);
+        timeoutId = setTimeout(translateByTimeout, AutoTranslationInterval + 100);
     });
     textSelected.keydown(function (e) {
         dtStart = new Date();
