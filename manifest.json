@@ -1,9 +1,12 @@
 {
   "manifest_version": 2,
 
-  "name": "Language Translator",
-  "version": "2.14.214",
-  "description": "A Chrome Extension which translates text between English and Chinese Simplified by default.",
+  "name": "__MSG_ExtensionName__",
+  "description": "__MSG_ExtensionRemark__",
+
+  "default_locale": "en",
+
+  "version": "2.14.224",
 
   "permissions": [
     "<all_urls>",
@@ -35,7 +38,7 @@
         "19": "image/language_19.jpg",
         "38": "image/language_19.jpg"
     },
-    "default_title": "Language Translator V2.14.214"
+    "default_title": "Language Translator V2.14.224"
   },
   
   "background": {
@@ -52,13 +55,13 @@
 		"matches": ["<all_urls>"],
 		"css": ["style/content_translator.css"],
 		"js" : [
-            "script/common.js", 
-            "script/jquery.min.js", 
-            "script/content_popup.js", 
-            "script/clipboard.js", 
-            "script/storages.js", 
-            "script/wikipages.js", 
-            "script/addDOMLoadEvent.js", 
+            "script/i18n.js",
+            "script/common.js",
+            "script/jquery.min.js",
+            "script/clipboard.js",
+            "script/storages.js",
+            "script/wikipages.js",
+            "script/addDOMLoadEvent.js",
             "script/content_translator.js"
         ],
 		"run_at": "document_idle",
@@ -72,12 +75,11 @@
       "image/volume_max.png",
       "image/glyphicons-halflings.png",
       "image/google_wallet_logo.png",
-      "background_popup.html",
-      "background_popup_iframe.html",
+      "popup_iframe.html",
+      "script/i18n.js",
       "script/geo.js",
       "script/geoapi.js",
       "script/wikipages.js",
-      "style/content_popup.css",
       "script/addDOMLoadEvent.js",
       "script/jquery.min.js",
       "script/common.js",

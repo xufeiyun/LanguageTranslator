@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="style/popup.css"/>
     <script type="text/javascript" src="script/jquery.min.js"></script>
     <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="script/i18n.js"></script>
     <script type="text/javascript" src="script/common.js"></script>
     <script type="text/javascript" src="script/clipboard.js"></script>
     <script type="text/javascript" src="script/storages.js"></script>
@@ -70,7 +71,7 @@
       <section>
         <form class="form-search">
           <fieldset>
-            <input id="btnViewWikipage" type="button" class="btn-link" title="View Encyclopedia" value="Source Text"/>
+            <input id="btnSourceText" type="button" class="sourcetext btn-link" title="View Encyclopedia" value="Source Text"/>
               <a id="btnReadSource" title="Pronunciation of Source Text" class="hide hand icon-volume-up"></a>
               (Press <strong>Ctrl</strong>+<strong>Enter</strong> to <input id="btnTranslate" type="button" class="btn-mini btn-success" title="Translate the input text manually (Ctrl+Enter)" value=" Translate"/>):
               <a id="btnTranslate1" href="#" title="Translate the input text manually (Ctrl+ Enter)" class="hide button button-rounded button-flat-primary"><i class="icon-refresh"></i>Translate</a><br />
@@ -83,11 +84,11 @@
             </ul>
             <div class="tab-content">
               <div class="tab-pane active" id="youdao">
-                <span>Main Meanings</span>&nbsp;<a id="btnReadMain" title="Pronunciation of Main Meanings" class="hide hand icon-volume-up"></a>:<br />
+                <span id="btnMainText" class="mainmeaning">Main Meanings</span>&nbsp;<a id="btnReadMain" title="Pronunciation of Main Meanings" class="hide hand icon-volume-up"></a>:<br />
                 <textarea id="txtTranslated" rows="3" class="fixedw text-success input-medium search-query input-xxlarge" placeholder="NO VALID SOURCE"></textarea><br />
-                <span>More Meanings</span>&nbsp;<a id="btnReadMore" title="Pronunciation of More Meanings" class="hide hand icon-volume-up"></a>:<br />
+                <span id="btnMoreText" class="moremeaning">More Meanings</span>&nbsp;<a id="btnReadMore" title="Pronunciation of More Meanings" class="hide hand icon-volume-up"></a>:<br />
                 <textarea id="txtTranslatedAll" rows="4" class="fixedw text-info input-medium search-query input-xxlarge" placeholder="NO VALID SOURCE"></textarea><br />
-                <p id="logoYouDao" class="">Data Provided by <a href="http://fanyi.youdao.com/" title="YOUDAO translateor API">YOUDAO translator</a>!</p>                
+                <p id="logoYouDao" class="logoAPI"><span id="btnDataProvider">Data Provided by</span> <a id="btnYouDaoAPI" href="http://fanyi.youdao.com/" class="youdaolink" title="YOUDAO Translation API">YOUDAO Translation</a>!</p>                
               </div>
               <div class="tab-pane" id="google">
                 <span>Main Meanings:</span><br />

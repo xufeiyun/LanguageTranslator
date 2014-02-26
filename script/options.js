@@ -11,6 +11,14 @@ function fnSelectionChanged() {
 
 $(document).ready(function ()
 {
+    if (IsDebugger)
+    {
+        $("h1").hide();
+        $("h6").hide();
+    }
+
+    $("#extesion_url").attr("href", "https://chrome.google.com/webstore/detail/language-translator/" + ExtenionUID);
+
     // send feedback
     getElement("formSendFeedback").submit(sendFeedback);
 

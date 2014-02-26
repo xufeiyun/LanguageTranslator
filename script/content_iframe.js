@@ -42,6 +42,8 @@ $(document).ready(function ()
     //var content = getFileContentsSync(ProductURIs.WebpagePopup);
     clearTexts();
 
+    i18n.SetLocalization();
+
     // add text events
     textSelected = $("#txtSelected");
     textSelected.focus(function (e)
@@ -91,7 +93,7 @@ $(document).ready(function ()
     });
 
     // open wiki page
-    $("#btnViewWikipage").click(function ()
+    $("#btnSourceText").click(function ()
     {
         openWikipage($("#txtSelected").val());
     });
@@ -145,7 +147,7 @@ $(document).ready(function ()
     // set images by codes
     //$(".logoProduct").css("background-image","url(chrome-extension://" + ExtenionUID + "/image/language_19.jpg);");
     //$(".icon-volume-up").css("background-image","url(chrome-extension://" + ExtenionUID + "/image/volume_max.png)!important;");
-    
+
     // translate firstly
     msg2out(OperatorType.getSelectText, "");
 });

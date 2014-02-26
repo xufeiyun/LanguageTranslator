@@ -4,7 +4,9 @@
 <head>
     <title>Language Translator Extension</title>
     <link rel="stylesheet" href="style/content_translator.css"/>
+
     <script type="text/javascript" src="script/jquery.min.js"></script>
+    <script type="text/javascript" src="script/i18n.js"></script>
     <script type="text/javascript" src="script/common.js"></script>
 </head>
 <body>
@@ -24,14 +26,14 @@
         <section>
             <form class="form-search">
                 <fieldset>
-                    <span class="sourcetext btn-link">Source Text </span> <a id="btnReadSource" title="Pronunciation of Source Text" class="hand icon-volume-up"></a>(Press <strong>Ctrl</strong>+<strong>Enter</strong> to
+                    <span id="btnSourceText" class="sourcetext btn-link">Source Text </span> <a id="btnReadSource" title="Pronunciation of Source Text" class="hand icon-volume-up"></a>(Press <strong>Ctrl</strong>+<strong>Enter</strong> to
                     <input id="btnTranslate" type="button" class="btn-mini btn-success" title="Translate the input text manually (Ctrl+Enter)" value=" Translate"/>):<br>
                     <textarea id="txtSelected" rows="2" class="fixedw text-warning input-medium search-query input-xxlarge" placeholder="please SELECT or TYPE a word, phrase or sentence..."></textarea><br>
-                    <span class="mainmeaning">Main Meanings </span><a id="btnReadMain" title="Pronunciation of Main Meanings" class="hand icon-volume-up"></a>:<br>
+                    <span id="btnMainText" class="mainmeaning">Main Meanings </span><a id="btnReadMain" title="Pronunciation of Main Meanings" class="hand icon-volume-up"></a>:<br>
                     <textarea id="txtTranslated" rows="2" class="fixedw text-success input-medium search-query input-xxlarge" placeholder="NO VALID SOURCE" style="height: 32px;"></textarea><br>
-                    <span class="moremeaning">More Meanings </span><a id="btnReadMore" title="Pronunciation of More Meanings" class="hand icon-volume-up"></a>:<br>
+                    <span id="btnMoreText" class="moremeaning">More Meanings </span><a id="btnReadMore" title="Pronunciation of More Meanings" class="hand icon-volume-up"></a>:<br>
                     <textarea id="txtTranslatedAll" rows="2" class="fixedw text-info input-medium search-query input-xxlarge" placeholder="NO VALID SOURCE" style="height: 32px;"></textarea><br>
-                    <div id="logoYouDao" class="logoAPI">Data Provided by <a href="http://fanyi.youdao.com/" title="YOUDAO translateor API">YOUDAO translator</a>!</div>
+                    <div id="logoYouDao" class="logoAPI"><span id="btnDataProvider">Data Provided by</span> <a href="http://fanyi.youdao.com/" title="YOUDAO translateor API">YOUDAO translator</a>!</div>
                 </fieldset>
             </form>
         </section>

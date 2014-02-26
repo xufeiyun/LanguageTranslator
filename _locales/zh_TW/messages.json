@@ -1,0 +1,90 @@
+{
+    "ExtensionName": {
+        "message": "快捷翻譯工具"
+    },
+    "ExtensionRemark": {
+        "message": "一個用於翻譯文本的谷歌插件,默認支持英漢互譯。"
+    },
+
+    "ExtesionTitle": {
+        "message": "快捷翻譯器"
+    },
+    "ExtesionTitleTooltip": {
+        "message": "在谷歌在線商店中查看本快捷翻譯插件"
+    },
+
+    "SourceTexts": {
+        "message": " 所選文字 "
+    },
+    "SourceTextsTooltip": {
+        "message": "在維基百科中查看所選文字的其他信息"
+    },
+    "SourceSoundTooltip": {
+        "message": "朗讀所選文字"
+    },
+    "TranslateButton": {
+        "message": "單擊翻譯"
+    },
+    "TranslateButtonTooltip": {
+        "message": "手工輸入文字後,單擊翻譯或按組合鍵：Ctrl+Enter。"
+    },
+
+    "MainMeanings": {
+        "message": " 主要解釋 "
+    },
+    "MainSoundTooltip": {
+        "message": "朗讀主要解釋中的文字"
+    },
+
+    "MoreMeanings": {
+        "message": " 其他解釋 "
+    },
+    "MoreSoundTooltip": {
+        "message": "朗讀其他解釋中的文字"
+    },
+
+    "DataProvided": {
+        "message": "數據服務提供商:"
+    },
+    "YouDataTranslation": {
+        "message": "有道翻譯"
+    },
+    "YouDataTranslationTooltip": {
+        "message": "打開有道在線翻譯"
+    },
+
+    "FeatureText": {
+        "message": "功能"
+    },
+    "FeatureTitle": {
+        "message": "查看本產品的功能"
+    },
+
+    "OptionText": {
+        "message": "設置"
+    },
+    "OptionTitle": {
+        "message": "設置本產品的功能"
+    },
+
+    "OperationText": {
+        "message": "操作"
+    },
+    "OperationTitle": {
+        "message": "查看本產品所支持的操作"
+    },
+
+    "DonateText": {
+        "message": "捐贈"
+    },
+    "DonateTitle": {
+        "message": "向本產品的開發者捐款"
+    },
+
+    "AboutText": {
+        "message": "關於"
+    },
+    "AboutTitle": {
+        "message": "查看本產品的其他信息"
+    }
+}

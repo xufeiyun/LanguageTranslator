@@ -1,0 +1,116 @@
+{
+    "ExtensionName": {
+        "message": "Language Translator (en)",
+        "description": "The Extension Name for the product."
+    },
+    "ExtensionRemark": {
+        "message": "A Chrome Extension which translates text between English and Chinese Simplified by default.",
+        "description": "The Extension Description for the product."
+    },
+
+    "ExtesionTitle": {
+        "message": "Language Translator",
+        "description": "The Extension Title of popup dialog for the product."
+    },
+    "ExtesionTitleTooltip": {
+        "message": "View the Language-Translator extension on Google webstore",
+        "description": "The Extension Title of popup dialog for the product."
+    },
+
+    "SourceTexts": {
+        "message": "Source Text ",
+        "description": "Language Translator Extension: A google chrome extension!."
+    },
+    "SourceTextsTooltip": {
+        "message": "View Encyclopedia",
+        "description": "Language Translator Extension: A google chrome extension!."
+    },
+    "SourceSoundTooltip": {
+        "message": "Pronunciation of Source Text",
+        "description": "Language Translator Extension: A google chrome extension!."
+    },
+    "TranslateButton": {
+        "message": "Translate",
+        "description": "Language Translator Extension: A google chrome extension!."
+    },
+    "TranslateButtonTooltip": {
+        "message": "Translate the input text manually (Ctrl+Enter)",
+        "description": "Language Translator Extension: A google chrome extension!."
+    },
+
+    "MainMeanings": {
+        "message": "Main Meanings ",
+        "description": "Language Translator Extension: A google chrome extension!."
+    },
+    "MainSoundTooltip": {
+        "message": "Pronunciation of Main Meanings",
+        "description": "Language Translator Extension: A google chrome extension!."
+    },
+
+    "MoreMeanings": {
+        "message": "More Meanings ",
+        "description": "Language Translator Extension: A google chrome extension!."
+    },
+    "MoreSoundTooltip": {
+        "message": "Pronunciation of More Meanings",
+        "description": "Language Translator Extension: A google chrome extension!."
+    },
+
+    "DataProvided": {
+        "message": "Data Provided by:",
+        "description": "Language Translator Extension: A google chrome extension!."
+    },
+    "YouDataTranslation": {
+        "message": "YOUDAO Translation",
+        "description": "Language Translator Extension: A google chrome extension!."
+    },
+    "YouDataTranslationTooltip": {
+        "message": "YOUDAO Translation API",
+        "description": "Language Translator Extension: A google chrome extension!."
+    },
+
+    "FeatureText": {
+        "message": "Features",
+        "description": "Language Translator Extension: A google chrome extension!."
+    },
+    "FeatureTitle": {
+        "message": "View Features of the Language Translator",
+        "description": "Language Translator Extension: A google chrome extension!."
+    },
+
+    "OptionText": {
+        "message": "Options",
+        "description": "Language Translator Extension: A google chrome extension!."
+    },
+    "OptionTitle": {
+        "message": "Set Options of the Language Translator",
+        "description": "Language Translator Extension: A google chrome extension!."
+    },
+
+    "OperationText": {
+        "message": "HOWTO",
+        "description": "Language Translator Extension: A google chrome extension!."
+    },
+    "OperationTitle": {
+        "message": "View Operations of the Language Translator",
+        "description": "Language Translator Extension: A google chrome extension!."
+    },
+
+    "DonateText": {
+        "message": "Donation",
+        "description": "Language Translator Extension: A google chrome extension!."
+    },
+    "DonateTitle": {
+        "message": "Donate to Author",
+        "description": "Language Translator Extension: A google chrome extension!."
+    },
+
+    "AboutText": {
+        "message": "About",
+        "description": "Language Translator Extension: A google chrome extension!."
+    },
+    "AboutTitle": {
+        "message": "About the Language Translator extension",
+        "description": "Language Translator Extension: A google chrome extension!."
+    }
+}

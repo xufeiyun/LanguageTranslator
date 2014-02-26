@@ -35,12 +35,12 @@ body
 }
 .logo1
 {
-    background-image: url(image/logo_128.png);
+    background-image: url(../image/logo_128.png);
     background-position: left center;
 }
 .logo2
 {
-    background-image: url(image/language_19.jpg);
+    background-image: url(../image/language_19.jpg);
     background-size: 20px 20px;
     margin-top: 10px;
 }

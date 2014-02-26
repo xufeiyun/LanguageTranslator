@@ -19,6 +19,9 @@ function translateByTimeout()
 var textSelected = null;
 
 $(document).ready(function () {
+    
+    i18n.SetLocalization();
+
     // add text events
     textSelected = $("#txtSelected");
     textSelected.focus(function (e) {
@@ -58,7 +61,7 @@ $(document).ready(function () {
         textSelected.focus();
     });
 
-    $("#btnViewWikipage").click(function () {
+    $("#btnSourceText").click(function () {
         openWikipage($("#txtSelected").val());
     });
     $("#navTitle").click(function () {

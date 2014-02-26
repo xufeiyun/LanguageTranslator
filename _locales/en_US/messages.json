@@ -1,0 +1,90 @@
+{
+    "ExtensionName": {
+        "message": "Language Translator (us)"
+    },
+    "ExtensionRemark": {
+        "message": "A Chrome Extension which translates text between English and Chinese Simplified by default."
+    },
+
+    "ExtesionTitle": {
+        "message": "Language Translator"
+    },
+    "ExtesionTitleTooltip": {
+        "message": "View the Language-Translator extension on Google webstore"
+    },
+
+    "SourceTexts": {
+        "message": "Source Text "
+    },
+    "SourceTextsTooltip": {
+        "message": "View Encyclopedia"
+    },
+    "SourceSoundTooltip": {
+        "message": "Pronunciation of Source Text"
+    },
+    "TranslateButton": {
+        "message": "Translate"
+    },
+    "TranslateButtonTooltip": {
+        "message": "Translate the input text manually (Ctrl+Enter)"
+    },
+
+    "MainMeanings": {
+        "message": "Main Meanings "
+    },
+    "MainSoundTooltip": {
+        "message": "Pronunciation of Main Meanings"
+    },
+
+    "MoreMeanings": {
+        "message": "More Meanings "
+    },
+    "MoreSoundTooltip": {
+        "message": "Pronunciation of More Meanings"
+    },
+
+    "DataProvided": {
+        "message": "Data Provided by:"
+    },
+    "YouDataTranslation": {
+        "message": "YOUDAO Translation"
+    },
+    "YouDataTranslationTooltip": {
+        "message": "YOUDAO Translation API"
+    },
+
+    "FeatureText": {
+        "message": "Features"
+    },
+    "FeatureTitle": {
+        "message": "View Features of the Language Translator"
+    },
+
+    "OptionText": {
+        "message": "Options"
+    },
+    "OptionTitle": {
+        "message": "Set Options of the Language Translator"
+    },
+
+    "OperationText": {
+        "message": "HOWTO"
+    },
+    "OperationTitle": {
+        "message": "View Operations of the Language Translator"
+    },
+
+    "DonateText": {
+        "message": "Donation"
+    },
+    "DonateTitle": {
+        "message": "Donate to Author"
+    },
+
+    "AboutText": {
+        "message": "About"
+    },
+    "AboutTitle": {
+        "message": "About the Language Translator extension"
+    }
+}

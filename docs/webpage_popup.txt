@@ -1,4 +1,4 @@
-﻿<!-- Copied from file: background_popup.html, contents of div#divLanguageTranslator -->
+﻿<!-- Copied from file: popup_iframe.html, contents of div#divLanguageTranslator -->
 <article>
     <section>
         <div id="divNavTitle" title="View the Language-Translator extension on Google webstore" class="navbar navbar-static-top">
@@ -49,6 +49,6 @@
     */
     /*
     
-    <iframe id="frameLanguageTranslator" src="chrome-extension://<ExecutionID>/background_popup_iframe.html"></iframe>
+    <iframe id="frameLanguageTranslator" src="chrome-extension://<ExecutionID>/popup_iframe.html"></iframe>
     
     */
