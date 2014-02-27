@@ -25,6 +25,10 @@
         "message": "View Encyclopedia",
         "description": "Language Translator Extension: A google chrome extension!."
     },
+    "SourceTextsPlaceholder": {
+        "message": "SELECT or TYPE text and wait a second...",
+        "description": "Language Translator Extension: A google chrome extension!."
+    },
     "SourceSoundTooltip": {
         "message": "Pronunciation of Source Text",
         "description": "Language Translator Extension: A google chrome extension!."
@@ -42,6 +46,10 @@
         "message": "Main Meanings ",
         "description": "Language Translator Extension: A google chrome extension!."
     },
+    "MainMeaningsPlaceholder": {
+        "message": "NO VALID SOURCE",
+        "description": "Language Translator Extension: A google chrome extension!."
+    },
     "MainSoundTooltip": {
         "message": "Pronunciation of Main Meanings",
         "description": "Language Translator Extension: A google chrome extension!."
@@ -49,6 +57,10 @@
 
     "MoreMeanings": {
         "message": "More Meanings ",
+        "description": "Language Translator Extension: A google chrome extension!."
+    },
+    "MoreMeaningsPlaceholder": {
+        "message": "NO VALID SOURCE",
         "description": "Language Translator Extension: A google chrome extension!."
     },
     "MoreSoundTooltip": {

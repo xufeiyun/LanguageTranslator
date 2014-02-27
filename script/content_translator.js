@@ -275,7 +275,7 @@ function showPopupDialogForTranslation(sourceText, mainMeaning, moreMeaning)
 
         // update container width
         divContainer.css("width", getElement(ElementIds.PopupIFrame, pDocument).css("width"));
-        divContainer.css("height", "490px");
+        divContainer.css("height", "450px");
 
         var expandLink = getElement(ElementIds.PopupButtonCollapse, pDocument);
         // enabled & expand webpage-based popup dialog

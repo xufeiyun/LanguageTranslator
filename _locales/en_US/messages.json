@@ -19,6 +19,9 @@
     "SourceTextsTooltip": {
         "message": "View Encyclopedia"
     },
+    "SourceTextsPlaceholder": {
+        "message": "SELECT or TYPE text and wait a second..."
+    },
     "SourceSoundTooltip": {
         "message": "Pronunciation of Source Text"
     },
@@ -32,12 +35,18 @@
     "MainMeanings": {
         "message": "Main Meanings "
     },
+    "MainMeaningsPlaceholder": {
+        "message": "NO VALID SOURCE"
+    },
     "MainSoundTooltip": {
         "message": "Pronunciation of Main Meanings"
     },
 
     "MoreMeanings": {
         "message": "More Meanings "
+    },
+    "MoreMeaningsPlaceholder": {
+        "message": "NO VALID SOURCE"
     },
     "MoreSoundTooltip": {
         "message": "Pronunciation of More Meanings"

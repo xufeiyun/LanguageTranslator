@@ -19,6 +19,9 @@
     "SourceTextsTooltip": {
         "message": "在维基百科中查看所选文字的其他信息"
     },
+    "SourceTextsPlaceholder": {
+        "message": "从页面上选择或直接输入文本后，等待一会儿..."
+    },
     "SourceSoundTooltip": {
         "message": "朗读所选文字"
     },
@@ -32,12 +35,18 @@
     "MainMeanings": {
         "message": " 主要解释 "
     },
+    "MainMeaningsPlaceholder": {
+        "message": "无有效文本"
+    },
     "MainSoundTooltip": {
         "message": "朗读主要解释中的文字"
     },
 
     "MoreMeanings": {
         "message": " 其他解释 "
+    },
+    "MoreMeaningsPlaceholder": {
+        "message": "无有效文本"
     },
     "MoreSoundTooltip": {
         "message": "朗读其他解释中的文字"
