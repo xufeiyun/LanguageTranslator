@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <!-- This page is the POPUP PAGE of this chrome extension. -->
 <html>
   <head>
@@ -71,10 +71,9 @@
       <section>
         <form class="form-search">
           <fieldset>
-            <input id="btnSourceText" type="button" class="sourcetext btn-link" title="View Encyclopedia" value="Source Text"/>
-              <a id="btnReadSource" title="Pronunciation of Source Text" class="hide hand icon-volume-up"></a>
-              (Press <strong>Ctrl</strong>+<strong>Enter</strong> to <input id="btnTranslate" type="button" class="btn-mini btn-success" title="Translate the input text manually (Ctrl+Enter)" value=" Translate"/>):
-              <a id="btnTranslate1" href="#" title="Translate the input text manually (Ctrl+ Enter)" class="hide button button-rounded button-flat-primary"><i class="icon-refresh"></i>Translate</a><br />
+            <span id="btnSourceText" type="button" class="sourcetext btn-link" title="View Encyclopedia" value="Source Text"></span><span id="btnReadSource" title="Pronunciation of Source Text" class="hide hand icon-volume-up"></span> (<strong>Ctrl</strong>+<strong>Enter</strong> <span> = </span>
+			<input id="btnTranslate" type="button" class="btn-mini btn-success" title="Translate the input text manually (Ctrl+Enter)" value=" Translate"/>):
+			<a id="btnTranslate1" href="#" title="Translate the input text manually (Ctrl+ Enter)" class="hide button button-rounded button-flat-primary"><i class="icon-refresh"></i>Translate</a><br />
             <textarea id="txtSelected" rows="2" class="fixedw text-warning input-medium search-query input-xxlarge" placeholder="please SELECT or TYPE a word, phrase or sentence..."></textarea><br />
             <ul class="hide nav nav-tabs" id="tabAPIs">
               <li class="active"><a href="#youdao" data-toggle="tab">Youdao</a></li>
