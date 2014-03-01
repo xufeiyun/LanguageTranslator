@@ -17,19 +17,22 @@ var i18n =
         i18n.SetText("btnSourceText", "SourceTexts");
         i18n.SetTitle("btnSourceText", "SourceTextsTooltip");
         i18n.SetTitle("btnReadSource", "SourceSoundTooltip");
+        i18n.SetPlaceholder("txtSelected", "SourceTextsPlaceholder");
 
         i18n.SetText("btnTranslate", "TranslateButton");
         i18n.SetTitle("btnTranslate", "TranslateButtonTooltip");
 
         i18n.SetText("btnMainText", "MainMeanings");
         i18n.SetTitle("btnReadMain", "MainSoundTooltip");
+        i18n.SetPlaceholder("txtTranslated", "MainMeaningsPlaceholder");
 
         i18n.SetText("btnMoreText", "MoreMeanings");
         i18n.SetTitle("btnReadMore", "MoreSoundTooltip");
+        i18n.SetPlaceholder("txtTranslatedAll", "MoreMeaningsPlaceholder");
 
         i18n.SetText("btnDataProvider", "DataProvided");
-        i18n.SetText("btnYouDaoAPI", "YouDataTranslation");
-        i18n.SetTitle("btnYouDaoAPI", "YouDataTranslationTooltip");
+        i18n.SetText("btnTranslatorAPI", "YouDataTranslation");
+        i18n.SetTitle("btnTranslatorAPI", "YouDataTranslationTooltip");
 
         i18n.SetText("btnFeatures", "FeatureText");
         i18n.SetTitle("btnFeatures", "FeatureTitle");
@@ -76,6 +79,11 @@ var i18n =
             element[0].title = value;
         }
     },
+    
+    SetPlaceholder: function (element_id, message_name)
+    {
+        i18n.setAttrValue(element_id, 'placeholder', message_name);
+    },
 
     PrintLocale: function ()
     {
@@ -93,6 +101,17 @@ var i18n =
     getMessage: function (message_name)
     {
         return chrome.i18n.getMessage(message_name);
-    }
+    },
+    
+    setAttrValue: function (element_id, attr_name, message_name)
+    {
+        var value = i18n.getMessage(message_name);
+        logW("i18n value: " + value);
+        var element = $("#" + element_id);
+        if (element.length > 0)
+        {
+            element[0].setAttribute(attr_name, value);
+        }
+    },
 
 };
