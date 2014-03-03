@@ -175,7 +175,7 @@ function encodeText(text)
 {
     return encodeURIComponent(text);
 }
-function isDefined(variable) 
+function isDefined(variable)
 {
     return (typeof(variable) != "undefined");
 }

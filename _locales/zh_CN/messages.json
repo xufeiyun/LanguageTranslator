@@ -1,99 +1,99 @@
 {
-    "ExtensionName": {
-        "message": "快捷翻译工具 (cn)"
+   "ExtensionName": {
+       "message":"快捷翻译工具"
     },
-    "ExtensionRemark": {
-        "message": "一个用于翻译文本的谷歌插件,默认支持英汉互译。"
-    },
-
-    "ExtesionTitle": {
-        "message": "快捷翻译器"
-    },
-    "ExtesionTitleTooltip": {
-        "message": "在谷歌在线商店中查看本快捷翻译插件"
+   "ExtensionRemark": {
+       "message":"一个用于翻译文本的谷歌插件,默认支持英汉互译。"
     },
 
-    "SourceTexts": {
-        "message": " 所选文字 "
+   "ExtesionTitle": {
+       "message":"快捷翻译器"
     },
-    "SourceTextsTooltip": {
-        "message": "在维基百科中查看所选文字的其他信息"
-    },
-    "SourceTextsPlaceholder": {
-        "message": "从页面上选择或直接输入文本后，等待一会儿..."
-    },
-    "SourceSoundTooltip": {
-        "message": "朗读所选文字"
-    },
-    "TranslateButton": {
-        "message": "单击翻译"
-    },
-    "TranslateButtonTooltip": {
-        "message": "手工输入文字后,单击翻译或按组合键：Ctrl+Enter。"
+   "ExtesionTitleTooltip": {
+       "message":"在谷歌在线商店中查看本快捷翻译插件"
     },
 
-    "MainMeanings": {
-        "message": " 主要解释 "
+   "SourceTexts": {
+       "message":"所选文字"
     },
-    "MainMeaningsPlaceholder": {
-        "message": "无有效文本"
+   "SourceTextsTooltip": {
+       "message":"在维基百科中查看所选文字的其他信息"
     },
-    "MainSoundTooltip": {
-        "message": "朗读主要解释中的文字"
+   "SourceTextsPlaceholder": {
+       "message":"从页面上选择或直接输入文本后，等待一会儿..."
     },
-
-    "MoreMeanings": {
-        "message": " 其他解释 "
+   "SourceSoundTooltip": {
+       "message":"朗读所选文字"
     },
-    "MoreMeaningsPlaceholder": {
-        "message": "无有效文本"
+   "TranslateButton": {
+       "message":"单击翻译"
     },
-    "MoreSoundTooltip": {
-        "message": "朗读其他解释中的文字"
-    },
-
-    "DataProvided": {
-        "message": "数据服务提供商:"
-    },
-    "YouDataTranslation": {
-        "message": "有道翻译"
-    },
-    "YouDataTranslationTooltip": {
-        "message": "打开有道在线翻译"
+   "TranslateButtonTooltip": {
+       "message":"手工输入文字后,单击翻译或按组合键：Ctrl+Enter。"
     },
 
-    "FeatureText": {
-        "message": "功能"
+   "MainMeanings": {
+       "message":"主要解释"
     },
-    "FeatureTitle": {
-        "message": "查看本产品的功能"
+   "MainMeaningsPlaceholder": {
+       "message":"无有效文本"
     },
-
-    "OptionText": {
-        "message": "设置"
-    },
-    "OptionTitle": {
-        "message": "设置本产品的功能"
+   "MainSoundTooltip": {
+       "message":"朗读主要解释中的文字"
     },
 
-    "OperationText": {
-        "message": "操作"
+   "MoreMeanings": {
+       "message":"其他解释"
     },
-    "OperationTitle": {
-        "message": "查看本产品所支持的操作"
+   "MoreMeaningsPlaceholder": {
+       "message":"无有效文本"
     },
-
-    "DonateText": {
-        "message": "捐赠"
-    },
-    "DonateTitle": {
-        "message": "向本产品的开发者捐款"
+   "MoreSoundTooltip": {
+       "message":"朗读其他解释中的文字"
     },
 
-    "AboutText": {
-        "message": "关于"
+   "DataProvided": {
+       "message":"数据服务提供商:"
     },
-    "AboutTitle": {
-        "message": "查看本产品的其他信息"
+   "YouDataTranslation": {
+       "message":"有道翻译"
+    },
+   "YouDataTranslationTooltip": {
+       "message":"打开有道在线翻译"
+    },
+
+   "FeatureText": {
+       "message":"功能"
+    },
+   "FeatureTitle": {
+       "message":"查看本产品的功能"
+    },
+
+   "OptionText": {
+       "message":"设置"
+    },
+   "OptionTitle": {
+       "message":"设置本产品的功能"
+    },
+
+   "OperationText": {
+       "message":"操作"
+    },
+   "OperationTitle": {
+       "message":"查看本产品所支持的操作"
+    },
+
+   "DonateText": {
+       "message":"捐赠"
+    },
+   "DonateTitle": {
+       "message":"向本产品的开发者捐款"
+    },
+
+   "AboutText": {
+       "message":"关于"
+    },
+   "AboutTitle": {
+       "message":"查看本产品的其他信息"
     }
 }

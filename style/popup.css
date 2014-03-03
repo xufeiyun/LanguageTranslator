@@ -16,6 +16,38 @@ body
 {
 	display: none!important;
 }
+
+html, #popup_body
+{    
+    min-width: 317px;
+    /*min-height: 445px;*/
+    
+    background-color: rgba(248, 244, 240, 0.94);
+    border: 0px solid;
+    border-color: #808080;
+    border-top-left-radius:  0%;
+    border-top-right-radius:  0%;
+    border-bottom-left-radius: 0%;
+    border-bottom-right-radius: 0%;
+    z-index: 1000001;
+    
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    color: #333;
+    text-align: left;    
+}
+
+html
+{
+    z-index: 1000000;
+    max-height: 411px;
+}
+
+#footer
+{
+    margin-top: -26px;
+}
+
 .hand
 {
     cursor: pointer;
@@ -44,12 +76,12 @@ body
     background-size: 20px 20px;
     margin-top: 10px;
 }
-.fixedw
+.fixedw_popup
 {
-    width: 544px;
-    min-width: 544px;
-    max-width: 544px;
-    overflow: visible;
+    width: 316px;
+    min-width: 316px;
+    max-width: 316px;
+    overflow: auto;
     /*
     border-top-left-radius:  1%;
     border-top-right-radius:  1%;
@@ -104,5 +136,11 @@ body
 .btn-link
 {
     margin-left: -8px;
-    margin-right: -5px;
+    margin-right: -5px;    
+}
+
+#btnTranslate 
+{
+    height: 18px;
+    line-height: 0px;
 }

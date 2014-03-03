@@ -123,6 +123,11 @@ $(document).ready(function ()
     });
 
     // bottom buttons' events in popup dialog
+    $("#btnTranslatorAPI").click(function ()
+    {
+        var page = this.getAttribute('href');
+        openPage(page);
+    });
     $("#btnOperations").click(function ()
     {
         openPage("options.html?tab=operations");

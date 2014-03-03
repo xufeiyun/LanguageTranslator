@@ -18,36 +18,45 @@ function translateByTimeout()
 
 var textSelected = null;
 
-$(document).ready(function () {
-    
+$(document).ready(function ()
+{
+
     i18n.SetLocalization();
 
     // add text events
     textSelected = $("#txtSelected");
-    textSelected.focus(function (e) {
+    textSelected.focus(function (e)
+    {
         clearTexts();
     });
-    textSelected.change(function (e) {
+    textSelected.change(function (e)
+    {
         clearTexts();
     });
-    textSelected.keyup(function (e) {
+    textSelected.keyup(function (e)
+    {
         clearTimeout(timeoutId);
         clearTexts();
         timeoutId = setTimeout(translateByTimeout, AutoTranslationInterval + 100);
     });
-    textSelected.keydown(function (e) {
+    textSelected.keydown(function (e)
+    {
         dtStart = new Date();
-        if (e.keyCode == 13 && e.shiftKey) {
+        if (e.keyCode == 13 && e.shiftKey)
+        {
         }
-        else if (e.keyCode == 13 && e.ctrlKey) {
+        else if (e.keyCode == 13 && e.ctrlKey)
+        {
             translateByInput();
             textSelected.focus();
             e.bubbles = false;
         }
-        else if (e.keyCode == 13) {
+        else if (e.keyCode == 13)
+        {
         }
     });
-    textSelected.mouseenter(function () {
+    textSelected.mouseenter(function ()
+    {
         textSelected.focus();
         textSelected.select();
     });
@@ -55,32 +64,65 @@ $(document).ready(function () {
     textSelected.select();
 
     // add translate events
-    $("#btnTranslate").click(function () {
+    $("#btnTranslate").click(function ()
+    {
         clearTimeout(timeoutId);
         translateByInput();
         textSelected.focus();
     });
 
-    $("#btnSourceText").click(function () {
+    $("#btnSourceText").click(function ()
+    {
         openWikipage($("#txtSelected").val());
     });
-    $("#navTitle").click(function () {
+    $("#navTitle").click(function ()
+    {
         openHomepage();
     });
 
     // add button events for pronounciation
-    $("#" + PronounceAudios.Source.ButtonId).click(function () {
+    $("#" + PronounceAudios.Source.ButtonId).click(function ()
+    {
         pronunceText(PronounceAudios.Source.PlayerId);
     });
-    $("#" + PronounceAudios.Main.ButtonId).click(function () {
+    $("#" + PronounceAudios.Main.ButtonId).click(function ()
+    {
         pronunceText(PronounceAudios.Main.PlayerId);
     });
-    $("#" + PronounceAudios.More.ButtonId).click(function () {
+    $("#" + PronounceAudios.More.ButtonId).click(function ()
+    {
         pronunceText(PronounceAudios.More.PlayerId);
     });
-    
+
+    // bottom buttons' events in popup dialog
+    $("#btnTranslatorAPI").click(function ()
+    {
+        var page = this.href;
+        openPage(page);
+    });
+    $("#btnOperations").click(function ()
+    {
+        openPage("options.html?tab=operations");
+    });
+    $("#btnOptions").click(function ()
+    {
+        openPage("options.html");
+    });
+    $("#btnFeatures").click(function ()
+    {
+        openPage("options.html?tab=features");
+    });
+    $("#btnDonations").click(function ()
+    {
+        openPage("options.html?tab=feedbacks");
+    });
+    $("#btnAbout").click(function ()
+    {
+        openPage("options.html?tab=about");
+    });
+
     // hide footer by default
-    $("#footer").hide();
+    // $("#footer").hide();
 });
 
 function pronunceText(playerId)
@@ -184,6 +226,8 @@ function pup2tab(type, message)
 // response callback
 function resp_pup(response)
 {
+    if (!isDefined(response)) return false;
+
 	logD("#RESPONSE#: Received type [" + response.type + "], message [" + response.message + "]");
 	
 	var type = response.type;

@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="buttons/css/font-awesome.min.css">
     <link rel="stylesheet" href="buttons/css/buttons.css">
+    <link rel="stylesheet" href="style/content_iframe.css"/>
+    <link rel="stylesheet" href="style/content_translator.css"/>
     <link rel="stylesheet" href="style/popup.css"/>
     <script type="text/javascript" src="script/jquery.min.js"></script>
     <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
@@ -30,29 +32,34 @@
   <body id="popup_body">
     <article>
         <section>
-            <div id="navTitle" title="View the Language-Translator extension on Google webstore" class="navbar navbar-static-top">
-                <a id="btnLogo" class="brand logo2" href="#"></a>
-                <a id="btnTitle" class="brand" href="#">Language Translator</a>
+            <div id="divNavTitle" title="View the Language-Translator extension on Google webstore" class="navbar navbar-static-top">
                 <div class="navbar-inner">
-                    <ul class="hide nav">
-                    <li><a href="#"></a></li>
-                    <li><a href="#"></a></li>
-                    <li><a href="#"></a></li>
-                    <li><a href="#"></a></li>
-                    <li><a href="#"></a></li>
+                    <a id="btnLogo" class="brand logoProduct" href="#"></a>
+                    <a id="btnTitle" class="brand" href="#">Language Translator</a>
+                </div>
+                <div class="hide navbar-inner">
+                    <ul class="nav">
+                        <li><a href="#"></a></li>
+                        <li><a href="#"></a></li>
+                        <li><a href="#"></a></li>
+                        <li><a href="#"></a></li>
+                        <li><a href="#"></a></li>
                     </ul>
                 </div>
             </div>
-            <div id="navBottom" class="hide navbar navbar-fixed-bottom">
+            <!--<div id="divNavBottom" class="navbar navbar-fixed-bottom">
                 <div class="navbar-inner">
-                <a id="btnNavigator" class="brand" href="#">A Google Extension</a>
-                <ul class="nav">
-                    <li class=""><a href="#"></a></li>
-                    <li><a href="#"></a></li>
-                    <li><a href="#"></a></li>
-                </ul>
+                    <a id="btnLogo" class="brand logoProduct" href="#"></a>
+                    <a id="btnNavigator" class="brand" href="#">Language Translator</a>
                 </div>
-            </div>
+                <div class="navbar-inner">
+                    <ul class="nav">
+                        <li class=""><a href="#"></a></li>
+                        <li><a href="#"></a></li>
+                        <li><a href="#"></a></li>
+                    </ul>
+                </div>
+            </div>-->
         </section>
     </article>
 
@@ -71,10 +78,9 @@
       <section>
         <form class="form-search">
           <fieldset>
-            <span id="btnSourceText" type="button" class="sourcetext btn-link" title="View Encyclopedia" value="Source Text"></span><span id="btnReadSource" title="Pronunciation of Source Text" class="hide hand icon-volume-up"></span> (<strong>Ctrl</strong>+<strong>Enter</strong> <span> = </span>
-			<input id="btnTranslate" type="button" class="btn-mini btn-success" title="Translate the input text manually (Ctrl+Enter)" value=" Translate"/>):
-			<a id="btnTranslate1" href="#" title="Translate the input text manually (Ctrl+ Enter)" class="hide button button-rounded button-flat-primary"><i class="icon-refresh"></i>Translate</a><br />
-            <textarea id="txtSelected" rows="2" class="fixedw text-warning input-medium search-query input-xxlarge" placeholder="please SELECT or TYPE a word, phrase or sentence..."></textarea><br />
+            <span id="btnSourceText" class="sourcetext btn-link" title="View Encyclopedia">Source Text</span><span id="btnReadSource" title="Pronunciation of Source Text" class="hide hand icon-volume-up"></span>(<strong>Ctrl</strong>+<strong>Enter</strong><span> = </span>
+			<input id="btnTranslate" type="button" class="btn-mini btn-success hand" title="Translate the input text manually (Ctrl+Enter)" value=" Translate"/>):
+            <textarea id="txtSelected" rows="2" class="fixedw_popup text-warning input-medium search-query input-xxlarge" placeholder="SELECT or TYPE text and wait a second..."></textarea><br />
             <ul class="hide nav nav-tabs" id="tabAPIs">
               <li class="active"><a href="#youdao" data-toggle="tab">Youdao</a></li>
               <li><a href="#google" data-toggle="tab">Google</a></li>
@@ -83,59 +89,48 @@
             </ul>
             <div class="tab-content">
               <div class="tab-pane active" id="youdao">
-                <span id="btnMainText" class="mainmeaning">Main Meanings</span>&nbsp;<a id="btnReadMain" title="Pronunciation of Main Meanings" class="hide hand icon-volume-up"></a>:<br />
-                <textarea id="txtTranslated" rows="3" class="fixedw text-success input-medium search-query input-xxlarge" placeholder="NO VALID SOURCE"></textarea><br />
-                <span id="btnMoreText" class="moremeaning">More Meanings</span>&nbsp;<a id="btnReadMore" title="Pronunciation of More Meanings" class="hide hand icon-volume-up"></a>:<br />
-                <textarea id="txtTranslatedAll" rows="4" class="fixedw text-info input-medium search-query input-xxlarge" placeholder="NO VALID SOURCE"></textarea><br />
-                <p id="logoYouDao" class="logoAPI"><span id="btnDataProvider">Data Provided by</span> <a id="btnTranslatorAPI" href="http://fanyi.youdao.com/" class="youdaolink" title="YOUDAO Translation API">YOUDAO Translation</a>!</p>                
+                <span id="btnMainText" class="mainmeaning">Main Meanings</span><a id="btnReadMain" title="Pronunciation of Main Meanings" class="hide hand icon-volume-up"></a>:<br />
+                <textarea id="txtTranslated" rows="3" class="fixedw_popup text-success input-medium search-query input-xxlarge" placeholder="NO VALID SOURCE"></textarea><br />
+                <span id="btnMoreText" class="moremeaning">More Meanings</span><a id="btnReadMore" title="Pronunciation of More Meanings" class="hide hand icon-volume-up"></a>:<br />
+                <textarea id="txtTranslatedAll" rows="4" class="fixedw_popup text-info input-medium search-query input-xxlarge" placeholder="NO VALID SOURCE"></textarea><br />
+                <div id="logoYouDao" class="logoAPI"><span id="btnDataProvider">Data Provided by</span> <a id="btnTranslatorAPI" href="http://fanyi.youdao.com/" class="youdaolink" title="YOUDAO Translation API">YOUDAO Translation</a>!</div>                
               </div>
               <div class="tab-pane" id="google">
                 <span>Main Meanings:</span><br />
-                <textarea id="txtTranslatedG" rows="3" class="fixedw text-success input-medium search-query input-xxlarge" placeholder="NO VALID SOURCE"></textarea><br />
+                <textarea id="txtTranslatedG" rows="3" class="fixedw_popup text-success input-medium search-query input-xxlarge" placeholder="NO VALID SOURCE"></textarea><br />
                 <span>More Meanings:</span><br />
-                <textarea id="txtTranslatedAllG" rows="4" class="fixedw text-info input-medium search-query input-xxlarge" placeholder="NO VALID SOURCE"></textarea><br />
+                <textarea id="txtTranslatedAllG" rows="4" class="fixedw_popup text-info input-medium search-query input-xxlarge" placeholder="NO VALID SOURCE"></textarea><br />
                 <p id="logoGoogle" class=""><span id="btnDataProvider">Data Provided by</span> <a id="btnTranslatorAPI" href="http://fanyi.google.com/" title="GOOGLE translateor API">GOOGLE translator</a>!</p>
               </div>
               <div class="tab-pane" id="baidu">
                 <span>Main Meanings:</span><br />
-                <textarea id="txtTranslatedB" rows="3" class="fixedw text-success input-medium search-query input-xxlarge" placeholder="NO VALID SOURCE"></textarea><br />
+                <textarea id="txtTranslatedB" rows="3" class="fixedw_popup text-success input-medium search-query input-xxlarge" placeholder="NO VALID SOURCE"></textarea><br />
                 <span>More Meanings:</span><br />
-                <textarea id="txtTranslatedAllB" rows="4" class="fixedw text-info input-medium search-query input-xxlarge" placeholder="NO VALID SOURCE"></textarea><br />
+                <textarea id="txtTranslatedAllB" rows="4" class="fixedw_popup text-info input-medium search-query input-xxlarge" placeholder="NO VALID SOURCE"></textarea><br />
                 <p id="logoBaidu" class=""><span id="btnDataProvider">Data Provided by</span> <a id="btnTranslatorAPI" href="http://fanyi.baidu.com/" title="BAIDU translateor API">BAIDU translator</a>!</p>
               </div>
               <div class="tab-pane" id="microsoft">
                 <span>Main Meanings:</span><br />
-                <textarea id="txtTranslatedM" rows="3" class="fixedw text-success input-medium search-query input-xxlarge" placeholder="NO VALID SOURCE"></textarea><br />
+                <textarea id="txtTranslatedM" rows="3" class="fixedw_popup text-success input-medium search-query input-xxlarge" placeholder="NO VALID SOURCE"></textarea><br />
                 <span>More Meanings:</span><br />
-                <textarea id="txtTranslatedAllM" rows="4" class="fixedw text-info input-medium search-query input-xxlarge" placeholder="NO VALID SOURCE"></textarea><br />
+                <textarea id="txtTranslatedAllM" rows="4" class="fixedw_popup text-info input-medium search-query input-xxlarge" placeholder="NO VALID SOURCE"></textarea><br />
                 <div id="logoMicrosoft" class=""><span id="btnDataProvider">Data Provided by</span> <a id="btnTranslatorAPI" href="http://fanyi.microsoft.com/" title="MICROSOFT BING translateor API">BING translator</a>!</div>
               </div>
+              <br />
             </div>
           </fieldset>
         </form>
       </section>
     </article>
 
-    <footer id="footer" class="clearfix simple">
-      <div class="constrain">
-        <div id="legal">
-          <ul class="inline">
-            <li><a class="" href="#">Contact</a></li>
-            <li><a class="" href="#">Forum</a></li>
-          </ul>
-          <p class="copyright">
-              Copyright 2013 @<a href="https://chrome.google.com/webstore/detail/language-translator/">The Language Translator</a>,
-              <a href="mailto:vanillapeter@163.com" title="Mobile: 18688774304 | Email: vanillapeter@163.com" class="wp-link">Designed & Powered by Eric Xu</a><br/>
-              <span class="sponsor-line">
-                Product as a
-                <a href="http://developer.chrome.com/extensions/getstarted.html" rel="noindex,nofollow" class="mt-link">Google Extension</a>
-                &nbsp;|&nbsp;Thanks: 
-                <a href="#">Members</a>,&nbsp;
-                <a href="#">Sponsors</a>
-              </span>
-          </p>
+    <footer id="footer">
+        <div>
+            <span id="btnFeatures" class="optionslink" title="View Features of the Language Translator">Features</span>
+            <span id="btnOptions" class="optionslink" title="Set Options of the Language Translator">Options</span>
+            <span id="btnOperations" class="optionslink" title="View Operations of the Language Translator">HOWTO</span>
+            <span id="btnDonations" class="donationslink" title="Donate to Author">Donation</span>
+            <span id="btnAbout" class="optionslink" title="About the Language Translator">About</span>
         </div>
-      </div>
     </footer>
   </body>
 </html>

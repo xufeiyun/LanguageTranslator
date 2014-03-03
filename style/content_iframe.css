@@ -8,8 +8,10 @@
  * Designed and built with all the love in the world @world by @eric
  */
 
-body {
+body
+{
     width: 330px;
+    font-family: Arial, Tahoma, 宋体;
 }
 .content_iframe
 {
@@ -18,7 +20,8 @@ body {
     min-width: 317px;
     min-height: 445px;
     
-    background-color: rgba(248, 244, 240, 0.94);
+    /*background-color: rgba(248, 244, 240, 0.94);*/
+    background-color: #fff;
     border: 1px solid;
     border-color: #808080;
     border-top-left-radius:  0%;
@@ -29,9 +32,10 @@ body {
     
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 14px;
-    line-height: 20px;
     color: #333;
     text-align: left;
+    
+    line-height: 20px;
     
     margin-left: -8px;
     margin-top: -8px;
@@ -66,24 +70,32 @@ body {
     min-height: 120px;
     max-height: 120px;
 }
+
+#btnDataProvider, .youdaolink, .optionslink, .donationslink
+{
+    margin-left: 2px;
+    margin-right: 2px;
+}
+#btnDataProvider
+{
+    color: #666666;
+}
 .youdaolink
 {
-    cursor: pointer;
-    color: #08c;
     text-transform: uppercase;
+}
+.youdaolink, .optionslink, .donationslink
+{
+    cursor: pointer;
+    color: #006699; /*#08c*/
 }
 .youdaolink:hover, .optionslink:hover, .donationslink:hover
 {
-    border-bottom: 1px solid #08c;
+    border-bottom: 1px solid #0099FF;
     font-weight: bold;
-    color: #468847;
+    color: #0099FF; /*#468847*/
 }
-.optionslink, .donationslink
-{
-    cursor: pointer;
-    color: #08c;
-    margin-right: 4px;
-}
+
 .fixedw
 {
     width: 310px;
@@ -187,6 +199,12 @@ a:hover, a:active {
 {
     cursor: pointer;
 }
+.sourcetext,.mainmeaning,.moremeaning
+{
+    margin-left: 2px!important;
+    margin-right: 3px!important;
+}
+
 .sourcetext
 {
     color: #088ed2;
@@ -198,11 +216,11 @@ a:hover, a:active {
 }
 .mainmeaning
 {
-    
+    color: #666666;
 }
 .moremeaning
 {
-    
+    color: #666666;
 }
 .logoAPI, .sourcetext,  .mainmeaning, .moremeaning
 {

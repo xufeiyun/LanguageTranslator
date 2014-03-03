@@ -67,6 +67,7 @@ function openWikipage(word)
 /*END*/
 
 function openPage(url, callback){
+    logD("Page URL: " + url);
 	if (chrome.tabs) {
 	    chrome.tabs.create({ url: url }, callback);
 	}
