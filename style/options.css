@@ -121,6 +121,11 @@ h6 {
    word-spacing: 5px;
 }
 
+h6:after
+{
+    content: ();
+}
+
 #logo {
   float: left;
   padding-right: 20px;
