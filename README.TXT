@@ -9,3 +9,5 @@ It is strongly suggested that you'd better download github below for managing th
 https://help.github.com/articles/set-up-git
 
 !!!!!!!!!!!!!!ATTENTION!!!!!!!!!!!!!!
+
+Online ZH-CN => ZH-TW

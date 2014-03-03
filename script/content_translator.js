@@ -227,7 +227,7 @@ function showPopupDialogForTranslation(sourceText, mainMeaning, moreMeaning)
         //var html =  getFileContentsSync(ProductURIs.WebpagePopup);
         var html = "<div id='btnLanguageTranslatorCollapse' class='collapselink' title='Collapse/Expand Me!' href='javascript:void(0);'></div>"
                  + "<div id='btnLanguageTranslatorDisable' class='disablelink' title='Enable/Disable Popup!' href='javascript:void(0);'></div>"
-                 + "<div id='btnLanguageTranslatorClose' class='closelink' title='Close Me! Translation by reloading page!' href='javascript:void(0);'></div>"
+                 + "<div id='btnLanguageTranslatorClose' class='closelink' title='Close Me! Reload page to Translate!' href='javascript:void(0);'></div>"
                  + "<iframe id='" + ElementIds.PopupIFrame + "' width='326px' height='450px' style='border: 0px; display: none;' src='" + ProductURIs.PopupIFramePage + "'></iframe>";
         // iframe: width='326px' height='450px'
         divContainer = createElement("div");
@@ -269,6 +269,14 @@ function showPopupDialogForTranslation(sourceText, mainMeaning, moreMeaning)
     attachEvetns();
 
     // collapse the popup dialog if disabling popup
+    var expandLink = getElement(ElementIds.PopupButtonCollapse, pDocument);
+    var disableLink = getElement(ElementIds.PopupButtonDisable, pDocument);
+    var closeLink = getElement(ElementIds.PopupButtonClose, pDocument);
+
+    i18n.SetTitle(ElementIds.PopupButtonCollapse, "ExpandPopupTitle");
+    i18n.SetTitle(ElementIds.PopupButtonDisable, "EnablePopupTitle");
+    i18n.SetTitle(ElementIds.PopupButtonClose, "ClosePopupTitle");
+
     if (OptionItemValues.EnablePopupDialog == true)
     {
         divContainer.removeClass("content_translator_circle");
@@ -277,7 +285,6 @@ function showPopupDialogForTranslation(sourceText, mainMeaning, moreMeaning)
         divContainer.css("width", getElement(ElementIds.PopupIFrame, pDocument).css("width"));
         divContainer.css("height", "450px");
 
-        var expandLink = getElement(ElementIds.PopupButtonCollapse, pDocument);
         // enabled & expand webpage-based popup dialog
         expandLink.removeClass("expandlink");
         expandLink.removeClass("collapselink");
@@ -286,7 +293,6 @@ function showPopupDialogForTranslation(sourceText, mainMeaning, moreMeaning)
         expandLink.addClass("collapselink");
         expandLink.addClass("expandcollapserectangle");
 
-        var disableLink = getElement(ElementIds.PopupButtonDisable, pDocument);
         disableLink.removeClass("enablelink");
         disableLink.removeClass("disablelink");
         disableLink.removeClass("disableenablecircle");
@@ -294,7 +300,6 @@ function showPopupDialogForTranslation(sourceText, mainMeaning, moreMeaning)
         disableLink.addClass("disablelink");
         disableLink.addClass("disableenablerectangle");
 
-        var closeLink = getElement(ElementIds.PopupButtonClose, pDocument);
         closeLink.removeClass("closecircle");
         closeLink.removeClass("closerectangle");
         closeLink.addClass("closerectangle");
@@ -310,7 +315,6 @@ function showPopupDialogForTranslation(sourceText, mainMeaning, moreMeaning)
         divContainer.css("width", "48px");
         divContainer.css("height", "40px");
 
-        var expandLink = getElement(ElementIds.PopupButtonCollapse, pDocument);
         // disable & collapse webpage-based popup dialog
         expandLink.removeClass("expandlink");
         expandLink.removeClass("collapselink");
@@ -319,7 +323,6 @@ function showPopupDialogForTranslation(sourceText, mainMeaning, moreMeaning)
         expandLink.addClass("expandlink");
         expandLink.addClass("expandcollapsecircle");
 
-        var disableLink = getElement(ElementIds.PopupButtonDisable, pDocument);
         disableLink.removeClass("enablelink");
         disableLink.removeClass("disablelink");
         disableLink.removeClass("disableenablecircle");
@@ -327,7 +330,6 @@ function showPopupDialogForTranslation(sourceText, mainMeaning, moreMeaning)
         disableLink.addClass("enablelink");
         disableLink.addClass("disableenablecircle");
 
-        var closeLink = getElement(ElementIds.PopupButtonClose, pDocument);
         closeLink.removeClass("closecircle");
         closeLink.removeClass("closerectangle");
         closeLink.addClass("closecircle");

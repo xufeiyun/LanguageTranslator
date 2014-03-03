@@ -95,5 +95,40 @@
     },
    "AboutTitle": {
        "message":"About the Language Translator extension"
+    },
+
+    
+   "ExpandPopupTitle": {
+       "message":"Collapse/Expand Me!"
+    },
+   "EnablePopupTitle": {
+       "message":"Enable/Disable Popup!"
+    },
+   "ClosePopupTitle": {
+       "message":"Close Me! Reload page to Translate!"
+    },
+   "Translating": {
+       "message":"Now translating......"
+    },
+    /* Error Message for YouDao Translation*/
+   "YourDaoDefault": {
+       "message":"Undefined ErrorCode: ",
+       "description":"Language Translator Extension: A google chrome extension!."
+    },
+   "YourDao20": {
+       "message":"Text is too long!",
+       "description":"Language Translator Extension: A google chrome extension!."
+    },
+   "YourDao30": {
+       "message":"Can't process invalid translation!",
+       "description":"Language Translator Extension: A google chrome extension!."
+    },
+   "YourDao40": {
+       "message":"Unsupported languang type!",
+       "description":"Language Translator Extension: A google chrome extension!."
+    },
+   "YourDao50": {
+       "message":"Invalid Private API Key!",
+       "description":"Language Translator Extension: A google chrome extension!."
     }
 }

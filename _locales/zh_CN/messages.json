@@ -95,5 +95,35 @@
     },
    "AboutTitle": {
        "message":"查看本产品的其他信息"
+    },
+
+    
+   "ExpandPopupTitle": {
+       "message":"展开或收缩此弹出框!"
+    },
+   "EnablePopupTitle": {
+       "message":"启用或禁用此弹出框!"
+    },
+   "ClosePopupTitle": {
+       "message":"关掉此弹出框! 重新加载页面后自动启用翻译!"
+    },
+   "Translating": {
+       "message":"正在翻译，请稍候..."
+    },
+    /* Error Message for YouDao Translation*/
+   "YourDaoDefault": {
+       "message":"未定义的错误代码: "
+    },
+   "YourDao20": {
+       "message":"需要翻译的文字太多!"
+    },
+   "YourDao30": {
+       "message":"无法进行有效的翻译!"
+    },
+   "YourDao40": {
+       "message":"不受支持的语言类别!"
+    },
+   "YourDao50": {
+       "message":"使用了无效的私人API Key!"
     }
 }

@@ -3,7 +3,7 @@
 */
 var prefix = "[TRANSLATORS]: ";
 
-var translating = "Now translating......";
+var translating = i18n.getMessage("Translating");
 var emptytext = "";
 
 function translate(message)
@@ -309,25 +309,20 @@ function translateByYoudao(message)
 function handleErrorYouDao(errorCode)
 {
     var text = "Normal";
+    var prefix = "YourDao";
     switch (errorCode)
     {
-        case 20: 
-            text = "Text is too long!"
-            break;
+        case 20:
         case 30:
-            text = "Can't process invalid translation!"
-            break;
         case 40: 
-            text = "Unsupported languang type!"
-            break;
         case 50:
-            text = "Invalid Private API Key!"
+            text = i18n.getMessage(prefix + errorCode);
             break;
         defaut:
-            text = "Undefined ErrorCode: " + errorCode;
+            text = i18n.getMessage(prefix + "Default");
     }
     updateMainMeaning(text);
-    updateMoreMeaning(emptytext);
+    updateMoreMeaning(" ");
 }
 function parseResultYoudao(result)
 {
