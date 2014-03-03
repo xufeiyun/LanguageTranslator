@@ -81,7 +81,6 @@ html
     width: 316px;
     min-width: 316px;
     max-width: 316px;
-    overflow: auto;
     /*
     border-top-left-radius:  1%;
     border-top-right-radius:  1%;
@@ -101,31 +100,22 @@ html
 
 /* for chrome & safari */
 ::-webkit-scrollbar {
-    width: 0px;
+    width: 12px;
     height: 0px;
-    display: none;
+    margin-bottom: -50px;
 }
-::-webkit-scrollbar-button:start:decrement, ::-webkit-scrollbar-button:end:increment {
-    height: 1px;
-    display: none;
-    background-color: rgba(255, 255, 255, 0.00);
+::-webkit-scrollbar-track {
+    border-radius:5px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
 }
-::-webkit-scrollbar-button:horizontal:start:decrement, ::-webkit-scrollbar-button:horizontal:end:increment {
-    height: 1px;
-    display: none;
-    background-color: rgba(255, 255, 255, 0.00);
+::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
 }
-::-webkit-scrollbar-track-piece {
-    display: none;
-    background-color: rgba(255, 255, 255, 0.00);
+::-webkit-scrollbar-corner {
 }
-::-webkit-scrollbar-thumb:vertical, ::-webkit-scrollbar-thumb:horizontal {
-    display: none;
-    background-color: rgba(255, 255, 255, 0.00);
-    border: 1px solid rgba(255, 255, 255, 0.00);
-    -webkit-border-radius: 0px;
+::-webkit-resizer {
 }
-
 
 
 /* added css attributes for bootstrap css*/

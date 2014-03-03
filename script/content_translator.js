@@ -196,6 +196,7 @@ var popupPosition = function ()
         // divContainer.css("display", "block");
     }
     // focus original element
+    // focusParentPage();
 }
 
 var pDocument = null;
