@@ -1,13 +1,13 @@
 {
    "ExtensionName": {
-       "message":"Language Translator"
+       "message":"The Language Translator"
     },
    "ExtensionRemark": {
        "message":"A Chrome Extension which translates text between English and Chinese Simplified by default."
     },
 
    "ExtesionTitle": {
-       "message":"Language Translator"
+       "message":"The Language Translator"
     },
    "ExtesionTitleTooltip": {
        "message":"View the Language-Translator extension on Google webstore"

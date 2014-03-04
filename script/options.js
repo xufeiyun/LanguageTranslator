@@ -45,10 +45,23 @@ $(document).ready(function ()
 
     showTab();
 
+    // need to simplize these codes
     $("#lgdFeedback").click(function ()
     {
         $("#feedbackArea").toggle();
     });
+    $("#lgdGrowth").click(function ()
+    {
+        $("#ulGrowth").toggle();
+    }).click();
+    $("#lgdFixes").click(function ()
+    {
+        $("#ulFixes").toggle();
+    }).click();
+    $("#lgdRelease").click(function ()
+    {
+        $("#ulRelease").toggle();
+    }).click();
 
     // load settings for Options page
     msgout(OperatorType.loadSettings, null);
@@ -74,8 +87,10 @@ var loadItems = function ()
                         "__more_fea",
                         "__more_ops",
                         "__news",
+                        "__latest",
                         "__nice_fea",
                         "__releases",
+                        "__advices",
                         "__sponsors");
     ids.forEach(function (id) { $("#" + id)[0].outerHTML = ReadFileAPI.getFileContentsSync(prefix + id + '.html'); });
 };

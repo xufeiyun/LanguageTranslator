@@ -83,8 +83,16 @@ $(document).ready(function ()
     });
     textSelected.focus();
     textSelected.select();
-
-    // add translate events
+    
+    // add top link events
+    $("#divNavTitle").click(function ()
+    {
+        openPage(ProductURIs.Product);
+    });
+    $("#btnSourceText").click(function ()
+    {
+        openWikipage($("#txtSelected").val());
+    });
     $("#btnTranslate").click(function ()
     {
         clearTimeout(timeoutId);
@@ -92,21 +100,6 @@ $(document).ready(function ()
         textSelected.focus();
     });
 
-    // open wiki page
-    $("#btnSourceText").click(function ()
-    {
-        openWikipage($("#txtSelected").val());
-    });
-
-    $("#btnYouDaoAPI").click(function ()
-    {
-        openPage('http://fanyi.youdao.com/');
-    });
-
-    $("#divNavTitle").click(function ()
-    {
-        openPage(ProductURIs.Product);
-    });
 
     // add button events for pronounciation
     $("#" + PronounceAudios.Source.ButtonId).click(function ()

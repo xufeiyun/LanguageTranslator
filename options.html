@@ -46,8 +46,9 @@
         <li><a href="#features" data-toggle="tab">Features</a></li>
         <li><a href="#histories" data-toggle="tab">Histories</a></li>
         <li><a href="#feedbacks" data-toggle="tab">Feedbacks</a></li>
-        <li><a href="#about" data-toggle="tab">About</a></li>
         <li><a href="#contributors" data-toggle="tab">Contributors</a></li>
+        <li><a href="#suggestions" data-toggle="tab">Suggestions</a></li>
+        <li><a href="#about" data-toggle="tab">About</a></li>
     </ul>
     <div class="tab-content">
         
@@ -190,8 +191,17 @@
         <div class="tab-pane" id="histories">
             <form>
               <fieldset>
-                <legend>News</legend>
+                <legend>Latest News</legend>
                   <ul>
+                      <li id="__latest"></li>
+                  </ul>
+              </fieldset>
+            </form>
+
+            <form>
+              <fieldset>
+                <legend id="lgdGrowth" class="hand" title="Let you know the growth of the team to develop the Language Translator product.">Growth</legend>
+                  <ul id="ulGrowth">
                       <li id="__news"></li>
                   </ul>
               </fieldset>
@@ -199,8 +209,8 @@
 
             <form>
               <fieldset>
-                <legend>Fixes</legend>
-                  <ul>
+                <legend id="lgdFixes" class="hand" title="Let you know the milestone of the team to fix any important or little bugs.">Fixes</legend>
+                  <ul id="ulFixes">
                       <li id="__fixes"></li>
                   </ul>
               </fieldset>
@@ -208,8 +218,8 @@
             
             <form>
               <fieldset>
-                <legend>Release</legend>
-                  <ul>
+                <legend id="lgdRelease" class="hand" title="Let you know the release activity from the team.">Release</legend>
+                  <ul id="ulRelease">
                       <li id="__releases"></li>
                   </ul>
               </fieldset>
@@ -240,7 +250,7 @@
                         <strong>Message: </strong><span id="msgContent" class="message"></span>
                     </div>
                     <label class="checkbox">
-                        <button id="btnSendFeedback" type="submit" title="Send an Email to author" class="btn">Submit</button>
+                        <button id="btnSendFeedback" type="submit" title="Send an Email to author immediately" class="btn">Submit feedbacks now</button>
                     </label>
                 </div>
               </fieldset>
@@ -261,7 +271,7 @@
                     Donation will be: <span class="donation" id="spanDonation"></span>!<br/>
                     <script src="script/paypal-button.min.js?merchant=vanillapeter@gmail.com"
                         data-button="donate"
-                        data-name="Donation for Language Translator"
+                        data-name="Donation for The Language Translator Product (A Google Extension)"
                         data-quantity="1"
                         data-amount="1"
                         data-currency="USD"
@@ -273,6 +283,19 @@
                 <label class="hide">
                     <!--<input type="button" class="btn amazonpay" value="Buy with Amazon" title="Donate it to Author via Amazon Payment Service" id="btnDonateAmazon"></input>-->
                 </label>
+              </fieldset>
+            </form>
+
+        </div>
+        
+        <div class="tab-pane" id="suggestions">
+            
+            <form>
+              <fieldset>
+                <legend title="Let you know the suggestions or advices from circumspective and careful customers">Suggestions</legend>
+                  <ul>
+                      <li id="__advices"></li>
+                  </ul>
               </fieldset>
             </form>
 
@@ -304,7 +327,7 @@
                       <li id="__members"></li>
                   </ul>
               </fieldset>
-            </form>
+            </form>            
 
             <form>
               <fieldset>

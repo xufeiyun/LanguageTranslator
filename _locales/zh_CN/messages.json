@@ -1,16 +1,16 @@
 {
    "ExtensionName": {
-       "message":"快捷翻译工具"
+       "message":"便捷翻译工具"
     },
    "ExtensionRemark": {
        "message":"一个用于翻译文本的谷歌插件,默认支持英汉互译。"
     },
 
    "ExtesionTitle": {
-       "message":"快捷翻译器"
+       "message":"便捷翻译器"
     },
    "ExtesionTitleTooltip": {
-       "message":"在谷歌在线商店中查看本快捷翻译插件"
+       "message":"在谷歌在线商店中查看本便捷翻译插件"
     },
 
    "SourceTexts": {

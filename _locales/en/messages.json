@@ -1,6 +1,6 @@
 {
    "ExtensionName": {
-       "message":"Language Translator",
+       "message":"The Language Translator",
        "description":"The Extension Name for the product."
     },
    "ExtensionRemark": {
@@ -9,7 +9,7 @@
     },
 
    "ExtesionTitle": {
-       "message":"Language Translator",
+       "message":"The Language Translator",
        "description":"The Extension Title of popup dialog for the product."
     },
    "ExtesionTitleTooltip": {
