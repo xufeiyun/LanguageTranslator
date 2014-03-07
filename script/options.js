@@ -10,7 +10,7 @@ function fnSelectionChanged() {
 
 
 $(document).ready(function () {
-    if (!IsDebugger) {
+    if (IsDebugger) {
         $("h1").hide();
         $("h6").hide();
     }
