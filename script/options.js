@@ -9,13 +9,21 @@ function fnSelectionChanged() {
 }
 
 
-$(document).ready(function ()
-{
-    if (IsDebugger)
-    {
+$(document).ready(function () {
+    if (!IsDebugger) {
         $("h1").hide();
         $("h6").hide();
     }
+
+    $(window).scroll(function () {
+        var old = $("#divOptionPageTitle")[0].style.left;
+        var left = 0 - scrollX + 40;
+        if (old != left) {
+            $("#divOptionPageTitle")[0].style.left = left + "px";
+        }
+    });
+
+    $("#divOptionPageTitle");
 
     $("#extesion_url").attr("href", "https://chrome.google.com/webstore/detail/language-translator/" + ExtenionUID);
 
@@ -25,13 +33,11 @@ $(document).ready(function ()
     // text donation
     getElement("txtDonation").change(updateDonation);
 
-    $(".close").click(function ()
-    {
+    $(".close").click(function () {
         hideMsg();
     });
 
-    $("#btnBasicSettings").click(function ()
-    {
+    $("#btnBasicSettings").click(function () {
         saveSettings();
     });
 
@@ -46,28 +52,23 @@ $(document).ready(function ()
     showTab();
 
     // need to simplize these codes
-    $("#lgdFeedback").click(function ()
-    {
+    $("#lgdFeedback").click(function () {
         $("#feedbackArea").toggle();
     });
-    $("#lgdGrowth").click(function ()
-    {
+    $("#lgdGrowth").click(function () {
         $("#ulGrowth").toggle();
     }).click();
-    $("#lgdFixes").click(function ()
-    {
+    $("#lgdFixes").click(function () {
         $("#ulFixes").toggle();
     }).click();
-    $("#lgdRelease").click(function ()
-    {
+    $("#lgdRelease").click(function () {
         $("#ulRelease").toggle();
     }).click();
 
     // load settings for Options page
     msgout(OperatorType.loadSettings, null);
 
-    $("h1").click(function ()
-    {
+    $("h1").click(function () {
         openHomepage();
     });
 

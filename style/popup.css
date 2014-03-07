@@ -134,3 +134,8 @@ html
     height: 18px;
     line-height: 0px;
 }
+
+.adjacent
+{
+    padding-right: 3px!important;
+}

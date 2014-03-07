@@ -11,7 +11,66 @@
 body
 {
     /*min-height: 2000px;*/
-  margin: 40px;
+  margin-top: 185px;
+  margin-left: 40px;
+  clear: both;
+  min-width: 1024px;
+}
+
+h1, h6 {
+  width: 90%;
+  word-wrap:  normal;
+  white-space: nowrap;
+    min-width: 1024px;
+}
+h1 {
+  -webkit-border-radius: 8px;
+  -webkit-box-shadow: 0 0 20px #d0d0d0;
+  /*background: -webkit-linear-gradient(top, #C0C8D2, #C0C8D2 50%, #CDD4E0);*/
+  background: -webkit-linear-gradient(left, #BBCEE9, #BBCEE9 50%, #AABEDC);
+  border-bottom: 1px solid #8faad9;
+  border-top: 1px solid #8faad9;
+  text-shadow: #bbcee9 0 1px 1px;
+  padding: 20px;
+  font-size: 3em;
+  color: #000;
+  text-shadow: #bbcee9 0 1px 1px;
+  /*margin: 20px;*/
+}
+
+h6 {
+   color: #e7840b;
+   font-size: 20px;
+   word-spacing: 5px;
+}
+
+h6:after
+{
+}
+.fixedtitle
+{
+    float: left;
+    display: inline;
+    position: fixed;
+    top: 0px!important;
+    background-color: white;
+    z-index: 99999999999999999999999;
+    width: 100%;
+    min-width: 1024px;
+    margin-right: 40px;
+}
+.optioncontent
+{
+    float: left;
+    display: inline;
+    width: 95%;
+    height: 100%;
+    min-width: 1024px;
+}
+#tabOptions
+{
+    width: 92%;
+    min-width: 1024px;
 }
 .hide
 {
@@ -28,11 +87,6 @@ body
     word-spacing: 0px;
     text-wrap: none;
 }
-.title, ul, form
-{
-    min-width: 1024px;
-}
-
 input:required, textarea:required {
     /*background: #fff url(image/red_asterisk.png) no-repeat 98% center;*/
     background: #fff no-repeat 98% center;
@@ -98,32 +152,6 @@ a:visited {
 .indent {
   margin-left: 20px;
   margin-bottom: -20px;
-}
-
-h1 {
-  -webkit-border-radius: 8px;
-  -webkit-box-shadow: 0 0 20px #d0d0d0;
-  /*background: -webkit-linear-gradient(top, #C0C8D2, #C0C8D2 50%, #CDD4E0);*/
-  background: -webkit-linear-gradient(left, #BBCEE9, #BBCEE9 50%, #AABEDC);
-  border-bottom: 1px solid #8faad9;
-  border-top: 1px solid #8faad9;
-  text-shadow: #bbcee9 0 1px 1px;
-  padding: 20px;
-  font-size: 3em;
-  color: #000;
-  text-shadow: #bbcee9 0 1px 1px;
-  /*margin: 20px;*/
-}
-
-h6 {
-   color: #e7840b;
-   font-size: 20px;
-   word-spacing: 5px;
-}
-
-h6:after
-{
-    content: ();
 }
 
 #logo {
