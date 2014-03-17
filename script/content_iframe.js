@@ -37,54 +37,50 @@ function translateByTimeout()
 
 var textSelected = null;
 
-$(document).ready(function ()
-{
+$(document).ready(function () {
     //var content = getFileContentsSync(ProductURIs.WebpagePopup);
     clearTexts();
 
-    $("#ddlSearchOnline").hover(function (e)
-    {
-        var oldIndex = this.selectedIndex;
-        console.error(e);
-        logD("Searching on " + this.selectedOptions[0].value);
+    $(".PopupSearchDiv span").mouseenter(function (e) {
+        $(".PopupSearchDiv ul").toggle();
+    });
+    $(".PopupSearchList li").click(function (e) {
+        var dataLeft = e.target.getAttribute('data-left');
+        var dataMid = encodeText(textSelected.val());
+        var dataRight = e.target.getAttribute('data-right');
+        var url = dataLeft + dataMid + dataRight;
+        openPage(url);        
+        $(".PopupSearchDiv ul").toggle();
     });
 
     i18n.SetLocalization();
 
     // add text events
     textSelected = $("#txtSelected");
-    textSelected.focus(function (e)
-    {
+    textSelected.focus(function (e) {
         clearTexts();
     });
-    textSelected.change(function (e)
-    {
+    textSelected.change(function (e) {
         clearTexts();
     });
-    textSelected.keyup(function (e)
-    {
+    textSelected.keyup(function (e) {
         clearTimeout(timeoutId);
         clearTexts();
         timeoutId = setTimeout(translateByTimeout, AutoTranslationInterval + 100);
     });
-    textSelected.keydown(function (e)
-    {
+    textSelected.keydown(function (e) {
         dtStart = new Date();
-        if (e.keyCode == 13 && e.shiftKey)
-        {
+        if (e.keyCode == 13 && e.shiftKey) {
         }
-        else if (e.keyCode == 13 && e.ctrlKey)
-        {
+        else if (e.keyCode == 13 && e.ctrlKey) {
             translateByInput();
             textSelected.focus();
             e.bubbles = false;
         }
-        else if (e.keyCode == 13)
-        {
+        else if (e.keyCode == 13) {
         }
     });
-    textSelected.mouseenter(function ()
-    {
+    textSelected.mouseenter(function () {
         textSelected.focus();
         textSelected.select();
     });
@@ -92,16 +88,13 @@ $(document).ready(function ()
     textSelected.select();
 
     // add top link events
-    $("#divNavTitle").click(function ()
-    {
+    $("#divNavTitle").click(function () {
         openPage(ProductURIs.Product);
     });
-    $("#btnSourceText").click(function ()
-    {
+    $("#btnSourceText").click(function () {
         openWikipage($("#txtSelected").val());
     });
-    $("#btnTranslate").click(function ()
-    {
+    $("#btnTranslate").click(function () {
         clearTimeout(timeoutId);
         translateByInput();
         textSelected.focus();
@@ -109,43 +102,34 @@ $(document).ready(function ()
 
 
     // add button events for pronounciation
-    $("#" + PronounceAudios.Source.ButtonId).click(function ()
-    {
+    $("#" + PronounceAudios.Source.ButtonId).click(function () {
         pronunceText(PronounceAudios.Source.PlayerId);
     });
-    $("#" + PronounceAudios.Main.ButtonId).click(function ()
-    {
+    $("#" + PronounceAudios.Main.ButtonId).click(function () {
         pronunceText(PronounceAudios.Main.PlayerId);
     });
-    $("#" + PronounceAudios.More.ButtonId).click(function ()
-    {
+    $("#" + PronounceAudios.More.ButtonId).click(function () {
         pronunceText(PronounceAudios.More.PlayerId);
     });
 
     // bottom buttons' events in popup dialog
-    $("#btnTranslatorAPI").click(function ()
-    {
+    $("#btnTranslatorAPI").click(function () {
         var page = this.getAttribute('href');
         openPage(page);
     });
-    $("#btnOperations").click(function ()
-    {
+    $("#btnOperations").click(function () {
         openPage("options.html?tab=operations");
     });
-    $("#btnOptions").click(function ()
-    {
+    $("#btnOptions").click(function () {
         openPage("options.html");
     });
-    $("#btnFeatures").click(function ()
-    {
+    $("#btnFeatures").click(function () {
         openPage("options.html?tab=features");
     });
-    $("#btnDonations").click(function ()
-    {
+    $("#btnDonations").click(function () {
         openPage("options.html?tab=feedbacks");
     });
-    $("#btnAbout").click(function ()
-    {
+    $("#btnAbout").click(function () {
         openPage("options.html?tab=about");
     });
 
