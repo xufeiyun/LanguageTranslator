@@ -42,6 +42,13 @@ $(document).ready(function ()
     //var content = getFileContentsSync(ProductURIs.WebpagePopup);
     clearTexts();
 
+    $("#ddlSearchOnline").hover(function (e)
+    {
+        var oldIndex = this.selectedIndex;
+        console.error(e);
+        logD("Searching on " + this.selectedOptions[0].value);
+    });
+
     i18n.SetLocalization();
 
     // add text events
@@ -83,7 +90,7 @@ $(document).ready(function ()
     });
     textSelected.focus();
     textSelected.select();
-    
+
     // add top link events
     $("#divNavTitle").click(function ()
     {

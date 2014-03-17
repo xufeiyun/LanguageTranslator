@@ -42,6 +42,20 @@
                     <form class="form-search">
                         <fieldset>
                             <span id="btnSourceText" class="sourcetext btn-link" title="View Encyclopedia">Source Text</span><a id="btnReadSource" title="Pronunciation of Source Text" class="hand icon-volume-up"></a>:<span class="hide">(<strong>Ctrl</strong>+<strong>Enter</strong>=<input id="btnTranslate" type="button" class="btn-mini btn-success hand" title="Translate the input text manually (Ctrl+Enter)" value="Translate"/>)</span>
+                            <select id="ddlSearchOnline" class="hand hide" size="5">
+                                <option value="search" class="hand hide">Search On</option>
+                                <option value="www.google.com" class="hand">Google</option>
+                                <option value="www.baidu.com" class="hand">Baidu</option>
+                                <option value="www.bing.com" class="hand">Bing</option>
+                            </select>
+                            <div class="PopupSearchDiv">
+                                <span>Search On</span>
+                                <ul class="PopupSearchList">
+                                    <li value="www.google.com" class="hand">Google</li>
+                                    <li value="www.baidu.com" class="hand">Baidu</li>
+                                    <li value="www.bing.com" class="hand">Bing</li>
+                                </ul>
+                            </div>
                             <textarea id="txtSelected" rows="3" class="fixedw text-warning input-medium search-query input-xxlarge" placeholder="SELECT or TYPE text and wait a second..."></textarea><br />                    
                             <span id="btnMainText" class="mainmeaning">Main Meanings</span><a id="btnReadMain" title="Pronunciation of Main Meanings" class="hand icon-volume-up"></a>:<br />  
                             <textarea id="txtTranslated" rows="4" class="fixedw text-success input-medium search-query input-xxlarge" placeholder="NO VALID SOURCE"></textarea><br />  
