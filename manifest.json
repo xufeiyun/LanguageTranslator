@@ -58,7 +58,6 @@
             "script/i18n.js",
             "script/common.js",
             "script/jquery.min.js",
-            "bootstrap/js/bootstrap.min.js",
             "script/clipboard.js",
             "script/storages.js",
             "script/wikipages.js",
