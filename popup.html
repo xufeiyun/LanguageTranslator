@@ -14,17 +14,19 @@
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="buttons/css/font-awesome.min.css">
     <link rel="stylesheet" href="buttons/css/buttons.css">
+    <link rel="stylesheet" href="style/popup.css"/>
     <link rel="stylesheet" href="style/content_iframe.css"/>
     <link rel="stylesheet" href="style/content_translator.css"/>
-    <link rel="stylesheet" href="style/popup.css"/>
-    <script type="text/javascript" src="script/jquery.min.js"></script>
+    <script type="text/javascript" src="script/jquery-1.10.1.min.js"></script>
     <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="script/jquery.watermark.min.js"></script>
     <script type="text/javascript" src="script/i18n.js"></script>
     <script type="text/javascript" src="script/common.js"></script>
     <script type="text/javascript" src="script/clipboard.js"></script>
     <script type="text/javascript" src="script/storages.js"></script>
     <script type="text/javascript" src="script/translators.js"></script>
     <script type="text/javascript" src="script/wikipages.js"></script>
+    <script type="text/javascript" src="script/search-onweb.js"></script>
     <script type="text/javascript" src="script/tabs.js"></script>
     <script type="text/javascript" src="script/addDOMLoadEvent.js"></script>
     <script type="text/javascript" src="script/popup.js"></script>
@@ -78,8 +80,15 @@
       <section>
         <form class="form-search">
           <fieldset>
-            <span id="btnSourceText" class="sourcetext btn-link" title="View Encyclopedia">Source Text</span><span id="btnReadSource" title="Pronunciation of Source Text" class="hide hand icon-volume-up adjacent"></span>(<strong>Ctrl</strong>+<strong>Enter</strong><span> = </span>
-			<input id="btnTranslate" type="button" class="btn-mini btn-success hand" title="Translate the input text manually (Ctrl+Enter)" value=" Translate"/>):
+            <span id="btnSourceText" class="sourcetext btn-link" title="View Encyclopedia">Source Text</span><a id="btnReadSource" title="Pronunciation of Source Text" class="hide hand icon-volume-up"></a>:<span class="hide">(<strong>Ctrl</strong>+<strong>Enter</strong><span> = </span><input id="btnTranslate" type="button" class="btn-mini btn-success hand" title="Translate the input text manually (Ctrl+Enter)" value=" Translate"/>)</span>
+            <div class="PopupSearchDiv">
+                <span id="spanSearchTitle" title="Search the Source Texts on search engine!">Search On...</span>
+                <ul class="PopupSearchList">
+                    <li data-left='https://www.google.com.hk/#newwindow=1&q=' data-mid='' data-right='&safe=strict'>Google</li>
+                    <li data-left='http://www.baidu.com/#wd=' data-mid='' data-right='&rsv_bp=0&tn=baidu&rsv_spt=3&ie=utf-8&rsv_sug3=2&rsv_sug4=127&rsv_sug1=2&rsv_sug2=0&inputT=4'>Baidu</li>
+                    <li data-left='https://www.bing.com/search?q=' data-mid='' data-right='&go=&qs=n&form=QBLH&pq=test&sc=8-4&sp=-1&sk='>Bing</li>
+                </ul>
+            </div>
             <textarea id="txtSelected" rows="2" class="fixedw_popup text-warning input-medium search-query input-xxlarge" placeholder="SELECT or TYPE text and wait a second..."></textarea><br />
             <ul class="hide nav nav-tabs" id="tabAPIs">
               <li class="active"><a href="#youdao" data-toggle="tab">Youdao</a></li>

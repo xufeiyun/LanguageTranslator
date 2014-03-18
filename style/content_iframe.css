@@ -22,12 +22,11 @@ body
     
     /*background-color: rgba(248, 244, 240, 0.94);*/
     background-color: #fff;
-    border: 1px solid;
-    border-color: #808080;
-    border-top-left-radius:  0%;
-    border-top-right-radius:  0%;
-    border-bottom-left-radius: 0%;
-    border-bottom-right-radius: 0%;
+    border: 1px solid #B8B8B8;
+    border-top-left-radius:  1%;
+    border-top-right-radius:  1%;
+    border-bottom-left-radius: 1%;
+    border-bottom-right-radius: 1%;
     z-index: 1000000;
     
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -524,7 +523,7 @@ textarea:focus:invalid:focus
     display: inline;
     height: 20px;
     width: 80px;
-    color: #005580;
+    color: #088ed2;
     background-color: transparent;
     cursor: pointer;
 }
@@ -533,19 +532,34 @@ textarea:focus:invalid:focus
 }
 
 .PopupSearchList {
-    position: fixed;    
-    top: 46px;
-    left: 45px;
+    z-index: 999;
+    position: fixed;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    top: 63px;
+    left: __MSG_SearchListLeft__;
+    width: __MSG_SearchListWidth__;
     line-height: 24px;
     list-style-type: none;
     clear: both;
     color: #005580;
-    background-color: transparent;
+    background-color: white;
     cursor: pointer;
     display: none;
+    border: 0px solid #9b9b9b;
+}
+
+.PopupSearchList li {
+    margin-left: -40px;
+    color: #088ed2;
+    background-color: white;
 }
 
 .PopupSearchList li:hover {
-    color: #fd150e;
+    background-color: #f4d2d2;
+    color: #005580;
 }
 
+.PopupSearchListOffset {
+    left: __MSG_SearchListLeftOffset__;
+}

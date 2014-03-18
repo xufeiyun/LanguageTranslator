@@ -20,7 +20,7 @@
        "message":"在維基百科中查看所選文字的其他信息"
     },
    "SourceTextsPlaceholder": {
-       "message":"从页面上选择或直接输入文本后，等待一会儿..."
+       "message":"從頁面上選擇或直接輸入文本後，稍等片刻!<br/>(按Ctrl+Enter組合鍵即刻翻譯)"
     },
    "SourceSoundTooltip": {
        "message":"朗讀所選文字"
@@ -125,5 +125,18 @@
     },
    "YourDao50": {
        "message":"使用了無效的私人API Key!"
+    },
+    
+   "SearchOnText": {
+       "message":"(從網絡搜索)"
+    },
+   "SearchOnTitle": {
+       "message":"從搜索引擎中搜索所選文字!"
+    },
+   "SearchListWidth": {
+       "message":"40px"
+    },
+   "SearchListLeft": {
+       "message":"85px"
     }
 }

@@ -370,8 +370,8 @@ function getFileContentsSync(url, type)
 // judge whether the word contains chinese or not
 function isChinese(s)
 {
-    var patrn = /[\u4E00-\u9FA5]|[\uFE30-\uFFA0]/gi;
-    var result = patrn.exec(s) != null;
+    var pattern = /[\u4E00-\u9FA5]|[\uFE30-\uFFA0]/gi;
+    var result = (pattern.exec(s) != null); // ok chinese
     return result;
 }
 

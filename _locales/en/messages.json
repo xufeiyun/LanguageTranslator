@@ -26,7 +26,7 @@
        "description":"Language Translator Extension: A google chrome extension!."
     },
    "SourceTextsPlaceholder": {
-       "message":"SELECT or TYPE text and wait a second...",
+       "message":"SELECT text on page or TYPE here, wait a moment!<br/>Ctrl+Enter: Translate immediately.",
        "description":"Language Translator Extension: A google chrome extension!."
     },
    "SourceSoundTooltip": {
@@ -143,6 +143,7 @@
        "message":"Now translating......",
        "description":"Language Translator Extension: A google chrome extension!."
     },
+
     /* Error Message for YouDao Translation*/
    "YourDaoDefault": {
        "message":"Undefined ErrorCode: ",
@@ -163,5 +164,22 @@
    "YourDao50": {
        "message":"Invalid Private API Key!",
        "description":"Language Translator Extension: A google chrome extension!."
+    },
+    
+   "SearchOnText": {
+       "message":"(Search From",
+       "description":"Language Translator Extension: A google chrome extension!."
+    },
+   "SearchOnTitle": {
+       "message":"Search the Source Texts on search engine!",
+       "description":"Language Translator Extension: A google chrome extension!."
+    },
+   "SearchListWidth": {
+       "message":"40px",
+       "description":"The Width of the position about the Search List."
+    },
+   "SearchListLeft": {
+       "message":"106px",
+       "description":"The Left of the position about the Search List."
     }
 }

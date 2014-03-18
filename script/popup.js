@@ -20,6 +20,7 @@ var textSelected = null;
 
 $(document).ready(function ()
 {
+    SearchWeb.Initialize();
 
     i18n.SetLocalization();
 
@@ -62,6 +63,10 @@ $(document).ready(function ()
     });
     textSelected.focus();
     textSelected.select();
+
+    // must set by codes: set multiple-lines of place holder
+    textSelected.addClass("jq_watermark");
+    textSelected.watermark();
 
     // add top link events
     $("#divNavTitle").click(function ()

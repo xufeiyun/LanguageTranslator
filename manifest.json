@@ -57,10 +57,12 @@
 		"js" : [
             "script/i18n.js",
             "script/common.js",
-            "script/jquery.min.js",
+            "script/jquery-1.10.1.min.js",
+            "script/jquery.watermark.min.js",
             "script/clipboard.js",
             "script/storages.js",
             "script/wikipages.js",
+            "script/search-onweb.js",
             "script/addDOMLoadEvent.js",
             "script/content_translator.js"
         ],
@@ -81,11 +83,12 @@
       "script/geoapi.js",
       "script/wikipages.js",
       "script/addDOMLoadEvent.js",
-      "script/jquery.min.js",
+      "script/jquery.watermark.min.js",
       "script/common.js",
       "script/translators.js",
       "script/content_iframe.js",
-      "script/jquery-1.10.1.js",
-      "script/jquery-1.10.1.min.map"
+      "script/jquery-1.10.1.min.js",
+      "script/jquery-1.10.1.min.map",
+      "script/search-onweb.js"
   ]
 }

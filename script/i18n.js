@@ -48,6 +48,9 @@ var i18n =
 
         i18n.SetText("btnAbout", "AboutText");
         i18n.SetTitle("btnAbout", "AboutTitle");
+        
+        i18n.SetText("spanSearchTitle", "SearchOnText");
+        i18n.SetTitle("spanSearchTitle", "SearchOnTitle");
 
         return true;
     },

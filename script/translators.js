@@ -108,7 +108,8 @@ function getValidSuffix(type)
 function clearTexts(type)
 {
     logD("Clear Text...");
-    if (!isValidText($("#txtSelected").val()))
+    var text = $("#txtSelected").val();
+    if (!isValidText(text))
     {
         updateSourceText(emptytext);
         updateMainMeaning(emptytext, type);
@@ -131,9 +132,14 @@ function initializeTexts(message, type)
 
 function updateSourceText(text)
 {
+    logD('update source text');
     var id = "#txtSelected";
     $(id).val(text);
     updateHeight(id);
+    if (text != emptytext)
+    {
+        $(id).blur();
+    }
 }
 
 function updateMainMeaning(text, type)

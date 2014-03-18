@@ -45,7 +45,7 @@
 	{
 		"matches": ["<all_urls>"],
 		"css": ["content_translator.css"],
-		"js" : ["common.js", "jquery.min.js", "clipboard.js", "wikipages.js", "content_translator.js"],
+		"js" : ["common.js", "jquery-1.10.1.min.js", "clipboard.js", "wikipages.js", "content_translator.js"],
 		"run_at": "document_idle",
 		"all_frames": true
 	}

@@ -20,7 +20,7 @@
        "message":"View Encyclopedia"
     },
    "SourceTextsPlaceholder": {
-       "message":"SELECT or TYPE text and wait a second..."
+       "message":"SELECT text on page or TYPE here, wait a moment!<br/>Ctrl+Enter: Translate immediately."
     },
    "SourceSoundTooltip": {
        "message":"Pronunciation of Source Text"
@@ -130,5 +130,18 @@
    "YourDao50": {
        "message":"Invalid Private API Key!",
        "description":"Language Translator Extension: A google chrome extension!."
+    },
+    
+   "SearchOnText": {
+       "message":"(Search From)"
+    },
+   "SearchOnTitle": {
+       "message":"Search the Source Texts on search engine!"
+    },
+   "SearchListWidth": {
+       "message":"40px"
+    },
+   "SearchListLeft": {
+       "message":"106px"
     }
 }
