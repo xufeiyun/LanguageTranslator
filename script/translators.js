@@ -8,12 +8,12 @@ var emptytext = "";
 
 function translate(message)
 {
-    logD("TRANSLATE...");
+    LoggerAPI.logD("TRANSLATE...");
     if (typeof(message) == "undefined") return false;
     
     message = $.trim(message);
 
-    if (!isValidText(message))
+    if (!CommonAPI.isValidText(message))
     {
         var classHide = "hide";
         $("#" + PronounceAudios.Source.ButtonId).addClass(classHide);
@@ -25,7 +25,7 @@ function translate(message)
     if (typeof(createTranslateAudio) != undefined) {
        createTranslateAudio(PronounceAudios.Source, message);
     }
-    //logD(getFileContentsSync('https://dl.yunio.com/pub/0LpA2l?name=webpage_popup.txt'));
+    //LoggerAPI.logD(AjaxAPI.getFileContentsSync('https://dl.yunio.com/pub/0LpA2l?name=webpage_popup.txt'));
 
     translateByYoudao(message);
     translateByGoogle(message);
@@ -37,7 +37,7 @@ function createTranslateAudio(audioType, word)
 {
     if (OptionItemValues.EnablePronunciation == false)
     {
-        logD("Pronunciation Feature has been disabled, it may be in DEBUG mode.");
+        LoggerAPI.logD("Pronunciation Feature has been disabled, it may be in DEBUG mode.");
         //return;
     }
 
@@ -45,8 +45,8 @@ function createTranslateAudio(audioType, word)
         audioId = audioType.PlayerId,
         buttonId = audioType.ButtonId;
 
-    var isChineseWord = isChinese(word);
-    logW("Is Chinese Word: " + isChineseWord);
+    var isChineseWord = CommonAPI.isChinese(word);
+    LoggerAPI.logW("Is Chinese Word: " + isChineseWord);
     var url = "http://tts.baidu.com/text2audio?lan=" + (isChineseWord ? "zh" : "en") +"&amp;ie=UTF-8&amp;text=" + encodeURI(word);
 
     // creat audio element
@@ -102,14 +102,14 @@ function updateRows(id)
 
 function getValidSuffix(type)
 {
-	return t = (isValidText(type)) ? type : "";
+	return t = (CommonAPI.isValidText(type)) ? type : "";
 }
 
 function clearTexts(type)
 {
-    logD("Clear Text...");
+    LoggerAPI.logD("Clear Text...");
     var text = $("#txtSelected").val();
-    if (!isValidText(text))
+    if (!CommonAPI.isValidText(text))
     {
         updateSourceText(emptytext);
         updateMainMeaning(emptytext, type);
@@ -132,7 +132,7 @@ function initializeTexts(message, type)
 
 function updateSourceText(text)
 {
-    logD('update source text');
+    LoggerAPI.logD('update source text');
     var id = "#txtSelected";
     $(id).val(text);
     updateHeight(id);
@@ -160,7 +160,7 @@ function updateMoreMeaning(text, type)
 /*-----------  Translate By Input Text --------------*/
 function translateByInput()
 {
-    logD("Translating by input......");
+    LoggerAPI.logD("Translating by input......");
     var text = $("#txtSelected").val();
     translate(text);
 }
@@ -170,9 +170,9 @@ function translateByInput()
 function translateByClipboard()
 {
     var text = window.Clipboard.paste();
-    logD("Translating by clipboard text......");
+    LoggerAPI.logD("Translating by clipboard text......");
     translate(text);
-    return isValidText(text);
+    return CommonAPI.isValidText(text);
 }
 /*END*/
 
@@ -181,12 +181,12 @@ function translateByGoogle(message)
 {
     return false;
 
-    if (!isValidText(message)) return false;
+    if (!CommonAPI.isValidText(message)) return false;
 	
 	var type = "G";	
 	initializeTexts(message, type);
     
-	var text = encodeText(message);
+	var text = CommonAPI.encodeText(message);
 	var url = "http://translate.google.com.hk/translate_a/t?client=t&hl=en&sl=en&tl=zh-CN&ie=UTF-8&oe=UTF-8&multires=1&oc=2&otf=1&rom=1&ssel=4&tsel=4&pc=1&sc=1&q=" + text;
 
 	var xhr = new XMLHttpRequest();
@@ -195,18 +195,18 @@ function translateByGoogle(message)
       showAPILogo("logoGoogle");
 	  if (xhr.readyState == 4) {
 		// received json data
-		// logD(xhr.responseText);
+		// LoggerAPI.logD(xhr.responseText);
 		
 		// all meanings
 		text = xhr.responseText;
-		text = removeDuplicated(text, ",");
+		text = CommonAPI.removeDuplicated(text, ",");
 		var meanings = text;
 		$("#txtTranslatedAll" + type).html(meanings);
 		
 		// first meaning
 		var data = JSON.parse(meanings);
 		data = data[0][0][0];
-		// logD(data);
+		// LoggerAPI.logD(data);
 		$("#txtTranslated"  + type).val(data);
 	  }
 	  return true;
@@ -229,7 +229,7 @@ function parseData(data)
 				values += parseEachData(data[data.length - l]) + ",";
 			}
 			catch (e) {
-				logW(e);
+				LoggerAPI.logW(e);
 			}
 			finally {
 			}
@@ -255,7 +255,7 @@ function parseEachData(data)
 				values += parseEachData(data[data.length - l]) + ",";
 			}
 			catch (e) {
-				logW(e);
+				LoggerAPI.logW(e);
 			}
 			finally {
 			}
@@ -271,7 +271,7 @@ function parseEachData(data)
 /*-----------  Translate By BaiDu API --------------*/
 function translateByBaidu(message)
 {
-    if (!isValidText(message)) return false;
+    if (!CommonAPI.isValidText(message)) return false;
 	
 	var type = "B";	
     initializeTexts(message, type);
@@ -284,7 +284,7 @@ function translateByBaidu(message)
 /*-----------  Translate By YouDao API --------------*/
 function translateByYoudao(message)
 {
-    if (!isValidText(message)) return false;
+    if (!CommonAPI.isValidText(message)) return false;
 
 	var type = "";
     initializeTexts(message, type);
@@ -295,7 +295,7 @@ function translateByYoudao(message)
         url: url,
         dataType : "json",
         type: "get",
-        data: "q=" + encodeText(text),
+        data: "q=" + CommonAPI.encodeText(text),
         success: function(result)
         {
             showAPILogo("logoYouDao");
@@ -333,7 +333,7 @@ function handleErrorYouDao(errorCode)
 function parseResultYoudao(result)
 {
 	var type = "";
-    logD(result.toString());
+    LoggerAPI.logD(result.toString());
 
     //var data = JSON.parse(result);
     var data = result;
@@ -347,7 +347,7 @@ function parseResultYoudao(result)
         if (hasBasic)
         {
             single = combineValues(data.basic.explains, "." + NewLine);
-            if (isDefined(data.basic.phonetic))
+            if (CommonAPI.isDefined(data.basic.phonetic))
             {
                 sound = "[" + data.basic.phonetic + "]  " + NewLine;
             }
@@ -384,7 +384,7 @@ function parseResultYoudao(result)
 }
 function combineValues(valuesArray, separator)
 {
-    if (!isValidText(separator)) {separator = ",";}
+    if (!CommonAPI.isValidText(separator)) {separator = ",";}
     var values = "";
     for (var i = 0; i < valuesArray.length; i++) {
         var value = valuesArray[i];
@@ -404,7 +404,7 @@ function combineValues(valuesArray, separator)
 /*-----------  Translate By YouDao API --------------*/
 function translateByMicrosoft(message)
 {
-    if (!isValidText(message)) return false;
+    if (!CommonAPI.isValidText(message)) return false;
 	
 	var type = "M";	
     initializeTexts(message, type);

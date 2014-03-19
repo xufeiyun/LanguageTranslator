@@ -2,45 +2,27 @@
 var prefix = "[OPTIONS PAGE]: ";
 
 
-// this includes: [select text by moving mouse] and [select text by dbl-clicking the text]
-document.onselectionchange = fnSelectionChanged;
-function fnSelectionChanged() {
-    logD("OPTIONS page loaded.");
-}
+$(document).ready(function ()
+{
+    checkDebugger();
+    
+    scrollTitle();
 
-
-$(document).ready(function () {
-    if (IsDebugger) {
-        $("h1").hide();
-        $("h6").hide();
-    }
-
-    $(window).scroll(function () {
-        var old = $("#divOptionPageTitle")[0].style.left;
-        var left = 0 - scrollX + 40;
-        if (old != left) {
-            $("#divOptionPageTitle")[0].style.left = left + "px";
-        }
-    });
-
-    $("#divOptionPageTitle");
-
-    $("#extesion_url").attr("href", "https://chrome.google.com/webstore/detail/language-translator/" + ExtenionUID);
+    $("#product_name").attr("href", "https://chrome.google.com/webstore/detail/language-translator/" + ExtenionUID);
 
     // send feedback
-    getElement("formSendFeedback").submit(sendFeedback);
+    DomAPI.getElement("formSendFeedback").submit(sendFeedback);
 
-    // text donation
-    getElement("txtDonation").change(updateDonation);
+    // send donation
+    DomAPI.getElement("txtDonation").change(updateDonation);
 
-    $(".close").click(function () {
-        hideMsg();
-    });
+    // save setting
+    DomAPI.getElement("btnBasicSettings").click(saveSettings);
 
-    $("#btnBasicSettings").click(function () {
-        saveSettings();
-    });
+    // hide msg when sending out email
+    $(".close").click(hideMsg);
 
+    // load items of sections
     loadItems();
 
     // hide message
@@ -49,33 +31,67 @@ $(document).ready(function () {
     // initialize donate
     initDonation();
 
+    // show tab on loading page
     showTab();
 
-    // need to simplize these codes
-    $("#lgdFeedback").click(function () {
-        $("#feedbackArea").toggle();
-    });
-    $("#lgdGrowth").click(function () {
-        $("#ulGrowth").toggle();
-    }).click();
-    $("#lgdFixes").click(function () {
-        $("#ulFixes").toggle();
-    }).click();
-    $("#lgdRelease").click(function () {
-        $("#ulRelease").toggle();
-    }).click();
+    // bind events for legends
+    bindLegendEvent();
+
+    // open page for h*
+    $("h1").click(openHomepage);
 
     // load settings for Options page
     msgout(OperatorType.loadSettings, null);
 
-    $("h1").click(function () {
-        openHomepage();
-    });
-
     $("#settings label:lt(4):even").css("color", "blue");
+
     // test email
     // testEmail();
 });
+
+var checkDebugger = function ()
+{
+    if (IsDebugger)
+    {
+        $("h1").hide();
+        $("h6").hide();
+    }
+};
+
+var scrollTitle = function ()
+{
+    $(window).scroll(function ()
+    {
+        var old = $("#divOptionPageTitle")[0].style.left;
+        var left = 0 - scrollX + 40;
+        if (old != left)
+        {
+            $("#divOptionPageTitle")[0].style.left = left + "px";
+        }
+    });
+};
+
+var bindLegendEvent = function ()
+{
+    var toggle = function (legend, area, click)
+    {
+        var l = $("#" + legend);
+        l.click(function ()
+        {
+            $("#" + area).toggle();
+        });
+        if (click) { l.click(); }
+    };
+
+    var list = new Array(
+        { l: 'lgdFeedback', a: 'feedbackArea', c: false },
+        { l: 'lgdGrowth', a: 'ulGrowth', c: true },
+        { l: 'lgdFixes', a: 'ulFixes', c: true },
+        { l: 'lgdRelease', a: 'ulRelease', c: true }
+    );
+    
+    list.forEach(function (o) { toggle(o.l, o.a, o.c); });
+};
 
 var loadItems = function ()
 {
@@ -97,9 +113,9 @@ var loadItems = function ()
 };
 
 var testEmail = function () {
-    var name = getElement("txtName").val("Eric Xu");
-    var from = getElement("txtEmail").val("190170412@qq.com");
-    var content = getElement("txtFeedback").html("What you see is TEST SUGGESTION");
+    var name = DomAPI.getElement("txtName").val("Eric Xu");
+    var from = DomAPI.getElement("txtEmail").val("190170412@qq.com");
+    var content = DomAPI.getElement("txtFeedback").html("What you see is TEST SUGGESTION");
 };
 
 var showTab = function ()
@@ -117,7 +133,7 @@ var showTab = function ()
 
 var hideMsg = function ()
 {
-    getElement("msgContainer").hide();
+    DomAPI.getElement("msgContainer").hide();
 };
 
 var showMsg = function (message)
@@ -128,14 +144,14 @@ var showMsg = function (message)
 
 var showWarn = function (message)
 {
-    getElement("msgContent").html(message);
-    getElement("msgContainer").show();
+    DomAPI.getElement("msgContent").html(message);
+    DomAPI.getElement("msgContainer").show();
 }
 
 var updateDonation = function ()
 {
-    var value = getElement("txtDonation").val();
-    var span = getElement("spanDonation");
+    var value = DomAPI.getElement("txtDonation").val();
+    var span = DomAPI.getElement("spanDonation");
     span.html(value);
     var payPayAmount = $("input[name=amount]");
     payPayAmount.val(value);
@@ -150,9 +166,9 @@ var initDonation = function ()
 };
 
 var sendFeedback = function () {
-    var name = getElement("txtName").val();
-    var from = getElement("txtEmail").val();
-    var content = getElement("txtFeedback").val();
+    var name = DomAPI.getElement("txtName").val();
+    var from = DomAPI.getElement("txtEmail").val();
+    var content = DomAPI.getElement("txtFeedback").val();
 
     showWarn("Submitting feedbacks, please wait...");
 
@@ -164,30 +180,30 @@ var sendFeedback = function () {
 };
 
 var loadSettings = function (data) {
-    logD("loadSettings");
+    LoggerAPI.logD("loadSettings");
     var options = data;
     if (typeof(options.EnablePopupDialog) != "undefined" && options.EnablePopupDialog == TrueValue) {
-        getElement("chkEnablePopupDialg").click();
+        DomAPI.getElement("chkEnablePopupDialg").click();
     }
     if (typeof(options.EnableTranslation) != "undefined" && options.EnableTranslation == TrueValue) {
-        getElement("chkEnableTextTranslation").click();
+        DomAPI.getElement("chkEnableTextTranslation").click();
     }
     if (typeof(options.EnableCopyText) != "undefined" && options.EnableCopyText == TrueValue) {
-        getElement("chkEnableCopyText").click();
+        DomAPI.getElement("chkEnableCopyText").click();
     }
     if (typeof(options.EnableLogger) != "undefined" && options.EnableLogger == TrueValue) {
-        getElement("chkEnableTraceLog").click();
+        DomAPI.getElement("chkEnableTraceLog").click();
     }
 };
 
 var saveSettings = function () {
-    logD("saveSettings");
+    LoggerAPI.logD("saveSettings");
     var data = {
         message: {
-            EnableTranslation: getElement("chkEnableTextTranslation")[0].checked,
-            EnablePopupDialog: getElement("chkEnablePopupDialg")[0].checked,
-            EnableCopyText: getElement("chkEnableCopyText")[0].checked,
-            EnableLogger: getElement("chkEnableTraceLog")[0].checked
+            EnableTranslation: DomAPI.getElement("chkEnableTextTranslation")[0].checked,
+            EnablePopupDialog: DomAPI.getElement("chkEnablePopupDialg")[0].checked,
+            EnableCopyText: DomAPI.getElement("chkEnableCopyText")[0].checked,
+            EnableLogger: DomAPI.getElement("chkEnableTraceLog")[0].checked
         }
     };
     msgout(OperatorType.saveSettings, data);
@@ -203,13 +219,13 @@ function msgout(type, message)
 }
 // response callback
 function resp_opt(response) {
-    logD("#RESPONSE#: Received type [" + response.type + "], message [" + response.message + "]");
+    LoggerAPI.logD("#RESPONSE#: Received type [" + response.type + "], message [" + response.message + "]");
 
     var type = response.type;
     var message = response.message;
 
     if (type == OperatorType.getSelectText) {
-        if (isDefined(response) && isValidText(response.message)) {
+        if (CommonAPI.isDefined(response) && CommonAPI.isValidText(response.message)) {
         }
     }
     else if (type == OperatorType.loadSettings) {
@@ -222,8 +238,8 @@ function resp_opt(response) {
         alert("Settings saved successfully.");
     }
     else {
-        var message = isDefined(response) ? (isValidText(response.message) ? response.message : "message not defined in response") : ("response not defined");
-        logE("#RESPONSE#: Received response type: [" + response.type + "], response message: [" + message + "]");
+        var message = CommonAPI.isDefined(response) ? (CommonAPI.isValidText(response.message) ? response.message : "message not defined in response") : ("response not defined");
+        LoggerAPI.logE("#RESPONSE#: Received response type: [" + response.type + "], response message: [" + message + "]");
     }
 }
 /*END*/

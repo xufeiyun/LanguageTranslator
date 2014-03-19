@@ -2,8 +2,7 @@
 /* ---
 get files' contents
 -----*/
-var ReadFileAPI =
-{
+var ReadFileAPI = {
     isDefined: function (variable)
     {
         return (typeof (variable) != "undefined");
@@ -34,7 +33,7 @@ var ReadFileAPI =
         }).responseText;
 
         var log = "Retrieved content, URL is: " + url;
-        logD(log);
+        LoggerAPI.logD(log);
     },
 
     getFileContents: function (url, fnSuccess, type, fnFailure)

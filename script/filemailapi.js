@@ -34,8 +34,7 @@ https://www.filemail.com/api/transfer/complete?apikey=5e10cf38-2152-4704-914d-39
 
 
 
-var MailAPI =
-{
+var MailAPI = {
     Type:
     {
         InitEmail: "init",
@@ -66,8 +65,8 @@ var MailAPI =
     Send: function (name, fromemail, content, fnSuccess, fnFailure, prefix)
     {
         // prepare to send at first
-        if (!isValidText(name)) name = "[USER N/A]";
-        if (!isValidText(fromemail)) fromemail = "[USER'S EMAIL N/A]";
+        if (!CommonAPI.isValidText(name)) name = "[USER N/A]";
+        if (!CommonAPI.isValidText(fromemail)) fromemail = "[USER'S EMAIL N/A]";
 
         MailAPI.Callbacks.Success = fnSuccess;
         MailAPI.Callbacks.Failure = fnFailure;
@@ -127,7 +126,7 @@ var MailAPI =
 
     get: function (apiUrl, nextType)
     {
-        logD(apiUrl);
+        LoggerAPI.logD(apiUrl);
         $.ajax({
             url: apiUrl,
             type: "get",
@@ -144,7 +143,7 @@ var MailAPI =
     },
     post: function (apiUrl, newId, postData, nextType)
     {
-        logD(apiUrl);
+        LoggerAPI.logD(apiUrl);
         $.ajax({
             url: apiUrl,
             type: "post",
@@ -211,7 +210,7 @@ var MailAPI =
                 }
                 else if (type == MailAPI.Type.Complete)
                 {
-                    logD(result.downloadurl);
+                    LoggerAPI.logD(result.downloadurl);
                     if (MailAPI.Callbacks.Success) { MailAPI.Callbacks.Success("Thanks a lot for your feedback. Feedback sent successfully."); }
                 }
             }
@@ -224,7 +223,7 @@ var MailAPI =
         catch (e)
         {
             msg = e.Message;
-            logE(msg);
+            LoggerAPI.logE(msg);
             if (MailAPI.Callbacks.Failure) { MailAPI.Callbacks.Failure(msg); }
         }
     }

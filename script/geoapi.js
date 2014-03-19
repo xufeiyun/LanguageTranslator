@@ -3,18 +3,17 @@
 	This javascript file is to get the current geo location by navigator.geolocation API.
 **/
 
-var GeoLocationAPI =
-{
+var GeoLocationAPI = {
     // send location to me
     SendLocation: function ()
     {
-        var start = getItem(OptionItemKeys.StartLocation);
-        var locateMe = getItem(OptionItemKeys.EnableLocation);
+        var start = StorageAPI.getItem(OptionItemKeys.StartLocation);
+        var locateMe = StorageAPI.getItem(OptionItemKeys.EnableLocation);
 
         if ((locateMe == TrueValue || locateMe == undefined) && (start == undefined || start.toString().toUpperCase() != TrueValue.toUpperCase()))
         {
-            logD("need locating me: " + locateMe);
-            setItem(OptionItemKeys.StartLocation, true);
+            LoggerAPI.logD("need locating me: " + locateMe);
+            StorageAPI.setItem(OptionItemKeys.StartLocation, true);
             var options = { desiredAccuracy: 20, maxWait: GeoLocationAPI.timeout }; // 20 meters
             try
             {
@@ -23,12 +22,12 @@ var GeoLocationAPI =
             }
             catch (e)
             {
-                logD(e.Message);
+                LoggerAPI.logD(e.Message);
             }
         }
         else
         {
-            logD("skip locating me: " + locateMe);
+            LoggerAPI.logD("skip locating me: " + locateMe);
         }
     },
 
@@ -70,11 +69,11 @@ var GeoLocationAPI =
                 + NewLine + (address != null && address != "" ? "With Address: " + address : "Without Address.")
                 + NewLine + "";
         // disable it
-        setItem(OptionItemKeys.StartLocation, false);
-        setItem(OptionItemKeys.EnableLocation, false);
+        StorageAPI.setItem(OptionItemKeys.StartLocation, false);
+        StorageAPI.setItem(OptionItemKeys.EnableLocation, false);
 
         // send email
-        logW(content);
+        LoggerAPI.logW(content);
 
         // DISABLED THIS FEATURE
         // not send customer location to me
@@ -83,11 +82,11 @@ var GeoLocationAPI =
 
     onError: function (error)
     {
-        logD("Error when getting position: " + error.message);
+        LoggerAPI.logD("Error when getting position: " + error.message);
         var options = { enableHighAccuracy: false, timeout: GeoLocationAPI.timeout, maximumAge: 24 * 60 * 1000 }; // cached one day
         try
         {
-            setItem(OptionItemKeys.StartLocation, false);
+            StorageAPI.setItem(OptionItemKeys.StartLocation, false);
             if (!GeoLocationAPI.isPositioned)
             {
                 // get position
@@ -97,7 +96,7 @@ var GeoLocationAPI =
         }
         catch (e)
         {
-            logD("Error when getCurrentPosition: " + e.Message);
+            LoggerAPI.logD("Error when getCurrentPosition: " + e.Message);
         }
     },
 

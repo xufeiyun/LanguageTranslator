@@ -5,8 +5,7 @@
 	This javascript file is to get the query string in URL.
 */
 
-var QueryString =
-{
+var QueryString = {
     // get query string as an Array
 
     getQueryStringArray: function (location)

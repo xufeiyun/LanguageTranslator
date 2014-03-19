@@ -15,17 +15,17 @@ function openHomepage()
 
 function openWikipage(word)
 {
-    logD("call openWikipage with word:" + word);
+    LoggerAPI.logD("call openWikipage with word:" + word);
 
     var fromGoogle = function (word)
     {
-        logW("Undefined Wikipedia Type: " + OptionItemValues.DefaultBaike);
-        logW("Searching [" + word + "] by google.com ...");
+        LoggerAPI.logW("Undefined Wikipedia Type: " + OptionItemValues.DefaultBaike);
+        LoggerAPI.logW("Searching [" + word + "] by google.com ...");
         fromGoogleAPI(word);
     };
 
     // ok
-    if (isChinese(word))
+    if (CommonAPI.isChinese(word))
     {
         if (OptionItemValues.DefaultBaike == BaikeType.wikicn)
         {
@@ -67,13 +67,13 @@ function openWikipage(word)
 /*END*/
 
 function openPage(url, callback){
-    logD("Page URL: " + url);
+    LoggerAPI.logD("Page URL: " + url);
 	if (chrome.tabs) {
 	    chrome.tabs.create({ url: url }, callback);
 	}
     else {
-        logW(callback ? callback : "callback is undefined");
-        logW(prefix + "chrome.tabs is NOT defined!");
+        LoggerAPI.logW(callback ? callback : "callback is undefined");
+        LoggerAPI.logW(prefix + "chrome.tabs is NOT defined!");
         if (url.indexOf("://") == -1) 
         {
             url = "chrome-extension://" + ExtenionUID + "/" + url;
@@ -82,12 +82,12 @@ function openPage(url, callback){
         {
             //window.open(url);
             // send data to background for open the page by chrome.tabs
-            msg_send(OperatorType.openOptionPage, url, callback);
+            MsgBusAPI.msg_send(OperatorType.openOptionPage, url, callback);
         }
         else
         {
             // send data to background for open the page by chrome.tabs
-            msg_send(OperatorType.openOptionPage, url, callback);
+            MsgBusAPI.msg_send(OperatorType.openOptionPage, url, callback);
         }
     }
 }
@@ -100,17 +100,17 @@ function fromHomepage(uid)
 }
 function fromWikipediaEN(word)
 {
-	var url = "http://en.wikipedia.org/wiki/" + encodeText(word);
+	var url = "http://en.wikipedia.org/wiki/" + CommonAPI.encodeText(word);
     openPage(url);
 }
 function fromWikipediaCN(word)
 {
-    var url = "http://zh.wikipedia.org/wiki/" + encodeText(word);
+    var url = "http://zh.wikipedia.org/wiki/" + CommonAPI.encodeText(word);
     openPage(url);
 }
 function fromGoogleAPI(word)
 {
-    var url = 'https://www.google.com/#q=' + encodeText(word) + "&safe=strict";
+    var url = 'https://www.google.com/#q=' + CommonAPI.encodeText(word) + "&safe=strict";
     openPage(url);
 }
 // by scripts
@@ -127,7 +127,7 @@ function fromBaiduAPI(word)
         value: word
     };
 
-    msg_send(OperatorType.setBaikeSetting, data)
+    MsgBusAPI.msg_send(OperatorType.setBaikeSetting, data)
 
     openPage('http://baike.baidu.com/');
 }
@@ -145,7 +145,7 @@ function fromTencentAPI(word)
         value: word
     };
 
-    msg_send(OperatorType.setBaikeSetting, data)
+    MsgBusAPI.msg_send(OperatorType.setBaikeSetting, data)
 
     openPage('http://baike.soso.com/');
 }
@@ -165,16 +165,16 @@ function setPage_BaiduAPI(isPageControl, value)
             text.val(value);
             // button element
             var submit = $("input[value='进入词条']");
-            logD(submit ? "submit found" : "submit NOT found");
-            //if (submit.length > 0 && isDefined(submit[0].click))
-            if (submit && isDefined(submit.click))
+            LoggerAPI.logD(submit ? "submit found" : "submit NOT found");
+            //if (submit.length > 0 && CommonAPI.isDefined(submit[0].click))
+            if (submit && CommonAPI.isDefined(submit.click))
             {
                 submit.click();
-                logD("Submit button clicked.");
+                LoggerAPI.logD("Submit button clicked.");
             }
             else
             {
-                logE("Submit button not found.");
+                LoggerAPI.logE("Submit button not found.");
             }
         }
     }
@@ -190,14 +190,14 @@ function setPage_TencentAPI(isPageControl, value)
             text.val(value);
             // button element
             var submit = $("#enterLemma");
-            if (submit.length > 0 && isDefined(submit[0].click))
+            if (submit.length > 0 && CommonAPI.isDefined(submit[0].click))
             {
                 submit[0].click();
-                logD("Submit button clicked.");
+                LoggerAPI.logD("Submit button clicked.");
             }
             else
             {
-                logE("Submit button not found.");
+                LoggerAPI.logE("Submit button not found.");
             }
         }
     }

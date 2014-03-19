@@ -3,8 +3,7 @@
 	This javascript file is to set the localizations.
 **/
 
-var i18n =
-{
+var i18n = {
     SetLocalization: function ()
     {
         var locale = (i18n.getMessage("@@ui_locale"));
@@ -58,7 +57,7 @@ var i18n =
     SetText: function (element_id, message_name)
     {
         var value = i18n.getMessage(message_name);
-        logW("i18n value: " + value);
+        LoggerAPI.logW("i18n value: " + value);
         var element = $("#" + element_id);
         if (element.length > 0)
         {
@@ -75,7 +74,7 @@ var i18n =
     SetTitle: function (element_id, message_name)
     {
         var value = i18n.getMessage(message_name);
-        logW("i18n value: " + value);
+        LoggerAPI.logW("i18n value: " + value);
         var element = $("#" + element_id);
         if (element.length > 0)
         {
@@ -109,7 +108,7 @@ var i18n =
     setAttrValue: function (element_id, attr_name, message_name)
     {
         var value = i18n.getMessage(message_name);
-        logW("i18n value: " + value);
+        LoggerAPI.logW("i18n value: " + value);
         var element = $("#" + element_id);
         if (element.length > 0)
         {

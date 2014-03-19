@@ -1,17 +1,29 @@
-function setItem(key, value) {
-    if (value == null) value = "";
-	localStorage[key] = value;
-	// localStorage.setItem(key, value);
-	return {"Key": key, "Value": value};
-}
 
-function getItem(key) {
-	// return localStorage.getItem(key);
-	var value = localStorage[key];
-	if (value == "") value = null;
-	return value;
-}
+/**
+	This javascript file is to get/set key-value pair to localStorage object.
+**/
 
-function removeItem(key) {
-	localStorage.removeItem(key);
-}
+var StorageAPI = {
+
+    setItem: function (key, value)
+    {
+        if (value == null) value = "";
+        localStorage[key] = value;
+        // StorageAPI.setItem(key, value);
+        return { "Key": key, "Value": value };
+    },
+
+    getItem: function (key)
+    {
+        // return localStorage.StorageAPI.getItem(key);
+        var value = localStorage[key];
+        if (value == "") value = null;
+        return value;
+    },
+
+    removeItem: function (key)
+    {
+        localStorage.removeItem(key);
+    }
+
+};

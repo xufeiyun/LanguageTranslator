@@ -26,7 +26,7 @@ var SearchWeb =
         $(".PopupSearchList li").click(function (e)
         {
             var dataLeft = e.target.getAttribute('data-left');
-            var dataMid = encodeText(textSelected.val());
+            var dataMid = CommonAPI.encodeText(textSelected.val());
             var dataRight = e.target.getAttribute('data-right');
             var url = dataLeft + dataMid + dataRight;
 

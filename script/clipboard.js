@@ -11,32 +11,35 @@ var prefix = "[CLIPBOARD]: ";
   var Clipboard, root;
 
   Clipboard = {
-    _createTextArea: function() {
-      var textArea;
-      textArea = document.createElement("textarea");
-      textArea.style.position = "absolute";
-      textArea.style.left = "-100%";
-      return textArea;
-    },
+      // publics
     copy: function(data) {
-      var textArea;
-      textArea = this._createTextArea();
-      textArea.value = data;
-      document.body.appendChild(textArea);
-      textArea.select();
-      var result = document.execCommand("Copy");
-      document.body.removeChild(textArea);
-      return result;
+        var textArea;
+        textArea = this._createTextArea();
+        textArea.value = data;
+        document.body.appendChild(textArea);
+        textArea.select();
+        var result = document.execCommand("Copy");
+        document.body.removeChild(textArea);
+        return result;
     },
     paste: function() {
-      var textArea, value;
-      textArea = this._createTextArea();
-      document.body.appendChild(textArea);
-      textArea.focus();
-      document.execCommand("Paste");
-      value = textArea.value;
-      document.body.removeChild(textArea);
-      return value;
+        var textArea, value;
+        textArea = this._createTextArea();
+        document.body.appendChild(textArea);
+        textArea.focus();
+        document.execCommand("Paste");
+        value = textArea.value;
+        document.body.removeChild(textArea);
+        return value;
+    },
+
+    // privates
+    _createTextArea: function() {
+        var textArea;
+        textArea = document.createElement("textarea");
+        textArea.style.position = "absolute";
+        textArea.style.left = "-100%";
+        return textArea;
     }
   };
 
