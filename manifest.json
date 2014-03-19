@@ -33,7 +33,7 @@
     },
 
   "browser_action": {
-    "default_popup": "popup.html",
+    "default_popup": "popup_dialog.html",
     "default_icon": { 
         "19": "image/language_19.jpg",
         "38": "image/language_19.jpg"
@@ -53,7 +53,7 @@
   "content_scripts": [
 	{
 		"matches": ["<all_urls>"],
-		"css": ["style/content_translator.css"],
+		"css": ["style/contents.css", "style/popup_dialog.css"],
 		"js" : [
             "script/i18n.js",
             "script/common.js",
@@ -64,7 +64,7 @@
             "script/wikipages.js",
             "script/search-onweb.js",
             "script/addDOMLoadEvent.js",
-            "script/content_translator.js"
+            "script/contents.js"
         ],
 		"run_at": "document_idle",
 		"all_frames": true
@@ -77,7 +77,7 @@
       "image/volume_max.png",
       "image/glyphicons-halflings.png",
       "image/google_wallet_logo.png",
-      "popup_iframe.html",
+      "popup_dialog.html",
       "script/i18n.js",
       "script/geo.js",
       "script/geoapi.js",
@@ -86,7 +86,7 @@
       "script/jquery.watermark.min.js",
       "script/common.js",
       "script/translators.js",
-      "script/content_iframe.js",
+      "script/popup_dialog.js",
       "script/jquery-1.10.1.min.js",
       "script/jquery-1.10.1.min.map",
       "script/search-onweb.js"

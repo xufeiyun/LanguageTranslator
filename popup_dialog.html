@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<!-- This page is the WEBPAGE POPUP PAGE of this chrome extension. -->
+<html lang="en" id="popup_html">
+    <head>
+        <title>The Language Translator</title>
+
+        <meta http-equiv="Page-Enter" Content="blendTrans(Duration=0.5)">
+        <meta http-equiv="Page-Exit" Content="blendTrans(Duration=0.5)">
+        <meta http-equiv=Access-Control-Allow-Origin content=*>
+        <meta charset="UTF-8">
+        <meta name="Keywords" content="The Language Translator">
+        <meta name="Author" content="Eric Xu">
+        <meta name="Email" content="vanillapeter@163.com">
+        <meta name="Version" content="1.0 Beta">
+
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="buttons/css/font-awesome.min.css">
+        <link rel="stylesheet" href="buttons/css/buttons.css">
+        <link rel="stylesheet" href="style/contents.css"/>
+        <link rel="stylesheet" href="style/popup_dialog.css"/>
+
+        <script type="text/javascript" src="script/i18n.js"></script>
+        <script type="text/javascript" src="script/addDOMLoadEvent.js"></script>
+        <script type="text/javascript" src="script/jquery-1.10.1.min.js"></script>
+        <script type="text/javascript" src="script/jquery.watermark.min.js"></script>
+        <script type="text/javascript" src="script/common.js"></script>
+        <script type="text/javascript" src="script/wikipages.js"></script>
+        <script type="text/javascript" src="script/search-onweb.js"></script>
+        <script type="text/javascript" src="script/translators.js"></script>
+        <script type="text/javascript" src="script/popup_dialog.js"></script>
+    </head>
+
+    <body id="popup_body">
+
+        <div id="divLanguageTranslatorInFrame" class="content_iframe">        
+
+            <article class="hide audiopart">
+                <section>
+                    <fieldset>
+                        <legend>Read Text by YouDao Sound API</legend>
+                        <div id="divReadSource"></div>
+                        <div id="divReadMain"></div>
+                        <div id="divReadMore"></div>
+                    </fieldset>
+                </section>
+            </article>
+            
+            <article>
+                <section>
+                    <div id="divNavTitle" title="View the Language-Translator extension on Google webstore" class="navbar navbar-static-top">
+                        <div class="navbar-inner">
+                            <a id="btnLogo" class="brand logoProduct" href="#"></a>
+                            <a id="btnTitle" class="brand title" href="#">Language Translator</a>
+                        </div>
+                    </div>
+                </section>
+            </article>
+            
+            <article>
+                <section>
+                    <form class="form-search">
+                        <fieldset>
+                            <span id="btnSourceText" class="sourcetext btn-link" title="View Encyclopedia">Source Text</span><a id="btnReadSource" title="Pronunciation of Source Text" class="hand icon-volume-up"></a>:<span class="hide">(<strong>Ctrl</strong>+<strong>Enter</strong>=<input id="btnTranslate" type="button" class="btn-mini btn-success hand" title="Translate the input text manually (Ctrl+Enter)" value="Translate"/>)</span>
+                            <div class="PopupSearchDiv">
+                                <span id="spanSearchTitle" title="Search the Source Texts on search engine!">Search On...</span>
+                                <ul class="PopupSearchList">
+                                    <li data-left='https://www.google.com.hk/#newwindow=1&q=' data-mid='' data-right='&safe=strict'>Google</li>
+                                    <li data-left='http://www.baidu.com/#wd=' data-mid='' data-right='&rsv_bp=0&tn=baidu&rsv_spt=3&ie=utf-8&rsv_sug3=2&rsv_sug4=127&rsv_sug1=2&rsv_sug2=0&inputT=4'>Baidu</li>
+                                    <li data-left='https://www.bing.com/search?q=' data-mid='' data-right='&go=&qs=n&form=QBLH&pq=test&sc=8-4&sp=-1&sk='>Bing</li>
+                                </ul>
+                            </div>
+                            <textarea id="txtSelected" rows="3" class="fixedw text-warning input-medium search-query input-xxlarge" placeholder="SELECT or TYPE text and wait a second..."></textarea><br />                    
+                            <span id="btnMainText" class="mainmeaning">Main Meanings</span><a id="btnReadMain" title="Pronunciation of Main Meanings" class="hand icon-volume-up"></a>:<br />  
+                            <textarea id="txtTranslated" rows="4" class="fixedw text-success input-medium search-query input-xxlarge" placeholder="NO VALID SOURCE"></textarea><br />  
+                            <span id="btnMoreText" class="moremeaning">More Meanings</span><a id="btnReadMore" title="Pronunciation of More Meanings" class="hand icon-volume-up"></a>:<br />
+                            <textarea id="txtTranslatedAll" rows="6" class="fixedw text-info input-medium search-query input-xxlarge" placeholder="NO VALID SOURCE"></textarea><br />                    
+                            <div id="logoYouDao" class="logoAPI"><span id="btnDataProvider">Data Provided by</span> <span id="btnTranslatorAPI" href="http://fanyi.youdao.com/" class="youdaolink" title="YOUDAO Translation API">YOUDAO Translation</span>!</div>
+                            <div id="footer">
+                                <span id="btnFeatures" class="optionslink" title="View Features of the Language Translator">Features</span>
+                                <span id="btnOptions" class="optionslink" title="Set Options of the Language Translator">Options</span>
+                                <span id="btnOperations" class="optionslink" title="View Operations of the Language Translator">HOWTO</span>
+                                <span id="btnDonations" class="donationslink" title="Donate to Author">Donation</span>
+                                <span id="btnAbout" class="optionslink" title="About the Language Translator">About</span>
+                            </div>
+                        </fieldset>
+                    </form>
+                </section>
+            </article>
+            
+        </div>
+
+    </body>
+</html>
