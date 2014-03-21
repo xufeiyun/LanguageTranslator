@@ -175,14 +175,6 @@ function focusParentPage()
     }
 }
 
-var frameLoaded = function (e)
-{
-    var t = this;
-    var type = event.type;
-    var e = event.srcElement;
-    LoggerAPI.logW("iframe event type: " + type);
-};
-
 var popupPosition = function ()
 {
     if (!OptionItemValues.ClosedPopupDialog)
@@ -196,13 +188,10 @@ var popupPosition = function ()
 }
 
 var pDocument = null;
-function showPopupDialogForTranslation(sourceText, mainMeaning, moreMeaning)
+
+var getDocument = function (isFrame)
 {
-    LoggerAPI.logD("[X]=" + MousePosition.x + " [Y]=" + MousePosition.y + ", Selected Text: " + sourceText);
-
-    var isFrame = window.top.window.document.body.tagName == "FRAMESET";
-
-    if (!pDocument && isFrame) 
+    if (!pDocument && isFrame)
     {
         var fs = window.top.frames;
         for (var i = 0; i < fs.length; i++)
@@ -215,6 +204,14 @@ function showPopupDialogForTranslation(sourceText, mainMeaning, moreMeaning)
             }
         }
     }
+    return pDocument;
+};
+
+function showPopupDialogForTranslation(sourceText, mainMeaning, moreMeaning)
+{
+    LoggerAPI.logD("[X]=" + MousePosition.x + " [Y]=" + MousePosition.y + ", Selected Text: " + sourceText);
+    
+    pDocument = getDocument(window.top.window.document.body.tagName == "FRAMESET");
     
     var divContainer = DomAPI.getElement(ElementIds.WebPagePopupDiv, pDocument);
 
@@ -225,15 +222,23 @@ function showPopupDialogForTranslation(sourceText, mainMeaning, moreMeaning)
         var html = "<div id='btnLanguageTranslatorCollapse' class='collapselink' title='Collapse/Expand Me!' href='javascript:void(0);'></div>"
                  + "<div id='btnLanguageTranslatorDisable' class='disablelink' title='Enable/Disable Popup!' href='javascript:void(0);'></div>"
                  + "<div id='btnLanguageTranslatorClose' class='closelink' title='Close Me! Reload page to Translate!' href='javascript:void(0);'></div>"
-                 + "<iframe id='" + ElementIds.PopupIFrame + "' width='326px' height='450px' style='border: 0px; display: none;' src='" + ProductURIs.PopupIFramePage + "'></iframe>";
+                 + "<iframe id='" + ElementIds.PopupIFrame + "' width='326px' height='455px' style='border: 0px; display: none;' src='" + ProductURIs.PopupIFramePage + "'></iframe>";
         // iframe: width='326px' height='450px'
         divContainer = DomAPI.createElement("div");
         divContainer.setAttribute("id", ElementIds.WebPagePopupDiv);
-        divContainer.setAttribute("class", "content_translator");
+        divContainer.setAttribute("class", "content_popup");
         //divContainer.setAttribute("style", styles);
         divContainer.innerHTML = html;
         
         DomAPI.appendChild(divContainer, pDocument);
+        
+        var frameLoaded = function (e)
+        {
+            var t = this;
+            var type = event.type;
+            var e = event.srcElement;
+            LoggerAPI.logW("iframe event type: " + type);
+        };
 
         DomAPI.getElement(ElementIds.PopupIFrame, pDocument).bind("load", frameLoaded);
         DomAPI.getElement(ElementIds.PopupIFrame, pDocument).bind("loadeddata", frameLoaded);
@@ -276,7 +281,7 @@ function showPopupDialogForTranslation(sourceText, mainMeaning, moreMeaning)
 
     if (OptionItemValues.EnablePopupDialog == true)
     {
-        divContainer.removeClass("content_translator_circle");
+        divContainer.removeClass("content_popup_circle");
 
         // update container width
         divContainer.css("width", DomAPI.getElement(ElementIds.PopupIFrame, pDocument).css("width"));

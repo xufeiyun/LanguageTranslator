@@ -8,89 +8,6 @@
  * Designed and built with all the love in the world @world by @eric
  */
 
-#popup_html, #popup_body
-{    
-    min-width: 317px;
-    /*min-height: 445px;*/
-    
-    background-color: rgba(248, 244, 240, 0.94);
-    border: 0px solid;
-    border-color: #808080;
-    border-top-left-radius:  0%;
-    border-top-right-radius:  0%;
-    border-bottom-left-radius: 0%;
-    border-bottom-right-radius: 0%;
-    z-index: 1000001;
-    
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-size: 14px;
-    color: #333;
-    text-align: left;    
-}
-
-#popup_body
-{
-    width: 330px;
-    font-family: Arial, Tahoma, 宋体;
-}
-
-#popup_html
-{
-    z-index: 1000000;
-    max-height: 411px;
-}
-.content_iframe
-{
-    position: absolute;
-    
-    min-width: 317px;
-    min-height: 445px;
-    
-    /*background-color: rgba(248, 244, 240, 0.94);*/
-    background-color: #fff;
-    border: 1px solid #B8B8B8;
-    border-top-left-radius:  1%;
-    border-top-right-radius:  1%;
-    border-bottom-left-radius: 1%;
-    border-bottom-right-radius: 1%;
-    z-index: 1000000;
-    
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-size: 14px;
-    color: #333;
-    text-align: left;
-    
-    line-height: 20px;
-    
-    margin-left: -8px;
-    margin-top: -8px;
-}
-
-
-.fixedw
-{
-    width: 310px;
-    min-width: 310px;
-    max-width: 310px;
-    overflow: auto;
-    /*
-    border-top-left-radius:  1%;
-    border-top-right-radius:  1%;
-    border-bottom-left-radius: 1%;
-    border-bottom-right-radius: 5%;
-    */
-    /** style the scroll bar: transparent **/
-    /*
-    */
-    scrollbar-3dlight-color: #f8b9b7;
-    scrollbar-arrow-color: #51a351;
-    scrollbar-base-color: rgba(82, 168, 236, 0.6);
-    scrollbar-darkshadow-color:#08c;
-    scrollbar-face-color: rgba(0, 0, 0, 0.25);
-    scrollbar-highlight-color: rgba(0, 0, 0, 0.25);
-    scrollbar-shadow-color: #999;
-    scrollbar-track-color: rgba(143, 108, 73, 0.85);
-}
 /* for chrome & safari */
 ::-webkit-scrollbar {
     width: 12px;
@@ -143,80 +60,7 @@
 }
 */
 
-.hide
-{
-	display: none!important;
-}
-.audiopart
-{
-    position: absolute;
-    top: -10000px;
-    left: -10000px;
-    top: 0px;
-    left: 0px;
-}
-#txtSelected
-{
-    height: 70px;
-    min-height: 70px;
-    max-height: 70px;
-}
-#txtTranslated
-{
-    height: 80px;
-    min-height: 80px;
-    max-height: 80px;
-}
-#txtTranslatedAll
-{
-    height: 120px;
-    min-height: 120px;
-    max-height: 120px;
-}
-
-#btnDataProvider, .youdaolink, .optionslink, .donationslink
-{
-    margin-left: 2px;
-    margin-right: 2px;
-}
-#btnDataProvider
-{
-    color: #666666;
-}
-.youdaolink
-{
-    text-transform: uppercase;
-}
-.youdaolink, .optionslink, .donationslink
-{
-    cursor: pointer;
-    color: #006699; /*#08c*/
-}
-.youdaolink:hover, .optionslink:hover, .donationslink:hover
-{
-    border-bottom: 1px solid #0099FF;
-    font-weight: bold;
-    color: #0099FF; /*#468847*/
-}
-
-section
-{
-    padding-top: 0px!important;
-}
-a
-{
-    color: #08c;
-    text-decoration: none;
-}
-a:hover, a:focus {
-    color: #005580;
-    text-decoration: underline;
-}
-a:hover, a:active {
-    outline: 0;
-}
-
- .hidden
+.hidden
 {
 	display: none!important;
 }
@@ -224,83 +68,18 @@ a:hover, a:active {
 {
     cursor: pointer;
 }
-.sourcetext,.mainmeaning,.moremeaning
-{
-    margin-left: 2px!important;
-    margin-right: 3px!important;
-}
-
-.sourcetext
-{
-    color: #088ed2;
-    cursor: pointer;
-}
-.sourcetext:hover
-{
-    text-decoration: underline;
-}
-.mainmeaning
-{
-    color: #666666;
-}
-.moremeaning
-{
-    color: #666666;
-}
-.logoAPI, .sourcetext,  .mainmeaning, .moremeaning
-{
-    text-align: left;
-    padding-left: 0px;
-}
-.logoAPI
-{
-}
-.logo_size, .logoProduct
-{
-    background-repeat: no-repeat;
-    background-position: center right;
-    background-size: 48px 48px;
-    margin-top: 10px;
-}
-.logoProduct
-{
-    width: 20px;
-    height: 20px;
-    background-image: url(../image/language_19.jpg);
-    background-position: center center;
-    background-size: 19px 19px;
-}
-.title
-{
-}
-.title, .logoProduct
-{
-    margin-top: 10px;
-}
-
-fieldset
-{
-    padding: 0;
-    margin: 0;
-    border: 0;
-}
-
 
 #divLanguageTranslator
 {
     position: fixed;
     top: 0px;
-    right: 0px;
+    right: 2px!important;    
 }
-.content_translator
+.content_popup
 {
-    position: absolute;
-    top: 0px;
     margin-top: 2px!important;
-    right: 2px!important;
-    
     width: 326px;
-    height: 40px;    
+    height: 40px;
     
     border: 0px solid;
     border-color: #808080;
@@ -312,7 +91,8 @@ fieldset
     color: #0094ff;
     text-align: right;
 }
-.content_translator_circle
+
+.content_popup_circle
 {
     background-color: rgba(34, 217, 105, 0.79);
     border-top-left-radius:  0%;
@@ -345,9 +125,6 @@ fieldset
     /*background-image: url(image/glyphicons-halflings.png);*/
 }
 
-
-
-
 .collapselink
 {
     background-position:-287px -121px;
@@ -369,9 +146,6 @@ fieldset
     background-position:-312px 0px;
 }
 
-
-
-
 .expandcollapserectangle
 {
     margin-top: 14px;
@@ -388,9 +162,6 @@ fieldset
     right: 6px;
 }
 
-
-
-
 .expandcollapsecircle
 {
     margin-top: 1px;
@@ -405,4 +176,23 @@ fieldset
 {
     margin-top: 20px;
     right: 1px;
+}
+
+
+/* the overrides of defined css for popup_dialog page */
+
+#popup_html
+{
+}
+
+#popup_body
+{
+    border: 0px!important;
+}
+
+#popup_dialog
+{
+    border: 0px!important;
+    margin-left: 0px!important;
+    margin-top: 0px!important;
 }
