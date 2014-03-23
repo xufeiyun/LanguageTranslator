@@ -11,9 +11,9 @@
  
 #popup_html, #popup_body, #popup_dialog
 {
-    background-color: rgba(248, 244, 240, 0.94);
-    border: 0px solid;
-    border-color: #808080;
+    /*background-color: rgba(248, 244, 240, 0.94);
+    border-color: #808080;*/
+    border: 0px solid #808080;
     border-top-left-radius:  0%;
     border-top-right-radius:  0%;
     border-bottom-left-radius: 0%;
@@ -29,8 +29,10 @@
 #popup_html
 {
     min-width: 324px;
-    min-height: 446px;
+    min-height: 444px;
     z-index: 1000000;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 #popup_body
@@ -43,16 +45,16 @@
     position: absolute; 
     
     background-color: #fff;
-    border: 1px solid #B8B8B8;
+    border: 0px solid #B8B8B8;
     border-top-left-radius:  1%;
     border-top-right-radius:  1%;
     border-bottom-left-radius: 1%;
     border-bottom-right-radius: 1%;
     z-index: 1000000;
     
-    line-height: 20px;    
-    margin-left: -8px;
-    margin-top: -8px;
+    line-height: 20px;
+    margin-left: 0px!important;
+    margin-top: -2px!important;
 }
 
 
@@ -242,7 +244,7 @@ fieldset
 }
 
 .PopupSearchList li {
-    margin-left: -40px;
+    margin-left: -28px;
     color: #088ed2;
     background-color: white;
 }

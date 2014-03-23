@@ -131,7 +131,7 @@ function selectTextByTimeout(text)
             LoggerAPI.logD("To Copy selected Text: " + message);
             // window.Clipboard.copy(text);
             // send message to background to copy text
-            tab2ext(OperatorType.copySelectText, message);
+            MsgBusAPI.msg_send(OperatorType.copySelectText, message);
         }
 
         if (OptionItemValues.EnableTranslation)
@@ -151,7 +151,7 @@ function selectTextByTimeout(text)
 		{
 		    showPopupDialogForTranslation(message, 'main meanings', 'more meanings');
 		    // send message to background to translate text
-		    tab2ext(OperatorType.getSelectText, message);
+		    MsgBusAPI.msg_send(OperatorType.getSelectText, message);
 
 		    setTimeout(focusParentPage, 100);
 		}
@@ -210,8 +210,9 @@ var getDocument = function (isFrame)
 function showPopupDialogForTranslation(sourceText, mainMeaning, moreMeaning)
 {
     LoggerAPI.logD("[X]=" + MousePosition.x + " [Y]=" + MousePosition.y + ", Selected Text: " + sourceText);
-    
-    pDocument = getDocument(window.top.window.document.body.tagName == "FRAMESET");
+
+    var isPopupFrame = window.top.window.document.body.tagName == "FRAMESET";
+    pDocument = getDocument(isPopupFrame);
     
     var divContainer = DomAPI.getElement(ElementIds.WebPagePopupDiv, pDocument);
 
@@ -222,7 +223,7 @@ function showPopupDialogForTranslation(sourceText, mainMeaning, moreMeaning)
         var html = "<div id='btnLanguageTranslatorCollapse' class='collapselink' title='Collapse/Expand Me!' href='javascript:void(0);'></div>"
                  + "<div id='btnLanguageTranslatorDisable' class='disablelink' title='Enable/Disable Popup!' href='javascript:void(0);'></div>"
                  + "<div id='btnLanguageTranslatorClose' class='closelink' title='Close Me! Reload page to Translate!' href='javascript:void(0);'></div>"
-                 + "<iframe id='" + ElementIds.PopupIFrame + "' width='326px' height='455px' style='border: 0px; display: none;' src='" + ProductURIs.PopupIFramePage + "'></iframe>";
+                 + "<iframe id='" + ElementIds.PopupIFrame + "' width='326px' height='450px' style='border: 1px #BDBDBD solid; margin: -1px -1px -1px -1px; padding: 0px 0px 0px 1px; display: none;' src='" + ProductURIs.PopupIFramePage + "'></iframe>";
         // iframe: width='326px' height='450px'
         divContainer = DomAPI.createElement("div");
         divContainer.setAttribute("id", ElementIds.WebPagePopupDiv);
@@ -311,7 +312,7 @@ function showPopupDialogForTranslation(sourceText, mainMeaning, moreMeaning)
     }
     else
     {
-        divContainer.addClass("content_translator_circle");
+        divContainer.addClass("content_popup_circle");
 
         // update container width
         divContainer.css("width", "48px");
@@ -391,7 +392,7 @@ function attachEvetns()
             if (display == true)
             {
                 frame.css("display", "block");
-                div.removeClass("content_translator_circle");
+                div.removeClass("content_popup_circle");
                 div.css("width", "326px");
                 div.css("height", "490px");
 
@@ -405,7 +406,7 @@ function attachEvetns()
             else
             {
                 frame.css("display", "none");
-                div.addClass("content_translator_circle");
+                div.addClass("content_popup_circle");
                 div.css("width", "48px");
                 div.css("height", "40px");
 

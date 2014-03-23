@@ -545,7 +545,7 @@ var MsgBusAPI = {
                 }
                 //var textToTranslated = window.Clipboard.paste();
                 var textToTranslated = message;
-                MsgBusAPI.bgd2tab(type, message);
+                MsgBusAPI.msg_send(type, message);
                 sendResponse({ type: type, message: textToTranslated });
             }
             else

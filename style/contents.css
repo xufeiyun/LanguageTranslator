@@ -10,16 +10,16 @@
 
 /* for chrome & safari */
 ::-webkit-scrollbar {
-    width: 12px;
+    width: 0px;
     height: 0px;
     margin-bottom: -50px;
 }
 ::-webkit-scrollbar-track {
-    border-radius:5px;
+    border-radius:0px;
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
 }
 ::-webkit-scrollbar-thumb {
-    border-radius: 5px;
+    border-radius: 0px;
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
 }
 ::-webkit-scrollbar-corner {
@@ -68,12 +68,12 @@
 {
     cursor: pointer;
 }
-
 #divLanguageTranslator
 {
     position: fixed;
     top: 0px;
-    right: 2px!important;    
+    right: 4px!important;
+    border: 0px solid red;
 }
 .content_popup
 {
@@ -181,18 +181,21 @@
 
 /* the overrides of defined css for popup_dialog page */
 
+#frameLanguageTranslator
+{
+    border: 1px solid red;
+}
+
 #popup_html
 {
 }
 
 #popup_body
 {
-    border: 0px!important;
+    border: 1px red solid;
 }
 
 #popup_dialog
 {
-    border: 0px!important;
-    margin-left: 0px!important;
-    margin-top: 0px!important;
+    border: 0px red solid;
 }

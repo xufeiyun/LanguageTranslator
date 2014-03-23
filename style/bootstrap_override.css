@@ -254,12 +254,13 @@ textarea:focus:invalid:focus
 }
 
 .icon-volume-up {
+    cursor: pointer;
     color: #08c!important;
-    background-image: url(../image/volume_max.png)!important;
+    /*background-image: url(../image/volume_max.png)!important;*/
     background-repeat: no-repeat!important;
     background-position:0px 0px;
     margin-left: 0px!important;
-    padding-right: 16px!important;
+    padding-right: 2px!important;
 }
 
 .icon-volume-up:before {

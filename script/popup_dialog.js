@@ -23,7 +23,7 @@ var Initialize = function ()
 
     if (typeof (chrome) != "undefined")
     {
-        chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) { CommonAPI.rcvmsg_iframe(request, sender, sendResponse); });
+        chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) { MsgBusAPI.rcvmsg_iframe(request, sender, sendResponse); });
     }
     
 
@@ -54,7 +54,7 @@ function fnDOMLoadCompleted()
 	if (!result)
 	{
 		// select text from web page
-		chrome.tabs.getSelected(null, translateByMessage);
+		//chrome.tabs.getSelected(null, translateByMessage);
 	}
 }
 

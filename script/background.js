@@ -18,7 +18,7 @@ var BgdAPI = {
         // Register runtime.onMessage event listener to receive message from Extension
         if (typeof (chrome) != "undefined")
         {
-            chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) { CommonAPI.rcvmsg_background(request, sender, sendResponse); });
+            chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) { MsgBusAPI.rcvmsg_background(request, sender, sendResponse); });
         }
 
         // uncomment this one if the extension uses page_action
