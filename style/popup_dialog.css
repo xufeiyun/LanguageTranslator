@@ -29,7 +29,7 @@
 #popup_html
 {
     min-width: 324px;
-    min-height: 444px;
+    min-height: 465px;
     z-index: 1000000;
     overflow-x: hidden;
     overflow-y: hidden;
@@ -43,7 +43,7 @@
 #popup_dialog
 {
     position: absolute; 
-    
+    height: 460px;
     background-color: #fff;
     border: 0px solid #B8B8B8;
     border-top-left-radius:  1%;
