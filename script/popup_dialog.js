@@ -13,7 +13,6 @@ var timeoutId;
 
 var textSelected = null;
 
-
 var DialogAPI =
 {
     Initialize: function ()
@@ -129,7 +128,7 @@ var DialogAPI =
         {
             clearTimeout(timeoutId);
             TranslatorAPI.clearTexts();
-            timeoutId = setTimeout(TranslatorAPI.translateByTimeout, AutoTranslationInterval + 100);
+            timeoutId = setTimeout(DialogAPI.translateByTimeout, AutoTranslationInterval + 100);
         });
         textSelected.keydown(function (e)
         {
