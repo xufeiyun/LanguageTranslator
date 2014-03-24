@@ -30,7 +30,7 @@ var SearchWeb =
             var dataRight = e.target.getAttribute('data-right');
             var url = dataLeft + dataMid + dataRight;
 
-            openPage(url);
+            WikiAPI.openPage(url);
 
             SearchWeb.hideList();
         });

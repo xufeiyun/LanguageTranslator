@@ -50,7 +50,7 @@ var PronounceAudios = {
 };
 
 var ProductURIs = {
-    Product: "https://chrome.google.com/webstore/detail/language-translator/" + ExtenionUID,
+    Product: "https://chrome.google.com/webstore/detail/the-language-translator/" + ReleaseId,
     PopupIFramePage: "chrome-extension://" + ExtenionUID + "/popup_dialog.html",
     WikiPediaEN: "http://en.wikipedia.org/wiki/",
     WikiPediaCN: "http://zh.wikipedia.org/wiki/",
@@ -398,34 +398,77 @@ var AjaxAPI = {
 
 };
 
-var MsgBusAPI = {
-    // Content Script => outter
-    msg_send: function (type, message, callback)
+var AudioAPI =
+{
+    createTranslateAudio: function (audioType, word)
     {
-        var need_resp = function (response)
+        if (OptionItemValues.EnablePronunciation == false)
         {
-            MsgBusAPI.msg_resp(response);
+            LoggerAPI.logD("Pronunciation Feature has been disabled, it may be in DEBUG mode.");
+            //return;
+        }
 
-            // invoke user's function
-            if (callback != undefined && callback != null)
+        var divId = audioType.ContainerId,
+        audioId = audioType.PlayerId,
+        buttonId = audioType.ButtonId;
+
+        var isChineseWord = CommonAPI.isChinese(word);
+        LoggerAPI.logW("Is Chinese Word: " + isChineseWord);
+        var url = "http://tts.baidu.com/text2audio?lan=" + (isChineseWord ? "zh" : "en") + "&amp;ie=UTF-8&amp;text=" + encodeURI(word);
+
+        // creat audio element
+        var htmlAudio = "<audio buttonid='" + buttonId + "' controls='controls' preload='preload' src='" + url + "' id='" + audioId + "'></audio>";
+        var div = "#" + divId;
+        $(div).html("");
+        $(div).html(htmlAudio);
+
+        var hideButton = function (e)
+        {
+            // hide button element or not after loaded data
+            var button = $("#" + e.target.getAttribute("buttonid"));
+            if (e.target.networkState == 3 || e.target.readyState == 0)
             {
-                callback(response);
+                button.addClass("hide");
             }
-            return true;
+            else
+            {
+                button.removeClass("hide");
+            }
         };
 
-        LoggerAPI.logD("#COMMON: callback function: " + CommonAPI.getFunctionName(callback));
-        LoggerAPI.logD("#COMMON: Sending message...");
-        /*
-        // this is from bgd2tab(type, message): Backgound => Content Script
-        chrome.tabs.getSelected(
-        null,
-        function (tab)
+        var audio = $("#" + audioId)[0];
+        audio.addEventListener("loadeddata", hideButton);
+        audio.addEventListener("error", hideButton);
+    }
+};
+
+var MsgBusAPI = {
+    // content script => outer
+    msg_send: function (type, message, callback)
+    {
+        LoggerAPI.logD("#msg_send: callback function: " + CommonAPI.getFunctionName(callback));
+        LoggerAPI.logD("#msg_send: sending message...");
+        chrome.runtime.sendMessage(
+            ExtenionUID,
+            { type: type, message: message },
+            function (response) { MsgBusAPI._msg_resp(response, callback); }
+        );
+    },
+
+    // background => content script
+    msg_bgd2tab: function (type, message, callback)
+    {
+        LoggerAPI.logD("#msg_bgd2tab: callback function: " + CommonAPI.getFunctionName(callback));
+        LoggerAPI.logD("#msg_bgd2tab: sending message...");
+        var queryResponse = function (tabs)
         {
-        chrome.tabs.sendMessage( tab.id, { type: type, message: message }, need_resp);
-        });
-        */
-        chrome.runtime.sendMessage(ExtenionUID, { type: type, message: message }, need_resp);
+            chrome.tabs.sendMessage(
+                tabs[0].id,
+                { type: type, message: message },
+                function (response) { MsgBusAPI._msg_resp(response, callback); }
+            );
+        };
+        chrome.tabs.query({ 'active': true }, queryResponse);
     },
 
     // response callback
@@ -433,21 +476,34 @@ var MsgBusAPI = {
     {
         if (response != null)
         {
-            LoggerAPI.logD("#COMMON: Received RESPONSE#: type=>" + response.type + ", message=>" + response.message);
+            LoggerAPI.logD("#msg_resp: Received RESPONSE#: type=>" + response.type + ", message=>" + response.message);
         }
         else
         {
-            LoggerAPI.logW("#COMMON: Received RESPONSE#: response is null");
+            LoggerAPI.logW("#msg_resp: Received RESPONSE#: response is null");
         }
+    },
+
+    _msg_resp: function (response, callback)
+    {
+        MsgBusAPI.msg_resp(response);
+
+        // invoke user's callback function
+        if (callback != undefined && callback != null)
+        {
+            callback(response);
+        }
+        return true;
     },
 
     // receivers
     rcvmsg_iframe: function (request, sender, sendResponse)
     {
+        LoggerAPI.logD("rcvmsg_iframe: Received TYPE: " + request.type + ", MESSAGE [" + request.message + "] " + msg);
+
         var msg = (sender.tab ?
                 "in content script, sent from tab URL: [" + sender.tab.url + "]" :
                 "in extension script");
-        LoggerAPI.logD("rcvmsg_iframe: Received TYPE: " + request.type + ", MESSAGE [" + request.message + "] " + msg);
 
         var type = request.type;
         var message = request.message;
@@ -459,7 +515,7 @@ var MsgBusAPI = {
         }
         else if (type == OperatorType.getSelectText)
         {
-            translate(message);
+            TranslatorAPI.translate(message);
         }
         else if (type == OperatorType.copySelectText)
         {
@@ -476,6 +532,7 @@ var MsgBusAPI = {
         }
         else if (type == OperatorType.viewWikipages)
         {
+            showWikipages(message);
             if (CommonAPI.isValidText(message))
             {
                 LoggerAPI.logD("rcvmsg_iframe: Try to open wikipage");
@@ -488,6 +545,10 @@ var MsgBusAPI = {
                     fromTencentAPI(message);
                 }
             }
+        }
+        else if (type == OperatorType.viewHomepage)
+        {
+            showHomepage(message);
         }
         else
         {
@@ -505,13 +566,11 @@ var MsgBusAPI = {
 
     rcvmsg_background: function (request, sender, sendResponse)
     {
-        /*------- To Receive message --------*/
+        LoggerAPI.logD("rcvmsg_background: Received TYPE: " + request.type + ", MESSAGE [" + request.message + "] " + msg);
 
         var msg = (sender.tab ?
                 "in content script, sent from tab URL: [" + sender.tab.url + "]" :
                 "in extension script");
-
-        LoggerAPI.logD("rcvmsg_bgd: Received TYPE: " + request.type + ", MESSAGE [" + request.message + "] " + msg);
 
         var type = request.type;
         var message = request.message;
@@ -519,7 +578,7 @@ var MsgBusAPI = {
 
         if (!CommonAPI.isValidText(type))
         {
-            LoggerAPI.logE("rcvmsg_bgd: Message received is null or empty");
+            LoggerAPI.logE("rcvmsg_background: Message received is null or empty");
         }
         else if (type == OperatorType.copySelectText)
         {
@@ -528,7 +587,7 @@ var MsgBusAPI = {
                 StorageAPI.setItem(type, message);
                 var result = window.Clipboard.copy(message);
                 //if (result) { LoggerAPI.logD("rcvmsg_bgd: Copied text OK."); }
-                //MsgBusAPI.bgd2tab(type, message);
+                //MsgBusAPI.msg_bgd2tab(type, message);
             }
         }
         else if (type == OperatorType.getSelectText)
@@ -545,12 +604,13 @@ var MsgBusAPI = {
                 }
                 //var textToTranslated = window.Clipboard.paste();
                 var textToTranslated = message;
-                MsgBusAPI.msg_send(type, message);
+                //MsgBusAPI.msg_send(type, message);
+                MsgBusAPI.msg_bgd2tab(type, message);
                 sendResponse({ type: type, message: textToTranslated });
             }
             else
             {
-                LoggerAPI.logW(prefix, "rcvmsg_bgd: NOT defined the response function!");
+                LoggerAPI.logW(prefix, "rcvmsg_background: NOT defined the response function!");
             }
         }
         else if (type == OperatorType.speakText)
@@ -636,7 +696,7 @@ var MsgBusAPI = {
         {
             if (CommonAPI.isValidText(message))
             {
-                LoggerAPI.logD("rcvmsg_bgd: Try to open wikipage");
+                LoggerAPI.logD("rcvmsg_background: Try to open wikipage");
                 openWikipage(message);
             }
         }
@@ -644,52 +704,77 @@ var MsgBusAPI = {
         {
             if (send)
             {
-                sendResponse({ type: type, message: "rcvmsg_bgd: #BACKGROUND SEND RESPONSE# Received Message:" + message });
+                sendResponse({ type: type, message: "rcvmsg_background: #BACKGROUND SEND RESPONSE# Received Message:" + message });
             }
             else
             {
-                LoggerAPI.logW(prefix, "rcvmsg_bgd: NOT defined the response function!");
+                LoggerAPI.logW(prefix, "rcvmsg_background: NOT defined the response function!");
             }
         }
         return true;
     },
 
-    rcvmsg_pup: function (request, sender, sendResponse)
+    rcvmsg_content: function (request, sender, sendResponse)
     {
+        LoggerAPI.logD("rcvmsg_content: Received type: " + request.type + ", message [" + request.message + "] " + msg);
+
         var msg = (sender.tab ?
-                "in content script, sent from tab URL: [" + sender.tab.url + "] " :
-                "in extension script");
-        LoggerAPI.logD("rcvmsg_pup: Received Type [" + request.type + "], Message [" + request.message + "] " + msg);
+            "in content script, sent from tab URL:-- [" + sender.tab.url + "]" :
+            "in extension script");
 
-        var type = request.type;
-        var message = request.message;
+        LoggerAPI.logD("rcvmsg_content: Received type: " + request.type + ", message [" + request.message + "] " + msg);
 
-        if (!CommonAPI.isValidText(message))
+        var send = (typeof (sendResponse) == "function");
+        if (!send)
         {
-            LoggerAPI.logE("rcvmsg_pup: Message received is null or empty");
-        }
-        else if (type == OperatorType.viewWikipages)
-        {
-            showWikipages(message);
-        }
-        else if (type == OperatorType.viewHomepage)
-        {
-            showHomepage(message);
+            LoggerAPI.logW("rcvmsg_cs: NOT defined the response function!");
         }
         else
         {
-            var send = (typeof (sendResponse) == "function");
-            if (send)
+            var type = request.type;
+            var message = request.message;
+
+            if (!CommonAPI.isValidText(type))
             {
-                LoggerAPI.logW("rcvmsg_pup: NOT defined the response function!");
+                LoggerAPI.logW("rcvmsg_cs: Message received is null or empty");
             }
+            else if (type == OperatorType.getSelectText)
+            {
+                var text = ContentAPI.getSelectedText().toString();
+                if (CommonAPI.isValidText(text))
+                {
+                    LoggerAPI.logD("rcvmsg_cs: replied text [" + text + "] by response function...");
+                    sendResponse({ type: type, message: text });
+                }
+            }
+            // else if (type == OperatorType.viewWikipages)
+            // {
+            // 	LoggerAPI.logW("rcvmsg_cs: to open wiki page");
+
+            /*  ERROR IN CONTENT SCRIPTS
+            chrome.tabs is not available:
+            You do not have permission to access this API.
+            Ensure that the required permission or manifest property is included in your manifest.json.
+            */
+            // chrome.tabs.create({ url: url });
+
+            // otherwise send message to background
+            //tab2ext(OperatorType.viewWikipages, message);
+
+            // }
+            // else if (type == OperatorType.viewHomepage)
+            // {
+            // 	LoggerAPI.logW("rcvmsg_cs: to open home page");
+            // }
             else
             {
+                LoggerAPI.logE("rcvmsg_cs: feature NOT IMPLEMENTED type: " + type);
                 // other features
-                sendResponse({ message: "rcvmsg_pup: [#NOT FEATURED#] Received message: " + type });
+                sendResponse({ type: type, message: "rcvmsg_cs: [#NOT FEATURED#]" });
             }
         }
     }
+
 };
 
 
