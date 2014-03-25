@@ -5,7 +5,6 @@
 
 var prefix = "[CONTENT SCRIPTS]: ";
 
-var isTranslatedByInput = false;
 var dtStart;
 var timeoutId;
 var thePopup;
@@ -67,7 +66,7 @@ var ContentAPI =
             var html = "<div id='btnLanguageTranslatorCollapse' class='collapselink' title='Collapse/Expand Me!' href='javascript:void(0);'></div>"
                  + "<div id='btnLanguageTranslatorDisable' class='disablelink' title='Enable/Disable Popup!' href='javascript:void(0);'></div>"
                  + "<div id='btnLanguageTranslatorClose' class='closelink' title='Close Me! Reload page to Translate!' href='javascript:void(0);'></div>"
-                 + "<iframe id='" + ElementIds.PopupIFrame + "' width='326px' height='450px' style='border: 1px #BDBDBD solid; margin: -1px -1px -1px -1px; padding: 0px 0px 0px 1px; display: none;' src='" + ProductURIs.PopupIFramePage + "'></iframe>";
+                 + "<iframe id='" + ElementIds.PopupIFrame + "' width='326px' height='455px' style='border: 1px #BDBDBD solid; margin: -1px -1px -1px -1px; padding: 0px 0px 0px 1px; display: none;' src='" + ProductURIs.PopupIFramePage + "'></iframe>";
             // iframe: width='326px' height='450px'
             divContainer = DomAPI.createElement("div");
             divContainer.setAttribute("id", ElementIds.WebPagePopupDiv);
@@ -95,13 +94,7 @@ var ContentAPI =
         {
             divContainer.html(html);
             PopupAPI.showPopup(ElementIds.WebPagePopupDiv, pDocument);
-            //divContainer.show();
-            //divContainer.popover('show');
-            if (!isTranslatedByInput)
-            {
-                //divContainer.css("left", MousePosition.x);
-                //divContainer.css("top", MousePosition.y + 10);
-            }
+            // show or move divContainer?
         }
         ContentAPI.popupPosition();
 
@@ -196,22 +189,18 @@ var ContentAPI =
 
     fnSelectionChanged: function ()
     {
+        TranslatorAPI.IsTypedText = false;
         // need save selected text
         // then translate it when expanding or enabling the popup dialog
         //if (OptionItemValues.EnableTranslation)
         {
             var text = ContentAPI.getSelectedText().toString();
-            if (!CommonAPI.isValidText(text))
-            {
-                return false;
-            }
-            isTranslatedByInput = false;
+            if (!CommonAPI.isValidText(text)) { return false; }
             clearTimeout(timeoutId);
             dtStart = new Date();
             theEvent = window.event;
             LoggerAPI.logD("Selection Changed in DOM: " + dtStart.getTime());
 
-            //selectTextByTimeout(text);
             timeoutId = setTimeout(ContentAPI.selectTextByTimeout, AutoTranslationInterval + 100);
         }
     },
@@ -334,7 +323,8 @@ var ContentAPI =
             for (var i = 0; i < fs.length; i++)
             {
                 var frameHeight = fs[i].window.frameElement.height;
-                if (frameHeight > 400) // ElementIds.PopupIFrame's height
+                var width = fs[i].window.frameElement.width;
+                if (frameHeight > 400 && width > 300) // ElementIds.PopupIFrame's height & width
                 {
                     pDocument = fs[i].window.document;
                     break;

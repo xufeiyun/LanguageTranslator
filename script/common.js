@@ -437,8 +437,10 @@ var AudioAPI =
         };
 
         var audio = $("#" + audioId)[0];
-        audio.addEventListener("loadeddata", hideButton);
-        audio.addEventListener("error", hideButton);
+        if (audio) {
+            audio.addEventListener("loadeddata", hideButton);
+            audio.addEventListener("error", hideButton);
+        }
     }
 };
 

@@ -5,7 +5,6 @@
 
 var prefix = "[IFRAME SCRIPTS]: ";
 
-var isTranslatedByInput = false;
 var isIFramePopup = true;
 
 var dtStart;
@@ -17,8 +16,6 @@ var DialogAPI =
 {
     Initialize: function ()
     {
-        // Run our scripts as soon as the document's DOM is ready.
-        // DOMContentLoaded
         addDOMLoadEvent(DialogAPI.fnDOMLoadCompleted);
 
         DialogAPI.checkClickAction();
@@ -42,74 +39,12 @@ var DialogAPI =
 
         DialogAPI.bindBottomLinkEvent();
 
-        DialogAPI.tryTranslateNow();
+        TranslatorAPI.tryTranslateNow();
     },
 
     fnDOMLoadCompleted: function ()
     {
-        LoggerAPI.logD("DOM Loaded completely - popup dialog.");
-
-        // get the translating text by clipboard firstly.
-        //var result = translateByClipboard();
-    },
-
-    translateByMessage: function (activeTab)
-    {
-        // response callback
-        var resp_popup = function (response)
-        {
-            if (!CommonAPI.isDefined(response)) return false;
-
-            LoggerAPI.logD("#RESPONSE#: Received type [" + response.type + "], message [" + response.message + "]");
-
-            var type = response.type;
-            var message = response.message;
-
-            if (type == OperatorType.getSelectText)
-            {
-                if (CommonAPI.isDefined(response) && CommonAPI.isValidText(response.message))
-                {
-                    LoggerAPI.logD("#RESPONSE#: Translating text: " + response.message);
-                    TranslatorAPI.translate(response.message);
-                    textSelected.focus();
-                    textSelected.select();
-                }
-            }
-            else if (type == OperatorType.viewWikipages)
-            {
-                WikiAPI.showWikipages(message);
-            }
-            else if (type == OperatorType.viewHomepage)
-            {
-                WikiAPI.showHomepage(message);
-            }
-            else
-            {
-                var message = CommonAPI.isDefined(response) ? (CommonAPI.isValidText(response.message) ? response.message : "message not defined in response") : ("response not defined");
-                LoggerAPI.logE("#RESPONSE#: Received response type: [" + response.type + "], response message: [" + message + "]");
-            }
-        };
-
-        // test create new tab with specific URL
-        //chrome.tabs.create({ url: "http://www.163.com" });
-
-        // test notification popup
-        // CommonAPI.showPopupMsg('How are you? - popup');  // notification body text
-
-        // send message to CONTENT SCRIPTS
-        LoggerAPI.logD("Translating by message......");
-
-        MsgBusAPI.msg_send(OperatorType.getSelectText, "", resp_popup);
-    },
-
-    translateByTimeout: function ()
-    {
-        clearTimeout(timeoutId);
-        var interval = CommonAPI.getInterval(dtStart, new Date());
-        if (interval > AutoTranslationInterval)
-        {
-            TranslatorAPI.translateByInput();
-        }
+        LoggerAPI.logD("DOM loaded completely - popup dialog.");
     },
 
     bindTextEvent: function ()
@@ -170,6 +105,7 @@ var DialogAPI =
         {
             WikiAPI.openWikipage($("#txtSelected").val());
         });
+        // this button has been hidden
         $("#btnTranslate").click(function ()
         {
             clearTimeout(timeoutId);
@@ -180,7 +116,7 @@ var DialogAPI =
 
     bindPronounceEvent: function ()
     {
-        // add button events for pronounciation
+        // add button events for pronunciation
         $("#" + PronounceAudios.Source.ButtonId).click(function ()
         {
             DialogAPI.pronunceText(PronounceAudios.Source.PlayerId);
@@ -237,18 +173,6 @@ var DialogAPI =
         }
     },
 
-    tryTranslateNow: function ()
-    {
-        var resp_iframe = function (response)
-        {
-            LoggerAPI.logD("#IFRAME received RESPONSE#: type=>" + response.type + ", message=>" + response.message);
-            TranslatorAPI.translate(response.message);
-        }
-
-        // translate firstly
-        MsgBusAPI.msg_send(OperatorType.getSelectText, "", resp_iframe);
-    },
-
     checkClickAction: function ()
     {
         var logClickAction = function ()
@@ -266,7 +190,7 @@ var DialogAPI =
 
         // Fired when a browser action icon is clicked. 
         // This event will NOT fire if the browser action has a popup.
-        //chrome.browserAction.onClicked.addListener(function(activeTab) {alert(activeTab.title);});
+        // chrome.browserAction.onClicked.addListener(function(activeTab) {alert(activeTab.title);});
         if (UsePageAction == false)
         {
             LoggerAPI.logD("use browser action");
@@ -295,8 +219,6 @@ var DialogAPI =
         }
     }
 };
-
-
 
 $(document).ready(function ()
 {

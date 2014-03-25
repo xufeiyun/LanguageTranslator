@@ -8,6 +8,10 @@ var emptytext = "";
 
 var TranslatorAPI =
 {
+    LastSource: "",
+    IsTypedText: false, /* true when typing text, false when selecting text on page */
+
+    /* entry for translating word */
     translate: function (message)
     {
         LoggerAPI.logD("TRANSLATE..."); if (typeof (message) == "undefined") return false;
@@ -22,17 +26,107 @@ var TranslatorAPI =
             $("#" + PronounceAudios.More.ButtonId).addClass(classHide);
         }
 
+        // no need to translate if not changed
+        if (TranslatorAPI.LastSource.toLowerCase() == message.toLowerCase()) { return false; }
+
         // add Source pronounce
         if (typeof (AudioAPI.createTranslateAudio) != undefined)
         {
             AudioAPI.createTranslateAudio(PronounceAudios.Source, message);
         }
-        //LoggerAPI.logD(AjaxAPI.getFileContentsSync('https://dl.yunio.com/pub/0LpA2l?name=webpage_popup.txt'));
-        
+
+        TranslatorAPI.LastSource = message;
+
         YouDaoTranslateAPI.translate(message);
-        GoogleTranslateAPI.translate(message);
-        BaiduTranslateAPI.translate(message);
-        MicrosoftTranslateAPI.translate(message);
+//        GoogleTranslateAPI.translate(message);
+//        BaiduTranslateAPI.translate(message);
+//        MicrosoftTranslateAPI.translate(message);
+    },
+
+    translateByInput: function ()
+    {
+        TranslatorAPI.IsTypedText = true;
+        LoggerAPI.logD("Translating by input......");
+        var text = $("#txtSelected").val();
+        TranslatorAPI.translate(text);
+    },
+
+    translateByTimeout: function ()
+    {
+        clearTimeout(timeoutId);
+        var interval = CommonAPI.getInterval(dtStart, new Date());
+        if (interval > AutoTranslationInterval)
+        {
+            TranslatorAPI.translateByInput();
+        }
+    },
+
+    translateByMessage: function (activeTab)
+    {
+        // response callback
+        var resp_popup = function (response)
+        {
+            if (!CommonAPI.isDefined(response)) return false;
+
+            LoggerAPI.logD("#RESPONSE#: Received type [" + response.type + "], message [" + response.message + "]");
+
+            var type = response.type;
+            var message = response.message;
+
+            if (type == OperatorType.getSelectText)
+            {
+                if (CommonAPI.isDefined(response) && CommonAPI.isValidText(response.message))
+                {
+                    LoggerAPI.logD("#RESPONSE#: Translating text: " + response.message);
+                    TranslatorAPI.translate(response.message);
+                    textSelected.focus();
+                    textSelected.select();
+                }
+            }
+            else if (type == OperatorType.viewWikipages)
+            {
+                WikiAPI.showWikipages(message);
+            }
+            else if (type == OperatorType.viewHomepage)
+            {
+                WikiAPI.showHomepage(message);
+            }
+            else
+            {
+                var message = CommonAPI.isDefined(response) ? (CommonAPI.isValidText(response.message) ? response.message : "message not defined in response") : ("response not defined");
+                LoggerAPI.logE("#RESPONSE#: Received response type: [" + response.type + "], response message: [" + message + "]");
+            }
+        };
+
+        // test create new tab with specific URL
+        //chrome.tabs.create({ url: "http://www.163.com" });
+
+        // test notification popup
+        // CommonAPI.showPopupMsg('How are you? - popup');  // notification body text
+
+        // send message to CONTENT SCRIPTS
+        LoggerAPI.logD("Translating by message......");
+
+        MsgBusAPI.msg_send(OperatorType.getSelectText, "", resp_popup);
+    },
+
+    tryTranslateNow: function ()
+    {
+        var resp_translate = function (response)
+        {
+            TranslatorAPI.translate(response.message);
+        }
+
+        // translate firstly
+        MsgBusAPI.msg_send(OperatorType.getSelectText, "", resp_translate);
+    },
+
+    translateByClipboard: function ()
+    {
+        var text = window.Clipboard.paste();
+        LoggerAPI.logD("Translating by clipboard text......");
+        TranslatorAPI.translate(text);
+        return CommonAPI.isValidText(text);
     },
 
     clearTexts: function (type)
@@ -51,21 +145,6 @@ var TranslatorAPI =
         }
     },
 
-    translateByInput: function ()
-    {
-        LoggerAPI.logD("Translating by input......");
-        var text = $("#txtSelected").val();
-        TranslatorAPI.translate(text);
-    },
-
-    translateByClipboard: function ()
-    {
-        var text = window.Clipboard.paste();
-        LoggerAPI.logD("Translating by clipboard text......");
-        TranslatorAPI.translate(text);
-        return CommonAPI.isValidText(text);
-    },
-
     _show_api_logo: function (id)
     {
         $("#" + id).removeClass("hidden");
@@ -74,13 +153,9 @@ var TranslatorAPI =
     _update_height: function (id)
     {
         if (typeof (isIFramePopup) != "undefined") return;
-
         var attribute = "height";
-
         $(id).css(attribute, emptytext);    // restore height
-
         TranslatorAPI._update_rows(id);
-
         $(id).css(attribute, $(id)[0].scrollHeight);    // set height
     },
 
@@ -89,22 +164,18 @@ var TranslatorAPI =
         return true;
         var rows = $(id).val().split("\n").length;
         var count = $(id).val().length / OneLineCharCount;
-        if (rows < 2)
-        {
-            rows = count;
-        }
+        if (rows < 2) { rows = count; }
         $(id).attr("rows", rows);
     },
 
     _get_valid_suffix: function (type)
     {
-        return t = (CommonAPI.isValidText(type)) ? type : "";
+        return (CommonAPI.isValidText(type)) ? type : "";
     },
 
     _initial_texts: function (message, type)
     {
         if (!CommonAPI.isValidText(message)) return false;
-
         TranslatorAPI._update_source_text(message);
         TranslatorAPI._update_main_meaning(translating, type);
         TranslatorAPI._update_more_meaning(translating, type);
@@ -117,10 +188,7 @@ var TranslatorAPI =
         var id = "#txtSelected";
         $(id).val(text);
         TranslatorAPI._update_height(id);
-        if (text != emptytext)
-        {
-            $(id).blur();
-        }
+        if (text != emptytext && !TranslatorAPI.IsTypedText) { $(id).blur(); }
     },
 
     _update_main_meaning: function (text, type)

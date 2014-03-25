@@ -9,6 +9,7 @@
  */
 
 /* for chrome & safari */
+/*
 ::-webkit-scrollbar {
     width: 0px;
     height: 0px;
@@ -27,7 +28,6 @@
 ::-webkit-resizer {
 }
 
-/*
 ::-webkit-scrollbar-button:start:decrement, ::-webkit-scrollbar-button:end:increment {
     height: 0px;
     display: none;

@@ -8,7 +8,25 @@
  * Designed and built with all the love in the world @world by @eric
  */
 
- 
+::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+    margin-bottom: -50px;
+}
+::-webkit-scrollbar-track {
+    border-radius:0px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 0px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+::-webkit-scrollbar-corner {
+}
+::-webkit-resizer {
+}
+
+
 #popup_html, #popup_body, #popup_dialog
 {
     /*background-color: rgba(248, 244, 240, 0.94);
@@ -29,10 +47,10 @@
 #popup_html
 {
     min-width: 324px;
-    min-height: 465px;
+    min-height: 450px;
     z-index: 1000000;
-    overflow-x: hidden;
-    overflow-y: hidden;
+    /*overflow-x: hidden;
+    overflow-y: hidden;*/
 }
 
 #popup_body

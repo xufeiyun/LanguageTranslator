@@ -61,9 +61,11 @@
                     "script/jquery.watermark.min.js",
                     "script/clipboard.js",
                     "script/storages.js",
+                    "script/translators.js",
                     "script/wikipages.js",
                     "script/search-onweb.js",
                     "script/addDOMLoadEvent.js",
+                    "script/popup_dialog.js",
                     "script/contents.js"
                 ],
                 "run_at": "document_idle",
