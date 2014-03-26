@@ -272,7 +272,6 @@ var ContentAPI =
             {
                 ContentAPI.ShowPopupDialogForTranslation(message, 'main meanings', 'more meanings');
                 // send message to background to translate text
-                debugger;
                 MsgBusAPI.msg_send(OperatorType.getSelectText, message);
                 setTimeout(ContentAPI.focusParentPage, 100);
             }

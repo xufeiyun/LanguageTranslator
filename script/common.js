@@ -505,7 +505,6 @@ var MsgBusAPI = {
     // receivers
     rcvmsg_iframe: function (request, sender, sendResponse)
     {
-        debugger;
         LoggerAPI.logD("rcvmsg_iframe: Received TYPE: " + request.type + ", MESSAGE [" + request.message + "] " + msg);
 
         var msg = (sender.tab ?
@@ -573,7 +572,6 @@ var MsgBusAPI = {
 
     rcvmsg_background: function (request, sender, sendResponse)
     {
-        debugger;
         LoggerAPI.logD("rcvmsg_background: Received TYPE: " + request.type + ", MESSAGE [" + request.message + "] " + msg);
 
         var msg = (sender.tab ?
@@ -724,7 +722,6 @@ var MsgBusAPI = {
 
     rcvmsg_content: function (request, sender, sendResponse)
     {
-        debugger;
         LoggerAPI.logD("rcvmsg_content: Received type: " + request.type + ", message [" + request.message + "] " + msg);
 
         var msg = (sender.tab ?
