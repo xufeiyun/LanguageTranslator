@@ -611,8 +611,8 @@ var MsgBusAPI = {
                 //var textToTranslated = window.Clipboard.paste();
                 var textToTranslated = message;
                 //MsgBusAPI.msg_send(type, message);
-                //MsgBusAPI.msg_bgd2tab(type, message);
-                sendResponse({ type: type, message: textToTranslated });
+                MsgBusAPI.msg_bgd2tab(type, message);   // this is for page dialog
+                sendResponse({ type: type, message: textToTranslated });    // this is for extension dialog
             }
             else
             {

@@ -9,13 +9,13 @@
     <file path="/popup_dialog.html" changelist="8ef01290-10b9-4bbe-9173-765223075c11" time="1395472453796" ignored="false" />
     <file path="/a.css" changelist="8ef01290-10b9-4bbe-9173-765223075c11" time="1395460179630" ignored="false" />
     <file path="/a.coffee" changelist="8ef01290-10b9-4bbe-9173-765223075c11" time="1395460204323" ignored="false" />
-    <file path="/a.dummy" changelist="8ef01290-10b9-4bbe-9173-765223075c11" time="1395827857140" ignored="false" />
+    <file path="/a.dummy" changelist="8ef01290-10b9-4bbe-9173-765223075c11" time="1395828255671" ignored="false" />
     <file path="/contents.js" changelist="8ef01290-10b9-4bbe-9173-765223075c11" time="1395825782953" ignored="false" />
     <file path="/popup_dialog.css" changelist="8ef01290-10b9-4bbe-9173-765223075c11" time="1395823087906" ignored="false" />
     <file path="/__fixes.html" changelist="8ef01290-10b9-4bbe-9173-765223075c11" time="1395629407765" ignored="false" />
     <file path="/__more_fea.html" changelist="8ef01290-10b9-4bbe-9173-765223075c11" time="1395629454734" ignored="false" />
     <file path="/__nice_fea.html" changelist="8ef01290-10b9-4bbe-9173-765223075c11" time="1395629497296" ignored="false" />
-    <file path="/common.js" changelist="8ef01290-10b9-4bbe-9173-765223075c11" time="1395824887609" ignored="false" />
+    <file path="/common.js" changelist="8ef01290-10b9-4bbe-9173-765223075c11" time="1395828067546" ignored="false" />
     <file path="/options.js" changelist="8ef01290-10b9-4bbe-9173-765223075c11" time="1395641279093" ignored="false" />
     <file path="/wikipages.js" changelist="8ef01290-10b9-4bbe-9173-765223075c11" time="1395641377937" ignored="false" />
     <file path="/search-onweb.js" changelist="8ef01290-10b9-4bbe-9173-765223075c11" time="1395641970625" ignored="false" />
@@ -109,19 +109,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="common.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="common.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/script/common.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="110" column="10" selection-start="4548" selection-end="4548" vertical-scroll-proportion="0.0">
+            <state line="614" column="107" selection-start="19141" selection-end="19141" vertical-scroll-proportion="0.88738126">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="contents.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="contents.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/script/contents.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="273" column="63" selection-start="10995" selection-end="10995" vertical-scroll-proportion="0.4385382">
+            <state line="31" column="27" selection-start="817" selection-end="817" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -130,7 +130,7 @@
       <file leaf-file-name="popup_dialog.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/script/popup_dialog.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="41" column="30" selection-start="923" selection-end="938" vertical-scroll-proportion="0.0">
+            <state line="40" column="36" selection-start="900" selection-end="900" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="e#3061#3581#0" expanded="false" />
                 <element signature="e#3625#4450#0" expanded="false" />
@@ -172,8 +172,8 @@
         <option value="$PROJECT_DIR$/style/popup_dialog.css" />
         <option value="$PROJECT_DIR$/script/popup_dialog.js" />
         <option value="$PROJECT_DIR$/script/translators.js" />
-        <option value="$PROJECT_DIR$/script/common.js" />
         <option value="$PROJECT_DIR$/script/contents.js" />
+        <option value="$PROJECT_DIR$/script/common.js" />
       </list>
     </option>
   </component>
@@ -406,12 +406,12 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="10" y="0" width="1260" height="981" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19237147" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23233533" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.070658684" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3291874" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2495854" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -421,11 +421,11 @@
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3291874" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2578773" sideWeight="0.91976047" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.040630184" sideWeight="0.7676647" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2578773" sideWeight="0.9293413" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.040630184" sideWeight="0.9293413" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23466003" sideWeight="0.7676647" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23466003" sideWeight="0.8958084" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2495854" sideWeight="0.8742515" order="2" side_tool="false" content_ui="combo" />
@@ -590,9 +590,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/script/contents.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="27" selection-start="817" selection-end="817" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/script/popup_dialog.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="30" selection-start="923" selection-end="938" vertical-scroll-proportion="0.0">
+        <state line="40" column="36" selection-start="900" selection-end="900" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="e#3061#3581#0" expanded="false" />
             <element signature="e#3625#4450#0" expanded="false" />
@@ -604,14 +611,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/script/common.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="110" column="10" selection-start="4548" selection-end="4548" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/script/contents.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="273" column="63" selection-start="10995" selection-end="10995" vertical-scroll-proportion="0.4385382">
+        <state line="614" column="107" selection-start="19141" selection-end="19141" vertical-scroll-proportion="0.88738126">
           <folding />
         </state>
       </provider>
