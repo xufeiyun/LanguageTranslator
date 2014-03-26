@@ -6,7 +6,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Designed and built with all the love in the world @world by @eric
- */
 
 ::-webkit-scrollbar {
     width: 0px;
@@ -26,6 +25,33 @@
 ::-webkit-resizer {
 }
 
+ */
+
+/* make the scroll bars just show vertical scroll bar */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 100%;
+}
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 8px;
+    height: 100%;
+    margin-bottom: -10px;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+::-webkit-scrollbar-corner{
+    height: 0px;
+    padding: 0px;
+    background-color: transparent;
+}
+::-webkit-resizer {
+    height: 0px;
+    width: 0px;
+    background-color: transparent;
+}
 
 #popup_html, #popup_body, #popup_dialog
 {
@@ -51,6 +77,7 @@
     z-index: 1000000;
     /*overflow-x: hidden;
     overflow-y: hidden;*/
+    overflow: hidden!important;
 }
 
 #popup_body
@@ -61,7 +88,7 @@
 #popup_dialog
 {
     position: absolute; 
-    height: 460px;
+    height: 450px;
     background-color: #fff;
     border: 0px solid #B8B8B8;
     border-top-left-radius:  1%;
@@ -73,6 +100,7 @@
     line-height: 20px;
     margin-left: 0px!important;
     margin-top: -2px!important;
+    overflow: hidden!important;
 }
 
 
@@ -81,8 +109,8 @@
     width: 310px;
     min-width: 310px;
     max-width: 310px;
-    overflow: auto;
     /*
+    overflow: auto;
     border-top-left-radius:  1%;
     border-top-right-radius:  1%;
     border-bottom-left-radius: 1%;

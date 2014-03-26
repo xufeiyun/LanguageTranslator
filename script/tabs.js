@@ -2,11 +2,23 @@
 	This javascript file is the defined tab features basedon google, baidu, youdao API etc.
 */
 /*-----------  toggle tabs --------------*/
+
+var TabsAPI =
+{
+    Initialize: function() {
+        bindLinkEvents();
+    },
+
+    bindLinkEvents: function(){
+        $('#tabAPIs a').click(function (e) {
+            e.preventDefault();
+            $(this).tab('show');
+        });
+    }
+};
+
 $(document).ready(function(){
-    $('#tabAPIs a').click(function (e) {
-      e.preventDefault();
-      $(this).tab('show');
-    });
+    TabsAPI.Initialize();
 });
 /*END*/
 

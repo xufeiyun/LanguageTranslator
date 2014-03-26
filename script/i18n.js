@@ -16,18 +16,18 @@ var i18n = {
         i18n.SetText("btnSourceText", "SourceTexts");
         i18n.SetTitle("btnSourceText", "SourceTextsTooltip");
         i18n.SetTitle("btnReadSource", "SourceSoundTooltip");
-        i18n.SetPlaceholder("txtSelected", "SourceTextsPlaceholder");
+        i18n.SetPlaceholder(ElementIds.TextSelected, "SourceTextsPlaceholder");
 
         i18n.SetText("btnTranslate", "TranslateButton");
         i18n.SetTitle("btnTranslate", "TranslateButtonTooltip");
 
         i18n.SetText("btnMainText", "MainMeanings");
         i18n.SetTitle("btnReadMain", "MainSoundTooltip");
-        i18n.SetPlaceholder("txtTranslated", "MainMeaningsPlaceholder");
+        i18n.SetPlaceholder(ElementIds.TextTranslated, "MainMeaningsPlaceholder");
 
         i18n.SetText("btnMoreText", "MoreMeanings");
         i18n.SetTitle("btnReadMore", "MoreSoundTooltip");
-        i18n.SetPlaceholder("txtTranslatedAll", "MoreMeaningsPlaceholder");
+        i18n.SetPlaceholder(ElementIds.TextTranslatedAll, "MoreMeaningsPlaceholder");
 
         i18n.SetText("btnDataProvider", "DataProvided");
         i18n.SetText("btnTranslatorAPI", "YouDataTranslation");
@@ -94,7 +94,7 @@ var i18n = {
         
         chrome.i18n.getAcceptLanguages(function (languageList)
         {
-            var languages = languageList.join(",");
+            var languages = languageList.join(Comma);
             console.warn("Configured Languages: " + languages);
         });
 

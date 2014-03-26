@@ -39,7 +39,7 @@ var DialogAPI =
 
         DialogAPI.bindBottomLinkEvent();
 
-        TranslatorAPI.tryTranslateNow();
+        TranslatorAPI.tryTranslateNow();    // serve for the extension dialog
     },
 
     fnDOMLoadCompleted: function ()
@@ -50,7 +50,7 @@ var DialogAPI =
     bindTextEvent: function ()
     {
         // add text events
-        textSelected = $("#txtSelected");
+        textSelected = $("#" + ElementIds.TextSelected);
         textSelected.focus(function (e)
         {
             TranslatorAPI.clearTexts();
@@ -63,7 +63,7 @@ var DialogAPI =
         {
             clearTimeout(timeoutId);
             TranslatorAPI.clearTexts();
-            timeoutId = setTimeout(DialogAPI.translateByTimeout, AutoTranslationInterval + 100);
+            timeoutId = setTimeout(TranslatorAPI.translateByTimeout, AutoTranslationInterval + 100);
         });
         textSelected.keydown(function (e)
         {
@@ -103,7 +103,7 @@ var DialogAPI =
         });
         $("#btnSourceText").click(function ()
         {
-            WikiAPI.openWikipage($("#txtSelected").val());
+            WikiAPI.openWikipage($("#" + ElementIds.TextSelected).val());
         });
         // this button has been hidden
         $("#btnTranslate").click(function ()

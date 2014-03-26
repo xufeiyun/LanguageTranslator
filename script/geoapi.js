@@ -52,7 +52,7 @@ var GeoLocationAPI = {
         var accuracy2 = coords.altitudeAccuracy == null ? "" : coords.altitudeAccuracy;
 
         // var results = $.ajax({ url: "http://maps.googleapis.com/maps/api/geocode/json?latlng=22.543098999999998,114.057868&sensor=false", dataType: "json", type: "get", async: false }).responseText;
-        var url = "http://maps.googleapis.com/maps/api/geocode/json?latlng=" + latitude + "," + longitude + "&sensor=false";
+        var url = "http://maps.googleapis.com/maps/api/geocode/json?latlng=" + latitude + Comma + longitude + "&sensor=false";
         var results = $.ajax({ url: url, dataType: "json", type: "get", async: false }).responseText;
 
         var or = JSON.parse(results);

@@ -8,6 +8,7 @@ var ReleaseId = "hfcnemnjojifmhdgdbhnhiinmjdohlel"; // release key
 var ExtenionUID = chrome.i18n.getMessage("@@extension_id"); //extension id: __MSG_@@extension_id__
 
 var NewLine = "\r\n";
+var Comma = ","
 var AutoCopyTextInterval = 812;
 var AutoTranslationInterval = 600;
 var OneLineCharCount = 45;
@@ -63,7 +64,10 @@ var ElementIds = {
     PopupIFrame: 'frameLanguageTranslator',
     PopupButtonClose: 'btnLanguageTranslatorClose',
     PopupButtonCollapse: 'btnLanguageTranslatorCollapse',
-    PopupButtonDisable: 'btnLanguageTranslatorDisable'
+    PopupButtonDisable: 'btnLanguageTranslatorDisable',
+    TextSelected: 'txtSelected',
+    TextTranslated: 'txtTranslated',
+    TextTranslatedAll: 'txtTranslatedAll'
 };
 
 var OptionItemKeys = {
@@ -501,6 +505,7 @@ var MsgBusAPI = {
     // receivers
     rcvmsg_iframe: function (request, sender, sendResponse)
     {
+        debugger;
         LoggerAPI.logD("rcvmsg_iframe: Received TYPE: " + request.type + ", MESSAGE [" + request.message + "] " + msg);
 
         var msg = (sender.tab ?
@@ -568,6 +573,7 @@ var MsgBusAPI = {
 
     rcvmsg_background: function (request, sender, sendResponse)
     {
+        debugger;
         LoggerAPI.logD("rcvmsg_background: Received TYPE: " + request.type + ", MESSAGE [" + request.message + "] " + msg);
 
         var msg = (sender.tab ?
@@ -607,7 +613,7 @@ var MsgBusAPI = {
                 //var textToTranslated = window.Clipboard.paste();
                 var textToTranslated = message;
                 //MsgBusAPI.msg_send(type, message);
-                MsgBusAPI.msg_bgd2tab(type, message);
+                //MsgBusAPI.msg_bgd2tab(type, message);
                 sendResponse({ type: type, message: textToTranslated });
             }
             else
@@ -718,6 +724,7 @@ var MsgBusAPI = {
 
     rcvmsg_content: function (request, sender, sendResponse)
     {
+        debugger;
         LoggerAPI.logD("rcvmsg_content: Received type: " + request.type + ", message [" + request.message + "] " + msg);
 
         var msg = (sender.tab ?

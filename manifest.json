@@ -55,10 +55,10 @@
                 "matches": ["<all_urls>"],
                 "css": ["style/contents.css"],
                 "js" : [
-                    "script/i18n.js",
-                    "script/common.js",
                     "script/jquery-1.10.1.min.js",
                     "script/jquery.watermark.min.js",
+                    "script/i18n.js",
+                    "script/common.js",
                     "script/clipboard.js",
                     "script/storages.js",
                     "script/translators.js",

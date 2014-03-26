@@ -4,7 +4,6 @@
 var prefix = "[TRANSLATORS]: ";
 
 var translating = i18n.getMessage("Translating");
-var emptytext = "";
 
 var TranslatorAPI =
 {
@@ -38,16 +37,16 @@ var TranslatorAPI =
         TranslatorAPI.LastSource = message;
 
         YouDaoTranslateAPI.translate(message);
-//        GoogleTranslateAPI.translate(message);
-//        BaiduTranslateAPI.translate(message);
-//        MicrosoftTranslateAPI.translate(message);
+        //GoogleTranslateAPI.translate(message);
+        //BaiduTranslateAPI.translate(message);
+        //MicrosoftTranslateAPI.translate(message);
     },
 
     translateByInput: function ()
     {
         TranslatorAPI.IsTypedText = true;
         LoggerAPI.logD("Translating by input......");
-        var text = $("#txtSelected").val();
+        var text = $("#" + ElementIds.TextSelected).val();
         TranslatorAPI.translate(text);
     },
 
@@ -132,16 +131,16 @@ var TranslatorAPI =
     clearTexts: function (type)
     {
         LoggerAPI.logD("Clear Text...");
-        var text = $("#txtSelected").val();
+        var text = $("#" + ElementIds.TextSelected).val();
         if (!CommonAPI.isValidText(text))
         {
-            TranslatorAPI._update_source_text(emptytext);
-            TranslatorAPI._update_main_meaning(emptytext, type);
-            TranslatorAPI._update_more_meaning(emptytext, type);
+            TranslatorAPI._update_source_text(EmptyText);
+            TranslatorAPI._update_main_meaning(EmptyText, type);
+            TranslatorAPI._update_more_meaning(EmptyText, type);
         }
         else
         {
-            TranslatorAPI._update_height("#txtSelected");
+            TranslatorAPI._update_height("#" + ElementIds.TextSelected);
         }
     },
 
@@ -154,7 +153,7 @@ var TranslatorAPI =
     {
         if (typeof (isIFramePopup) != "undefined") return;
         var attribute = "height";
-        $(id).css(attribute, emptytext);    // restore height
+        $(id).css(attribute, EmptyText);    // restore height
         TranslatorAPI._update_rows(id);
         $(id).css(attribute, $(id)[0].scrollHeight);    // set height
     },
@@ -185,22 +184,22 @@ var TranslatorAPI =
     _update_source_text: function (text)
     {
         LoggerAPI.logD('update source text');
-        var id = "#txtSelected";
+        var id = "#" + ElementIds.TextSelected;
         $(id).val(text);
         TranslatorAPI._update_height(id);
-        if (text != emptytext && !TranslatorAPI.IsTypedText) { $(id).blur(); }
+        if (text != EmptyText && !TranslatorAPI.IsTypedText) { $(id).blur(); }
     },
 
     _update_main_meaning: function (text, type)
     {
-        var id = "#txtTranslated" + TranslatorAPI._get_valid_suffix(type);
+        var id = "#" + ElementIds.TextTranslated + TranslatorAPI._get_valid_suffix(type);
         $(id).val(text);
         TranslatorAPI._update_height(id);
     },
 
     _update_more_meaning: function (text, type)
     {
-        var id = "#txtTranslatedAll" + TranslatorAPI._get_valid_suffix(type);
+        var id = "#" + ElementIds.TextTranslatedAll + TranslatorAPI._get_valid_suffix(type);
         $(id).val(text);
         $(id).html(text);
         TranslatorAPI._update_height(id);
@@ -316,7 +315,7 @@ var YouDaoTranslateAPI =
     },
     _combine_values: function (valuesArray, separator)
     {
-        if (!CommonAPI.isValidText(separator)) { separator = ","; }
+        if (!CommonAPI.isValidText(separator)) { separator = Comma; }
         var values = "";
         for (var i = 0; i < valuesArray.length; i++)
         {
@@ -340,11 +339,10 @@ var GoogleTranslateAPI =
     /*-----------  Translate By Google API --------------*/
     translate: function (message)
     {
-        return false;
-
         if (!CommonAPI.isValidText(message)) return false;
 
-        var type = "G";
+        //var type = "G";
+        var type = "";
         TranslatorAPI._initial_texts(message, type);
 
         var text = CommonAPI.encodeText(message);
@@ -354,23 +352,33 @@ var GoogleTranslateAPI =
         xhr.open("GET", url, true);
         xhr.onreadystatechange = function ()
         {
-            _show_api_logo("logoGoogle");
+            TranslatorAPI._show_api_logo("logoGoogle");
+            /*
+             0 (Uninitialized) The object has been created, but not initialized (the open method has not been called).
+             1 (Open) The object has been created, but the send method has not been called.
+             2 (Sent) The send method has been called, but the status and headers are not yet available.
+             3 (Receiving) Some data has been received.
+             4 (Loaded) All the data has been received, and is available.
+             * */
             if (xhr.readyState == 4)
             {
                 // received json data
-                // LoggerAPI.logD(xhr.responseText);
-
-                // all meanings
+                // all meanings sent back
                 text = xhr.responseText;
-                text = CommonAPI.removeDuplicated(text, ",");
-                var meanings = text;
-                $("#txtTranslatedAll" + type).html(meanings);
+                text = CommonAPI.removeDuplicated(text, Comma);
 
-                // first meaning
-                var data = JSON.parse(meanings);
-                data = data[0][0][0];
+                // main meaning
+                var data = JSON.parse(text);
+                var main = data[0][0][0];
                 // LoggerAPI.logD(data);
-                $("#txtTranslated" + type).val(data);
+                $("#" +  ElementIds.TextTranslated + type).val(main);
+
+                // more meanings
+                var more = GoogleTranslateAPI._parse_data(data);
+                if (more == EmptyText) { more = main; }
+                more = CommonAPI.removeDuplicated(more, Comma);
+                more = CommonAPI.removeDuplicated(more, NewLine);
+                $("#" + ElementIds.TextTranslatedAll + type).val(more);
             }
             return true;
         };
@@ -379,63 +387,38 @@ var GoogleTranslateAPI =
         return true;
     },
 
+    /* data should be array */
     _parse_data: function (data)
     {
         var t = "";
-        var l = 0;
-        var values = "";
+        var counts = 0;
+        var index = 0;
+        var values = " ";
+        var value = "";
         t = typeof (data);
-        l = (t == "object" && data.length > 0) ? (data.length) : (0);
-        do
+        counts = (t == "object" && data.length > 0) ? (data.length) : (0);
+        while (index < counts)
         {
-            if (data.length > 0)
+            try
             {
-                try
-                {
-                    values += _parse_data_item(data[data.length - l]) + ",";
-                }
-                catch (e)
-                {
-                    LoggerAPI.logW(e);
-                }
-                finally
-                {
+                value = data[index];
+                if (typeof(value) == "object") {
+                    values += Comma + GoogleTranslateAPI._parse_data(value);
+                } else if (typeof(value) == "string" && $.trim(value) != EmptyText) {
+                    values += Comma + value;
                 }
             }
-            l--;
-        } while (l > 0);
-
-        return values;
-    },
-
-    _parse_data_item: function (data)
-    {
-        var t = typeof (data);
-        if (t && t == "string")
-        {
-            return data;
+            catch (e)
+            {
+                LoggerAPI.logW(e);
+                console.error(e);
+            }
+            finally
+            {
+            }
+            index++;
+            values += NewLine;
         }
-        var values = "";
-        var l = (t == "object" && data.length > 0) ? (data.length) : (0);
-        do
-        {
-            if (data.length > 0)
-            {
-                try
-                {
-                    values += _parse_data_item(data[data.length - l]) + ",";
-                }
-                catch (e)
-                {
-                    LoggerAPI.logW(e);
-                }
-                finally
-                {
-                }
-            }
-            l--;
-        } while (l > 0);
-
         return values;
     }
 };
@@ -451,7 +434,7 @@ var BaiduTranslateAPI =
         TranslatorAPI._initial_texts(message, type);
 
         // TODO
-    },
+    }
     /*END*/
 };
 

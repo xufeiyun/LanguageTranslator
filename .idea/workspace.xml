@@ -5,22 +5,24 @@
     <ignored path="LanguageTranslator.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/contents.css" changelist="8ef01290-10b9-4bbe-9173-765223075c11" time="1395478546171" ignored="false" />
-    <file path="/popup_dialog.js" changelist="8ef01290-10b9-4bbe-9173-765223075c11" time="1395731101578" ignored="false" />
+    <file path="/popup_dialog.js" changelist="8ef01290-10b9-4bbe-9173-765223075c11" time="1395804257312" ignored="false" />
     <file path="/popup_dialog.html" changelist="8ef01290-10b9-4bbe-9173-765223075c11" time="1395472453796" ignored="false" />
     <file path="/a.css" changelist="8ef01290-10b9-4bbe-9173-765223075c11" time="1395460179630" ignored="false" />
     <file path="/a.coffee" changelist="8ef01290-10b9-4bbe-9173-765223075c11" time="1395460204323" ignored="false" />
-    <file path="/a.dummy" changelist="8ef01290-10b9-4bbe-9173-765223075c11" time="1395731138578" ignored="false" />
-    <file path="/contents.js" changelist="8ef01290-10b9-4bbe-9173-765223075c11" time="1395734351875" ignored="false" />
-    <file path="/popup_dialog.css" changelist="8ef01290-10b9-4bbe-9173-765223075c11" time="1395479217125" ignored="false" />
+    <file path="/a.dummy" changelist="8ef01290-10b9-4bbe-9173-765223075c11" time="1395815320562" ignored="false" />
+    <file path="/contents.js" changelist="8ef01290-10b9-4bbe-9173-765223075c11" time="1395825782953" ignored="false" />
+    <file path="/popup_dialog.css" changelist="8ef01290-10b9-4bbe-9173-765223075c11" time="1395823087906" ignored="false" />
     <file path="/__fixes.html" changelist="8ef01290-10b9-4bbe-9173-765223075c11" time="1395629407765" ignored="false" />
     <file path="/__more_fea.html" changelist="8ef01290-10b9-4bbe-9173-765223075c11" time="1395629454734" ignored="false" />
     <file path="/__nice_fea.html" changelist="8ef01290-10b9-4bbe-9173-765223075c11" time="1395629497296" ignored="false" />
-    <file path="/common.js" changelist="8ef01290-10b9-4bbe-9173-765223075c11" time="1395740154390" ignored="false" />
+    <file path="/common.js" changelist="8ef01290-10b9-4bbe-9173-765223075c11" time="1395824887609" ignored="false" />
     <file path="/options.js" changelist="8ef01290-10b9-4bbe-9173-765223075c11" time="1395641279093" ignored="false" />
     <file path="/wikipages.js" changelist="8ef01290-10b9-4bbe-9173-765223075c11" time="1395641377937" ignored="false" />
     <file path="/search-onweb.js" changelist="8ef01290-10b9-4bbe-9173-765223075c11" time="1395641970625" ignored="false" />
-    <file path="/translators.js" changelist="8ef01290-10b9-4bbe-9173-765223075c11" time="1395733876015" ignored="false" />
+    <file path="/translators.js" changelist="8ef01290-10b9-4bbe-9173-765223075c11" time="1395824673031" ignored="false" />
     <file path="/clipboard.js" changelist="8ef01290-10b9-4bbe-9173-765223075c11" time="1395717370531" ignored="false" />
+    <file path="/tabs.js" changelist="8ef01290-10b9-4bbe-9173-765223075c11" time="1395802975406" ignored="false" />
+    <file path="/i18n.js" changelist="8ef01290-10b9-4bbe-9173-765223075c11" time="1395804155921" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,7 +47,6 @@
     <sortChildren value="false" />
   </component>
   <component name="DebuggerManager">
-    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -80,6 +81,7 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -89,18 +91,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="contents.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/script/contents.js">
+      <file leaf-file-name="wikipages.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/script/wikipages.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="80" column="41" selection-start="3299" selection-end="3299" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#8700#9920#0" expanded="false" />
-                <element signature="e#9968#11634#0" expanded="false" />
-                <element signature="e#13005#13954#0" expanded="false" />
-                <element signature="e#14049#15366#0" expanded="false" />
-                <element signature="e#15646#16451#0" expanded="false" />
-                <element signature="e#16943#21413#0" expanded="false" />
-              </folding>
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -108,32 +103,7 @@
       <file leaf-file-name="translators.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/script/translators.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="112" column="13" selection-start="3841" selection-end="3856" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="popup_dialog.js" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/script/popup_dialog.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="41" column="8" selection-start="909" selection-end="909" vertical-scroll-proportion="0.3929619">
-              <folding>
-                <element signature="e#1100#2401#0" expanded="false" />
-                <element signature="e#2442#2947#0" expanded="false" />
-                <element signature="e#2990#3510#0" expanded="false" />
-                <element signature="e#3554#4379#0" expanded="false" />
-                <element signature="e#4424#4672#0" expanded="false" />
-                <element signature="e#4713#6350#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="manifest.json" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/manifest.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="31" column="39" selection-start="613" selection-end="613" vertical-scroll-proportion="0.0">
+            <state line="18" column="35" selection-start="520" selection-end="520" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -142,17 +112,33 @@
       <file leaf-file-name="common.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/script/common.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="440" column="21" selection-start="13271" selection-end="13271" vertical-scroll-proportion="0.0">
+            <state line="609" column="44" selection-start="18744" selection-end="18744" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#15282#17416#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="contents.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/script/contents.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="274" column="25" selection-start="11021" selection-end="11021" vertical-scroll-proportion="0.68026316">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="clipboard.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/script/clipboard.js">
+      <file leaf-file-name="popup_dialog.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/script/popup_dialog.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="40" selection-start="627" selection-end="627" vertical-scroll-proportion="0.0">
-              <folding />
+            <state line="41" column="30" selection-start="923" selection-end="938" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#3061#3581#0" expanded="false" />
+                <element signature="e#3625#4450#0" expanded="false" />
+                <element signature="e#4495#4743#0" expanded="false" />
+                <element signature="e#4784#6421#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -174,22 +160,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/loadlist/__more_fea.html" />
-        <option value="$PROJECT_DIR$/loadlist/__nice_fea.html" />
-        <option value="$PROJECT_DIR$/loadlist/__releases.html" />
         <option value="$PROJECT_DIR$/loadlist/__news.html" />
         <option value="$PROJECT_DIR$/loadlist/__latest.html" />
         <option value="$PROJECT_DIR$/script/wikipages.js" />
         <option value="$PROJECT_DIR$/script/options.js" />
         <option value="$PROJECT_DIR$/script/search-onweb.js" />
         <option value="$PROJECT_DIR$/script/clipboard.js" />
-        <option value="$PROJECT_DIR$/script/translators.js" />
         <option value="$PROJECT_DIR$/style/contents.css" />
-        <option value="$PROJECT_DIR$/style/popup_dialog.css" />
-        <option value="$PROJECT_DIR$/script/contents.js" />
+        <option value="$PROJECT_DIR$/script/tabs.js" />
         <option value="$PROJECT_DIR$/manifest.json" />
-        <option value="$PROJECT_DIR$/script/common.js" />
+        <option value="$PROJECT_DIR$/script/geoapi.js" />
+        <option value="$PROJECT_DIR$/script/i18n.js" />
+        <option value="$PROJECT_DIR$/style/popup_dialog.css" />
         <option value="$PROJECT_DIR$/script/popup_dialog.js" />
+        <option value="$PROJECT_DIR$/script/translators.js" />
+        <option value="$PROJECT_DIR$/script/common.js" />
+        <option value="$PROJECT_DIR$/script/contents.js" />
       </list>
     </option>
   </component>
@@ -230,7 +216,6 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -279,6 +264,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -286,14 +272,14 @@
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="options.lastSelected" value="editor.preferences.appearance" />
     <property name="MemberChooser.sorted" value="false" />
-    <property name="MemberChooser.showClasses" value="true" />
+    <property name="options.lastSelected" value="editor.preferences.appearance" />
     <property name="FullScreen" value="false" />
+    <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.searchVisible" value="true" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="MemberChooser.copyJavadoc" value="false" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
@@ -308,6 +294,19 @@
       <option name="SHMEM_ADDRESS" value="javadebug" />
       <option name="HOST" value="localhost" />
       <option name="PORT" value="5005" />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
@@ -336,19 +335,6 @@
       <envs />
       <properties />
       <listeners />
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -421,13 +407,13 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="10" y="0" width="1260" height="981" extended-state="0" />
+    <frame x="10" y="0" width="1260" height="981" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19237147" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.13652694" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.04311377" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3291874" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2495854" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -437,17 +423,17 @@
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3291874" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2636816" sideWeight="0.80718565" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.112769485" sideWeight="0.86347306" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2578773" sideWeight="0.91976047" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.040630184" sideWeight="0.95688623" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20066334" sideWeight="0.86347306" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23466003" sideWeight="0.95688623" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2495854" sideWeight="0.8742515" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1257485" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2495854" sideWeight="0.8742515" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -513,134 +499,124 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/script/background.js">
+    <entry file="file://$PROJECT_DIR$/script/querystring.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="0" selection-start="166" selection-end="166" vertical-scroll-proportion="0.1517341">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/script/readfile.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/script/search-onweb.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="14" selection-start="106" selection-end="116" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/script/storages.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/script/tabs.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="77" selection-start="452" selection-end="452" vertical-scroll-proportion="0.0">
           <folding>
-            <element signature="n#!!doc" expanded="false" />
-            <element signature="e#170#1177#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/save/background_dictionary.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="143" column="4" selection-start="4044" selection-end="4044" vertical-scroll-proportion="5.047619">
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/style/StyleSheet.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/options.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LanguageTranslator.iml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/background.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/style/bootstrap_override.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/popup_dialog.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="69" column="36" selection-start="4102" selection-end="4102" vertical-scroll-proportion="2.2741117">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/style/contents.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="7" selection-start="255" selection-end="611" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/style/popup_dialog.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="19" selection-start="1084" selection-end="1084" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/script/contents.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="80" column="41" selection-start="3299" selection-end="3299" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#8700#9920#0" expanded="false" />
-            <element signature="e#9968#11634#0" expanded="false" />
-            <element signature="e#13005#13954#0" expanded="false" />
-            <element signature="e#14049#15366#0" expanded="false" />
-            <element signature="e#15646#16451#0" expanded="false" />
-            <element signature="e#16943#21413#0" expanded="false" />
+            <element signature="n#!!doc" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/manifest.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="39" selection-start="613" selection-end="613" vertical-scroll-proportion="0.0">
+        <state line="70" column="40" selection-start="1720" selection-end="1733" vertical-scroll-proportion="0.37453645">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/script/common.js">
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavascriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/AJAX.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="440" column="21" selection-start="13271" selection-end="13271" vertical-scroll-proportion="0.0">
+        <state line="6" column="14" selection-start="98" selection-end="112" vertical-scroll-proportion="-0.7044476">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/script/geoapi.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="54" column="95" selection-start="2072" selection-end="2072" vertical-scroll-proportion="0.18063584">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/popup_dialog.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="75" column="82" selection-start="5012" selection-end="5018" vertical-scroll-proportion="0.6580938">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/style/popup_dialog.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="111" column="42" selection-start="2300" selection-end="2300" vertical-scroll-proportion="1.4042553">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/script/i18n.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="96" column="51" selection-start="3185" selection-end="3185" vertical-scroll-proportion="0.18297872">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/script/wikipages.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/script/translators.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="112" column="13" selection-start="3841" selection-end="3856" vertical-scroll-proportion="0.0">
+        <state line="18" column="35" selection-start="520" selection-end="520" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/script/clipboard.js">
+    <entry file="file://$PROJECT_DIR$/script/common.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="40" selection-start="627" selection-end="627" vertical-scroll-proportion="0.0">
-          <folding />
+        <state line="609" column="44" selection-start="18744" selection-end="18744" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#15282#17416#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/script/popup_dialog.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="8" selection-start="909" selection-end="909" vertical-scroll-proportion="0.3929619">
+        <state line="41" column="30" selection-start="923" selection-end="938" vertical-scroll-proportion="0.0">
           <folding>
-            <element signature="e#1100#2401#0" expanded="false" />
-            <element signature="e#2442#2947#0" expanded="false" />
-            <element signature="e#2990#3510#0" expanded="false" />
-            <element signature="e#3554#4379#0" expanded="false" />
-            <element signature="e#4424#4672#0" expanded="false" />
-            <element signature="e#4713#6350#0" expanded="false" />
+            <element signature="e#3061#3581#0" expanded="false" />
+            <element signature="e#3625#4450#0" expanded="false" />
+            <element signature="e#4495#4743#0" expanded="false" />
+            <element signature="e#4784#6421#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/script/contents.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="274" column="25" selection-start="11021" selection-end="11021" vertical-scroll-proportion="0.68026316">
+          <folding />
         </state>
       </provider>
     </entry>

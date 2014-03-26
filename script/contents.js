@@ -98,14 +98,6 @@ var ContentAPI =
         }
         ContentAPI.popupPosition();
 
-        // udpate meanings
-        //$("#txtSelected").html(sourceText);
-        //$("#txtTranslated").html(mainMeaning);
-        //$("#txtTranslatedAll").html(moreMeaning);
-        //updateHeight("#txtSelected");
-        //updateHeight("#txtTranslated");
-        //updateHeight("#txtTranslatedAll");
-
         ContentAPI._attach_events();
 
         // collapse the popup dialog if disabling popup
@@ -280,6 +272,7 @@ var ContentAPI =
             {
                 ContentAPI.ShowPopupDialogForTranslation(message, 'main meanings', 'more meanings');
                 // send message to background to translate text
+                debugger;
                 MsgBusAPI.msg_send(OperatorType.getSelectText, message);
                 setTimeout(ContentAPI.focusParentPage, 100);
             }
