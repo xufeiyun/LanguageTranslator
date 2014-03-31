@@ -1,0 +1,147 @@
+/*!
+ * Nine Grid Styles
+ *
+ * Copyright 2014 Eric Xu
+ * Licensed under the Apache License v2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Designed and built with all the love in the world by Eric Xu.
+ */
+
+body {
+    background: white;
+    margin: 0;
+    overflow: hidden;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    border-style: none;
+}
+
+img {
+    border: 0;
+}
+
+hr {
+    clear: both;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    visibility: hidden;
+    border-width: 0;
+}
+
+#tabNineGrid
+{
+
+}
+
+.palletSize, .palletArea, .tabNavigator
+{
+    width: 320px;
+}
+
+.palletSize {
+    height:420px;
+}
+
+.palletArea {
+    height: 100%;
+    box-shadow: inset 0 0 0 1px black;
+}
+
+.tabNavigator{
+    height: 40px;
+}
+
+#tabNineGrid
+{
+    width: 318px;
+}
+
+.productPallet {
+    width: 310px;
+    height: 364px;
+    margin-left: 12px;
+    border: 1px solid transparent;
+    clear: both;
+    padding: 1px;
+    overflow: auto;
+}
+
+.productTitle
+{
+    padding-left: 4px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    font: caption;
+    color: #8b8bff;
+}
+
+.productCell,.productCellText {
+    padding: 0px; 
+    width: 68px;
+    height: 68px;
+    margin: 1.5px;
+    float: left;
+    box-shadow: 0 0 0 1px lightgray;
+    background: white;
+    overflow: hidden;
+    cursor: pointer;
+    color: #0094ff;
+    /* round corners */
+    border-radius: 5px;
+}
+
+.productCell:hover, .productCellText:hover {
+    box-shadow:  0 0 0 1px red;
+    color: #f00;
+    background-color: lightgray;
+}
+
+/* just an image */
+.productCell img
+{
+    max-width: 100%;
+    display: block;
+    margin: 0px auto;
+    margin-top: 0px;  
+    max-height: 100%;
+    height: 100%;
+}
+
+/* an image with bottom text */
+.productCellText img, .productCellText span
+{
+    max-width: 100%;
+    display: block;
+    margin: 0px auto;
+    margin-top: 0px;    
+}
+.productCellText img
+{
+    max-height: 70%;
+    height: 100%;
+}
+.productCellText span {
+    max-height: 30%;
+    text-align: center;
+}
+
+
+.logo {
+    display: block;
+    margin: 0px auto;
+    max-height: 100%;
+    max-width: 100%;
+}
+
+
+/* overriden css for bootstrap...css */
+
+.tab-content
+{
+    overflow: visible;   
+}

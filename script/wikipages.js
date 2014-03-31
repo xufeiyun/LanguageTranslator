@@ -91,6 +91,7 @@ var WikiAPI = {
     },
 
     /*-----------  open pages of different source from content or popup scripts--------------*/
+    // by url
     fromHomepage: function (uid)
     {
         var url = ProductURIs.Product;

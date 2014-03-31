@@ -23,6 +23,9 @@
     <file path="/clipboard.js" changelist="8ef01290-10b9-4bbe-9173-765223075c11" time="1395717370531" ignored="false" />
     <file path="/tabs.js" changelist="8ef01290-10b9-4bbe-9173-765223075c11" time="1395802975406" ignored="false" />
     <file path="/i18n.js" changelist="8ef01290-10b9-4bbe-9173-765223075c11" time="1395804155921" ignored="false" />
+    <file path="/ninegrid.css" changelist="8ef01290-10b9-4bbe-9173-765223075c11" time="1396231308593" ignored="false" />
+    <file path="/ninegrid.js" changelist="8ef01290-10b9-4bbe-9173-765223075c11" time="1396231670578" ignored="false" />
+    <file path="/ninegrid.html" changelist="8ef01290-10b9-4bbe-9173-765223075c11" time="1396231754343" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,6 +50,7 @@
     <sortChildren value="false" />
   </component>
   <component name="DebuggerManager">
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -81,7 +85,6 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
-    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -90,7 +93,88 @@
     <favorites_list name="LanguageTranslator" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="ninegrid.css" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/style/ninegrid.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="110" column="5" selection-start="1627" selection-end="1627" vertical-scroll-proportion="0.0">
+              <folding>
+                <marker date="1396250748765" expanded="true" signature="1123:1143" placeholder="{...}" />
+                <marker date="1396250748765" expanded="true" signature="1215:1350" placeholder="{...}" />
+                <marker date="1396250748765" expanded="true" signature="1365:1583" placeholder="{...}" />
+                <marker date="1396250748765" expanded="true" signature="1681:1738" placeholder="{...}" />
+                <marker date="1396250748765" expanded="true" signature="1766:1802" placeholder="{...}" />
+                <marker date="1396250748765" expanded="true" signature="1852:1887" placeholder="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="popup_dialog.html" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/popup_dialog.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="75" column="82" selection-start="5012" selection-end="5018" vertical-scroll-proportion="0.68496734">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ninegrid.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/script/ninegrid.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="58" column="0" selection-start="1403" selection-end="1403" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Minimal.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/script/Minimal.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="3" column="31" selection-start="152" selection-end="161" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#191#1244#0" expanded="false" />
+                <element signature="e#1364#2497#0" expanded="false" />
+                <element signature="e#2562#2950#0" expanded="false" />
+                <element signature="e#3006#3399#0" expanded="false" />
+                <element signature="e#3462#3591#0" expanded="false" />
+                <element signature="e#3660#3889#0" expanded="false" />
+                <element signature="e#3945#4069#0" expanded="false" />
+                <element signature="n#!!block;n#getStructuredData#0" expanded="false" />
+                <element signature="n#!!block;n#normalizeHexColor#0" expanded="false" />
+                <element signature="n#!!block;n#cssUrl#0" expanded="false" />
+                <element signature="n#!!block;n#pxToNumber#0" expanded="false" />
+                <element signature="n#!!block;n#Product#0" expanded="false" />
+                <element signature="e#5928#6051#0" expanded="false" />
+                <element signature="e#6104#6201#0" expanded="false" />
+                <element signature="n#!!block;n#FillImage#0" expanded="false" />
+                <element signature="e#6948#7025#0" expanded="false" />
+                <element signature="e#7187#7473#0" expanded="false" />
+                <element signature="e#7520#8604#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="addata.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/script/addata.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ninegrid.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ninegrid.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="290" column="9" selection-start="13561" selection-end="13561" vertical-scroll-proportion="-8.354838">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -107,10 +191,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/loadlist/__news.html" />
-        <option value="$PROJECT_DIR$/loadlist/__latest.html" />
-        <option value="$PROJECT_DIR$/script/wikipages.js" />
-        <option value="$PROJECT_DIR$/script/options.js" />
         <option value="$PROJECT_DIR$/script/search-onweb.js" />
         <option value="$PROJECT_DIR$/script/clipboard.js" />
         <option value="$PROJECT_DIR$/style/contents.css" />
@@ -123,6 +203,10 @@
         <option value="$PROJECT_DIR$/script/translators.js" />
         <option value="$PROJECT_DIR$/script/contents.js" />
         <option value="$PROJECT_DIR$/script/common.js" />
+        <option value="$PROJECT_DIR$/script/ninegrid.js" />
+        <option value="$PROJECT_DIR$/ninegrid.html" />
+        <option value="$PROJECT_DIR$/script/Minimal.js" />
+        <option value="$PROJECT_DIR$/style/ninegrid.css" />
       </list>
     </option>
   </component>
@@ -162,7 +246,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -211,6 +294,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -219,14 +303,14 @@
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="MemberChooser.sorted" value="false" />
     <property name="options.lastSelected" value="editor.preferences.appearance" />
-    <property name="FullScreen" value="false" />
+    <property name="MemberChooser.sorted" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
+    <property name="FullScreen" value="false" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="MemberChooser.copyJavadoc" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="MemberChooser.copyJavadoc" value="false" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
@@ -241,19 +325,6 @@
       <option name="SHMEM_ADDRESS" value="javadebug" />
       <option name="HOST" value="localhost" />
       <option name="PORT" value="5005" />
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
@@ -282,6 +353,19 @@
       <envs />
       <properties />
       <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -354,13 +438,12 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="10" y="0" width="1260" height="981" extended-state="0" />
-    <editor active="false" />
+    <frame x="10" y="0" width="1260" height="981" extended-state="1" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19237147" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.070658684" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3291874" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2495854" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -374,12 +457,13 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.040630184" sideWeight="0.9293413" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23466003" sideWeight="0.8958084" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.06965174" sideWeight="0.8958084" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2495854" sideWeight="0.8742515" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.070658684" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1257485" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -438,7 +522,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="1" />
+      <option name="time" value="2" />
     </breakpoint-manager>
   </component>
   <component name="antWorkspaceConfiguration">
@@ -446,69 +530,14 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/script/querystring.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/script/readfile.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/script/search-onweb.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="14" selection-start="106" selection-end="116" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/script/storages.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/script/tabs.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="77" selection-start="452" selection-end="452" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/manifest.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="70" column="40" selection-start="1720" selection-end="1733" vertical-scroll-proportion="0.37453645">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavascriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/AJAX.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="14" selection-start="98" selection-end="112" vertical-scroll-proportion="-0.7044476">
-          <folding />
-        </state>
+        <state line="6" column="14" selection-start="98" selection-end="112" vertical-scroll-proportion="-0.7044476" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/script/geoapi.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="54" column="95" selection-start="2072" selection-end="2072" vertical-scroll-proportion="0.18063584">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/popup_dialog.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="75" column="82" selection-start="5012" selection-end="5018" vertical-scroll-proportion="0.6580938">
-          <folding />
-        </state>
+        <state line="54" column="95" selection-start="2072" selection-end="2072" vertical-scroll-proportion="0.18063584" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/style/popup_dialog.css">
@@ -520,9 +549,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/script/i18n.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="96" column="51" selection-start="3185" selection-end="3185" vertical-scroll-proportion="0.18297872">
-          <folding />
-        </state>
+        <state line="96" column="51" selection-start="3185" selection-end="3185" vertical-scroll-proportion="0.18297872" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/script/contents.js">
@@ -561,6 +588,81 @@
     <entry file="file://$PROJECT_DIR$/script/common.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="598" column="43" selection-start="18471" selection-end="18471" vertical-scroll-proportion="0.37939698">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/background.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="15" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/script/ninegrid.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="58" column="0" selection-start="1403" selection-end="1403" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ninegrid.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="290" column="9" selection-start="13561" selection-end="13561" vertical-scroll-proportion="-8.354838">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/script/addata.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/script/Minimal.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="31" selection-start="152" selection-end="161" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#191#1244#0" expanded="false" />
+            <element signature="e#1364#2497#0" expanded="false" />
+            <element signature="e#2562#2950#0" expanded="false" />
+            <element signature="e#3006#3399#0" expanded="false" />
+            <element signature="e#3462#3591#0" expanded="false" />
+            <element signature="e#3660#3889#0" expanded="false" />
+            <element signature="e#3945#4069#0" expanded="false" />
+            <element signature="n#!!block;n#getStructuredData#0" expanded="false" />
+            <element signature="n#!!block;n#normalizeHexColor#0" expanded="false" />
+            <element signature="n#!!block;n#cssUrl#0" expanded="false" />
+            <element signature="n#!!block;n#pxToNumber#0" expanded="false" />
+            <element signature="n#!!block;n#Product#0" expanded="false" />
+            <element signature="e#5928#6051#0" expanded="false" />
+            <element signature="e#6104#6201#0" expanded="false" />
+            <element signature="n#!!block;n#FillImage#0" expanded="false" />
+            <element signature="e#6948#7025#0" expanded="false" />
+            <element signature="e#7187#7473#0" expanded="false" />
+            <element signature="e#7520#8604#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/style/ninegrid.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="110" column="5" selection-start="1627" selection-end="1627" vertical-scroll-proportion="0.0">
+          <folding>
+            <marker date="1396250748765" expanded="true" signature="1123:1143" placeholder="{...}" />
+            <marker date="1396250748765" expanded="true" signature="1215:1350" placeholder="{...}" />
+            <marker date="1396250748765" expanded="true" signature="1365:1583" placeholder="{...}" />
+            <marker date="1396250748765" expanded="true" signature="1681:1738" placeholder="{...}" />
+            <marker date="1396250748765" expanded="true" signature="1766:1802" placeholder="{...}" />
+            <marker date="1396250748765" expanded="true" signature="1852:1887" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/popup_dialog.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="75" column="82" selection-start="5012" selection-end="5018" vertical-scroll-proportion="0.68496734">
           <folding />
         </state>
       </provider>

@@ -66,7 +66,7 @@ var ContentAPI =
             var html = "<div id='btnLanguageTranslatorCollapse' class='collapselink' title='Collapse/Expand Me!' href='javascript:void(0);'></div>"
                  + "<div id='btnLanguageTranslatorDisable' class='disablelink' title='Enable/Disable Popup!' href='javascript:void(0);'></div>"
                  + "<div id='btnLanguageTranslatorClose' class='closelink' title='Close Me! Reload page to Translate!' href='javascript:void(0);'></div>"
-                 + "<iframe id='" + ElementIds.PopupIFrame + "' width='326px' height='455px' style='border: 1px #BDBDBD solid; margin: -1px -1px -1px -1px; padding: 0px 0px 0px 1px; display: none;' src='" + ProductURIs.PopupIFramePage + "'></iframe>";
+                 + "<iframe id='" + ElementIds.PopupIFrame + "' width='326px' height='455px' style='background-color:white; border: 1px #BDBDBD solid; margin: -1px -1px -1px -1px; padding: 0px 0px 0px 1px; display: none;' src='" + ProductURIs.PopupIFramePage + "'></iframe>";
             // iframe: width='326px' height='450px'
             divContainer = DomAPI.createElement("div");
             divContainer.setAttribute("id", ElementIds.WebPagePopupDiv);
