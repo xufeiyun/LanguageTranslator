@@ -5,7 +5,7 @@
 var prefix = "[COMMON SCRIPTS]: "
 
 var ReleaseId = "hfcnemnjojifmhdgdbhnhiinmjdohlel"; // release key
-var ExtenionUID = chrome.i18n.getMessage("@@extension_id"); //extension id: __MSG_@@extension_id__
+var ExtensionUID = chrome.i18n.getMessage("@@extension_id"); //extension id: __MSG_@@extension_id__
 
 var NewLine = "\r\n";
 var Comma = ","
@@ -16,7 +16,7 @@ var EmptyText = "";
 var TrueValue = "true";
 var UsePageAction = false;
 
-var IsDebugger = (ExtenionUID == "dppekmccnfhabjbkalkadbhofdlhpnld" || ExtenionUID == "fhpodiibcajbmcllgnoaggldkfanoijo");  // develop key
+var IsDebugger = (ExtensionUID == "dppekmccnfhabjbkalkadbhofdlhpnld" || ExtensionUID == "fhpodiibcajbmcllgnoaggldkfanoijo");  // develop key
 
 // output current locale
 i18n.PrintLocale();
@@ -52,7 +52,7 @@ var PronounceAudios = {
 
 var ProductURIs = {
     Product: "https://chrome.google.com/webstore/detail/the-language-translator/" + ReleaseId,
-    PopupIFramePage: "chrome-extension://" + ExtenionUID + "/popup_dialog.html",
+    PopupIFramePage: "chrome-extension://" + ExtensionUID + "/popup_dialog.html",
     WikiPediaEN: "http://en.wikipedia.org/wiki/",
     WikiPediaCN: "http://zh.wikipedia.org/wiki/",
     WebpagePopup: "https://dl.yunio.com/pub/0LpA2l?name=webpage_popup.txt",
@@ -455,7 +455,7 @@ var MsgBusAPI = {
         LoggerAPI.logD("#msg_send: callback function: " + CommonAPI.getFunctionName(callback));
         LoggerAPI.logD("#msg_send: sending message...");
         chrome.runtime.sendMessage(
-            ExtenionUID,
+            ExtensionUID,
             { type: type, message: message },
             function (response) { MsgBusAPI._msg_resp(response, callback); }
         );
@@ -779,6 +779,10 @@ var MsgBusAPI = {
                 sendResponse({ type: type, message: "rcvmsg_cs: [#NOT FEATURED#]" });
             }
         }
+    },
+
+    rcvmsg_ninegrid: function (request, sender, sendResponse)
+    {
     }
 
 };

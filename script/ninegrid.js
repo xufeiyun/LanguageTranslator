@@ -6,9 +6,38 @@ var CLEAR_GIF = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAA
 
 var NineGridAPI = {
 
+    SourceText: "",
+
     Initialize: function ()
     {
         addDOMLoadEvent(this.ensureInit);
+
+        var wiki = $("#baidu_wiki");
+        if (wiki.length == 0)
+        {
+            wiki = document.getElementById('baidu_wiki');
+        };
+        if (wiki)
+        {
+            wiki.click(function (e)
+            {
+                WikiAPI.fromBaiduAPI(NineGridAPI.SourceText);
+            });
+        }
+
+        if (typeof (chrome) != "undefined")
+        {
+            //chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) { MsgBusAPI.rcvmsg_ninegrid(request, sender, sendResponse); });
+        }
+
+        // get selected text
+        MsgBusAPI.msg_send(OperatorType.getSelectText, "", NineGridAPI.resp_ninegrid);
+    },
+
+    resp_ninegrid: function (response)
+    {
+        NineGridAPI.SourceText = response.message;
+        console.error(response.message);
     },
 
     ensureInit: function ()

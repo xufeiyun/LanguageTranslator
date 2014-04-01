@@ -8,7 +8,7 @@ var WikiAPI = {
     openHomepage: function ()
     {
         // ok
-        WikiAPI.fromHomepage(ExtenionUID);
+        WikiAPI.fromHomepage(ExtensionUID);
     },
     openWikipage: function (word)
     {
@@ -74,7 +74,7 @@ var WikiAPI = {
             LoggerAPI.logW(prefix + "chrome.tabs is NOT defined!");
             if (url.indexOf("://") == -1)
             {
-                url = "chrome-extension://" + ExtenionUID + "/" + url;
+                url = "chrome-extension://" + ExtensionUID + "/" + url;
             }
             if (url.indexOf("http") == 0)
             {

@@ -66,6 +66,7 @@
                     "script/search-onweb.js",
                     "script/addDOMLoadEvent.js",
                     "script/popup_dialog.js",
+                    "script/ninegrid.js",
                     "script/contents.js"
                 ],
                 "run_at": "document_idle",
@@ -79,7 +80,10 @@
       "image/volume_max.png",
       "image/glyphicons-halflings.png",
       "image/google_wallet_logo.png",
+
       "popup_dialog.html",
+      "ninegrid.html",
+
       "script/i18n.js",
       "script/geo.js",
       "script/geoapi.js",
@@ -88,6 +92,7 @@
       "script/jquery.watermark.min.js",
       "script/common.js",
       "script/translators.js",
+      "script/popup_dialog.js",
       "script/popup_dialog.js",
       "script/jquery-1.10.1.min.js",
       "script/jquery-1.10.1.min.map",

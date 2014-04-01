@@ -31,6 +31,8 @@ var DialogAPI =
 
         i18n.SetLocalization();
 
+        DialogAPI.bindTabsFeature();
+
         DialogAPI.bindTextEvent();
 
         DialogAPI.bindTopLinkEvent();
@@ -45,6 +47,33 @@ var DialogAPI =
     fnDOMLoadCompleted: function ()
     {
         LoggerAPI.logD("DOM loaded completely - popup dialog.");
+    },
+
+    bindTabsFeature: function ()
+    {
+        var popup = $("#PopupTabFeature");
+        var btnSource = $("#btnSourceText");
+        var updateSource = function ()
+        {
+            var src = popup.attr('src');
+            if (src != 'ninegrid.html')
+            {
+                popup.attr('src', 'ninegrid.html');
+            }
+        };
+        btnSource.mouseenter(function (e)
+        {
+            updateSource();
+            popup.show();
+        }).mousemove(function (e)
+        {
+            updateSource();
+            popup.show();
+        }).mouseout(function (e)
+        {
+            //popup.hide();
+        });
+        popup.mouseout(function (e) { popup.hide(); });
     },
 
     bindTextEvent: function ()

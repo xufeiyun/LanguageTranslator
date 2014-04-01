@@ -40,31 +40,42 @@ hr {
 
 .palletSize, .palletArea, .tabNavigator
 {
-    width: 320px;
+    width: 324px;
 }
 
 .palletSize {
-    height:420px;
+    height:340px;
 }
 
 .palletArea {
     height: 100%;
-    box-shadow: inset 0 0 0 1px black;
+    border-radius: 5px;
+    box-shadow: inset 0 0 0 1px #cfcff8; /*#d8e8e8*/
 }
 
 .tabNavigator{
     height: 40px;
 }
 
+/* tabs */
 #tabNineGrid
 {
-    width: 318px;
+    width: 322px;
+    font-weight: normal;
+}
+#tabNineGrid a:hover
+{
+    color: red;
+}
+.active a
+{
+    color: #0094ff!important;
 }
 
 .productPallet {
     width: 310px;
-    height: 364px;
-    margin-left: 12px;
+    height: 290px;
+    margin-left: 14px;
     border: 1px solid transparent;
     clear: both;
     padding: 1px;
@@ -73,17 +84,23 @@ hr {
 
 .productTitle
 {
-    padding-left: 4px;
+    width: 285px;
+    padding-left: 0px;
     padding-top: 4px;
     padding-bottom: 4px;
     font: caption;
-    color: #8b8bff;
+    background-color: transparent;
+    font-weight: lighter;
+    
+    color: #808080;
 }
 
 .productCell,.productCellText {
     padding: 0px; 
+    
     width: 68px;
     height: 68px;
+    
     margin: 1.5px;
     float: left;
     box-shadow: 0 0 0 1px lightgray;

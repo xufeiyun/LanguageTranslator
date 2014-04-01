@@ -446,7 +446,7 @@ var ContentAPI =
 
     _update_icons: function ()
     {
-        var img = "url(chrome-extension://" + ExtenionUID + "/image/glyphicons-halflings.png)";
+        var img = "url(chrome-extension://" + ExtensionUID + "/image/glyphicons-halflings.png)";
         //LoggerAPI.logD(img);
         DomAPI.getById(ElementIds.PopupButtonCollapse, pDocument).style.backgroundImage = img;
         DomAPI.getById(ElementIds.PopupButtonDisable, pDocument).style.backgroundImage = img;

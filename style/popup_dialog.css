@@ -95,7 +95,7 @@
     border-top-right-radius:  1%;
     border-bottom-left-radius: 1%;
     border-bottom-right-radius: 1%;
-    z-index: 1000000;
+    z-index: 1000002;
     
     line-height: 20px;
     margin-left: 0px!important;
@@ -258,6 +258,24 @@ fieldset
     margin: 0;
     border: 0;
 }
+
+
+
+.PopupTabFeature
+{
+    z-index: 9999999999999999999999999999999;
+    position: fixed;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    top: 58px;
+    left: 0px;
+    width: 400px;
+    min-height: 340px;
+    border: 0px;
+}
+
+
+
 
 .PopupSearchDiv {
     display: inline;
