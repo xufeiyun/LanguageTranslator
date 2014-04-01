@@ -73,6 +73,8 @@ var tabs = new Array(
             var imgBasePath = "image/ninegrid/";
             var appendItems = function (tabId, title, image) {
                 var tab = $("#" + tabId);
+				if (tab == null || tab.length == 0) { return false; }
+				
                 var div = DomAPI.createElement("div");
                 var img = DomAPI.createElement("img");
                 img.alt = title;
@@ -101,14 +103,18 @@ var tabs = new Array(
                         WikiAPI.fromBaiduAPI(NineGridAPI.SourceText);
                     });
                 }
+				return true;
             };
 
             // load each tab & its items
             tabs.forEach(function (o) {
                 var tabId = o.t;
                 var data = o.d;
+				var result = true;
                 data.forEach(function (o) {
-                    appendItems(tabId, o.t, o.d);
+                    if (result) {
+						result = appendItems(tabId, o.t, o.d);
+					}					
                 });
             });
         },
