@@ -67,8 +67,9 @@ hr {
 {
     color: red;
 }
-.active a
+.active, .active a
 {
+	cursor: pointer!important;
     color: #0094ff!important;
 }
 
