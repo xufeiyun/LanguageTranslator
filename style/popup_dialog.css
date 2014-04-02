@@ -260,7 +260,6 @@ fieldset
 }
 
 
-
 .PopupTabFeature
 {
     z-index: 9999999999999999999999999999999;
@@ -269,9 +268,14 @@ fieldset
     margin-bottom: 0px;
     top: 58px;
     left: 0px;
-    width: 400px;
-    min-height: 340px;
+    
+    min-width: 324px;
+    width: 324px;
+    min-height: 342px;
+    height: 342px;
+    
     border: 0px;
+    border-width: 0px;
 }
 
 

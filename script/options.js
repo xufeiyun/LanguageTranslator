@@ -39,7 +39,7 @@ var OptionAPI =
         OptionAPI.bindLegendEvent();
 
         // open page for h*
-        $("h1").click(WikiAPI.openHomepage);
+        $("h1").click(WikiAPI.fromHomepage);
 
         // load settings for Options page
         MsgBugAPI.msg_send(OperatorType.loadSettings, null, OptionAPI.resp_option);

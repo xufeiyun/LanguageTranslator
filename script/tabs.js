@@ -6,7 +6,7 @@
 var TabsAPI =
 {
     Initialize: function() {
-        bindLinkEvents();
+        this.bindLinkEvents();
     },
 
     bindLinkEvents: function(){

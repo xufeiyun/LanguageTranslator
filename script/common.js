@@ -4,8 +4,11 @@
 
 var prefix = "[COMMON SCRIPTS]: "
 
-var ReleaseId = "hfcnemnjojifmhdgdbhnhiinmjdohlel"; // release key
-var ExtensionUID = chrome.i18n.getMessage("@@extension_id"); //extension id: __MSG_@@extension_id__
+var ReleaseId = "hfcnemnjojifmhdgdbhnhiinmjdohlel"; /* release key */
+var DebugId1 = "dppekmccnfhabjbkalkadbhofdlhpnld";  /* develop key */
+var DebugId2 = "fhpodiibcajbmcllgnoaggldkfanoijo";  /* develop key */
+var getExtensionId = function () { var id = ""; try { id = chrome.i18n.getMessage("@@extension_id"); /*extension id: __MSG_@@extension_id__*/ } catch (e) { id = DebugId1; } return id; };
+var ExtensionUID = getExtensionId();
 
 var NewLine = "\r\n";
 var Comma = ","
@@ -16,10 +19,23 @@ var EmptyText = "";
 var TrueValue = "true";
 var UsePageAction = false;
 
-var IsDebugger = (ExtensionUID == "dppekmccnfhabjbkalkadbhofdlhpnld" || ExtensionUID == "fhpodiibcajbmcllgnoaggldkfanoijo");  // develop key
+var IsDebugger = (ExtensionUID == DebugId1 || ExtensionUID == DebugId2);
+
+String.prototype.contains = function (value) {
+    var result = false;
+    var source = "" + this.valueOf();
+    result = source.indexOf(value) >= 0;
+    return result;
+};
+String.prototype.startsWith = function (value) {
+    var result = false;
+    var source = "" + this.valueOf();
+    result = source.indexOf(value) == 0;
+    return result;
+};
 
 // output current locale
-i18n.PrintLocale();
+if (!window.location.href.startsWith('file://')) { i18n.PrintLocale(); }
 
 var OperatorType = {
     getSelectText: "OperatorTypeKey_GetSelectText",
@@ -53,6 +69,7 @@ var PronounceAudios = {
 var ProductURIs = {
     Product: "https://chrome.google.com/webstore/detail/the-language-translator/" + ReleaseId,
     PopupIFramePage: "chrome-extension://" + ExtensionUID + "/popup_dialog.html",
+    NineGridIFramePage: "chrome-extension://" + ExtensionUID + "/ninegrid.html",
     WikiPediaEN: "http://en.wikipedia.org/wiki/",
     WikiPediaCN: "http://zh.wikipedia.org/wiki/",
     WebpagePopup: "https://dl.yunio.com/pub/0LpA2l?name=webpage_popup.txt",
@@ -266,79 +283,65 @@ var LoggerAPI = {
 };
 
 var DomAPI = {
-    getElement: function (id, pDocument)
-    {
+    getElement: function (id, pDocument) {
         // return jquery object
-        if (pDocument != undefined && pDocument != null)
-        {
+        if (pDocument != undefined && pDocument != null) {
             return $(pDocument.getElementById(id));
             //return $(pDocument.documentElement).children("body").children("[id='" + id + "']")
         }
-        else
-        {
+        else {
             return $(DomAPI.getById(id));
         }
     },
 
-    getById: function (id, pDocument)
-    {
+    getById: function (id, pDocument) {
         // return html element
-        if (pDocument != undefined && pDocument != null)
-        {
+        if (pDocument != undefined && pDocument != null) {
             return pDocument.getElementById(id)
         }
-        else
-        {
+        else {
             return DomAPI.getDocument().getElementById(id);
         }
     },
-    appendChild: function (element, pDocument)
-    {
-        if (pDocument != undefined && pDocument != null)
-        {
+    appendChild: function (element, pDocument) {
+        if (pDocument != undefined && pDocument != null) {
             pDocument.body.appendChild(element);
         }
-        else
-        {
+        else {
             DomAPI.getDocument().body.appendChild(element);
         }
     },
-    createElement: function (tag)
-    {
+    createElement: function (tag) {
         return DomAPI.getDocument().createElement(tag);
     },
 
 
-    getsByTag: function (tag)
-    {
+    getsByTag: function (tag) {
         return DomAPI.getDocument().getElementsByTagName(tag);
     },
 
-    getDocument: function ()
-    {
-        //var doc = document;
-        var doc = top.window.document;
+    getDocument: function () {
+        var doc = null;
+        try {
+            var doc = top.window.document;
+        } catch (e) {
+            doc = document;
+        }
         return doc;
     },
 
-    getValue: function (element, key)
-    {
-        if (element)
-        {
+    getValue: function (element, key) {
+        if (element) {
             return element.getAttribute(key);
-        } else
-        {
+        } else {
             return "";
         }
     },
 
-    setValue: function (element, key, value)
-    {
-        if (element)
-        {
+    setValue: function (element, key, value) {
+        if (element) {
             return element.setAttribute(key, value);
-        } else
-        {
+        } else {
             return "";
         }
     }
@@ -450,8 +453,10 @@ var AudioAPI =
 
 var MsgBusAPI = {
     // content script => outer
-    msg_send: function (type, message, callback)
-    {
+    msg_send: function (type, message, callback) {
+        var url = window.location.href;
+        if (url.startsWith('file://')) { console.warn("[MSG NOT SEND] You may access file locally: " + url); return false; }
+
         LoggerAPI.logD("#msg_send: callback function: " + CommonAPI.getFunctionName(callback));
         LoggerAPI.logD("#msg_send: sending message...");
         chrome.runtime.sendMessage(
@@ -462,12 +467,10 @@ var MsgBusAPI = {
     },
 
     // background => content script
-    msg_bgd2tab: function (type, message, callback)
-    {
+    msg_bgd2tab: function (type, message, callback) {
         LoggerAPI.logD("#msg_bgd2tab: callback function: " + CommonAPI.getFunctionName(callback));
         LoggerAPI.logD("#msg_bgd2tab: sending message...");
-        var queryResponse = function (tabs)
-        {
+        var queryResponse = function (tabs) {
             chrome.tabs.sendMessage(
                 tabs[0].id,
                 { type: type, message: message },
@@ -478,33 +481,27 @@ var MsgBusAPI = {
     },
 
     // response callback
-    msg_resp: function (response)
-    {
-        if (response != null)
-        {
+    msg_resp: function (response) {
+        if (response != null) {
             LoggerAPI.logD("#msg_resp: Received RESPONSE#: type=>" + response.type + ", message=>" + response.message);
         }
-        else
-        {
+        else {
             LoggerAPI.logW("#msg_resp: Received RESPONSE#: response is null");
         }
     },
 
-    _msg_resp: function (response, callback)
-    {
+    _msg_resp: function (response, callback) {
         MsgBusAPI.msg_resp(response);
 
         // invoke user's callback function
-        if (callback != undefined && callback != null)
-        {
+        if (callback != undefined && callback != null) {
             callback(response);
         }
         return true;
     },
 
     // receivers
-    rcvmsg_iframe: function (request, sender, sendResponse)
-    {
+    rcvmsg_iframe: function (request, sender, sendResponse) {
         LoggerAPI.logD("rcvmsg_iframe: Received TYPE: " + request.type + ", MESSAGE [" + request.message + "] " + msg);
 
         var msg = (sender.tab ?
@@ -515,32 +512,25 @@ var MsgBusAPI = {
         var message = request.message;
         var send = (typeof (sendResponse) == "function");
 
-        if (!CommonAPI.isValidText(type))
-        {
+        if (!CommonAPI.isValidText(type)) {
             LoggerAPI.logE("rcvmsg_iframe: Message received is null or empty");
         }
-        else if (type == OperatorType.getSelectText)
-        {
+        else if (type == OperatorType.getSelectText) {
             TranslatorAPI.translate(message);
         }
-        else if (type == OperatorType.copySelectText)
-        {
-            if (CommonAPI.isValidText(message))
-            {
+        else if (type == OperatorType.copySelectText) {
+            if (CommonAPI.isValidText(message)) {
                 StorageAPI.setItem(OperatorType.copySelectText, message);
                 var result = window.Clipboard.copy(message);
                 if (result) { LoggerAPI.logD("rcvmsg_iframe: Copied text OK."); }
             }
         }
-        else if (type == OperatorType.showPageAction)
-        {
+        else if (type == OperatorType.showPageAction) {
             //chrome.pageAction.show(sender.tab.id);
         }
-        else if (type == OperatorType.viewWikipages)
-        {
+        else if (type == OperatorType.viewWikipages) {
             showWikipages(message);
-            if (CommonAPI.isValidText(message))
-            {
+            if (CommonAPI.isValidText(message)) {
                 LoggerAPI.logD("rcvmsg_iframe: Try to open wikipage");
                 {
                     // fromWikipedia(message);	// ok
@@ -552,26 +542,21 @@ var MsgBusAPI = {
                 }
             }
         }
-        else if (type == OperatorType.viewHomepage)
-        {
+        else if (type == OperatorType.viewHomepage) {
             showHomepage(message);
         }
-        else
-        {
-            if (send)
-            {
+        else {
+            if (send) {
                 sendResponse({ type: type, message: "rcvmsg_iframe: #IFRAME SEND RESPONSE# Received Message:" + message });
             }
-            else
-            {
+            else {
                 LoggerAPI.logW(prefix, "rcvmsg_iframe: NOT defined the response function!");
             }
         }
 
     },
 
-    rcvmsg_background: function (request, sender, sendResponse)
-    {
+    rcvmsg_background: function (request, sender, sendResponse) {
         LoggerAPI.logD("rcvmsg_background: Received TYPE: " + request.type + ", MESSAGE [" + request.message + "] " + msg);
 
         var msg = (sender.tab ?
@@ -582,30 +567,23 @@ var MsgBusAPI = {
         var message = request.message;
         var send = (typeof (sendResponse) == "function");
 
-        if (!CommonAPI.isValidText(type))
-        {
+        if (!CommonAPI.isValidText(type)) {
             LoggerAPI.logE("rcvmsg_background: Message received is null or empty");
         }
-        else if (type == OperatorType.copySelectText)
-        {
-            if (CommonAPI.isValidText(message))
-            {
+        else if (type == OperatorType.copySelectText) {
+            if (CommonAPI.isValidText(message)) {
                 StorageAPI.setItem(type, message);
                 var result = window.Clipboard.copy(message);
                 //if (result) { LoggerAPI.logD("rcvmsg_bgd: Copied text OK."); }
                 //MsgBusAPI.msg_bgd2tab(type, message);
             }
         }
-        else if (type == OperatorType.getSelectText)
-        {
-            if (send)
-            {
-                if (CommonAPI.isValidText(message))
-                {
+        else if (type == OperatorType.getSelectText) {
+            if (send) {
+                if (CommonAPI.isValidText(message)) {
                     StorageAPI.setItem(type, message);
                 }
-                else
-                {
+                else {
                     message = StorageAPI.getItem(type);
                 }
                 //var textToTranslated = window.Clipboard.paste();
@@ -614,45 +592,36 @@ var MsgBusAPI = {
                 MsgBusAPI.msg_bgd2tab(type, message);   // this is for page dialog
                 sendResponse({ type: type, message: textToTranslated });    // this is for extension dialog
             }
-            else
-            {
+            else {
                 LoggerAPI.logW(prefix, "rcvmsg_background: NOT defined the response function!");
             }
         }
-        else if (type == OperatorType.speakText)
-        {
+        else if (type == OperatorType.speakText) {
             chrome.tts.speak(message);
         }
-        else if (type == OperatorType.showPageAction)
-        {
+        else if (type == OperatorType.showPageAction) {
             //chrome.pageAction.show(sender.tab.id);
         }
-        else if (type == OperatorType.openOptionPage)
-        {
-            if (chrome.tabs)
-            {
-                var toCaller = function (tab)
-                {
+        else if (type == OperatorType.openOptionPage) {
+            if (chrome.tabs) {
+                var toCaller = function (tab) {
                     var response = { type: type, message: "To Open Page: " + message, object: tab };
                     sendResponse(response);
                 };
 
                 chrome.tabs.create({ url: message }, toCaller);
             }
-            else
-            {
+            else {
                 LoggerAPI.logW(prefix + "chrome.tabs is NOT defined!");
             }
         }
-        else if (type == OperatorType.setBaikeSetting)
-        {
+        else if (type == OperatorType.setBaikeSetting) {
             // set data
             StorageAPI.setItem(OptionItemKeys.IsPageControl, message.control);
             StorageAPI.setItem(OptionItemKeys.BaikeType, message.type);
             StorageAPI.setItem(OptionItemKeys.BaikeWord, message.value);
         }
-        else if (type == OperatorType.getBaikeSetting)
-        {
+        else if (type == OperatorType.getBaikeSetting) {
             // get data
             var data = {
                 control: StorageAPI.getItem(OptionItemKeys.IsPageControl),
@@ -667,8 +636,7 @@ var MsgBusAPI = {
 
             sendResponse({ type: type, message: data, object: data });
         }
-        else if (type == OperatorType.loadSettings)
-        {
+        else if (type == OperatorType.loadSettings) {
             // tell options to load settings
             var data = {
                 EnableTranslation: StorageAPI.getItem(OptionItemKeys.EnableTranslation),
@@ -685,8 +653,7 @@ var MsgBusAPI = {
             // MsgBusAPI.bgd2tab(OperatorType.loadSettings, data)
             sendResponse({ type: type, message: data });
         }
-        else if (type == OperatorType.saveSettings)
-        {
+        else if (type == OperatorType.saveSettings) {
             // start to save settings
             var data = message.message;
             StorageAPI.setItem(OptionItemKeys.EnableTranslation, data.EnableTranslation);
@@ -698,30 +665,24 @@ var MsgBusAPI = {
 
             sendResponse({ type: OperatorType.savedSettings, message: data });
         }
-        else if (type == OperatorType.viewWikipages)
-        {
-            if (CommonAPI.isValidText(message))
-            {
+        else if (type == OperatorType.viewWikipages) {
+            if (CommonAPI.isValidText(message)) {
                 LoggerAPI.logD("rcvmsg_background: Try to open wikipage");
                 openWikipage(message);
             }
         }
-        else
-        {
-            if (send)
-            {
+        else {
+            if (send) {
                 sendResponse({ type: type, message: "rcvmsg_background: #BACKGROUND SEND RESPONSE# Received Message:" + message });
             }
-            else
-            {
+            else {
                 LoggerAPI.logW(prefix, "rcvmsg_background: NOT defined the response function!");
             }
         }
         return true;
     },
 
-    rcvmsg_content: function (request, sender, sendResponse)
-    {
+    rcvmsg_content: function (request, sender, sendResponse) {
         LoggerAPI.logD("rcvmsg_content: Received type: " + request.type + ", message [" + request.message + "] " + msg);
 
         var msg = (sender.tab ?
@@ -731,24 +692,19 @@ var MsgBusAPI = {
         LoggerAPI.logD("rcvmsg_content: Received type: " + request.type + ", message [" + request.message + "] " + msg);
 
         var send = (typeof (sendResponse) == "function");
-        if (!send)
-        {
+        if (!send) {
             LoggerAPI.logW("rcvmsg_cs: NOT defined the response function!");
         }
-        else
-        {
+        else {
             var type = request.type;
             var message = request.message;
 
-            if (!CommonAPI.isValidText(type))
-            {
+            if (!CommonAPI.isValidText(type)) {
                 LoggerAPI.logW("rcvmsg_cs: Message received is null or empty");
             }
-            else if (type == OperatorType.getSelectText)
-            {
+            else if (type == OperatorType.getSelectText) {
                 var text = ContentAPI.getSelectedText().toString();
-                if (CommonAPI.isValidText(text))
-                {
+                if (CommonAPI.isValidText(text)) {
                     LoggerAPI.logD("rcvmsg_cs: replied text [" + text + "] by response function...");
                     sendResponse({ type: type, message: text });
                 }
@@ -772,8 +728,7 @@ var MsgBusAPI = {
             // {
             // 	LoggerAPI.logW("rcvmsg_cs: to open home page");
             // }
-            else
-            {
+            else {
                 LoggerAPI.logE("rcvmsg_cs: feature NOT IMPLEMENTED type: " + type);
                 // other features
                 sendResponse({ type: type, message: "rcvmsg_cs: [#NOT FEATURED#]" });
@@ -781,8 +736,7 @@ var MsgBusAPI = {
         }
     },
 
-    rcvmsg_ninegrid: function (request, sender, sendResponse)
-    {
+    rcvmsg_ninegrid: function (request, sender, sendResponse) {
     }
 
 };

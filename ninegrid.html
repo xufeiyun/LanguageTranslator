@@ -2,14 +2,14 @@
 <html>
     <head>
         <title>Nine Grid</title>
-        
+
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"/>
         <link rel="stylesheet" href="bootstrap/css/flat-ui-fonts.css"/>
         <link rel="stylesheet" type="text/css" href="style/ninegrid.css">
-        
+
         <script type="text/javascript" src="script/addDOMLoadEvent.js"></script>
         <script type="text/javascript" src="script/jquery-1.10.1.min.js"></script>
-	    <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="script/i18n.js"></script>
         <script type="text/javascript" src="script/common.js"></script>
         <script type="text/javascript" src="script/wikipages.js"></script>
@@ -18,37 +18,37 @@
 
     <body class="palletSize">
         <div class="palletArea">
-            
+
             <div class="tabNavigator" id="tabNavigator" style="padding: 1px;">
                 <ul class="nav nav-tabs" id="tabNineGrid">
-                    <li class="active"><a href="#wiki" data-toggle="tab">Wiki</a></li>
-                    <li><a href="#search" data-toggle="tab">Search</a></li>
-                    <li><a href="#share" data-toggle="tab">Share</a></li>
-                    <li class="hide"><a href="#study" data-toggle="tab">Study</a></li>
-                    <li class="hide"><a href="#card" data-toggle="tab">Card</a></li>
+                    <li class="active"><a id="ng_wiki_tab" title="" href="#ng_wiki" data-toggle="tab">Wiki</a></li>
+                    <li class=""><a id="ng_search_tab" title="" href="#ng_search" data-toggle="tab">Search</a></li>
+                    <li class=""><a id="ng_share_tab" title="" href="#ng_share" data-toggle="tab">Share</a></li>
+                    <li class="hide"><a id="ng_study_tab" title="" href="#ng_study" data-toggle="tab">Study</a></li>
+                    <li class="hide"><a id="ng_card_tab" title="" href="#ng_card" data-toggle="tab">Card</a></li>
                 </ul>
             </div>
-                
+
             <div class="tab-content">
 
-                <div class="tab-pane productPallet active" id="wiki">
-                    <div class="productTitle">View Encyclopedia of Text via:</div>
+                <div class="tab-pane productPallet active" id="ng_wiki">
+                    <div id="ng_wiki_title" title="" class="productTitle">View Encyclopedia of Text via:</div>
                 </div>
 
-                <div class="tab-pane productPallet" id="search">
-                    <div class="productTitle">Search Text on Internet via:</div>
+                <div class="tab-pane productPallet" id="ng_search">
+                    <div id="ng_search_title" title="" class="productTitle">Search Text on Internet via:</div>
                 </div>
 
-                <div class="tab-pane productPallet" id="share">                        
-                    <div class="productTitle">Share to below websites via:</div>
+                <div class="tab-pane productPallet" id="ng_share">
+                    <div id="ng_share_title" title="" class="productTitle">Share to below websites via:</div>
                 </div>
 
-                <div class="tab-pane productPallet" id="study">
-                    <div class="productTitle">Study words history:</div>
+                <div class="tab-pane productPallet" id="ng_study">
+                    <div id="ng_study_title" title="" class="productTitle">Study words history:</div>
                 </div>
-                
-                <div class="tab-pane productPallet" id="card">
-                    <div class="productTitle">Study words history:</div>
+
+                <div class="tab-pane productPallet" id="ng_card">
+                    <div id="ng_card_title" title="" class="productTitle">Manage words history:</div>
                 </div>
 
             </div>

@@ -435,11 +435,11 @@ var ContentAPI =
         {
             if (type == BaikeType.tencent)
             {
-                WikiAPI.setPage_TencentAPI(isPageControl, value);
+                WikiAPI.setPage_TencentWiki(isPageControl, value);
             }
             if (type == BaikeType.baidu)
             {
-                WikiAPI.setPage_BaiduAPI(isPageControl, value);
+                WikiAPI.setPage_BaiduWiki(isPageControl, value);
             }
         }
     },
