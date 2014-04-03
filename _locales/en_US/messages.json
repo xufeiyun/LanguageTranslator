@@ -20,7 +20,7 @@
        "message":"View Encyclopedia"
     },
    "SourceTextsPlaceholder": {
-       "message":"SELECT text on page or TYPE here, wait a moment!<br/>Ctrl+Enter: Translate immediately."
+       "message":"SELECT text on page or TYPE here...<br/>Ctrl+Enter: Translate immediately."
     },
    "SourceSoundTooltip": {
        "message":"Pronunciation of Source Text"

@@ -62,17 +62,17 @@ hr {
 {
     width: 322px;
     font-weight: normal;
-}
-#tabNineGrid a:hover
-{
-    color: red;
+    color: #0094ff;
 }
 .active, .active a
 {
 	cursor: pointer!important;
-    color: #0094ff!important;
 }
 
+.productTitle, .active, .active a, #tabNineGrid a:hover, .productCell:hover, .productCellText:hover
+{
+    color: #FF8C00!important;
+}
 .productPallet {
     width: 310px;
     height: 290px;
@@ -92,8 +92,6 @@ hr {
     font: caption;
     background-color: transparent;
     font-weight: lighter;
-    
-    color: #FF1493;
 }
 
 .productCell,.productCellText {
@@ -115,7 +113,6 @@ hr {
 
 .productCell:hover, .productCellText:hover {
     box-shadow:  0 0 0 1px red;
-    color: #f00;
     background-color: lightgray;
 }
 

@@ -13,9 +13,11 @@ var TranslatorAPI =
     /* entry for translating word */
     translate: function (message)
     {
-        LoggerAPI.logD("TRANSLATE..."); if (typeof (message) == "undefined") return false;
-
+        if (typeof (message) == "undefined") return false;
+        
         message = $.trim(message);
+
+        LoggerAPI.logD("TRANSLATE TEXT: " + message);
 
         if (!CommonAPI.isValidText(message))
         {

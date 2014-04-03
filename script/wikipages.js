@@ -24,13 +24,13 @@ var WikiAPI = {
                 WikiAPI.fromWikipediaCN(word);
             }
             else if (OptionItemValues.DefaultBaike == BaikeType.tencent) {
-                WikiAPI.fromTencentAPI(word);
+                WikiAPI.fromTencentWiki(word);
             }
             else if (OptionItemValues.DefaultBaike == BaikeType.baidu) {
-                WikiAPI.fromBaiduAPI(word);
+                WikiAPI.fromBaiduWiki(word);
             }
             else {
-                WikiAPI.fromGoogle(word);
+                SearchAPI.fromGoogleAPI(word);
             }
         }
         else {
@@ -38,16 +38,17 @@ var WikiAPI = {
                 WikiAPI.fromWikipediaEN(word);
             }
             else if (OptionItemValues.DefaultBaike == BaikeType.tencent) {
-                SearchAPI.fromTencentAPI(word);
+                WikiAPI.fromTencentWiki(word);
             }
             else if (OptionItemValues.DefaultBaike == BaikeType.baidu) {
-                SearchAPI.fromBaiduAPI(word);
+                WikiAPI.fromBaiduWiki(word);
             }
             else {
                 SearchAPI.fromGoogleAPI(word);
             }
         }
     },
+    // by url
     fromWikipediaEN: function (word) {
         var url = "http://en.wikipedia.org/wiki/" + CommonAPI.encodeText(word);
         WikiAPI.openPage(url);

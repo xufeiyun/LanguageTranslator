@@ -26,7 +26,7 @@
        "description":"Language Translator Extension: A google chrome extension!."
     },
    "SourceTextsPlaceholder": {
-       "message":"SELECT text on page or TYPE here, wait a moment!<br/>Ctrl+Enter: Translate immediately.",
+       "message":"SELECT text on page or TYPE here...<br/>Ctrl+Enter: Translate immediately.",
        "description":"Language Translator Extension: A google chrome extension!."
     },
    "SourceSoundTooltip": {

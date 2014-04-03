@@ -584,6 +584,7 @@ var MsgBusAPI = {
                     StorageAPI.setItem(type, message);
                 }
                 else {
+                    // get item from local storage
                     message = StorageAPI.getItem(type);
                 }
                 //var textToTranslated = window.Clipboard.paste();

@@ -18,6 +18,7 @@ var StorageAPI = {
         // return localStorage.StorageAPI.getItem(key);
         var value = localStorage[key];
         if (value == "") value = null;
+        //StorageAPI.setItem(key, "");
         return value;
     },
 

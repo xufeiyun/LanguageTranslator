@@ -6,16 +6,16 @@ var CLEAR_GIF = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAA
 
 // t: Text, d: Image URL, f: function with one parameter which is the SourceText, tt: ToolTip/Title
 var wikiTabs = new Array(
-    {t: 'Baidu Wiki', d: 'baidu_wiki.png', f: WikiAPI.fromBaiduWiki, tt: 'View Wiki Page via Baidu Baike'},
-    {t: 'Tencent', d: 'tencent_wiki.png', f: WikiAPI.fromTencentWiki, tt: 'View Wiki Page via Tencent Baike'},
-    {t: 'Wiki EN', d: 'wikien_wiki.png', f: WikiAPI.fromWikipediaEN, tt: 'View Wiki Page via Chinese-Simplified Page'},
-    {t: 'Wiki CN', d: 'wikicn_wiki.png', f: WikiAPI.fromWikipediaCN, tt: 'View Wiki Page via English Page'}
+    {t: 'Wiki EN', d: 'wikien_wiki.png', f: WikiAPI.fromWikipediaEN, tt: 'View Wiki Page of Source Text on English Page'},
+    {t: 'Wiki CN', d: 'wikicn_wiki.png', f: WikiAPI.fromWikipediaCN, tt: 'View Wiki Page of Source Text on Chinese-Simplified Page'},
+    {t: 'Baidu Wiki', d: 'baidu_wiki.png', f: WikiAPI.fromBaiduWiki, tt: 'View Wiki Page of Source Text on Baidu Baike'},
+    {t: 'Tencent', d: 'tencent_wiki.png', f: WikiAPI.fromTencentWiki, tt: 'View Wiki Page of Source Text on Tencent Baike'}
 );
 var searchTabs = new Array(
-    {t: 'Google', d: 'google_search.png', f: SearchAPI.fromGoogleAPI, tt: 'Search Source Text via Google'},
-    {t: 'Baidu', d: 'baidu_search.png', f: SearchAPI.fromBaiduAPI, tt: 'Search Source Text via Baidu'},
-    {t: 'Microsoft', d: 'bing_search.png', f: SearchAPI.fromMicrosoftAPI, tt: 'Search Source Text via Bing(Microsoft)'},
-    {t: 'Tencent', d: 'tencent_search.png', f: SearchAPI.fromTencentAPI, tt: 'Search Source Text via Soso(Tencent)'}
+    {t: 'Google', d: 'google_search.png', f: SearchAPI.fromGoogleAPI, tt: 'Search Source Text on Google'},
+    {t: 'Microsoft', d: 'bing_search.png', f: SearchAPI.fromMicrosoftAPI, tt: 'Search Source Text on Bing(Microsoft)'},
+    {t: 'Baidu', d: 'baidu_search.png', f: SearchAPI.fromBaiduAPI, tt: 'Search Source Text on Baidu'},
+    {t: 'Tencent', d: 'tencent_search.png', f: SearchAPI.fromTencentAPI, tt: 'Search Source Text on Soso(Tencent)'}
 );
 var shareTabs = new Array(
     {t: 'QQ空间', d: 'qzone_share.png', f: ShareAPI.fromQZoneAPI, tt: 'Share Source Text to QQ Space'},
@@ -28,11 +28,11 @@ var cardTabs = new Array();
 
 // t: type, d: data object
 var tabs = new Array(
-    { t: "wiki", d: wikiTabs, f: '', tt: 'View Encyclopedia Page' },
     { t: "search", d: searchTabs, f: '', tt: 'Search Source Text on Internet' },
-    { t: "share", d: shareTabs, f: '', tt: 'Share to my friends or blogs' }/*,
+    { t: "wiki", d: wikiTabs, f: '', tt: 'View Encyclopedia Page of Source Text' },
+    { t: "share", d: shareTabs, f: '', tt: 'Share Source Text to my friends or blogs' },
     { t: "study", d: studyTabs, f: '', tt: 'Learn & Study words' },
-    { t: "card", d: cardTabs, f: '', tt: 'Manage the Cards of Source Text' }*/
+    { t: "card", d: cardTabs, f: '', tt: 'Manage the Cards of Source Text' }
 );
 
     var NineGridAPI = {
@@ -113,6 +113,12 @@ var tabs = new Array(
                 var data = o.d;
                 var title = o.tt;
                 var result = true;
+
+                var tab = $("#" + NineGridAPI.TabIdPrefix + type + "_tab");
+                if (tab && tab.length > 0) {
+                    var cls = tab.parent().attr('class');
+                    if (cls.contains("hide")) { return; }   /* skip those tab which is hidden */
+                }
 
                 $("#" + NineGridAPI.TabIdPrefix + type + "_tab").attr('title', title);
                 $("#" + NineGridAPI.TabIdPrefix + type + "_title").attr('title', title);
