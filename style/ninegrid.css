@@ -101,6 +101,7 @@ hr {
     height: 68px;
     
     margin: 1.5px;
+    padding: 1.5px;
     float: left;
     box-shadow: 0 0 0 1px lightgray;
     background: white;
@@ -112,7 +113,7 @@ hr {
 }
 
 .productCell:hover, .productCellText:hover {
-    box-shadow:  0 0 0 1px red;
+    box-shadow:  0 0 0 1px #FF8C00;
     background-color: lightgray;
 }
 
