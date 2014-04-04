@@ -59,6 +59,10 @@ h6:after
     min-width: 1024px;
     margin-right: 40px;
 }
+.blueoption
+{
+    color: blue;
+}
 .optioncontent
 {
     float: left;
