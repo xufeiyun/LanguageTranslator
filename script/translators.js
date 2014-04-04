@@ -11,16 +11,14 @@ var TranslatorAPI =
     IsTypedText: false, /* true when typing text, false when selecting text on page */
 
     /* entry for translating word */
-    translate: function (message)
-    {
+    translate: function (message) {
         if (typeof (message) == "undefined") return false;
-        
+
         message = $.trim(message);
 
         LoggerAPI.logD("TRANSLATE TEXT: " + message);
 
-        if (!CommonAPI.isValidText(message))
-        {
+        if (!CommonAPI.isValidText(message)) {
             var classHide = "hide";
             $("#" + PronounceAudios.Source.ButtonId).addClass(classHide);
             $("#" + PronounceAudios.Main.ButtonId).addClass(classHide);
@@ -31,12 +29,13 @@ var TranslatorAPI =
         if (TranslatorAPI.LastSource.toLowerCase() == message.toLowerCase()) { return false; }
 
         // add Source pronounce
-        if (typeof (AudioAPI.createTranslateAudio) != undefined)
-        {
+        if (typeof (AudioAPI.createTranslateAudio) != undefined) {
             AudioAPI.createTranslateAudio(PronounceAudios.Source, message);
         }
 
         TranslatorAPI.LastSource = message;
+
+        if (message != '') { StorageAPI.setItem(OperatorType.getSelectText, message); }
 
         YouDaoTranslateAPI.translate(message);
         //GoogleTranslateAPI.translate(message);
@@ -44,29 +43,24 @@ var TranslatorAPI =
         //MicrosoftTranslateAPI.translate(message);
     },
 
-    translateByInput: function ()
-    {
+    translateByInput: function () {
         TranslatorAPI.IsTypedText = true;
         LoggerAPI.logD("Translating by input......");
         var text = $("#" + ElementIds.TextSelected).val();
         TranslatorAPI.translate(text);
     },
 
-    translateByTimeout: function ()
-    {
+    translateByTimeout: function () {
         clearTimeout(timeoutId);
         var interval = CommonAPI.getInterval(dtStart, new Date());
-        if (interval > AutoTranslationInterval)
-        {
+        if (interval > AutoTranslationInterval) {
             TranslatorAPI.translateByInput();
         }
     },
 
-    translateByMessage: function (activeTab)
-    {
+    translateByMessage: function (activeTab) {
         // response callback
-        var resp_popup = function (response)
-        {
+        var resp_popup = function (response) {
             if (!CommonAPI.isDefined(response)) return false;
 
             LoggerAPI.logD("#RESPONSE#: Received type [" + response.type + "], message [" + response.message + "]");
@@ -74,26 +68,21 @@ var TranslatorAPI =
             var type = response.type;
             var message = response.message;
 
-            if (type == OperatorType.getSelectText)
-            {
-                if (CommonAPI.isDefined(response) && CommonAPI.isValidText(response.message))
-                {
+            if (type == OperatorType.getSelectText) {
+                if (CommonAPI.isDefined(response) && CommonAPI.isValidText(response.message)) {
                     LoggerAPI.logD("#RESPONSE#: Translating text: " + response.message);
                     TranslatorAPI.translate(response.message);
                     textSelected.focus();
                     textSelected.select();
                 }
             }
-            else if (type == OperatorType.viewWikipages)
-            {
+            else if (type == OperatorType.viewWikipages) {
                 WikiAPI.showWikipages(message);
             }
-            else if (type == OperatorType.viewHomepage)
-            {
+            else if (type == OperatorType.viewHomepage) {
                 WikiAPI.showHomepage(message);
             }
-            else
-            {
+            else {
                 var message = CommonAPI.isDefined(response) ? (CommonAPI.isValidText(response.message) ? response.message : "message not defined in response") : ("response not defined");
                 LoggerAPI.logE("#RESPONSE#: Received response type: [" + response.type + "], response message: [" + message + "]");
             }
@@ -111,10 +100,8 @@ var TranslatorAPI =
         MsgBusAPI.msg_send(OperatorType.getSelectText, "", resp_popup);
     },
 
-    tryTranslateNow: function ()
-    {
-        var resp_translate = function (response)
-        {
+    tryTranslateNow: function () {
+        var resp_translate = function (response) {
             TranslatorAPI.translate(response.message);
         }
 
@@ -122,37 +109,31 @@ var TranslatorAPI =
         MsgBusAPI.msg_send(OperatorType.getSelectText, "", resp_translate);
     },
 
-    translateByClipboard: function ()
-    {
+    translateByClipboard: function () {
         var text = window.Clipboard.paste();
         LoggerAPI.logD("Translating by clipboard text......");
         TranslatorAPI.translate(text);
         return CommonAPI.isValidText(text);
     },
 
-    clearTexts: function (type)
-    {
+    clearTexts: function (type) {
         LoggerAPI.logD("Clear Text...");
         var text = $("#" + ElementIds.TextSelected).val();
-        if (!CommonAPI.isValidText(text))
-        {
+        if (!CommonAPI.isValidText(text)) {
             TranslatorAPI._update_source_text(EmptyText);
             TranslatorAPI._update_main_meaning(EmptyText, type);
             TranslatorAPI._update_more_meaning(EmptyText, type);
         }
-        else
-        {
+        else {
             TranslatorAPI._update_height("#" + ElementIds.TextSelected);
         }
     },
 
-    _show_api_logo: function (id)
-    {
+    _show_api_logo: function (id) {
         $("#" + id).removeClass("hidden");
     },
 
-    _update_height: function (id)
-    {
+    _update_height: function (id) {
         if (typeof (isIFramePopup) != "undefined") return;
         var attribute = "height";
         $(id).css(attribute, EmptyText);    // restore height
@@ -160,8 +141,7 @@ var TranslatorAPI =
         $(id).css(attribute, $(id)[0].scrollHeight);    // set height
     },
 
-    _update_rows: function (id)
-    {
+    _update_rows: function (id) {
         return true;
         var rows = $(id).val().split("\n").length;
         var count = $(id).val().length / OneLineCharCount;
@@ -169,13 +149,11 @@ var TranslatorAPI =
         $(id).attr("rows", rows);
     },
 
-    _get_valid_suffix: function (type)
-    {
+    _get_valid_suffix: function (type) {
         return (CommonAPI.isValidText(type)) ? type : "";
     },
 
-    _initial_texts: function (message, type)
-    {
+    _initial_texts: function (message, type) {
         if (!CommonAPI.isValidText(message)) return false;
         TranslatorAPI._update_source_text(message);
         TranslatorAPI._update_main_meaning(translating, type);
@@ -183,8 +161,7 @@ var TranslatorAPI =
         return true;
     },
 
-    _update_source_text: function (text)
-    {
+    _update_source_text: function (text) {
         LoggerAPI.logD('update source text');
         var id = "#" + ElementIds.TextSelected;
         $(id).val(text);
@@ -192,15 +169,13 @@ var TranslatorAPI =
         if (text != EmptyText && !TranslatorAPI.IsTypedText) { $(id).blur(); }
     },
 
-    _update_main_meaning: function (text, type)
-    {
+    _update_main_meaning: function (text, type) {
         var id = "#" + ElementIds.TextTranslated + TranslatorAPI._get_valid_suffix(type);
         $(id).val(text);
         TranslatorAPI._update_height(id);
     },
 
-    _update_more_meaning: function (text, type)
-    {
+    _update_more_meaning: function (text, type) {
         var id = "#" + ElementIds.TextTranslatedAll + TranslatorAPI._get_valid_suffix(type);
         $(id).val(text);
         $(id).html(text);

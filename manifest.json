@@ -6,7 +6,7 @@
 
   "default_locale": "en",
 
-  "version": "2.14.405",
+  "version": "2.14.406",
 
   "permissions": [
     "<all_urls>",
@@ -92,6 +92,7 @@
       "script/addDOMLoadEvent.js",
       "script/jquery.watermark.min.js",
       "script/common.js",
+      "script/storages.js",
       "script/translators.js",
       "script/popup_dialog.js",
       "script/popup_dialog.js",
