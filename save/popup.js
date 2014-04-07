@@ -26,10 +26,7 @@ $(document).ready(function ()
 
 var Initialize = function ()
 {
-    if (typeof (chrome) != "undefined")
-    {
-        chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) { CommonAPI.rcvmsg_pup(request, sender, sendResponse); });
-    }
+    ListenerAPI.onMessageListener(MsgBusAPI.rcvmsg_pup);
 
     clearTexts();
 

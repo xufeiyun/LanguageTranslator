@@ -738,8 +738,105 @@ var MsgBusAPI = {
     },
 
     rcvmsg_ninegrid: function (request, sender, sendResponse) {
-    }
+    },
 
+    // consider to use iframe for page context div
+    rcvmsg_context: function (request, sender, sendResponse) {
+        LoggerAPI.logD("rcvmsg_iframe: Received TYPE: " + request.type + ", MESSAGE [" + request.message + "] " + msg);
+
+        var msg = (sender.tab ?
+                "in content script, sent from tab URL: [" + sender.tab.url + "]" :
+                "in extension script");
+
+        var type = request.type;
+        var message = request.message;
+        var send = (typeof (sendResponse) == "function");
+
+        if (!CommonAPI.isValidText(type)) {
+            LoggerAPI.logE("rcvmsg_iframe: Message received is null or empty");
+        }
+        else if (type == OperatorType.getSelectText) {
+            TranslatorAPI.translate(message);
+        }
+        else if (type == OperatorType.copySelectText) {
+            if (CommonAPI.isValidText(message)) {
+                StorageAPI.setItem(OperatorType.copySelectText, message);
+                var result = window.Clipboard.copy(message);
+                if (result) { LoggerAPI.logD("rcvmsg_iframe: Copied text OK."); }
+            }
+        }
+        else if (type == OperatorType.showPageAction) {
+            //chrome.pageAction.show(sender.tab.id);
+        }
+        else if (type == OperatorType.viewWikipages) {
+            showWikipages(message);
+            if (CommonAPI.isValidText(message)) {
+                LoggerAPI.logD("rcvmsg_iframe: Try to open wikipage");
+                {
+                    // fromWikipedia(message);	// ok
+                }
+                // or
+                {
+                    //fromBaiduAPI(message);
+                    fromTencentAPI(message);
+                }
+            }
+        }
+        else if (type == OperatorType.viewHomepage) {
+            showHomepage(message);
+        }
+        else {
+            if (send) {
+                sendResponse({ type: type, message: "rcvmsg_iframe: #IFRAME SEND RESPONSE# Received Message:" + message });
+            }
+            else {
+                LoggerAPI.logW(prefix, "rcvmsg_iframe: NOT defined the response function!");
+            }
+        }
+
+    }
+};
+
+var ListenerAPI =
+{
+    // this listener's callback includes args: (request, sender, response)
+    onMessageListener: function (receiver_callback) {
+        if (ListenerAPI.isChromed) {
+            chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+                if (receiver_callback == null || typeof (receiver_callback) != 'function') {
+                    LoggerAPI.logE('receiver_callback is empty or undefined!');
+                    LoggerAPI.logD(receiver_callback);
+                } else {
+                    receiver_callback(request, sender, sendResponse);
+                }
+            });
+        } else {
+            LoggerAPI.logW('chrome or chrome.runtime is undefined!');
+        }
+    },
+
+    // this listener's callback includes args: (activeTab)
+    onIconClickListener: function (receiver_callback) {
+        if (typeof (chrome) != "undefined" && typeof (chrome.browserAction) != "undefined") {
+            chrome.browserAction.onClicked.addListener(function (activeTab) {
+                receiver_callback(activeTab);
+            });
+        }
+    },
+
+    // this listener's callback includes args: (tabId, changeInfo, tab)
+    onTabUpdateListener: function (receiver_callback) {
+        // uncomment this one if the extension uses page_action
+        if (typeof (chrome) != "undefined" && typeof (chrome.tabs) != "undefined" && UsePageAction) {
+            chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
+                receiver_callback(tabId, changeInfo, tab);
+            });
+        }
+    },
+
+    isChromed: function () {
+        return (typeof (chrome) != "undefined" && typeof (chrome.runtime) != "undefined");
+    }
 };
 
 

@@ -6,7 +6,7 @@
 
   "default_locale": "en",
 
-  "version": "2.14.406",
+  "version": "2.14.408",
 
   "permissions": [
     "<all_urls>",
@@ -53,7 +53,7 @@
   "content_scripts": [
             {
                 "matches": ["<all_urls>"],
-                "css": ["style/contents.css"],
+                "css": ["style/contents.css", "style/context.css"],
                 "js" : [
                     "script/jquery-1.10.1.js",
                     "script/jquery-1.10.1.min.js",

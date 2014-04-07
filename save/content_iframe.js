@@ -13,19 +13,14 @@ var timeoutId;
 
 var textSelected = null;
 
-var Initialize = function ()
-{
+var Initialize = function () {
     // Run our scripts as soon as the document's DOM is ready.
     // DOMContentLoaded
     addDOMLoadEvent(fnDOMLoadCompleted);
 
     checkClickAction();
 
-    if (typeof (chrome) != "undefined")
-    {
-        chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) { CommonAPI.rcvmsg_iframe(request, sender, sendResponse); });
-    }
-    
+    ListenerAPI.onMessageListener(MsgBusAPI.rcvmsg_iframe);
 
     clearTexts();
 
@@ -38,7 +33,7 @@ var Initialize = function ()
     bindTopLinkEvent();
 
     bindPronouceEvent();
-    
+
     bindBottomLinkEvent();
 
     tryTranslateNow();

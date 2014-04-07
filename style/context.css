@@ -1,0 +1,39 @@
+/*!
+ * Language Translator v 1.0
+ *
+ * Copyright 2014 Eric Xu
+ * Licensed under the Apache License v2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Designed and built with all the love in the world @world by @eric
+ */
+
+.context-Size
+{
+    width: 100%;
+    border: 1px red solid;
+}
+.context-source
+{
+    border: 1px blue solid;
+}
+.context-source span
+{
+    border: 2px pink solid;
+}
+.context-main
+{
+    border: 1px yellow solid;
+}
+.context-main span
+{
+    border: 2px pink solid;
+}
+.context-more
+{
+    border: 1px green solid;
+}
+.context-more span
+{
+    border: 2px pink solid;
+}

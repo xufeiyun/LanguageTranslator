@@ -9,9 +9,13 @@ var TranslatorAPI =
 {
     LastSource: "",
     IsTypedText: false, /* true when typing text, false when selecting text on page */
+    CurrentCallBack: null,  /* Data Object: {source: "", main: "", more: ""} */
 
     /* entry for translating word */
-    translate: function (message) {
+    translate: function (message, callback) {
+        TranslatorAPI.CurrentCallBack = null;
+        TranslatorAPI.CurrentCallBack = callback;
+
         if (typeof (message) == "undefined") return false;
 
         message = $.trim(message);
@@ -116,6 +120,15 @@ var TranslatorAPI =
         return CommonAPI.isValidText(text);
     },
 
+    getDataResult: function (main, more) {
+        var data = {
+            'source': TranslatorAPI.LastSource,
+            'main': main,
+            'more': more
+        };
+        return data;
+    },
+
     clearTexts: function (type) {
         LoggerAPI.logD("Clear Text...");
         var text = $("#" + ElementIds.TextSelected).val();
@@ -187,8 +200,7 @@ var YouDaoTranslateAPI =
 {
 
     /*-----------  Translate By YouDao API --------------*/
-    translate: function (message)
-    {
+    translate: function (message) {
         if (!CommonAPI.isValidText(message)) return false;
 
         var type = "";
@@ -201,29 +213,23 @@ var YouDaoTranslateAPI =
             dataType: "json",
             type: "get",
             data: "q=" + CommonAPI.encodeText(text),
-            success: function (result)
-            {
+            success: function (result) {
                 TranslatorAPI._show_api_logo("logoYouDao");
-                if (result.errorCode == 0)
-                {
+                if (result.errorCode == 0) {
                     YouDaoTranslateAPI._parse_yd_result(result);
                 }
-                else
-                {
+                else {
                     YouDaoTranslateAPI._handle_yd_error(result.errorCode);
                 }
-
             }
         });
 
     },
 
-    _handle_yd_error: function (errorCode)
-    {
+    _handle_yd_error: function (errorCode) {
         var text = "Normal";
         var prefix = "YourDao";
-        switch (errorCode)
-        {
+        switch (errorCode) {
             case 20:
             case 30:
             case 40:
@@ -235,74 +241,73 @@ var YouDaoTranslateAPI =
         }
         TranslatorAPI._update_main_meaning(text);
         TranslatorAPI._update_more_meaning(" ");
+
+        // invoke callback
+        if (TranslatorAPI.CurrentCallBack && typeof (TranslatorAPI.CurrentCallBack) == 'function') { TranslatorAPI.CurrentCallBack(TranslatorAPI.getDataResult(text, " ")); }
     },
 
-    _parse_yd_result: function (result)
-    {
+    _parse_yd_result: function (result) {
         var type = "";
         LoggerAPI.logD(result.toString());
 
         //var data = JSON.parse(result);
+        var main = "";
+        var more = "";
         var data = result;
-        if (data.errorCode == 0)
-        {
+
+        if (data.errorCode == 0) {
             var single = "";
             var multiples = "";
             var sound = "";
 
             var hasBasic = (data.basic) ? true : false;
-            if (hasBasic)
-            {
+            if (hasBasic) {
                 single = YouDaoTranslateAPI._combine_values(data.basic.explains, "." + NewLine);
-                if (CommonAPI.isDefined(data.basic.phonetic))
-                {
+                if (CommonAPI.isDefined(data.basic.phonetic)) {
                     sound = "[" + data.basic.phonetic + "]  " + NewLine;
                 }
             }
-            else
-            {
+            else {
                 single = YouDaoTranslateAPI._combine_values(data.translation);
             }
 
             // add Main pronounce
             AudioAPI.createTranslateAudio(PronounceAudios.Main, single);
-            TranslatorAPI._update_main_meaning(sound + single);
+            main = sound + single;
+            TranslatorAPI._update_main_meaning(main);
 
             var hasWeb = (data.web) ? true : false;
-            if (hasWeb)
-            {
+            if (hasWeb) {
                 var webs = data.web;
-                for (var i = 0; i < webs.length; i++)
-                {
+                for (var i = 0; i < webs.length; i++) {
                     var web = webs[i];
                     var key = web.key;
                     var value = YouDaoTranslateAPI._combine_values(web.value);
                     multiples += ((multiples == "") ? "" : NewLine) + key + ": " + value;
                 }
             }
-            else
-            {
+            else {
                 multiples = single;
             }
 
             // add More pronounce
             AudioAPI.createTranslateAudio(PronounceAudios.More, multiples);
-            TranslatorAPI._update_more_meaning(multiples);
+            more = multiples;
+            TranslatorAPI._update_more_meaning(more);
+
+            // invoke callback
+            if (TranslatorAPI.CurrentCallBack && typeof (TranslatorAPI.CurrentCallBack) == 'function') { TranslatorAPI.CurrentCallBack(TranslatorAPI.getDataResult(main, more)); }
         }
     },
-    _combine_values: function (valuesArray, separator)
-    {
+    _combine_values: function (valuesArray, separator) {
         if (!CommonAPI.isValidText(separator)) { separator = Comma; }
         var values = "";
-        for (var i = 0; i < valuesArray.length; i++)
-        {
+        for (var i = 0; i < valuesArray.length; i++) {
             var value = valuesArray[i];
-            if (values == "")
-            {
+            if (values == "") {
                 values += value.toString();
             }
-            else
-            {
+            else {
                 values += separator + value.toString();
             }
         }

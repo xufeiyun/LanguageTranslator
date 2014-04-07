@@ -19,39 +19,31 @@ var ContentAPI =
 {
     eventAttached: false,
 
-    Initialize: function ()
-    {
+    Initialize: function () {
         // Run our scripts as soon as the document's DOM is ready.
         addDOMLoadEvent(ContentAPI.fnDOMLoadCompleted);
 
         // this includes: [select text by moving mouse] and [select text by dbl-clicking the text]
         document.onselectionchange = ContentAPI.fnSelectionChanged;
 
-        $(document).mousemove(function (e)
-        {
+        $(document).mousemove(function (e) {
             MousePosition.x = e.pageX;
             MousePosition.y = e.pageY;
         });
-        $(document).click(function (e)
-        {
+        $(document).click(function (e) {
             // ContentAPI.hidePopupTranslator();
         });
-        $(window).scroll(function (e)
-        {
+        $(window).scroll(function (e) {
             ContentAPI.popupPosition();
         });
 
-        if (typeof (chrome) != "undefined")
-        {
-            chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) { MsgBusAPI.rcvmsg_content(request, sender, sendResponse); });
-        }
+        ListenerAPI.onMessageListener(MsgBusAPI.rcvmsg_content);
 
         // load configs
         MsgBusAPI.msg_send(OperatorType.loadSettings, "[load settings]");
-    },    
+    },
 
-    ShowPopupDialogForTranslation: function (sourceText, mainMeaning, moreMeaning)
-    {
+    ShowPopupDialogForTranslation: function (sourceText, mainMeaning, moreMeaning) {
         LoggerAPI.logD("[X]=" + MousePosition.x + " [Y]=" + MousePosition.y + ", Selected Text: " + sourceText);
 
         var isPopupFrame = window.top.window.document.body.tagName == "FRAMESET";
@@ -59,8 +51,7 @@ var ContentAPI =
 
         var divContainer = DomAPI.getElement(ElementIds.WebPagePopupDiv, pDocument);
 
-        if (divContainer == null || divContainer.length == 0)
-        {
+        if (divContainer == null || divContainer.length == 0) {
             var styles = "left: " + (MousePosition.x - 10) + "px; top: " + (MousePosition.y + 10) + "px;";
             //var html =  AjaxAPI.getFileContentsSync(ProductURIs.WebpagePopup);
             var html = "<div id='btnLanguageTranslatorCollapse' class='collapselink' title='Collapse/Expand Me!' href='javascript:void(0);'></div>"
@@ -76,8 +67,7 @@ var ContentAPI =
 
             DomAPI.appendChild(divContainer, pDocument);
 
-            var frameLoaded = function (e)
-            {
+            var frameLoaded = function (e) {
                 var t = this;
                 var type = event.type;
                 var e = event.srcElement;
@@ -90,8 +80,7 @@ var ContentAPI =
 
             divContainer = DomAPI.getElement(ElementIds.WebPagePopupDiv, pDocument);
         }
-        else
-        {
+        else {
             divContainer.html(html);
             PopupAPI.showPopup(ElementIds.WebPagePopupDiv, pDocument);
             // show or move divContainer?
@@ -109,8 +98,7 @@ var ContentAPI =
         i18n.SetTitle(ElementIds.PopupButtonDisable, "EnablePopupTitle");
         i18n.SetTitle(ElementIds.PopupButtonClose, "ClosePopupTitle");
 
-        if (OptionItemValues.EnablePopupDialog == true)
-        {
+        if (OptionItemValues.EnablePopupDialog == true) {
             divContainer.removeClass("content_popup_circle");
 
             // update container width
@@ -139,8 +127,7 @@ var ContentAPI =
             var iframe = DomAPI.getElement(ElementIds.PopupIFrame, pDocument);
             iframe.css("display", "block");
         }
-        else
-        {
+        else {
             divContainer.addClass("content_popup_circle");
 
             // update container width
@@ -171,16 +158,63 @@ var ContentAPI =
         }
     },
 
-    fnDOMLoadCompleted: function ()
-    {
+    ShowContextDialogForTranslation: function (soureText, mainMeaning, moreMeaning) {
+        var showContextDialog = function (result) {
+
+            debugger;
+            var source = result.source;
+            var main = result.main;
+            var more = result.more;
+
+            LoggerAPI.logD("[X]=" + MousePosition.x + " [Y]=" + MousePosition.y + ", Selected Text: " + sourceText);
+
+            var isPopupFrame = window.top.window.document.body.tagName == "FRAMESET";
+            pDocument = ContentAPI.getDocument(isPopupFrame);
+
+            var divContainer = DomAPI.getElement(ElementIds.WebPagePopupDiv, pDocument);
+
+            if (divContainer == null || divContainer.length == 0) {
+                var styles = "left: " + (MousePosition.x - 10) + "px; top: " + (MousePosition.y + 10) + "px;";
+                var html = "<iframe id='" + ElementIds.PopupIFrame + "' width='326px' height='455px' style='background-color:white; border: 1px #BDBDBD solid; margin: -1px -1px -1px -1px; padding: 0px 0px 0px 1px; display: none;' src='" + ProductURIs.PopupIFramePage + "'></iframe>";
+                divContainer = DomAPI.createElement("div");
+                divContainer.setAttribute("id", ElementIds.WebPagePopupDiv);
+                divContainer.setAttribute("class", "context_popup");
+                //divContainer.setAttribute("style", styles);
+                divContainer.innerHTML = html;
+
+                DomAPI.appendChild(divContainer, pDocument);
+
+                var frameLoaded = function (e) {
+                    var t = this;
+                    var type = event.type;
+                    var e = event.srcElement;
+                    LoggerAPI.logW("iframe event type: " + type);
+                };
+
+                DomAPI.getElement(ElementIds.PopupIFrame, pDocument).bind("load", frameLoaded);
+                DomAPI.getElement(ElementIds.PopupIFrame, pDocument).bind("loadeddata", frameLoaded);
+                DomAPI.getElement(ElementIds.PopupIFrame, pDocument).bind("loadedmetadata", frameLoaded);
+
+                divContainer = DomAPI.getElement(ElementIds.WebPagePopupDiv, pDocument);
+            }
+            else {
+                divContainer.html(html);
+                PopupAPI.showPopup(ElementIds.WebPagePopupDiv, pDocument);
+                // show or move divContainer?
+            }
+        };
+
+        TranslatorAPI.translate(soureText, showContextDialog);
+    },
+
+    fnDOMLoadCompleted: function () {
         LoggerAPI.logD("DOM Loaded completely - content.");
         // add events
         ContentAPI.handlePages();
         //setTimeout(ContentAPI.handlePages, 1000);
     },
 
-    fnSelectionChanged: function ()
-    {
+    fnSelectionChanged: function () {
         TranslatorAPI.IsTypedText = false;
         // need save selected text
         // then translate it when expanding or enabling the popup dialog
@@ -197,108 +231,92 @@ var ContentAPI =
         }
     },
 
-    hidePopupTranslator: function ()
-    {
+    hidePopupTranslator: function () {
         var id = "divLanguageTranslator";
         var text = ContentAPI.getSelectedText().toString();
-        if (!CommonAPI.isValidText(text))
-        {
+        if (!CommonAPI.isValidText(text)) {
             $("#" + id).hide();
         }
     },
 
-    loadConfigs: function (data)
-    {
+    loadConfigs: function (data) {
         LoggerAPI.logD("setting OptionItemValues from loaded configs......");
         var options = data;
-        if (typeof (options.EnablePopupDialog) != "undefined")
-        {
+        if (typeof (options.EnablePopupDialog) != "undefined") {
             OptionItemValues.EnablePopupDialog = (options.EnablePopupDialog == TrueValue);
         }
-        if (typeof (options.EnableTranslation) != "undefined")
-        {
+        if (typeof (options.EnableTranslation) != "undefined") {
             OptionItemValues.EnableTranslation = (options.EnableTranslation == TrueValue);
         }
-        if (typeof (options.EnableCopyText) != "undefined")
-        {
+        if (typeof (options.EnableCopyText) != "undefined") {
             OptionItemValues.EnableCopyText = (options.EnableCopyText == TrueValue);
         }
-        if (!IsDebugger && typeof (options.EnableLogger) != "undefined")
-        {
+        if (!IsDebugger && typeof (options.EnableLogger) != "undefined") {
             OptionItemValues.EnableLogger = (options.EnableLogger == TrueValue);
         }
 
-        if (OptionItemValues.EnablePopupDialog && !OptionItemValues.EnableTranslation)
-        {
+        if (OptionItemValues.EnablePopupDialog && !OptionItemValues.EnableTranslation) {
             LoggerAPI.logW("[Enable Popup Dialog] feature was enabled manually but without enabling the [Enable Text Translation] feature!");
             LoggerAPI.logD("To enable the [Enable Text Translation] feature......");
             OptionItemValues.EnableTranslation = OptionItemValues.EnablePopupDialog;
         }
     },
 
-    selectTextByTimeout: function (text)
-    {
+    selectTextByTimeout: function (text) {
         clearTimeout(timeoutId);
         var interval = CommonAPI.getInterval(dtStart, new Date());
-        if (interval > AutoTranslationInterval)
-        {
+        if (interval > AutoTranslationInterval) {
             if (isCopied) return;
 
             var message = ContentAPI.getSelectedText().toString();
 
             // copy the selected text to clipboard
-            if (OptionItemValues.EnableCopyText)
-            {
+            if (OptionItemValues.EnableCopyText) {
                 LoggerAPI.logD("To Copy selected Text: " + message);
                 // window.Clipboard.copy(text);
                 // send message to background to copy text
                 MsgBusAPI.msg_send(OperatorType.copySelectText, message);
             }
 
-            if (OptionItemValues.EnableTranslation)
-            {
+            if (OptionItemValues.EnableTranslation) {
                 //OptionItemValues.EnablePopupDialog = true;
             }
 
             // enable the webpage-based popup dialog
-            if (OptionItemValues.EnablePopupDialog)
-            {
+            if (OptionItemValues.EnablePopupDialog) {
             }
 
             // start translate and create web page popup element
             // no need to translate here => translated in iframe popup page
             // translateByYoudao(text);
-            if (OptionItemValues.EnableTranslation)
-            {
-                ContentAPI.ShowPopupDialogForTranslation(message, 'main meanings', 'more meanings');
+            if (OptionItemValues.EnableTranslation) {
+                ContentAPI.ShowContextDialogForTranslation(message, 'main meanings', 'more meanings');
+
+                // ContentAPI.ShowPopupDialogForTranslation(message, 'main meanings', 'more meanings');
+
                 // send message to background to translate text
                 MsgBusAPI.msg_send(OperatorType.getSelectText, message);
                 setTimeout(ContentAPI.focusParentPage, 100);
             }
 
             // clear all timeout ids
-            while (timeoutId > 0)
-            {
+            while (timeoutId > 0) {
                 clearTimeout(--timeoutId);
             }
             isCopied = false;
         }
     },
 
-    focusParentPage: function ()
-    {
+    focusParentPage: function () {
         // focus original element
-        if (originalElement != null && typeof (originalElement.focus) != undefined)
-        {
+        if (originalElement != null && typeof (originalElement.focus) != undefined) {
             window.top.document.body.click();
             originalElement.focus();
         }
     },
 
-    popupPosition: function ()
-    {
-        if (!OptionItemValues.ClosedPopupDialog)
-        {
+    popupPosition: function () {
+        if (!OptionItemValues.ClosedPopupDialog) {
             // replaced by CSS
             // var divContainer = DomAPI.getElement(ElementIds.WebPagePopupDiv, pDocument).css("top", window.scrollY);
             // divContainer.css("display", "block");
@@ -307,13 +325,10 @@ var ContentAPI =
         // focusParentPage();
     },
 
-    getDocument: function (isFrame)
-    {
-        if (!pDocument && isFrame)
-        {
+    getDocument: function (isFrame) {
+        if (!pDocument && isFrame) {
             var fs = window.top.frames;
-            for (var i = 0; i < fs.length; i++)
-            {
+            for (var i = 0; i < fs.length; i++) {
                 var frameHeight = fs[i].window.frameElement.height;
                 var width = fs[i].window.frameElement.width;
                 if (frameHeight > 400 && width > 300) // ElementIds.PopupIFrame's height & width
@@ -329,25 +344,19 @@ var ContentAPI =
 
     /*------- Get selection --------*/
     // get selected text from web page user opened
-    getSelectedText: function ()
-    {
+    getSelectedText: function () {
         var text = ContentAPI.getWindowSelection(window);
-        if (!CommonAPI.isValidText(text))
-        {
+        if (!CommonAPI.isValidText(text)) {
             // try getting selection from iframes
             var iframes = window.document.getElementsByTagName("iframe");
             var count = iframes.length;
-            if (iframes && count > 0)
-            {
+            if (iframes && count > 0) {
                 LoggerAPI.logD("Try to get selection from iframes");
-                for (var i = 0; i < count; i++)
-                {
+                for (var i = 0; i < count; i++) {
                     text = ContentAPI.getWindowSelection(iframes[i].window);
-                    if (CommonAPI.isValidText(text))
-                    {
+                    if (CommonAPI.isValidText(text)) {
                         text = ContentAPI.getWindowSelection(iframes[i].contentWindow);
-                        if (CommonAPI.isValidText(text))
-                        {
+                        if (CommonAPI.isValidText(text)) {
                             break;
                         }
                     }
@@ -358,47 +367,39 @@ var ContentAPI =
     },
 
     // get selected text from window or document
-    getWindowSelection: function (win)
-    {
+    getWindowSelection: function (win) {
         originalElement = win;
         var text = "";
         if (!CommonAPI.isDefined(win)) { return text; }
 
         var doc = win.document;
         var focused = doc.activeElement;
-        if (focused)
-        {
+        if (focused) {
             originalElement = focused;
-            try
-            {
-                if (focused.tagName == 'SELECT')
-                {
+            try {
+                if (focused.tagName == 'SELECT') {
                     return text;
                 }
                 LoggerAPI.logW("1#element: " + focused.tagName);
                 text = focused.value.substring(focused.selectionStart, focused.selectionEnd);
             }
-            catch (err)
-            {
+            catch (err) {
             }
         }
 
-        if (!CommonAPI.isValidText(text) && win.getSelection)
-        {
+        if (!CommonAPI.isValidText(text) && win.getSelection) {
             originalElement = win;
             LoggerAPI.logW("2#window");
             text = "" + win.getSelection().toString();
         }
 
-        if (!CommonAPI.isValidText(text) && doc.getSelection)
-        {
+        if (!CommonAPI.isValidText(text) && doc.getSelection) {
             originalElement = doc;
             LoggerAPI.logW("3#document");
             text = "" + doc.getSelection().toString();
         }
 
-        if (!CommonAPI.isValidText(text) && doc.selection)
-        {
+        if (!CommonAPI.isValidText(text) && doc.selection) {
             originalElement = doc;
             LoggerAPI.logW("4#range");
             text = "" + doc.selection.createRange().text;
@@ -409,13 +410,11 @@ var ContentAPI =
 
 
     /*------- scripts executed after page is loaded --------*/
-    handlePages: function ()
-    {
+    handlePages: function () {
         MsgBusAPI.msg_send(OperatorType.getBaikeSetting, OperatorType.getBaikeSetting, ContentAPI.executeScriptsOnPage)
     },
 
-    executeScriptsOnPage: function (response)
-    {
+    executeScriptsOnPage: function (response) {
         LoggerAPI.logW("What's the type of encyclopedia?");
         LoggerAPI.logD(response);
 
@@ -431,21 +430,17 @@ var ContentAPI =
         var isTyped = CommonAPI.isDefined(type);
 
         // tencent soso baike
-        if (isTyped)
-        {
-            if (type == BaikeType.tencent)
-            {
+        if (isTyped) {
+            if (type == BaikeType.tencent) {
                 WikiAPI.setPage_TencentWiki(isPageControl, value);
             }
-            if (type == BaikeType.baidu)
-            {
+            if (type == BaikeType.baidu) {
                 WikiAPI.setPage_BaiduWiki(isPageControl, value);
             }
         }
     },
 
-    _update_icons: function ()
-    {
+    _update_icons: function () {
         var img = "url(chrome-extension://" + ExtensionUID + "/image/glyphicons-halflings.png)";
         //LoggerAPI.logD(img);
         DomAPI.getById(ElementIds.PopupButtonCollapse, pDocument).style.backgroundImage = img;
@@ -453,10 +448,8 @@ var ContentAPI =
         DomAPI.getById(ElementIds.PopupButtonClose, pDocument).style.backgroundImage = img;
     },
 
-    _attach_events: function ()
-    {
-        if (!ContentAPI.eventAttached)
-        {
+    _attach_events: function () {
+        if (!ContentAPI.eventAttached) {
             ContentAPI.eventAttached = true;
 
             ContentAPI._update_icons();
@@ -467,14 +460,12 @@ var ContentAPI =
             var close = DomAPI.getElement(ElementIds.PopupButtonClose, pDocument);
             var frame = DomAPI.getElement(ElementIds.PopupIFrame, pDocument);
             var display = frame.css("display");
-            var shouldDisplay = function ()
-            {
+            var shouldDisplay = function () {
                 display = frame.css("display");
                 return (display == "none");
             };
 
-            var collapseIFrame = function ()
-            {
+            var collapseIFrame = function () {
                 collapse.removeClass("collapselink");
                 collapse.removeClass("expandlink");
                 collapse.removeClass("expandcollapserectangle");
@@ -490,8 +481,7 @@ var ContentAPI =
 
                 var display = shouldDisplay();
 
-                if (display == true)
-                {
+                if (display == true) {
                     frame.css("display", "block");
                     div.removeClass("content_popup_circle");
                     div.css("width", "326px");
@@ -504,8 +494,7 @@ var ContentAPI =
 
                     close.addClass("closerectangle");
                 }
-                else
-                {
+                else {
                     frame.css("display", "none");
                     div.addClass("content_popup_circle");
                     div.css("width", "48px");
@@ -519,58 +508,49 @@ var ContentAPI =
                     close.addClass("closecircle");
                 }
 
-                if (OptionItemValues.EnableTranslation)
-                {
+                if (OptionItemValues.EnableTranslation) {
                     disable.addClass("disablelink");
                 }
-                else
-                {
+                else {
                     disable.addClass("enablelink");
                 }
             };
 
-            collapse.click(function ()
-            {
+            collapse.click(function () {
                 OptionItemValues.EnablePopupDialog = shouldDisplay();
-                if (shouldDisplay())
-                {
+                if (shouldDisplay()) {
                     OptionItemValues.EnableTranslation = OptionItemValues.EnablePopupDialog;  // if open dialog, then enable translation   
                 }
                 //collapseIFrame();
                 window.setTimeout(collapseIFrame, 100);
             });
 
-            disable.click(function ()
-            {
+            disable.click(function () {
                 //OptionItemValues.EnableTranslation = !OptionItemValues.EnableTranslation;
                 //OptionItemValues.EnablePopupDialog = OptionItemValues.EnableTranslation;
                 OptionItemValues.EnablePopupDialog = !OptionItemValues.EnablePopupDialog;
 
-                var disableThisPopup = function ()
-                {
+                var disableThisPopup = function () {
                     collapseIFrame();
                 }
                 //collapseIFrame();
                 window.setTimeout(disableThisPopup, 100);
             });
 
-            close.click(function ()
-            {
+            close.click(function () {
                 // don't translate text any more unless reloading the webpage
                 OptionItemValues.EnablePopupDialog = false;
                 OptionItemValues.EnableTranslation = false;
                 OptionItemValues.ClosedPopupDialog = true;
 
-                var hideThisPopup = function ()
-                {
+                var hideThisPopup = function () {
                     PopupAPI.hidePopup(ElementIds.WebPagePopupDiv, pDocument);
                 }
                 //hideThisPopup();
                 window.setTimeout(hideThisPopup, 100);
             });
 
-            div.click(function (e)
-            {
+            div.click(function (e) {
                 LoggerAPI.logD("clicked div");
                 e.bubbles = false;
             });
@@ -586,6 +566,10 @@ var ContentAPI =
 // when content script page loaded
 // tab2ext(OperatorType.showPageAction, OperatorType.showPageAction);
 
+var ContextMenuAPI =
+{
+
+};
 
 $(document).ready(function ()
 {

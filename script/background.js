@@ -5,9 +5,8 @@
 var prefix = "[BACKGROUND SCRIPTS]: ";
 
 var BgdAPI = {
-    
-    Initialize: function ()
-    {
+
+    Initialize: function () {
         // addDOMLoadEvent(CommonAPI.showPopupMsg); // run ok
 
         // enable translation by default
@@ -15,45 +14,30 @@ var BgdAPI = {
 
         // Listen for any changes of any tab by script directly
 
-        // Register runtime.onMessage event listener to receive message from Extension
-        if (typeof (chrome) != "undefined")
-        {
-            chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) { MsgBusAPI.rcvmsg_background(request, sender, sendResponse); });
-        }
+        // Register receiver
+        ListenerAPI.onMessageListener(MsgBusAPI.rcvmsg_background);
 
-        // uncomment this one if the extension uses page_action
-        if (typeof (chrome) != "undefined" && UsePageAction) { chrome.tabs.onUpdated.addListener(BgdAPI._tab_updated); }
+        ListenerAPI.onTabUpdateListener(BgdAPI._tab_updated);
 
-        if (typeof (chrome) != "undefined" && typeof (chrome.browserAction) != "undefined")
-        {
-            chrome.browserAction.onClicked.addListener(function (activeTab)
-            {
-                BgdAPI._update_icon(activeTab);
-            });
-        }
+        ListenerAPI.onIconClickListener(BgdAPI._update_icon);
     },
 
-    _update_icon: function (tab)
-    {
+    _update_icon: function (tab) {
         var action = StorageAPI.getItem(OptionItemKeys.EnableAction);
-        if (typeof (action) != "undefined" && action == TrueValue)
-        {
+        if (typeof (action) != "undefined" && action == TrueValue) {
             chrome.browserAction.setIcon({
                 path: "image/language_19.png"
             });
         }
-        else
-        {
+        else {
             chrome.browserAction.setIcon({
                 path: "image/language_on.png"
             });
         }
     },
 
-    _tab_updated: function (tabId, changeInfo, tab)
-    {
-        if (typeof (chrome) != "undefined" && typeof (chrome.pageAction) != "undefined")
-        {
+    _tab_updated: function (tabId, changeInfo, tab) {
+        if (typeof (chrome) != "undefined" && typeof (chrome.pageAction) != "undefined") {
             chrome.pageAction.show(tabId);
         }
     }

@@ -19,9 +19,7 @@ var DialogAPI =
 
         DialogAPI.checkClickAction();
 
-        if (typeof (chrome) != "undefined") {
-            chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) { MsgBusAPI.rcvmsg_iframe(request, sender, sendResponse); });
-        }
+        ListenerAPI.onMessageListener(MsgBusAPI.rcvmsg_iframe);
 
         TranslatorAPI.clearTexts();
 
