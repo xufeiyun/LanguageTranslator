@@ -70,6 +70,7 @@ var ProductURIs = {
     Product: "https://chrome.google.com/webstore/detail/the-language-translator/" + ReleaseId,
     PopupIFramePage: "chrome-extension://" + ExtensionUID + "/popup_dialog.html",
     NineGridIFramePage: "chrome-extension://" + ExtensionUID + "/ninegrid.html",
+    ContextIFramePage: "chrome-extension://" + ExtensionUID + "/context_dialog.html",
     WikiPediaEN: "http://en.wikipedia.org/wiki/",
     WikiPediaCN: "http://zh.wikipedia.org/wiki/",
     WebpagePopup: "https://dl.yunio.com/pub/0LpA2l?name=webpage_popup.txt",
@@ -77,6 +78,7 @@ var ProductURIs = {
 };
 
 var ElementIds = {
+    WebPageContextDiv: 'divLanguageTranslatorContext',
     WebPagePopupDiv: 'divLanguageTranslator',
     PopupIFrame: 'frameLanguageTranslator',
     PopupButtonClose: 'btnLanguageTranslatorClose',
@@ -742,7 +744,7 @@ var MsgBusAPI = {
 
     // consider to use iframe for page context div
     rcvmsg_context: function (request, sender, sendResponse) {
-        LoggerAPI.logD("rcvmsg_iframe: Received TYPE: " + request.type + ", MESSAGE [" + request.message + "] " + msg);
+        LoggerAPI.logD("rcvmsg_context: Received TYPE: " + request.type + ", MESSAGE [" + request.message + "] " + msg);
 
         var msg = (sender.tab ?
                 "in content script, sent from tab URL: [" + sender.tab.url + "]" :
@@ -753,44 +755,17 @@ var MsgBusAPI = {
         var send = (typeof (sendResponse) == "function");
 
         if (!CommonAPI.isValidText(type)) {
-            LoggerAPI.logE("rcvmsg_iframe: Message received is null or empty");
+            LoggerAPI.logE("rcvmsg_context: Message received is null or empty");
         }
         else if (type == OperatorType.getSelectText) {
-            TranslatorAPI.translate(message);
-        }
-        else if (type == OperatorType.copySelectText) {
-            if (CommonAPI.isValidText(message)) {
-                StorageAPI.setItem(OperatorType.copySelectText, message);
-                var result = window.Clipboard.copy(message);
-                if (result) { LoggerAPI.logD("rcvmsg_iframe: Copied text OK."); }
-            }
-        }
-        else if (type == OperatorType.showPageAction) {
-            //chrome.pageAction.show(sender.tab.id);
-        }
-        else if (type == OperatorType.viewWikipages) {
-            showWikipages(message);
-            if (CommonAPI.isValidText(message)) {
-                LoggerAPI.logD("rcvmsg_iframe: Try to open wikipage");
-                {
-                    // fromWikipedia(message);	// ok
-                }
-                // or
-                {
-                    //fromBaiduAPI(message);
-                    fromTencentAPI(message);
-                }
-            }
-        }
-        else if (type == OperatorType.viewHomepage) {
-            showHomepage(message);
+            TranslatorAPI.translate(message, ContextAPI.UpdateMeanings);
         }
         else {
             if (send) {
-                sendResponse({ type: type, message: "rcvmsg_iframe: #IFRAME SEND RESPONSE# Received Message:" + message });
+                sendResponse({ type: type, message: "rcvmsg_context: #IFRAME SEND RESPONSE# Received Message:" + message });
             }
             else {
-                LoggerAPI.logW(prefix, "rcvmsg_iframe: NOT defined the response function!");
+                LoggerAPI.logW(prefix, "rcvmsg_context: NOT defined the response function!");
             }
         }
 

@@ -53,7 +53,7 @@
   "content_scripts": [
             {
                 "matches": ["<all_urls>"],
-                "css": ["style/contents.css", "style/context.css"],
+                "css": ["style/contents.css", "style/contexts.css"],
                 "js" : [
                     "script/jquery-1.10.1.js",
                     "script/jquery-1.10.1.min.js",
@@ -68,7 +68,8 @@
                     "script/addDOMLoadEvent.js",
                     "script/popup_dialog.js",
                     "script/ninegrid.js",
-                    "script/contents.js"
+                    "script/contents.js",
+                    "script/contexts.js"
                 ],
                 "run_at": "document_idle",
                 "all_frames": true
@@ -84,6 +85,7 @@
 
       "popup_dialog.html",
       "ninegrid.html",
+      "context_dialog.html",
 
       "script/i18n.js",
       "script/geo.js",

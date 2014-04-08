@@ -81,7 +81,7 @@ var ContentAPI =
             divContainer = DomAPI.getElement(ElementIds.WebPagePopupDiv, pDocument);
         }
         else {
-            divContainer.html(html);
+            //divContainer.html(html);
             PopupAPI.showPopup(ElementIds.WebPagePopupDiv, pDocument);
             // show or move divContainer?
         }
@@ -159,52 +159,44 @@ var ContentAPI =
     },
 
     ShowContextDialogForTranslation: function (soureText, mainMeaning, moreMeaning) {
-        var showContextDialog = function (result) {
 
-            debugger;
-            var source = result.source;
-            var main = result.main;
-            var more = result.more;
+        LoggerAPI.logD("[X]=" + MousePosition.x + " [Y]=" + MousePosition.y + ", Selected Text: " + soureText);
 
-            LoggerAPI.logD("[X]=" + MousePosition.x + " [Y]=" + MousePosition.y + ", Selected Text: " + sourceText);
+        var isPopupFrame = window.top.window.document.body.tagName == "FRAMESET";
+        pDocument = ContentAPI.getDocument(isPopupFrame);
 
-            var isPopupFrame = window.top.window.document.body.tagName == "FRAMESET";
-            pDocument = ContentAPI.getDocument(isPopupFrame);
+        var top = 25;
 
-            var divContainer = DomAPI.getElement(ElementIds.WebPagePopupDiv, pDocument);
+        var divContainer = DomAPI.getElement(ElementIds.WebPageContextDiv, pDocument);
 
-            if (divContainer == null || divContainer.length == 0) {
-                var styles = "left: " + (MousePosition.x - 10) + "px; top: " + (MousePosition.y + 10) + "px;";
-                var html = "<iframe id='" + ElementIds.PopupIFrame + "' width='326px' height='455px' style='background-color:white; border: 1px #BDBDBD solid; margin: -1px -1px -1px -1px; padding: 0px 0px 0px 1px; display: none;' src='" + ProductURIs.PopupIFramePage + "'></iframe>";
-                divContainer = DomAPI.createElement("div");
-                divContainer.setAttribute("id", ElementIds.WebPagePopupDiv);
-                divContainer.setAttribute("class", "context_popup");
-                //divContainer.setAttribute("style", styles);
-                divContainer.innerHTML = html;
+        if (divContainer == null || divContainer.length == 0) {
+            var styles = "left: " + (MousePosition.x - 10) + "px; top: " + (MousePosition.y + top) + "px;";
+            var html = "<iframe id='" + ElementIds.PopupIFrame + "' width='300px' height='100px' style='background-color:lightgray; border: 1px #BDBDBD solid; margin: -1px -1px -1px -1px; padding: 0px 0px 0px 1px; display: block;' src='" + ProductURIs.ContextIFramePage + "'></iframe>";
+            divContainer = DomAPI.createElement("div");
+            divContainer.setAttribute("id", ElementIds.WebPageContextDiv);
+            divContainer.setAttribute("class", "context_popup divLanguageTranslator");
+            divContainer.setAttribute("style", styles);
+            divContainer.innerHTML = html;
 
-                DomAPI.appendChild(divContainer, pDocument);
+            DomAPI.appendChild(divContainer, pDocument);
 
-                var frameLoaded = function (e) {
-                    var t = this;
-                    var type = event.type;
-                    var e = event.srcElement;
-                    LoggerAPI.logW("iframe event type: " + type);
-                };
+            var frameLoaded = function (e) {
+                var t = this;
+                var type = event.type;
+                var e = event.srcElement;
+                LoggerAPI.logW("iframe event type: " + type);
+            };
 
-                DomAPI.getElement(ElementIds.PopupIFrame, pDocument).bind("load", frameLoaded);
-                DomAPI.getElement(ElementIds.PopupIFrame, pDocument).bind("loadeddata", frameLoaded);
-                DomAPI.getElement(ElementIds.PopupIFrame, pDocument).bind("loadedmetadata", frameLoaded);
+            DomAPI.getElement(ElementIds.PopupIFrame, pDocument).bind("load", frameLoaded);
+            DomAPI.getElement(ElementIds.PopupIFrame, pDocument).bind("loadeddata", frameLoaded);
+            DomAPI.getElement(ElementIds.PopupIFrame, pDocument).bind("loadedmetadata", frameLoaded);
 
-                divContainer = DomAPI.getElement(ElementIds.WebPagePopupDiv, pDocument);
-            }
-            else {
-                divContainer.html(html);
-                PopupAPI.showPopup(ElementIds.WebPagePopupDiv, pDocument);
-                // show or move divContainer?
-            }
-        };
-
-        TranslatorAPI.translate(soureText, showContextDialog);
+            divContainer = DomAPI.getElement(ElementIds.WebPageContextDiv, pDocument);
+        }
+        if (divContainer.length > 0) {
+            divContainer[0].style.left = MousePosition.x + "px";
+            divContainer[0].style.top = (MousePosition.y + top) + "px";
+        }
     },
 
     fnDOMLoadCompleted: function () {
@@ -566,12 +558,6 @@ var ContentAPI =
 // when content script page loaded
 // tab2ext(OperatorType.showPageAction, OperatorType.showPageAction);
 
-var ContextMenuAPI =
-{
-
-};
-
-$(document).ready(function ()
-{
+$(document).ready(function () {
     ContentAPI.Initialize();
 });

@@ -68,7 +68,7 @@
 {
     cursor: pointer;
 }
-#divLanguageTranslator
+.divLanguageTranslator
 {
     position: fixed;
     top: 0px;
@@ -198,12 +198,4 @@
 #popup_dialog
 {
     border: 0px red solid;
-}
-
-
-
-/*  context popup  */
-.context_popup
-{
-    
 }

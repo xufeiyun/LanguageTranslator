@@ -41,7 +41,7 @@ var TranslatorAPI =
 
         if (message != '') { StorageAPI.setItem(OperatorType.getSelectText, message); }
 
-        YouDaoTranslateAPI.translate(message);
+        YouDaoTranslateAPI.translate(message, callback);
         //GoogleTranslateAPI.translate(message);
         //BaiduTranslateAPI.translate(message);
         //MicrosoftTranslateAPI.translate(message);
@@ -149,9 +149,13 @@ var TranslatorAPI =
     _update_height: function (id) {
         if (typeof (isIFramePopup) != "undefined") return;
         var attribute = "height";
-        $(id).css(attribute, EmptyText);    // restore height
-        TranslatorAPI._update_rows(id);
-        $(id).css(attribute, $(id)[0].scrollHeight);    // set height
+        var obj = $(id);
+        if (obj) {
+            $(id).css(attribute, EmptyText);    // restore height
+            TranslatorAPI._update_rows(id);
+            if (obj.length > 0 && obj[0])
+            $(id).css(attribute, $(id)[0].scrollHeight);    // set height
+        }
     },
 
     _update_rows: function (id) {
@@ -198,9 +202,13 @@ var TranslatorAPI =
 
 var YouDaoTranslateAPI =
 {
+    CurrentCallBack: null,
 
     /*-----------  Translate By YouDao API --------------*/
-    translate: function (message) {
+    translate: function (message, callback) {
+        YouDaoTranslateAPI.CurrentCallBack = null;
+        YouDaoTranslateAPI.CurrentCallBack = callback;
+
         if (!CommonAPI.isValidText(message)) return false;
 
         var type = "";
@@ -243,7 +251,7 @@ var YouDaoTranslateAPI =
         TranslatorAPI._update_more_meaning(" ");
 
         // invoke callback
-        if (TranslatorAPI.CurrentCallBack && typeof (TranslatorAPI.CurrentCallBack) == 'function') { TranslatorAPI.CurrentCallBack(TranslatorAPI.getDataResult(text, " ")); }
+        if (YouDaoTranslateAPI.CurrentCallBack && typeof (YouDaoTranslateAPI.CurrentCallBack) == 'function') { YouDaoTranslateAPI.CurrentCallBack(TranslatorAPI.getDataResult(text, " ")); }
     },
 
     _parse_yd_result: function (result) {
@@ -296,7 +304,7 @@ var YouDaoTranslateAPI =
             TranslatorAPI._update_more_meaning(more);
 
             // invoke callback
-            if (TranslatorAPI.CurrentCallBack && typeof (TranslatorAPI.CurrentCallBack) == 'function') { TranslatorAPI.CurrentCallBack(TranslatorAPI.getDataResult(main, more)); }
+            if (YouDaoTranslateAPI.CurrentCallBack && typeof (YouDaoTranslateAPI.CurrentCallBack) == 'function') { YouDaoTranslateAPI.CurrentCallBack(TranslatorAPI.getDataResult(main, more)); }
         }
     },
     _combine_values: function (valuesArray, separator) {
@@ -318,9 +326,14 @@ var YouDaoTranslateAPI =
 
 var GoogleTranslateAPI =
 {
+    CurrentCallBack: null,
+
     /*-----------  Translate By Google API --------------*/
-    translate: function (message)
+    translate: function (message, callback)
     {
+        GoogleTranslateAPI.CurrentCallBack = null;
+        GoogleTranslateAPI.CurrentCallBack = callback;
+
         if (!CommonAPI.isValidText(message)) return false;
 
         //var type = "G";
@@ -407,9 +420,14 @@ var GoogleTranslateAPI =
 
 var BaiduTranslateAPI =
 {
+    CurrentCallBack: null,
+
     /*-----------  Translate By BaiDu API --------------*/
-    translate: function (message)
+    translate: function (message, callback)
     {
+        BaiduTranslateAPI.CurrentCallBack = null;
+        BaiduTranslateAPI.CurrentCallBack = callback;
+
         if (!CommonAPI.isValidText(message)) return false;
 
         var type = "B";
@@ -422,9 +440,14 @@ var BaiduTranslateAPI =
 
 var MicrosoftTranslateAPI = 
 {
+    CurrentCallBack: null,
+
     /*-----------  Translate By YouDao API --------------*/
-    translate: function (message)
+    translate: function (message, callback)
     {
+        MicrosoftTranslateAPI.CurrentCallBack = null;
+        MicrosoftTranslateAPI.CurrentCallBack = callback;
+
         if (!CommonAPI.isValidText(message)) return false;
 
         var type = "M";
