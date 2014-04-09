@@ -18,6 +18,20 @@ var ContextAPI =
         $(".context-source span").html(source);
         $(".context-main span").html(main);
         $(".context-more span").html(more);
+    },
+    
+    BindCloseEvents: function(){
+        $(".context-close span").click(function(e){
+            this.hide();
+        });
+    },
+    
+    ShowContextDialog: function() {    
+        $(".context-more span").html(more);
+    },
+    
+    HideContextDialog: function() {    
+        $(".context-more span").html(more);
     }
 };
 

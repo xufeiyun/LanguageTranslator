@@ -165,13 +165,15 @@ var ContentAPI =
         var isPopupFrame = window.top.window.document.body.tagName == "FRAMESET";
         pDocument = ContentAPI.getDocument(isPopupFrame);
 
-        var top = 25;
+        var top = 20;
 
         var divContainer = DomAPI.getElement(ElementIds.WebPageContextDiv, pDocument);
 
         if (divContainer == null || divContainer.length == 0) {
             var styles = "left: " + (MousePosition.x - 10) + "px; top: " + (MousePosition.y + top) + "px;";
-            var html = "<iframe id='" + ElementIds.PopupIFrame + "' width='300px' height='100px' style='background-color:lightgray; border: 1px #BDBDBD solid; margin: -1px -1px -1px -1px; padding: 0px 0px 0px 1px; display: block;' src='" + ProductURIs.ContextIFramePage + "'></iframe>";
+            var html = ""
+                 + "<div id='btnLanguageTranslatorHide' class='hidelink' title='Hide me!' href='javascript:void(0);'>[X]</div>"
+                 + "<iframe id='" + ElementIds.PopupIFrame + "' width='300px' height='100px' style='background-color:lightgray; border: 1px #BDBDBD solid; margin: -1px -1px -1px -1px; padding: 0px 0px 0px 1px; display: block;' src='" + ProductURIs.ContextIFramePage + "'></iframe>";
             divContainer = DomAPI.createElement("div");
             divContainer.setAttribute("id", ElementIds.WebPageContextDiv);
             divContainer.setAttribute("class", "context_popup divLanguageTranslator");
@@ -196,7 +198,11 @@ var ContentAPI =
         if (divContainer.length > 0) {
             divContainer[0].style.left = MousePosition.x + "px";
             divContainer[0].style.top = (MousePosition.y + top) + "px";
+            divContainer.show();
         }
+        $("#btnLanguageTranslatorHide").click(function(e){
+            $("#" + ElementIds.WebPageContextDiv).hide();
+        });
     },
 
     fnDOMLoadCompleted: function () {

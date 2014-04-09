@@ -11,6 +11,18 @@
 
 
 /*  context popup  */
+.hidelink
+{
+    cursor: pointer;
+    position: absolute;
+    left: 265px;
+    color: blue;
+}
+.hidelink:hover
+{
+    background-color: gray;
+    color: red;
+}
 .context_popup
 {
     z-index: 99999999999999999999999999999;
