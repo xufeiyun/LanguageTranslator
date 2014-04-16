@@ -61,7 +61,7 @@ var ContentAPI =
             // iframe: width='326px' height='450px'
             divContainer = DomAPI.createElement("div");
             divContainer.setAttribute("id", ElementIds.WebPagePopupDiv);
-            divContainer.setAttribute("class", "content_popup");
+            divContainer.setAttribute("class", "content_popup divLanguageTranslator");
             //divContainer.setAttribute("style", styles);
             divContainer.innerHTML = html;
 
@@ -291,7 +291,8 @@ var ContentAPI =
             // no need to translate here => translated in iframe popup page
             // translateByYoudao(text);
             if (OptionItemValues.EnableTranslation) {
-                if (OptionItemValues.EnableContextDialog == TrueValue) {
+                alert(OptionItemValues.EnableContextDialog);
+                if (OptionItemValues.EnableContextDialog) {
                     // show simple context dialog
                     ContentAPI.ShowContextDialogForTranslation(message, 'main meanings', 'more meanings');
                 }
