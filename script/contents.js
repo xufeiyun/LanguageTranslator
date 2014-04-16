@@ -200,7 +200,7 @@ var ContentAPI =
             divContainer[0].style.top = (MousePosition.y + top) + "px";
             divContainer.show();
         }
-        $("#btnLanguageTranslatorHide").click(function(e){
+        $("#btnLanguageTranslatorHide").click(function (e) {
             $("#" + ElementIds.WebPageContextDiv).hide();
         });
     },
@@ -242,6 +242,9 @@ var ContentAPI =
         var options = data;
         if (typeof (options.EnablePopupDialog) != "undefined") {
             OptionItemValues.EnablePopupDialog = (options.EnablePopupDialog == TrueValue);
+        }
+        if (typeof (options.EnableContextDialog) != "undefined") {
+            OptionItemValues.EnableContextDialog = (options.EnableContextDialog == TrueValue);
         }
         if (typeof (options.EnableTranslation) != "undefined") {
             OptionItemValues.EnableTranslation = (options.EnableTranslation == TrueValue);
@@ -288,9 +291,14 @@ var ContentAPI =
             // no need to translate here => translated in iframe popup page
             // translateByYoudao(text);
             if (OptionItemValues.EnableTranslation) {
-                ContentAPI.ShowContextDialogForTranslation(message, 'main meanings', 'more meanings');
-
-                // ContentAPI.ShowPopupDialogForTranslation(message, 'main meanings', 'more meanings');
+                if (OptionItemValues.EnableContextDialog == TrueValue) {
+                    // show simple context dialog
+                    ContentAPI.ShowContextDialogForTranslation(message, 'main meanings', 'more meanings');
+                }
+                else {
+                    // show top-right content dialog
+                    ContentAPI.ShowPopupDialogForTranslation(message, 'main meanings', 'more meanings');
+                }
 
                 // send message to background to translate text
                 MsgBusAPI.msg_send(OperatorType.getSelectText, message);
