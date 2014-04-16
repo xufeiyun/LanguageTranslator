@@ -42,7 +42,7 @@ var OptionAPI =
         $("h1").click(WikiAPI.fromHomepage);
 
         // load settings for Options page
-        MsgBugAPI.msg_send(OperatorType.loadSettings, null, OptionAPI.resp_option);
+        MsgBusAPI.msg_send(OperatorType.loadSettings, null, OptionAPI.resp_option);
 
         $("#settings label:lt(4):even").css("color", "blue");
 
@@ -221,7 +221,11 @@ var OptionAPI =
         var options = data;
         if (typeof (options.EnablePopupDialog) != "undefined" && options.EnablePopupDialog == TrueValue)
         {
-            DomAPI.getElement("chkEnablePopupDialg").click();
+            DomAPI.getElement("chkEnablePopupDialog").click();
+        }
+        if (typeof (options.EnableContextDialog) != "undefined" && options.EnableContextDialog == TrueValue)
+        {
+            DomAPI.getElement("chkEnableContextDialog").click();
         }
         if (typeof (options.EnableTranslation) != "undefined" && options.EnableTranslation == TrueValue)
         {
@@ -243,12 +247,13 @@ var OptionAPI =
         var data = {
             message: {
                 EnableTranslation: DomAPI.getElement("chkEnableTextTranslation")[0].checked,
-                EnablePopupDialog: DomAPI.getElement("chkEnablePopupDialg")[0].checked,
+                EnableContextDialog: DomAPI.getElement("chkEnableContextDialog")[0].checked,
+                EnablePopupDialog: DomAPI.getElement("chkEnablePopupDialog")[0].checked,
                 EnableCopyText: DomAPI.getElement("chkEnableCopyText")[0].checked,
                 EnableLogger: DomAPI.getElement("chkEnableTraceLog")[0].checked
             }
         };
-        MsgBugAPI.msg_send(OperatorType.saveSettings, data, resp_option);
+        MsgBusAPI.msg_send(OperatorType.saveSettings, data, OptionAPI.resp_option);
     }
 };
 

@@ -29,11 +29,16 @@ var TranslatorAPI =
             $("#" + PronounceAudios.More.ButtonId).addClass(classHide);
         }
 
-        // no need to translate if not changed
-        if (TranslatorAPI.LastSource.toLowerCase() == message.toLowerCase()) { return false; }
+        if (!TranslatorAPI.IsTypedText) {
+            // it will called by content dialog & context dialog
+            if (typeof (TranslatorAPI.CurrentCallBack) == 'undefined' || typeof (TranslatorAPI.CurrentCallBack) != 'function') {
+                // no need to translate if not changed:
+                if (TranslatorAPI.LastSource.toLowerCase() == message.toLowerCase()) { return false; }
+            }
+        }
 
         // add Source pronounce
-        if (typeof (AudioAPI.createTranslateAudio) != undefined) {
+        if (typeof (AudioAPI.createTranslateAudio) != 'undefined') {
             AudioAPI.createTranslateAudio(PronounceAudios.Source, message);
         }
 
@@ -154,7 +159,7 @@ var TranslatorAPI =
             $(id).css(attribute, EmptyText);    // restore height
             TranslatorAPI._update_rows(id);
             if (obj.length > 0 && obj[0])
-            $(id).css(attribute, $(id)[0].scrollHeight);    // set height
+                $(id).css(attribute, $(id)[0].scrollHeight);    // set height
         }
     },
 

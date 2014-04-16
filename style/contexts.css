@@ -11,11 +11,15 @@
 
 
 /*  context popup  */
+.hide
+{
+    display: none;
+}
 .hidelink
 {
     cursor: pointer;
     position: absolute;
-    left: 265px;
+    left: 5px;
     color: blue;
 }
 .hidelink:hover

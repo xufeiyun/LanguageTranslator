@@ -172,7 +172,7 @@ var ContentAPI =
         if (divContainer == null || divContainer.length == 0) {
             var styles = "left: " + (MousePosition.x - 10) + "px; top: " + (MousePosition.y + top) + "px;";
             var html = ""
-                 + "<div id='btnLanguageTranslatorHide' class='hidelink' title='Hide me!' href='javascript:void(0);'>[X]</div>"
+                 + "<div id='btnLanguageTranslatorHide' class='hidelink hide' title='Hide me!' href='javascript:void(0);'>[X]</div>"
                  + "<iframe id='" + ElementIds.PopupIFrame + "' width='300px' height='100px' style='background-color:lightgray; border: 1px #BDBDBD solid; margin: -1px -1px -1px -1px; padding: 0px 0px 0px 1px; display: block;' src='" + ProductURIs.ContextIFramePage + "'></iframe>";
             divContainer = DomAPI.createElement("div");
             divContainer.setAttribute("id", ElementIds.WebPageContextDiv);

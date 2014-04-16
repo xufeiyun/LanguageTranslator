@@ -92,6 +92,7 @@ var ElementIds = {
 var OptionItemKeys = {
     EnableTranslation: "OptionItemKeys_EnableTranslation",
     EnablePopupDialog: "OptionItemKeys_EnablePopupDialog",
+    EnableContextDialog: "OptionItemKeys_EnableContextDialog",
     EnableCopyText: "OptionItemKeys_EnableCopyText",
     EnableLogger: "OptionItemKeys_EnableLogger",
     FromLanguage: "OptionItemKeys_FromLanguage",
@@ -111,7 +112,8 @@ var OptionItemKeys = {
 var OptionItemValues = {
     EnableLogger: false,  // It means to log text to browser console.
     EnablePronunciation: true,
-    EnablePopupDialog: false,   // It means the webpage-based popup dialog displays automatically OR NOT on current webpage that viewed by user.
+    EnablePopupDialog: false,   // It means the webpage-based popup dialog displays automatically after selecting text OR NOT on current webpage that viewed by user.
+    EnableContextDialog: false,   // It means the simple context dialog displays automatically after selecting text OR NOT on current webpage that viewed by user.
 
     ClosedPopupDialog: false,
     EnableTranslation: true,   // It means translation takes effect OR NOT thru webpage-based popup dialog or the extension-based popup dialog.
@@ -644,6 +646,7 @@ var MsgBusAPI = {
             var data = {
                 EnableTranslation: StorageAPI.getItem(OptionItemKeys.EnableTranslation),
                 EnablePopupDialog: StorageAPI.getItem(OptionItemKeys.EnablePopupDialog),
+                EnableContextDialog: StorageAPI.getItem(OptionItemKeys.EnableContextDialog),
                 EnableCopyText: StorageAPI.getItem(OptionItemKeys.EnableCopyText),
                 EnableLogger: StorageAPI.getItem(OptionItemKeys.EnableLogger),
                 FromLanguage: StorageAPI.getItem(OptionItemKeys.FromLanguage),
@@ -661,6 +664,7 @@ var MsgBusAPI = {
             var data = message.message;
             StorageAPI.setItem(OptionItemKeys.EnableTranslation, data.EnableTranslation);
             StorageAPI.setItem(OptionItemKeys.EnablePopupDialog, data.EnablePopupDialog);
+            StorageAPI.setItem(OptionItemKeys.EnableContextDialog, data.EnableContextDialog);
             StorageAPI.setItem(OptionItemKeys.EnableCopyText, data.EnableCopyText);
             StorageAPI.setItem(OptionItemKeys.EnableLogger, data.EnableLogger);
             //StorageAPI.setItem(OptionItemKeys.EnableAction, data.EnableAction);
