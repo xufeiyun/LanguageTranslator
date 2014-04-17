@@ -15,9 +15,13 @@ var ContextAPI =
         var source = result.source;
         var main = result.main;
         var more = result.more;
-        $(".context-source span").html(source);
-        $(".context-main span").html(main);
-        $(".context-more span").html(more);
+        var s = $(".context-source span");
+        var m1 = $(".context-main span");
+        var m2 = $(".context-more span");
+
+        s.html(source);
+        m1.html(main);
+        m2.html(more);
     },
     
     BindCloseEvents: function(){

@@ -19,7 +19,7 @@ var DialogAPI =
 
         DialogAPI.checkClickAction();
 
-        ListenerAPI.onMessageListener(MsgBusAPI.rcvmsg_iframe);
+        ListenerAPI.onMessageListener(MsgBusAPI.rcvmsg_popup);
 
         TranslatorAPI.clearTexts();
 

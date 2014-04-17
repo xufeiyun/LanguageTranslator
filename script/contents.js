@@ -291,7 +291,6 @@ var ContentAPI =
             // no need to translate here => translated in iframe popup page
             // translateByYoudao(text);
             if (OptionItemValues.EnableTranslation) {
-                alert(OptionItemValues.EnableContextDialog);
                 if (OptionItemValues.EnableContextDialog) {
                     // show simple context dialog
                     ContentAPI.ShowContextDialogForTranslation(message, 'main meanings', 'more meanings');
@@ -576,3 +575,4 @@ var ContentAPI =
 $(document).ready(function () {
     ContentAPI.Initialize();
 });
+

@@ -10,6 +10,7 @@
 
   "permissions": [
     "<all_urls>",
+    "tabs",
     "contextMenus",
     "webNavigation",
     "activeTab",
@@ -20,8 +21,7 @@
     "unlimitedStorage",
     "tts",
     "windows",
-    "geolocation",
-    "tabs"
+    "geolocation"
   ],
 
   "content_security_policy": "script-src 'self'; object-src 'self'",

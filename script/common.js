@@ -90,6 +90,7 @@ var ElementIds = {
 };
 
 var OptionItemKeys = {
+    EnablePronunciation: "OptionItemKeys_EnablePronunciation",
     EnableTranslation: "OptionItemKeys_EnableTranslation",
     EnablePopupDialog: "OptionItemKeys_EnablePopupDialog",
     EnableContextDialog: "OptionItemKeys_EnableContextDialog",
@@ -104,14 +105,13 @@ var OptionItemKeys = {
     IsPageControl: "OptionItemKeys_IsPageControl",
     BaikeType: "OptionItemKeys_BaikeType",
     BaikeWord: "OptionItemKeys_BaikeWord",
-    EnablePronunciation: "OptionItemKeys_EnablePronunciation",
-    Default: "OptionItemKeys_defalt"
+    Default: "OptionItemKeys_Defalt"
 };
 
 // Set default values for deployment!
 var OptionItemValues = {
-    EnableLogger: false,  // It means to log text to browser console.
     EnablePronunciation: true,
+    EnableLogger: false,  // It means to log text to browser console.
     EnablePopupDialog: false,   // It means the webpage-based popup dialog displays automatically after selecting text OR NOT on current webpage that viewed by user.
     EnableContextDialog: false,   // It means the simple context dialog displays automatically after selecting text OR NOT on current webpage that viewed by user.
 
@@ -133,19 +133,17 @@ var CheckDebugger = function ()
     {
         LoggerAPI.logW("DEBUG MODE: Enable Logger, Disable Pronunciation, Show Popup Dialog!");
 
-        OptionItemValues.EnableLogger = true;   // enable log for dev env
         OptionItemValues.EnablePronunciation = false;   // disable pronunce for dev env
-        OptionItemValues.EnablePopupDialog = true; // open dialog in debug mode
-        OptionItemValues.EnableContextDialog = false; // open dialog in debug mode
+        OptionItemValues.EnableLogger = true;   // enable log for dev env
+        OptionItemValues.EnablePopupDialog = true; // open popup dialog in debug mode
+        OptionItemValues.EnableContextDialog = true; // don't open simple dialog in debug mode
     }
 };
 
 var CommonAPI = {
-    showPopupMsg: function (message)
-    {
+    showPopupMsg: function (message) {
         //LoggerAPI.logD("SHOW NOTIFICATION WITH MESSAGE: " + message);
-        try
-        {
+        try {
             // notification popup
             var notify = webkitNotifications.createNotification(
                     'image/notify_logo.png',      // icon url - can be relative
@@ -154,26 +152,21 @@ var CommonAPI = {
                 );
             notify.show();
         }
-        catch (e)
-        {
+        catch (e) {
             LoggerAPI.logE("try to popup msg: [" + message + "]. " + e.toLocaleString());
         }
     },
 
-    alertMsg: function (message)
-    {
+    alertMsg: function (message) {
         CommonAPI.showPopupMsg(message);
     },
 
-    importJS: function (path)
-    {
+    importJS: function (path) {
         LoggerAPI.logD("[Try importing javascript file into viewed page dynamically] file path: " + path);
         var i;
         var ss = document.getElementsByTagName("script");
-        for (i = 0; i < ss.length; i++)
-        {
-            if (ss[i].src && ss[i].src.indexOf(path) != -1)
-            {
+        for (i = 0; i < ss.length; i++) {
+            if (ss[i].src && ss[i].src.indexOf(path) != -1) {
                 return;
             }
         }
@@ -185,80 +178,69 @@ var CommonAPI = {
         head.appendChild(s);
     },
 
-    getInterval: function (start, end)
-    {
-        if (CommonAPI.isDefined(start) && CommonAPI.isDefined(end))
-        {
+    getInterval: function (start, end) {
+        if (CommonAPI.isDefined(start) && CommonAPI.isDefined(end)) {
             var interval = (end.getTime() - start.getTime());
             return interval;
         }
-        else
-        {
+        else {
             return 0;
         }
     },
 
-    encodeText: function (text)
-    {
+    encodeText: function (text) {
         return encodeURIComponent(text);
     },
 
-    isDefined: function (variable)
-    {
+    isDefined: function (variable) {
         return (typeof (variable) != "undefined");
     },
 
-    isValidText: function (text)
-    {
+    isValidText: function (text) {
         // return CommonAPI.isDefined(text) && !(text == null || text.trim() == "");
         return CommonAPI.isDefined(text) && !(text == null || $.trim(text) == "");
     },
 
-    isFunction: function (fnName)
-    {
+    isFunction: function (fnName) {
         return (typeof (fnName) == "function");
     },
 
-    now: function ()
-    {
+    now: function () {
         var d = new Date();
         var ms = (1000 + d.getMilliseconds()).toString().substr(1);
         var value = "[" + d.toLocaleString() + " - " + ms + "] ";
         return value;
     },
 
-    removeDuplicated: function (data, character)
-    {
+    removeDuplicated: function (data, character) {
         var text = data;
         // removing duplicated comma
-        while (text.indexOf(character + character) > -1)
-        {
+        while (text.indexOf(character + character) > -1) {
             text = text.replace(character + character, character);
         }
         // end
         return text;
     },
 
-    removeInsideSpaces: function (text)
-    {
+    removeInsideSpaces: function (text) {
         text = text.replace(/\s/g, "");
         return text;
     },
 
     // judge whether the word contains chinese or not
-    isChinese: function (s)
-    {
+    isChinese: function (s) {
         var pattern = /[\u4E00-\u9FA5]|[\uFE30-\uFFA0]/gi;
         var result = (pattern.exec(s) != null); // ok chinese
         return result;
     },
 
-    getFunctionName: function (fn)
-    {
-        if (typeof (fn) == 'function')
-        {
+    getFunctionName: function (fn) {
+        if (typeof (fn) == 'function') {
             var cbs = fn.toString();
-            var name = cbs.match(/function ([a-zA-Z0-9_-]*)/)[1];
+            var name = cbs.match(/function *([a-zA-Z0-9_-]*)/)[1];
+            if (name == "") {
+                name = "ANONYMOUS FUNCTION"
+            }
             return name;
         }
         return 'NOT A FUNCTION';
@@ -456,6 +438,107 @@ var AudioAPI =
     }
 };
 
+var OptionItems = {
+    LoadSettings: function (fnResponse) {
+        debugger;
+        // tell options to load settings
+        var data = {
+            EnableTranslation: StorageAPI.getItem(OptionItemKeys.EnableTranslation),
+            EnablePopupDialog: StorageAPI.getItem(OptionItemKeys.EnablePopupDialog),
+            EnableContextDialog: StorageAPI.getItem(OptionItemKeys.EnableContextDialog),
+            EnableCopyText: StorageAPI.getItem(OptionItemKeys.EnableCopyText),
+            EnableLogger: StorageAPI.getItem(OptionItemKeys.EnableLogger),
+            FromLanguage: StorageAPI.getItem(OptionItemKeys.FromLanguage),
+            ToLanguage: StorageAPI.getItem(OptionItemKeys.ToLanguage),
+            DefaultBaike: StorageAPI.getItem(OptionItemKeys.DefaultBaike),
+            EnableAction: StorageAPI.getItem(OptionItemKeys.EnableAction),
+            EnableLocation: StorageAPI.getItem(OptionItemKeys.EnableLocation),
+            Default: StorageAPI.getItem(OptionItemKeys.Default)
+        };
+        // MsgBusAPI.bgd2tab(OperatorType.loadSettings, data)
+        if (typeof (fnResponse) == 'function') fnResponse({ type: OperatorType.loadSettings, message: data });
+    },
+    UpdateSettings: function (data) {
+        debugger;
+        if (typeof (data) == 'undefined') return;
+
+        var type = data.type;
+        var message = data.message;
+        // update settings
+        if (typeof (message.EnableTranslation) != 'undefined' && message.EnableTranslation == TrueValue) {
+            OptionItemValues.EnableTranslation = (message.EnableTranslation == TrueValue);
+        }
+        if (typeof (message.EnablePopupDialog) != 'undefined' && message.EnablePopupDialog == TrueValue) {
+            OptionItemValues.EnablePopupDialog = (message.EnablePopupDialog == TrueValue);
+        }
+        if (typeof (message.EnableContextDialog) != 'undefined' && message.EnableContextDialog == TrueValue) {
+            OptionItemValues.EnableContextDialog = (message.EnableContextDialog == TrueValue);
+        }
+        if (typeof (message.EnableCopyText) != 'undefined' && message.EnableCopyText == TrueValue) {
+            OptionItemValues.EnableCopyText = (message.EnableCopyText == TrueValue);
+        }
+        if (typeof (message.EnableLogger) != 'undefined' && message.EnableLogger == TrueValue) {
+            OptionItemValues.EnableLogger = (message.EnableLogger == TrueValue);
+        }
+        if (typeof (message.EnableAction) != 'undefined' && message.EnableAction == TrueValue) {
+            OptionItemValues.EnableAction = (message.EnableAction == TrueValue);
+        }
+        if (typeof (message.EnableLocation) != 'undefined' && message.EnableLocation == TrueValue) {
+            OptionItemValues.EnableLocation = (message.EnableLocation == TrueValue);
+        }
+
+        if (message.FromLanguage) {
+            OptionItemValues.FromLanguage = (message.FromLanguage);
+        }
+        if (message.ToLanguage) {
+            OptionItemValues.ToLanguage = (message.ToLanguage);
+        }
+        if (message.DefaultBaike) {
+            OptionItemValues.DefaultBaike = (message.DefaultBaike);
+        }
+        if (message.Default) {
+            OptionItemValues.Default = (message.Default);
+        }
+    },
+    SaveSettings: function (fnResponse, message) {
+        // start to save settings
+        var data = message.message;
+        StorageAPI.setItem(OptionItemKeys.EnableTranslation, data.EnableTranslation);
+        StorageAPI.setItem(OptionItemKeys.EnablePopupDialog, data.EnablePopupDialog);
+        StorageAPI.setItem(OptionItemKeys.EnableContextDialog, data.EnableContextDialog);
+        StorageAPI.setItem(OptionItemKeys.EnableCopyText, data.EnableCopyText);
+        StorageAPI.setItem(OptionItemKeys.EnableLogger, data.EnableLogger);
+        //StorageAPI.setItem(OptionItemKeys.EnableAction, data.EnableAction);
+        //StorageAPI.setItem(OptionItemKeys.EnableLocation, data.EnableLocation);
+
+        if (typeof (fnResponse) == 'function') fnResponse({ type: OperatorType.savedSettings, message: data });
+    },
+    GetBaikeSetting: function (fnResponse) {
+        // get data
+        var data = {
+            control: StorageAPI.getItem(OptionItemKeys.IsPageControl),
+            type: StorageAPI.getItem(OptionItemKeys.BaikeType),
+            value: StorageAPI.getItem(OptionItemKeys.BaikeWord)
+        };
+
+        // clear data
+        StorageAPI.setItem(OptionItemKeys.IsPageControl, null);
+        StorageAPI.setItem(OptionItemKeys.BaikeType, null);
+        StorageAPI.setItem(OptionItemKeys.BaikeWord, null);
+
+        if (typeof (fnResponse) == 'function') fnResponse({ type: OperatorType.getBaikeSetting, message: data, object: data });
+    },
+
+    SetBaikeSetting: function (fnResponse) {
+        // set data
+        StorageAPI.setItem(OptionItemKeys.IsPageControl, message.control);
+        StorageAPI.setItem(OptionItemKeys.BaikeType, message.type);
+        StorageAPI.setItem(OptionItemKeys.BaikeWord, message.value);
+
+        if (typeof (fnResponse) == 'function') fnResponse({ type: OperatorType.getBaikeSetting, message: null });
+    }
+};
+
 var MsgBusAPI = {
     // content script => outer
     msg_send: function (type, message, callback) {
@@ -470,8 +553,9 @@ var MsgBusAPI = {
             function (response) { MsgBusAPI._msg_resp(response, callback); }
         );
     },
-
+    
     // background => content script
+    // chrome.tabs undefined for content scripts
     msg_bgd2tab: function (type, message, callback) {
         LoggerAPI.logD("#msg_bgd2tab: callback function: " + CommonAPI.getFunctionName(callback));
         LoggerAPI.logD("#msg_bgd2tab: sending message...");
@@ -482,6 +566,11 @@ var MsgBusAPI = {
                 function (response) { MsgBusAPI._msg_resp(response, callback); }
             );
         };
+        /*  ERROR IN CONTENT SCRIPTS
+        chrome.tabs is not available:
+        You do not have permission to access this API.
+        Ensure that the required permission or manifest property is included in your manifest.json.
+        */
         chrome.tabs.query({ 'active': true }, queryResponse);
     },
 
@@ -496,22 +585,41 @@ var MsgBusAPI = {
     },
 
     _msg_resp: function (response, callback) {
+        debugger;
         MsgBusAPI.msg_resp(response);
 
         // invoke user's callback function
         if (callback != undefined && callback != null) {
-            callback(response);
+            // response may be a function from receiver
+            if (typeof (response) == 'function') {
+                response(callback);
+            } else {
+                callback(response);
+            }
+        } else {
+            LoggerAPI.logD("_msg_resp: callback is NOT defined");
         }
         return true;
     },
 
-    // receivers
-    rcvmsg_iframe: function (request, sender, sendResponse) {
-        LoggerAPI.logD("rcvmsg_iframe: Received TYPE: " + request.type + ", MESSAGE [" + request.message + "] " + msg);
+    _resp_data: function (receiver, type, message, callback, data) {
+        var data_resp = {
+            receiver: receiver,
+            type: type,
+            message: message,
+            callback: callback,
+            calldata: data
+        };
+        return data_resp;
+    },
 
+    // receivers
+    rcvmsg_popup: function (request, sender, sendResponse) {
         var msg = (sender.tab ?
                 "in content script, sent from tab URL: [" + sender.tab.url + "]" :
                 "in extension script");
+
+        LoggerAPI.logD("rcvmsg_iframe: Received TYPE: " + request.type + ", MESSAGE [" + request.message + "] " + msg);
 
         var type = request.type;
         var message = request.message;
@@ -534,16 +642,17 @@ var MsgBusAPI = {
             //chrome.pageAction.show(sender.tab.id);
         }
         else if (type == OperatorType.viewWikipages) {
-            showWikipages(message);
-            if (CommonAPI.isValidText(message)) {
+            var text = message;
+            showWikipages(text);
+            if (CommonAPI.isValidText(text)) {
                 LoggerAPI.logD("rcvmsg_iframe: Try to open wikipage");
                 {
-                    // fromWikipedia(message);	// ok
+                    // fromWikipedia(text);	// ok
                 }
                 // or
                 {
                     //fromBaiduAPI(message);
-                    fromTencentAPI(message);
+                    fromTencentAPI(text);
                 }
             }
         }
@@ -552,7 +661,8 @@ var MsgBusAPI = {
         }
         else {
             if (send) {
-                sendResponse({ type: type, message: "rcvmsg_iframe: #IFRAME SEND RESPONSE# Received Message:" + message });
+                var data = MsgBusAPI._resp_data("rcvmsg_popup", type, "rcvmsg_iframe: #IFRAME SEND RESPONSE# Received Message:" + message);
+                sendResponse(data);
             }
             else {
                 LoggerAPI.logW(prefix, "rcvmsg_iframe: NOT defined the response function!");
@@ -562,11 +672,11 @@ var MsgBusAPI = {
     },
 
     rcvmsg_background: function (request, sender, sendResponse) {
-        LoggerAPI.logD("rcvmsg_background: Received TYPE: " + request.type + ", MESSAGE [" + request.message + "] " + msg);
-
         var msg = (sender.tab ?
                 "in content script, sent from tab URL: [" + sender.tab.url + "]" :
                 "in extension script");
+
+        LoggerAPI.logD("rcvmsg_background: Received TYPE: " + request.type + ", MESSAGE [" + request.message + "] " + msg);
 
         var type = request.type;
         var message = request.message;
@@ -594,9 +704,13 @@ var MsgBusAPI = {
                 }
                 //var textToTranslated = window.Clipboard.paste();
                 var textToTranslated = message;
+
                 //MsgBusAPI.msg_send(type, message);
+
                 MsgBusAPI.msg_bgd2tab(type, message);   // this is for page dialog
-                sendResponse({ type: type, message: textToTranslated });    // this is for extension dialog
+
+                var data = MsgBusAPI._resp_data("rcvmsg_background", type, textToTranslated);
+                sendResponse(data); // this is for extension dialog
             }
             else {
                 LoggerAPI.logW(prefix, "rcvmsg_background: NOT defined the response function!");
@@ -611,8 +725,8 @@ var MsgBusAPI = {
         else if (type == OperatorType.openOptionPage) {
             if (chrome.tabs) {
                 var toCaller = function (tab) {
-                    var response = { type: type, message: "To Open Page: " + message, object: tab };
-                    sendResponse(response);
+                    var data = MsgBusAPI._resp_data("rcvmsg_background", type, "To Open Page: " + message, null, tab);
+                    sendResponse(data);
                 };
 
                 chrome.tabs.create({ url: message }, toCaller);
@@ -622,66 +736,27 @@ var MsgBusAPI = {
             }
         }
         else if (type == OperatorType.setBaikeSetting) {
-            // set data
-            StorageAPI.setItem(OptionItemKeys.IsPageControl, message.control);
-            StorageAPI.setItem(OptionItemKeys.BaikeType, message.type);
-            StorageAPI.setItem(OptionItemKeys.BaikeWord, message.value);
+            OptionItems.SetBaikeSetting(sendResponse);
         }
         else if (type == OperatorType.getBaikeSetting) {
-            // get data
-            var data = {
-                control: StorageAPI.getItem(OptionItemKeys.IsPageControl),
-                type: StorageAPI.getItem(OptionItemKeys.BaikeType),
-                value: StorageAPI.getItem(OptionItemKeys.BaikeWord)
-            };
-
-            // clear data
-            StorageAPI.setItem(OptionItemKeys.IsPageControl, null);
-            StorageAPI.setItem(OptionItemKeys.BaikeType, null);
-            StorageAPI.setItem(OptionItemKeys.BaikeWord, null);
-
-            sendResponse({ type: type, message: data, object: data });
+            OptionItems.GetBaikeSetting(sendResponse);
         }
         else if (type == OperatorType.loadSettings) {
-            // tell options to load settings
-            var data = {
-                EnableTranslation: StorageAPI.getItem(OptionItemKeys.EnableTranslation),
-                EnablePopupDialog: StorageAPI.getItem(OptionItemKeys.EnablePopupDialog),
-                EnableContextDialog: StorageAPI.getItem(OptionItemKeys.EnableContextDialog),
-                EnableCopyText: StorageAPI.getItem(OptionItemKeys.EnableCopyText),
-                EnableLogger: StorageAPI.getItem(OptionItemKeys.EnableLogger),
-                FromLanguage: StorageAPI.getItem(OptionItemKeys.FromLanguage),
-                ToLanguage: StorageAPI.getItem(OptionItemKeys.ToLanguage),
-                DefaultBaike: StorageAPI.getItem(OptionItemKeys.DefaultBaike),
-                EnableAction: StorageAPI.getItem(OptionItemKeys.EnableAction),
-                EnableLocation: StorageAPI.getItem(OptionItemKeys.EnableLocation),
-                Default: StorageAPI.getItem(OptionItemKeys.Default)
-            };
-            // MsgBusAPI.bgd2tab(OperatorType.loadSettings, data)
-            sendResponse({ type: type, message: data });
+            debugger;
+            OptionItems.LoadSettings(sendResponse);
         }
         else if (type == OperatorType.saveSettings) {
-            // start to save settings
-            var data = message.message;
-            StorageAPI.setItem(OptionItemKeys.EnableTranslation, data.EnableTranslation);
-            StorageAPI.setItem(OptionItemKeys.EnablePopupDialog, data.EnablePopupDialog);
-            StorageAPI.setItem(OptionItemKeys.EnableContextDialog, data.EnableContextDialog);
-            StorageAPI.setItem(OptionItemKeys.EnableCopyText, data.EnableCopyText);
-            StorageAPI.setItem(OptionItemKeys.EnableLogger, data.EnableLogger);
-            //StorageAPI.setItem(OptionItemKeys.EnableAction, data.EnableAction);
-            //StorageAPI.setItem(OptionItemKeys.EnableLocation, data.EnableLocation);
-
-            sendResponse({ type: OperatorType.savedSettings, message: data });
+            OptionItems.SaveSettings(sendResponse, message);
         }
         else if (type == OperatorType.viewWikipages) {
             if (CommonAPI.isValidText(message)) {
-                LoggerAPI.logD("rcvmsg_background: Try to open wikipage");
-                openWikipage(message);
+                WikiAPI.fromWikipage(message);
             }
         }
         else {
             if (send) {
-                sendResponse({ type: type, message: "rcvmsg_background: #BACKGROUND SEND RESPONSE# Received Message:" + message });
+                var data = MsgBusAPI._resp_data("rcvmsg_background", type, "#BACKGROUND SEND RESPONSE# Received Message:" + message);
+                sendResponse(data);
             }
             else {
                 LoggerAPI.logW(prefix, "rcvmsg_background: NOT defined the response function!");
@@ -691,8 +766,6 @@ var MsgBusAPI = {
     },
 
     rcvmsg_content: function (request, sender, sendResponse) {
-        LoggerAPI.logD("rcvmsg_content: Received type: " + request.type + ", message [" + request.message + "] " + msg);
-
         var msg = (sender.tab ?
             "in content script, sent from tab URL:-- [" + sender.tab.url + "]" :
             "in extension script");
@@ -713,47 +786,35 @@ var MsgBusAPI = {
             else if (type == OperatorType.getSelectText) {
                 var text = ContentAPI.getSelectedText().toString();
                 if (CommonAPI.isValidText(text)) {
-                    LoggerAPI.logD("rcvmsg_cs: replied text [" + text + "] by response function...");
-                    sendResponse({ type: type, message: text });
+                    LoggerAPI.logD("rcvmsg_content: replied text [" + text + "] by response function...");
+                    var data = MsgBusAPI._resp_data("rcvmsg_content", type, text);
+                    sendResponse(data);
                 }
             }
-            // else if (type == OperatorType.viewWikipages)
-            // {
-            // 	LoggerAPI.logW("rcvmsg_cs: to open wiki page");
-
-            /*  ERROR IN CONTENT SCRIPTS
-            chrome.tabs is not available:
-            You do not have permission to access this API.
-            Ensure that the required permission or manifest property is included in your manifest.json.
-            */
-            // chrome.tabs.create({ url: url });
-
-            // otherwise send message to background
-            //tab2ext(OperatorType.viewWikipages, message);
-
-            // }
-            // else if (type == OperatorType.viewHomepage)
-            // {
-            // 	LoggerAPI.logW("rcvmsg_cs: to open home page");
-            // }
             else {
                 LoggerAPI.logE("rcvmsg_cs: feature NOT IMPLEMENTED type: " + type);
                 // other features
-                sendResponse({ type: type, message: "rcvmsg_cs: [#NOT FEATURED#]" });
+                var data = MsgBusAPI._resp_data("rcvmsg_content", type, "[#NOT FEATURED#]");
+                sendResponse(data);
             }
         }
     },
 
     rcvmsg_ninegrid: function (request, sender, sendResponse) {
+        var msg = (sender.tab ?
+                "in content script, sent from tab URL: [" + sender.tab.url + "]" :
+                "in extension script");
+
+        LoggerAPI.logD("rcvmsg_ninegrid: Received TYPE: " + request.type + ", MESSAGE [" + request.message + "] " + msg);
     },
 
     // consider to use iframe for page context div
     rcvmsg_context: function (request, sender, sendResponse) {
-        LoggerAPI.logD("rcvmsg_context: Received TYPE: " + request.type + ", MESSAGE [" + request.message + "] " + msg);
-
         var msg = (sender.tab ?
                 "in content script, sent from tab URL: [" + sender.tab.url + "]" :
                 "in extension script");
+
+        LoggerAPI.logD("rcvmsg_context: Received TYPE: " + request.type + ", MESSAGE [" + request.message + "] " + msg);
 
         var type = request.type;
         var message = request.message;
@@ -763,11 +824,13 @@ var MsgBusAPI = {
             LoggerAPI.logE("rcvmsg_context: Message received is null or empty");
         }
         else if (type == OperatorType.getSelectText) {
+            console.error('translating via context');
             TranslatorAPI.translate(message, ContextAPI.UpdateMeanings);
         }
         else {
             if (send) {
-                sendResponse({ type: type, message: "rcvmsg_context: #IFRAME SEND RESPONSE# Received Message:" + message });
+                var data = MsgBusAPI._resp_data("rcvmsg_content", type, "#IFRAME SEND RESPONSE# Received Message:" + message);
+                sendResponse(data);
             }
             else {
                 LoggerAPI.logW(prefix, "rcvmsg_context: NOT defined the response function!");
@@ -819,8 +882,9 @@ var ListenerAPI =
     }
 };
 
+// load configs
+MsgBusAPI.msg_send(OperatorType.loadSettings, '[load configs]', OptionItems.UpdateSettings);
 
-CheckDebugger();
-
+//CheckDebugger();
 
 //var content = AjaxAPI.getFileContentsSync(ProductURIs.WebpagePopup);
