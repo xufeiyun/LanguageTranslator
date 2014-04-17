@@ -542,6 +542,13 @@ var OptionItems = {
 var MsgBusAPI = {
     // content script => outer
     msg_send: function (type, message, callback) {
+        switch (type) {
+            case OperatorType.loadSettings: // ok
+                alert(type);
+                break;
+            default:
+                alert(type);
+        }
         var url = window.location.href;
         if (url.startsWith('file://')) { console.warn("[MSG NOT SEND] You may access file locally: " + url); return false; }
 
@@ -553,7 +560,7 @@ var MsgBusAPI = {
             function (response) { MsgBusAPI._msg_resp(response, callback); }
         );
     },
-    
+
     // background => content script
     // chrome.tabs undefined for content scripts
     msg_bgd2tab: function (type, message, callback) {
