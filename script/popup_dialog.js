@@ -37,7 +37,7 @@ var DialogAPI =
 
         DialogAPI.bindBottomLinkEvent();
 
-        TranslatorAPI.tryTranslateNow();    // serve for the extension dialog
+        TranslatorAPI.tryTranslateNow();    // serve for the extension popup dialog
     },
 
     fnDOMLoadCompleted: function () {

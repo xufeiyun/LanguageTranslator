@@ -70,7 +70,7 @@ var WikiAPI = {
             value: word
         };
 
-        MsgBusAPI.msg_send(OperatorType.setBaikeSetting, data)
+        MsgBusAPI.msg_send(OperatorType.setBaikeSetting, data, OptionItems.SetBaikeSetting)
 
         WikiAPI.openPage('http://baike.baidu.com/');
     },
@@ -85,8 +85,9 @@ var WikiAPI = {
             control: true,
             value: word
         };
+        debugger;
 
-        MsgBusAPI.msg_send(OperatorType.setBaikeSetting, data)
+        MsgBusAPI.msg_send(OperatorType.setBaikeSetting, data, OptionItems.SetBaikeSetting)
 
         WikiAPI.openPage('http://baike.soso.com/');
     },

@@ -39,8 +39,7 @@ var ContentAPI =
 
         ListenerAPI.onMessageListener(MsgBusAPI.rcvmsg_content);
 
-        // load configs
-        MsgBusAPI.msg_send(OperatorType.loadSettings, "[load settings]");
+        TranslatorAPI.tryTranslateNow();    // serve for the content popup dialog and simple context dialog
     },
 
     ShowPopupDialogForTranslation: function (sourceText, mainMeaning, moreMeaning) {
@@ -422,7 +421,6 @@ var ContentAPI =
 
     executeScriptsOnPage: function (response) {
         LoggerAPI.logW("What's the type of encyclopedia?");
-        LoggerAPI.logD(response);
 
         // get data
         var data = response.object;
@@ -437,6 +435,7 @@ var ContentAPI =
 
         // tencent soso baike
         if (isTyped) {
+            LoggerAPI.logW("The type of encyclopedia: " + type);
             if (type == BaikeType.tencent) {
                 WikiAPI.setPage_TencentWiki(isPageControl, value);
             }

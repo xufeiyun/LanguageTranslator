@@ -21,6 +21,31 @@ var UsePageAction = false;
 
 var IsDebugger = (ExtensionUID == DebugId1 || ExtensionUID == DebugId2);
 
+var replace = function (args) {
+    var result = args[0].replace(/\{(\d+)\}/g,
+        function (m, i) {
+            var index = Number(i);
+            return args[index + 1];
+        });
+    return result;
+};
+
+/* using {0} etc*/
+String.format = function () {
+    var result = replace(arguments);
+    return result;
+};
+/* using {0} etc*/
+String.prototype.format = function () {
+    // build a complete arguments object
+    var source = "" + this.valueOf();
+    var args = new Array();
+    args.push(source);
+    for (var index in arguments) { args.push(arguments[Number(index)]); }
+
+    var result = replace(args);
+    return result;
+};
 String.prototype.contains = function (value) {
     var result = false;
     var source = "" + this.valueOf();
@@ -32,6 +57,68 @@ String.prototype.startsWith = function (value) {
     var source = "" + this.valueOf();
     result = source.indexOf(value) == 0;
     return result;
+};
+
+var FunctionNameAPI = {
+    ApplyPrintName: function (anObject, aFunction) {
+        // if aFunction is specified, then just apply to the function in the object
+        for (var key in anObject) {
+            if (aFunction && key.toLowerCase() !== aFunction.toLowerCase()) { continue; }
+
+            // if the keys belongs to object and it is a function
+            if (anObject.hasOwnProperty(key) && (typeof anObject[key] === 'function')) {
+                // overwrite this function
+                anObject[key] = (function () {
+                    // save the previous function
+                    var functionName = key;
+                    var functionCode = anObject[functionName];
+                    // return new function that will write log message and run the saved function
+                    return function () {
+                        var output = "";
+                        // if anObject defined a debug property
+                        if (anObject.debug && (anObject.debug === true || anObject.debug === functionName)) {
+                            output = String.format('I am a function [{0}] with arguments: {1}', functionName, arguments);
+                            LoggerAPI.logD(output);
+                        }
+                        output = String.format("Executing function: [{0}] with arguments: {1}", functionName, arguments);
+                        LoggerAPI.logD(output);
+                        var count = (arguments == null) ? 0 : arguments.length;
+                        var result = null;
+                        switch (count) {
+                            case 0: result = functionCode(arguments); break;
+                            case 1: result = functionCode(arguments[0]); break;
+                            case 2: result = functionCode(arguments[0], arguments[1]); break;
+                            case 3: result = functionCode(arguments[0], arguments[1], arguments[2]); break;
+                            case 4: result = functionCode(arguments[0], arguments[1], arguments[2], arguments[3]); break;
+                            case 5: result = functionCode(arguments[0], arguments[1], arguments[2], arguments[3], arguments[4]); break;
+                            case 6: result = functionCode(arguments[0], arguments[1], arguments[2], arguments[3], arguments[4], arguments[5]); break;
+                            case 7: result = functionCode(arguments[0], arguments[1], arguments[2], arguments[3], arguments[4], arguments[5], arguments[6]); break;
+                            case 8: result = functionCode(arguments[0], arguments[1], arguments[2], arguments[3], arguments[4], arguments[5], arguments[6], arguments[7]); break;
+                            case 9: result = functionCode(arguments[0], arguments[1], arguments[2], arguments[3], arguments[4], arguments[5], arguments[6], arguments[7], arguments[8]); break;
+                            default:
+                                console.error('#TODO# There are more than 9 arguments for this function: ' + functionName);
+                                result = functionCode(arguments);
+                        }
+                        return result;
+                    };
+                })();
+            }
+
+            if (aFunction && key.toLowerCase() === aFunction.toLowerCase()) { break; }
+        }
+    },
+
+    GetFunctionName: function (fn) {
+        if (typeof (fn) === 'function') {
+            var cbs = fn.toString();
+            var name = cbs.match(/function *([a-zA-Z0-9_-]*)/)[1];
+            if (name == "") {
+                name = "ANONYMOUS FUNCTION"
+            }
+            return name;
+        }
+        return 'NOT A FUNCTION';
+    }
 };
 
 // output current locale
@@ -136,7 +223,7 @@ var CheckDebugger = function ()
         OptionItemValues.EnablePronunciation = false;   // disable pronunce for dev env
         OptionItemValues.EnableLogger = true;   // enable log for dev env
         OptionItemValues.EnablePopupDialog = true; // open popup dialog in debug mode
-        OptionItemValues.EnableContextDialog = true; // don't open simple dialog in debug mode
+        OptionItemValues.EnableContextDialog = false; // don't open simple dialog in debug mode
     }
 };
 
@@ -235,15 +322,7 @@ var CommonAPI = {
     },
 
     getFunctionName: function (fn) {
-        if (typeof (fn) == 'function') {
-            var cbs = fn.toString();
-            var name = cbs.match(/function *([a-zA-Z0-9_-]*)/)[1];
-            if (name == "") {
-                name = "ANONYMOUS FUNCTION"
-            }
-            return name;
-        }
-        return 'NOT A FUNCTION';
+        return FunctionNameAPI.GetFunctionName(fn);
     }
 };
 
@@ -440,7 +519,6 @@ var AudioAPI =
 
 var OptionItems = {
     LoadSettings: function (fnResponse) {
-        debugger;
         // tell options to load settings
         var data = {
             EnableTranslation: StorageAPI.getItem(OptionItemKeys.EnableTranslation),
@@ -459,7 +537,6 @@ var OptionItems = {
         if (typeof (fnResponse) == 'function') fnResponse({ type: OperatorType.loadSettings, message: data });
     },
     UpdateSettings: function (data) {
-        debugger;
         if (typeof (data) == 'undefined') return;
 
         var type = data.type;
@@ -520,7 +597,6 @@ var OptionItems = {
             type: StorageAPI.getItem(OptionItemKeys.BaikeType),
             value: StorageAPI.getItem(OptionItemKeys.BaikeWord)
         };
-
         // clear data
         StorageAPI.setItem(OptionItemKeys.IsPageControl, null);
         StorageAPI.setItem(OptionItemKeys.BaikeType, null);
@@ -529,7 +605,7 @@ var OptionItems = {
         if (typeof (fnResponse) == 'function') fnResponse({ type: OperatorType.getBaikeSetting, message: data, object: data });
     },
 
-    SetBaikeSetting: function (fnResponse) {
+    SetBaikeSetting: function (fnResponse, message) {
         // set data
         StorageAPI.setItem(OptionItemKeys.IsPageControl, message.control);
         StorageAPI.setItem(OptionItemKeys.BaikeType, message.type);
@@ -542,18 +618,12 @@ var OptionItems = {
 var MsgBusAPI = {
     // content script => outer
     msg_send: function (type, message, callback) {
-        switch (type) {
-            case OperatorType.loadSettings: // ok
-                alert(type);
-                break;
-            default:
-                alert(type);
-        }
         var url = window.location.href;
         if (url.startsWith('file://')) { console.warn("[MSG NOT SEND] You may access file locally: " + url); return false; }
 
-        LoggerAPI.logD("#msg_send: callback function: " + CommonAPI.getFunctionName(callback));
-        LoggerAPI.logD("#msg_send: sending message...");
+        var output = String.format("#msg_send# sending message: type=>[{0}], message=>[{1}], callback function=>[{2}]", type, message, CommonAPI.getFunctionName(callback));
+        LoggerAPI.logD(output);
+
         chrome.runtime.sendMessage(
             ExtensionUID,
             { type: type, message: message },
@@ -564,8 +634,10 @@ var MsgBusAPI = {
     // background => content script
     // chrome.tabs undefined for content scripts
     msg_bgd2tab: function (type, message, callback) {
-        LoggerAPI.logD("#msg_bgd2tab: callback function: " + CommonAPI.getFunctionName(callback));
-        LoggerAPI.logD("#msg_bgd2tab: sending message...");
+
+        var output = String.format("#msg_bgd2tab# sending message: type=>[{0}], message=>[{1}], callback function=>[{2}]", type, message, CommonAPI.getFunctionName(callback));
+        LoggerAPI.logD(output);
+
         var queryResponse = function (tabs) {
             chrome.tabs.sendMessage(
                 tabs[0].id,
@@ -583,16 +655,10 @@ var MsgBusAPI = {
 
     // response callback
     msg_resp: function (response) {
-        if (response != null) {
-            LoggerAPI.logD("#msg_resp: Received RESPONSE#: type=>" + response.type + ", message=>" + response.message);
-        }
-        else {
-            LoggerAPI.logW("#msg_resp: Received RESPONSE#: response is null");
-        }
+        LoggerAPI.logD("#msg_resp: RESPONSE Received#: ", response);
     },
 
     _msg_resp: function (response, callback) {
-        debugger;
         MsgBusAPI.msg_resp(response);
 
         // invoke user's callback function
@@ -622,12 +688,6 @@ var MsgBusAPI = {
 
     // receivers
     rcvmsg_popup: function (request, sender, sendResponse) {
-        var msg = (sender.tab ?
-                "in content script, sent from tab URL: [" + sender.tab.url + "]" :
-                "in extension script");
-
-        LoggerAPI.logD("rcvmsg_iframe: Received TYPE: " + request.type + ", MESSAGE [" + request.message + "] " + msg);
-
         var type = request.type;
         var message = request.message;
         var send = (typeof (sendResponse) == "function");
@@ -679,12 +739,6 @@ var MsgBusAPI = {
     },
 
     rcvmsg_background: function (request, sender, sendResponse) {
-        var msg = (sender.tab ?
-                "in content script, sent from tab URL: [" + sender.tab.url + "]" :
-                "in extension script");
-
-        LoggerAPI.logD("rcvmsg_background: Received TYPE: " + request.type + ", MESSAGE [" + request.message + "] " + msg);
-
         var type = request.type;
         var message = request.message;
         var send = (typeof (sendResponse) == "function");
@@ -712,9 +766,9 @@ var MsgBusAPI = {
                 //var textToTranslated = window.Clipboard.paste();
                 var textToTranslated = message;
 
-                //MsgBusAPI.msg_send(type, message);
+                //MsgBusAPI.msg_send(type, textToTranslated);
 
-                MsgBusAPI.msg_bgd2tab(type, message);   // this is for page dialog
+                MsgBusAPI.msg_bgd2tab(type, textToTranslated);   // this is for page dialog
 
                 var data = MsgBusAPI._resp_data("rcvmsg_background", type, textToTranslated);
                 sendResponse(data); // this is for extension dialog
@@ -743,13 +797,12 @@ var MsgBusAPI = {
             }
         }
         else if (type == OperatorType.setBaikeSetting) {
-            OptionItems.SetBaikeSetting(sendResponse);
+            OptionItems.SetBaikeSetting(sendResponse, message);
         }
         else if (type == OperatorType.getBaikeSetting) {
             OptionItems.GetBaikeSetting(sendResponse);
         }
         else if (type == OperatorType.loadSettings) {
-            debugger;
             OptionItems.LoadSettings(sendResponse);
         }
         else if (type == OperatorType.saveSettings) {
@@ -773,12 +826,6 @@ var MsgBusAPI = {
     },
 
     rcvmsg_content: function (request, sender, sendResponse) {
-        var msg = (sender.tab ?
-            "in content script, sent from tab URL:-- [" + sender.tab.url + "]" :
-            "in extension script");
-
-        LoggerAPI.logD("rcvmsg_content: Received type: " + request.type + ", message [" + request.message + "] " + msg);
-
         var send = (typeof (sendResponse) == "function");
         if (!send) {
             LoggerAPI.logW("rcvmsg_cs: NOT defined the response function!");
@@ -808,21 +855,17 @@ var MsgBusAPI = {
     },
 
     rcvmsg_ninegrid: function (request, sender, sendResponse) {
+        // begin===placeholders
         var msg = (sender.tab ?
                 "in content script, sent from tab URL: [" + sender.tab.url + "]" :
                 "in extension script");
 
         LoggerAPI.logD("rcvmsg_ninegrid: Received TYPE: " + request.type + ", MESSAGE [" + request.message + "] " + msg);
+        // end===placeholders
     },
 
     // consider to use iframe for page context div
     rcvmsg_context: function (request, sender, sendResponse) {
-        var msg = (sender.tab ?
-                "in content script, sent from tab URL: [" + sender.tab.url + "]" :
-                "in extension script");
-
-        LoggerAPI.logD("rcvmsg_context: Received TYPE: " + request.type + ", MESSAGE [" + request.message + "] " + msg);
-
         var type = request.type;
         var message = request.message;
         var send = (typeof (sendResponse) == "function");
@@ -831,7 +874,6 @@ var MsgBusAPI = {
             LoggerAPI.logE("rcvmsg_context: Message received is null or empty");
         }
         else if (type == OperatorType.getSelectText) {
-            console.error('translating via context');
             TranslatorAPI.translate(message, ContextAPI.UpdateMeanings);
         }
         else {
@@ -889,9 +931,14 @@ var ListenerAPI =
     }
 };
 
-// load configs
-MsgBusAPI.msg_send(OperatorType.loadSettings, '[load configs]', OptionItems.UpdateSettings);
+FunctionNameAPI.ApplyPrintName(MsgBusAPI);
+FunctionNameAPI.ApplyPrintName(OptionItems);
 
-//CheckDebugger();
+if (!IsDebugger) {
+    // load configs
+    MsgBusAPI.msg_send(OperatorType.loadSettings, '[load configs]', OptionItems.UpdateSettings);
+} else {
+    CheckDebugger();
+}
 
 //var content = AjaxAPI.getFileContentsSync(ProductURIs.WebpagePopup);

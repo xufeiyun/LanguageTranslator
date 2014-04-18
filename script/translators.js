@@ -111,7 +111,11 @@ var TranslatorAPI =
 
     tryTranslateNow: function () {
         var resp_translate = function (response) {
-            TranslatorAPI.translate(response.message);
+            if (response != null && typeof (response.message) != 'undefined') {
+                TranslatorAPI.translate(response.message);
+            } else {
+                LoggerAPI.logW("Translation exits without response data!");
+            }
         }
 
         // translate firstly
