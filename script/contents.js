@@ -56,7 +56,7 @@ var ContentAPI =
             var html = "<div id='btnLanguageTranslatorCollapse' class='collapselink' title='Collapse/Expand Me!' href='javascript:void(0);'></div>"
                  + "<div id='btnLanguageTranslatorDisable' class='disablelink' title='Enable/Disable Popup!' href='javascript:void(0);'></div>"
                  + "<div id='btnLanguageTranslatorClose' class='closelink' title='Close Me! Reload page to Translate!' href='javascript:void(0);'></div>"
-                 + "<iframe id='" + ElementIds.PopupIFrame + "' width='326px' height='455px' style='background-color:white; border: 1px #BDBDBD solid; margin: -1px -1px -1px -1px; padding: 0px 0px 0px 1px; display: none;' src='" + ProductURIs.PopupIFramePage + "'></iframe>";
+                 + "<iframe id='" + ElementIds.PopupIFrame + "' class='ContentPopupDialog' src='" + ProductURIs.PopupIFramePage + "'></iframe>";
             // iframe: width='326px' height='450px'
             divContainer = DomAPI.createElement("div");
             divContainer.setAttribute("id", ElementIds.WebPagePopupDiv);
@@ -172,7 +172,7 @@ var ContentAPI =
             var styles = "left: " + (MousePosition.x - 10) + "px; top: " + (MousePosition.y + top) + "px;";
             var html = ""
                  + "<div id='btnLanguageTranslatorHide' class='hidelink hide' title='Hide me!' href='javascript:void(0);'>[X]</div>"
-                 + "<iframe id='" + ElementIds.PopupIFrame + "' width='300px' height='100px' style='background-color:lightgray; border: 1px #BDBDBD solid; margin: -1px -1px -1px -1px; padding: 0px 0px 0px 1px; display: block;' src='" + ProductURIs.ContextIFramePage + "'></iframe>";
+                 + "<iframe id='" + ElementIds.PopupIFrame + "' width='300px' height='100px' title='Click me to hide' class='SimpleContextDialog' src='" + ProductURIs.ContextIFramePage + "'></iframe>";
             divContainer = DomAPI.createElement("div");
             divContainer.setAttribute("id", ElementIds.WebPageContextDiv);
             divContainer.setAttribute("class", "context_popup divLanguageTranslator");
@@ -198,10 +198,12 @@ var ContentAPI =
             divContainer[0].style.left = MousePosition.x + "px";
             divContainer[0].style.top = (MousePosition.y + top) + "px";
             divContainer.show();
-        }
-        $("#btnLanguageTranslatorHide").click(function (e) {
+        } 
+        var hideContextDialog = function (e) {
             $("#" + ElementIds.WebPageContextDiv).hide();
-        });
+        };
+        $("#btnLanguageTranslatorHide").click(hideContextDialog);
+        $("#" + ElementIds.PopupIFrame).click(hideContextDialog);
     },
 
     fnDOMLoadCompleted: function () {

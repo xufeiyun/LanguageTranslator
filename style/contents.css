@@ -68,28 +68,37 @@
 {
     cursor: pointer;
 }
-.divLanguageTranslator
-{
-    position: fixed;
+
+/* css for content poup dialog */
+.ContentPopupDialog {
     top: 0px;
     right: 4px!important;
-    border: 0px solid red;
-}
-.content_popup
-{
-    margin-top: 2px!important;
     width: 326px;
-    height: 40px;
+    height: 455px;
+    margin: -1px 2px -1px -1px;
+    margin-top: 2px!important;
+    padding: 0px 0px 0px 1px;
+    display: none;
+    position: fixed;
+    border: 1px #BDBDBD #808080;
+    background-color: white;    
     
-    border: 0px solid;
-    border-color: #808080;
-    z-index: 9223372036854775807;
-    
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 14px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     line-height: 20px;
     color: #0094ff;
     text-align: right;
+    z-index: 9223372036854775807;
+}
+
+/* css for simple context dialog */
+.SimpleContextDialog {
+    background-color: lightgray;
+    border: 1px #BDBDBD solid;
+    margin: -1px -1px -1px -1px;
+    padding: 0px 0px 0px 10px;
+    cursor: pointer;
+    display: block;
 }
 
 .content_popup_circle

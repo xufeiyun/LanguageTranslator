@@ -8,7 +8,14 @@
  * Designed and built with all the love in the world @world by @eric
  */
 
-
+html
+{
+    width: 99%;   
+}
+body
+{
+    margin: 0px;
+}
 
 /*  context popup  */
 .hide
