@@ -60,7 +60,7 @@ var ContentAPI =
             // iframe: width='326px' height='450px'
             divContainer = DomAPI.createElement("div");
             divContainer.setAttribute("id", ElementIds.WebPagePopupDiv);
-            divContainer.setAttribute("class", "content_popup divLanguageTranslator");
+            divContainer.setAttribute("class", "div_content_popup");
             //divContainer.setAttribute("style", styles);
             divContainer.innerHTML = html;
 
@@ -172,10 +172,10 @@ var ContentAPI =
             var styles = "left: " + (MousePosition.x - 10) + "px; top: " + (MousePosition.y + top) + "px;";
             var html = ""
                  + "<div id='btnLanguageTranslatorHide' class='hidelink hide' title='Hide me!' href='javascript:void(0);'>[X]</div>"
-                 + "<iframe id='" + ElementIds.PopupIFrame + "' width='300px' height='100px' title='Click me to hide' class='SimpleContextDialog' src='" + ProductURIs.ContextIFramePage + "'></iframe>";
+                 + "<iframe id='" + ElementIds.PopupIFrame + "' title='Click me to hide' class='SimpleContextDialog' src='" + ProductURIs.ContextIFramePage + "'></iframe>";
             divContainer = DomAPI.createElement("div");
             divContainer.setAttribute("id", ElementIds.WebPageContextDiv);
-            divContainer.setAttribute("class", "context_popup divLanguageTranslator");
+            divContainer.setAttribute("class", "div_context_popup");
             divContainer.setAttribute("style", styles);
             divContainer.innerHTML = html;
 

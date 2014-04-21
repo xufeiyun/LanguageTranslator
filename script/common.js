@@ -223,7 +223,7 @@ var CheckDebugger = function ()
         OptionItemValues.EnablePronunciation = false;   // disable pronunce for dev env
         OptionItemValues.EnableLogger = true;   // enable log for dev env
         OptionItemValues.EnablePopupDialog = true; // open popup dialog in debug mode
-        OptionItemValues.EnableContextDialog = false; // don't open simple dialog in debug mode
+        OptionItemValues.EnableContextDialog = true; // don't open simple dialog in debug mode
     }
 };
 

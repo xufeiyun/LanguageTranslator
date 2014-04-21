@@ -69,6 +69,21 @@
     cursor: pointer;
 }
 
+.div_content_popup
+{
+    position: fixed;
+    width: 326px;
+    height: 40px;
+    margin-top: 2px!important;
+    border: 0px solid lightgray;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    color: #0094ff;
+    text-align: right;
+}
+
+
 /* css for content poup dialog */
 .ContentPopupDialog {
     top: 0px;
@@ -88,17 +103,7 @@
     line-height: 20px;
     color: #0094ff;
     text-align: right;
-    z-index: 9223372036854775807;
-}
-
-/* css for simple context dialog */
-.SimpleContextDialog {
-    background-color: lightgray;
-    border: 1px #BDBDBD solid;
-    margin: -1px -1px -1px -1px;
-    padding: 0px 0px 0px 10px;
-    cursor: pointer;
-    display: block;
+    z-index: -1;
 }
 
 .content_popup_circle
@@ -188,11 +193,10 @@
 }
 
 
-/* the overrides of defined css for popup_dialog page */
-
+/* the overrides of defined css for popup content dialog page */
 #frameLanguageTranslator
 {
-    border: 1px solid red;
+    border: 1px solid lightgray;
 }
 
 #popup_html

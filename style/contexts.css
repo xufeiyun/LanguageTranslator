@@ -8,11 +8,14 @@
  * Designed and built with all the love in the world @world by @eric
  */
 
-html
+
+.context-html
 {
-    width: 99%;   
+    width: 99%;
+    background-color: lightgray;
 }
-body
+
+.context-body 
 {
     margin: 0px;
 }
@@ -34,38 +37,112 @@ body
     background-color: gray;
     color: red;
 }
-.context_popup
+
+.div_context_popup
 {
+    position: fixed;
+    width: 0px;
+    height: 0px;
+    border: 0px solid lightgray;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    color: #0094ff;
+    text-align: right;
     z-index: 99999999999999999999999999999;
+    border-radius: 50%;
+}
+
+/* css for simple context dialog */
+.SimpleContextDialog {
+    width: 300px;
+    height:100px;
+    background-color: lightgray;
+    border: 1px #BDBDBD solid;
+    margin: -1px -1px -1px -1px;
+    padding: 0px 0px 0px 10px;
+    cursor: pointer;
+    display: block;
+    border-radius: 5% 1% 1% 5%;
+}
+.SimpleContextDialog:hover {
+    background-color: gray;
 }
 
 
-.context-Size
+.context-container
 {
     width: 100%;
-    border: 1px red solid;
+    height: 100%;
+    border: 0px;
 }
 .context-source
 {
-    border: 1px blue solid;
+    position: fixed;
+    border: 0px;
+    border-bottom: 1px solid blue;
+    border-bottom-width: thin;
+    width: 100%;
+    padding-left: 2px;
+    /* avoid transparent by default */
+    background-color: lightgray;
 }
 .context-source span
 {
-    border: 2px pink solid;
+    border: 0px;
+    color: rgba(183, 9, 238, 0.76);
 }
 .context-main
 {
-    border: 1px yellow solid;
+    border: 0px;
+    padding-top: 24px;
 }
-.context-main span
+.context-main textarea
 {
-    border: 2px pink solid;
+    border: 0px solid red;
+    
+    width: 295px;
+    min-width: 295px;
+    max-width: 295px;
+    
+    height: 66px;
+    min-height: 66px;
+    max-height: 66px;
+    
+    cursor: text;
+    font-size: 14px;
+    background-color: lightgray;
+    
+    overflow: hidden;
+    /*
+    overflow: auto;
+    border-top-left-radius:  1%;
+    border-top-right-radius:  1%;
+    border-bottom-left-radius: 1%;
+    border-bottom-right-radius: 5%;
+    */
+    /** style the scroll bar: transparent **/
+    /*
+    */
+    scrollbar-3dlight-color: #f8b9b7;
+    scrollbar-arrow-color: #51a351;
+    scrollbar-base-color: rgba(82, 168, 236, 0.6);
+    scrollbar-darkshadow-color:#08c;
+    scrollbar-face-color: rgba(0, 0, 0, 0.25);
+    scrollbar-highlight-color: rgba(0, 0, 0, 0.25);
+    scrollbar-shadow-color: #999;
+    scrollbar-track-color: rgba(143, 108, 73, 0.85);
+}
+
+.context-main textarea:focus
+{
+    border: 0px;
 }
 .context-more
 {
-    border: 1px green solid;
+    border: 0px;
 }
 .context-more span
 {
-    border: 2px pink solid;
+    border: 0px;
 }

@@ -148,12 +148,16 @@
     height: 80px;
     min-height: 80px;
     max-height: 80px;
+    cursor: text;
+    background-color: white;
 }
 #txtTranslatedAll
 {
     height: 120px;
     min-height: 120px;
     max-height: 120px;
+    cursor: text;
+    background-color: white;
 }
 
 #btnDataProvider, .youdaolink, .optionslink, .donationslink
