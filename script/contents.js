@@ -31,7 +31,7 @@ var ContentAPI =
             MousePosition.y = e.pageY;
         });
         $(document).click(function (e) {
-            // ContentAPI.hidePopupTranslator();
+            ContentAPI.Hide2Dialogs();
         });
         $(window).scroll(function (e) {
             ContentAPI.popupPosition();
@@ -171,7 +171,6 @@ var ContentAPI =
         if (divContainer == null || divContainer.length == 0) {
             var styles = "left: " + (MousePosition.x - 10) + "px; top: " + (MousePosition.y + top) + "px;";
             var html = ""
-                 + "<div id='btnLanguageTranslatorHide' class='hidelink hide' title='Hide me!' href='javascript:void(0);'>[X]</div>"
                  + "<iframe id='" + ElementIds.PopupIFrame + "' title='Click me to hide' class='SimpleContextDialog' src='" + ProductURIs.ContextIFramePage + "'></iframe>";
             divContainer = DomAPI.createElement("div");
             divContainer.setAttribute("id", ElementIds.WebPageContextDiv);
@@ -198,12 +197,9 @@ var ContentAPI =
             divContainer[0].style.left = MousePosition.x + "px";
             divContainer[0].style.top = (MousePosition.y + top) + "px";
             divContainer.show();
-        } 
-        var hideContextDialog = function (e) {
-            $("#" + ElementIds.WebPageContextDiv).hide();
-        };
-        $("#btnLanguageTranslatorHide").click(hideContextDialog);
-        $("#" + ElementIds.PopupIFrame).click(hideContextDialog);
+        }
+        $("#btnLanguageTranslatorHide").click(ContentAPI.Hide2Dialogs);
+        $("#" + ElementIds.PopupIFrame).click(ContentAPI.Hide2Dialogs);
     },
 
     fnDOMLoadCompleted: function () {
@@ -230,11 +226,12 @@ var ContentAPI =
         }
     },
 
-    hidePopupTranslator: function () {
-        var id = "divLanguageTranslator";
+    /* just hide the simple context dialog */
+    Hide2Dialogs: function () {
         var text = ContentAPI.getSelectedText().toString();
         if (!CommonAPI.isValidText(text)) {
-            $("#" + id).hide();
+            //$("#" + ElementIds.WebPagePopupDiv).hide();
+            $("#" + ElementIds.WebPageContextDiv).hide();
         }
     },
 

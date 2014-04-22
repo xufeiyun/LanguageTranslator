@@ -13,11 +13,13 @@
 {
     width: 99%;
     background-color: lightgray;
+    overflow: hidden;
 }
 
 .context-body 
 {
     margin: 0px;
+    overflow: hidden;
 }
 
 /*  context popup  */
@@ -85,29 +87,40 @@
     width: 100%;
     padding-left: 2px;
     /* avoid transparent by default */
-    background-color: lightgray;
+    z-index: -1;
 }
-.context-source span
+.context-source div
 {
     border: 0px;
+    margin-top: -1px;
+}
+.context-source, .context-source div
+{
+    height: 20px;
+    min-height: 20px;
+    max-height: 20px;
+    background-color: lightgray;
     color: rgba(183, 9, 238, 0.76);
 }
 .context-main
 {
     border: 0px;
-    padding-top: 24px;
+    padding-top: 21px;
 }
 .context-main textarea
 {
     border: 0px solid red;
     
+    margin-left: -1px;
+    margin-top: 0px;
+
     width: 295px;
     min-width: 295px;
     max-width: 295px;
     
-    height: 66px;
-    min-height: 66px;
-    max-height: 66px;
+    height: 74px;
+    min-height: 74px;
+    max-height: 74px;
     
     cursor: text;
     font-size: 14px;
