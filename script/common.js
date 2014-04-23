@@ -14,6 +14,7 @@ var NewLine = "\r\n";
 var Comma = ","
 var AutoCopyTextInterval = 812;
 var AutoTranslationInterval = 600;
+var MaxContextTranslationWords = 5;
 var OneLineCharCount = 45;
 var EmptyText = "";
 var TrueValue = "true";
@@ -58,6 +59,15 @@ String.prototype.startsWith = function (value) {
     result = source.indexOf(value) == 0;
     return result;
 };
+/* return the count of words contained */
+String.prototype.words = function () {
+    var source = "" + this.valueOf();
+    var list = source.match(/([~\S]+[~ ]*)/g);
+    if (list != null) {
+        return list.length;
+    }
+    return 0;
+}
 
 var FunctionNameAPI = {
     ApplyPrintName: function (anObject, aFunction) {
@@ -166,7 +176,7 @@ var ProductURIs = {
 
 var ElementIds = {
     WebPageContextDiv: 'divLanguageTranslatorContext',
-    WebPagePopupDiv: 'divLanguageTranslator',
+    WebPagePopupDiv: 'divLanguageTranslatorPopup',
     PopupIFrame: 'frameLanguageTranslator',
     PopupButtonClose: 'btnLanguageTranslatorClose',
     PopupButtonCollapse: 'btnLanguageTranslatorCollapse',

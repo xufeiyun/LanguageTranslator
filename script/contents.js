@@ -27,8 +27,15 @@ var ContentAPI =
         document.onselectionchange = ContentAPI.fnSelectionChanged;
 
         $(document).mousemove(function (e) {
-            MousePosition.x = e.pageX;
-            MousePosition.y = e.pageY;
+            MousePosition.x = e.clientX;
+            MousePosition.y = e.clientY;
+            /*
+            console.dir(e);
+            var x = String.format("ClientX: {0}, PageX: {1}, ScreenX: {2}, OffsetX: {3}", e.clientX, e.pageX, e.screenX, e.offsetX);
+            var y = String.format("ClientY: {0}, PageY: {1}, ScreenY: {2}, OffsetY: {3}", e.clientY, e.pageY, e.screenY, e.offsetY);
+            LoggerAPI.logE(x);
+            LoggerAPI.logE(y);
+            */
         });
         $(document).click(function (e) {
             ContentAPI.Hide2Dialogs();
@@ -289,6 +296,7 @@ var ContentAPI =
             // no need to translate here => translated in iframe popup page
             // translateByYoudao(text);
             if (OptionItemValues.EnableTranslation) {
+                var lessWords = message.words() < MaxContextTranslationWords;
                 if (OptionItemValues.EnableContextDialog) {
                     // show simple context dialog
                     ContentAPI.ShowContextDialogForTranslation(message, 'main meanings', 'more meanings');
